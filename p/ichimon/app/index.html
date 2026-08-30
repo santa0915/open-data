@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>イチモン — 中学受験 一問一答</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='1' y='1' width='14' height='14' rx='3' fill='%233d4354'/%3E%3Ctext x='8' y='12' font-size='10' text-anchor='middle' fill='%23ffd76a' font-family='sans-serif' font-weight='bold'%3E問%3C/text%3E%3C/svg%3E">
+  <style>
+    /* 依存ゼロ方針のため CSS もこのファイルに内包する(外部CDN禁止)。
+       配色は姉妹作(yomoji / nine-grid)の紙風ライトテーマ系統。
+       スマホ最優先: 最大幅520px・ボタンは指で押せる大きさ(44px以上)。 */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      min-height: 100%;
+      background: #e7e3d6;
+      color: #3d4354;
+      font-family: system-ui, "Hiragino Sans", "Noto Sans JP", sans-serif;
+    }
+
+    .wrap {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 14px 14px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    h1 { font-size: 22px; letter-spacing: 6px; }
+    .subtitle { font-size: 11px; opacity: 0.6; }
+    #mute {
+      background: #fff; border: 1px solid #c9c3b4; border-bottom-width: 2px;
+      border-radius: 8px; font-size: 14px; padding: 6px 10px; cursor: pointer;
+    }
+
+    section[hidden] { display: none; }
+    section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card {
+      background: #f4f1e8;
+      border: 1px solid #d8d2c2;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .card h2 { font-size: 14px; opacity: 0.75; }
+
+    /* --- ボタン共通(タップ領域を大きく) --- */
+    button {
+      font-family: inherit;
+      color: #3d4354;
+      cursor: pointer;
+    }
+    .btn {
+      min-height: 48px;
+      background: #fff;
+      border: 1px solid #c9c3b4; border-bottom-width: 3px;
+      border-radius: 10px;
+      font-size: 16px; font-weight: 700;
+      padding: 10px 16px;
+    }
+    .btn:hover { background: #faf8f2; }
+    .btn:active { border-bottom-width: 1px; transform: translateY(2px); }
+    .btn.primary { background: #3d4354; color: #f4f1e8; border-color: #3d4354; }
+    .btn.primary:hover { background: #4a5166; }
+    .btn.ghost { background: transparent; border-color: transparent; font-weight: 600; opacity: 0.7; min-height: 40px; }
+    .btn.ghost:hover { opacity: 1; background: transparent; }
+
+    /* --- home --- */
+    #subject-cards { display: flex; flex-direction: column; gap: 8px; }
+    .subject-card {
+      flex-direction: row; align-items: center; justify-content: space-between; gap: 8px;
+      width: 100%; text-align: left; font-size: inherit; cursor: pointer;
+    }
+    .subject-card.on { border: 2px solid #3d4354; box-shadow: 0 0 0 1px #3d4354 inset; }
+    .subject-name { font-size: 20px; font-weight: 700; }
+    .subject-note { font-size: 12px; opacity: 0.65; }
+    .due-badge {
+      background: #c96f5f; color: #fff;
+      font-size: 12px; font-weight: 700;
+      border-radius: 999px; padding: 4px 10px;
+      white-space: nowrap;
+    }
+    /* 個人利用パックの「個人」バッジ(adr/0005: 配布可能データと視覚的に区別) */
+    .private-badge {
+      display: inline-block;
+      background: #8a7ba8; color: #fff;
+      font-size: 11px; font-weight: 700;
+      border-radius: 5px; padding: 1px 6px;
+      margin-left: 6px; vertical-align: 2px;
+      white-space: nowrap;
+    }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      min-height: 44px;
+      padding: 8px 18px;
+      background: #fff;
+      border: 1px solid #c9c3b4; border-bottom-width: 3px;
+      border-radius: 999px;
+      font-size: 15px; font-weight: 700;
+    }
+    .chip.on { background: #6aaa64; border-color: #5c9757; color: #fff; }
+
+    .slider-row { display: flex; align-items: center; gap: 12px; }
+    #target-slider { flex: 1; accent-color: #3d4354; height: 32px; }
+    #target-value {
+      font-size: 24px; font-weight: 800; min-width: 2em; text-align: center;
+      color: #3d4354;
+    }
+    .slider-scale { display: flex; justify-content: space-between; font-size: 11px; opacity: 0.5; }
+
+    .mode-row { display: flex; gap: 8px; }
+    .mode-row .chip { flex: 1; text-align: center; }
+    .mode-note { font-size: 11px; opacity: 0.6; line-height: 1.6; }
+
+    /* --- quiz --- */
+    .progress-track {
+      height: 8px; background: #d8d2c2; border-radius: 999px; overflow: hidden;
+    }
+    #quiz-progress-bar {
+      height: 100%; width: 0; background: #6aaa64; border-radius: 999px;
+      transition: width 0.25s;
+    }
+    .quiz-head { display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+    #quiz-progress-text { font-weight: 700; }
+    #quiz-meta { opacity: 0.65; }
+    /* 形式チップ(4たく/きじゅつ/ならべかえ。recallは非表示) */
+    #quiz-type-chip {
+      display: inline-block;
+      background: #3d4354; color: #f4f1e8;
+      font-size: 11px; font-weight: 700;
+      border-radius: 5px; padding: 2px 7px; margin-right: 6px;
+    }
+    #quiz-type-chip[hidden] { display: none; }
+
+    /* --- choice: 選択肢4ボタン --- */
+    #choice-options { display: flex; flex-direction: column; gap: 8px; }
+    #choice-options[hidden] { display: none; }
+    .option {
+      min-height: 52px;
+      background: #fff; border: 1px solid #c9c3b4; border-bottom-width: 3px;
+      border-radius: 10px; font-size: 16px; font-weight: 600;
+      padding: 10px 14px; text-align: left; line-height: 1.8;
+    }
+    .option:hover { background: #faf8f2; }
+    .option:disabled { cursor: default; }
+    .option.correct { background: #6aaa64; border-color: #5c9757; color: #fff; }
+    .option.wrong { background: #c96f5f; border-color: #b35f50; color: #fff; }
+    .option.faded { opacity: 0.55; }
+
+    /* --- ordering: タップ順に番号を振る --- */
+    #ordering-items { display: flex; flex-direction: column; gap: 8px; }
+    .order-item {
+      position: relative;
+      min-height: 52px;
+      background: #fff; border: 1px solid #c9c3b4; border-bottom-width: 3px;
+      border-radius: 10px; font-size: 15px; font-weight: 600;
+      padding: 10px 14px 10px 46px; text-align: left; line-height: 1.8;
+    }
+    .order-item:hover { background: #faf8f2; }
+    .order-item:disabled { cursor: default; }
+    .order-item .order-num {
+      position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+      width: 26px; height: 26px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 800;
+      background: #e7e3d6; color: #9a948a;
+    }
+    .order-item.picked .order-num { background: #3d4354; color: #f4f1e8; }
+    .ordering-actions { display: flex; gap: 8px; margin-top: 10px; }
+    .ordering-actions .btn { flex: 1; }
+    #ordering-submit:disabled { opacity: 0.45; cursor: default; }
+
+    /* ordering の結果表示(正しい順序と自分の順序を並記・位置ごとに✓✗) */
+    #ordering-result {
+      background: #fff; border: 1px solid #d8d2c2; border-radius: 10px;
+      padding: 12px; font-size: 14px; line-height: 2.0;
+    }
+    #ordering-result[hidden] { display: none; }
+    .order-compare-row { display: flex; gap: 8px; align-items: baseline; padding: 2px 0; }
+    .order-mark { font-weight: 800; width: 1.4em; text-align: center; }
+    .order-mark.good { color: #4a7d45; }
+    .order-mark.bad { color: #c96f5f; }
+    .order-yours { flex: 1; }
+    .order-correct-answer { font-size: 13px; opacity: 0.8; margin-top: 6px; }
+
+    /* --- written: 採点ポイント --- */
+    #written-points[hidden] { display: none; }
+    #written-points-list {
+      background: #fff; border: 1px solid #d8d2c2; border-radius: 10px;
+      padding: 10px 12px 10px 32px; font-size: 14px; line-height: 2.0;
+    }
+    .points-hint { font-size: 12px; opacity: 0.7; margin-top: 4px; text-align: center; }
+
+    #quiz-question {
+      font-size: 20px; line-height: 2.1; font-weight: 600;
+      min-height: 3.2em;
+    }
+    rt { font-size: 10px; opacity: 0.8; }
+
+    #answer-block { display: flex; flex-direction: column; gap: 8px; }
+    #answer-block[hidden] { display: none; }
+    #quiz-answer {
+      font-size: 26px; font-weight: 800; color: #4a7d45;
+      line-height: 1.8; text-align: center;
+      background: #fff; border: 2px solid #6aaa64; border-radius: 10px;
+      padding: 14px 10px;
+    }
+    #quiz-explanation {
+      font-size: 14px; line-height: 2.0;
+      background: #fff; border: 1px solid #d8d2c2; border-radius: 10px;
+      padding: 12px;
+    }
+    .explanation-label { font-size: 11px; font-weight: 700; opacity: 0.55; }
+
+    #grade-btns { display: flex; gap: 10px; }
+    #grade-btns[hidden] { display: none; }
+    #grade-btns .btn { flex: 1; min-height: 60px; font-size: 18px; }
+    #grade-correct { background: #6aaa64; border-color: #5c9757; color: #fff; }
+    #grade-correct:hover { background: #74b56e; }
+    #grade-wrong { background: #c96f5f; border-color: #b35f50; color: #fff; }
+    #grade-wrong:hover { background: #d37c6c; }
+    .grade-hint { font-size: 11px; opacity: 0.6; text-align: center; }
+
+    /* --- result --- */
+    #result-score { font-size: 44px; font-weight: 800; text-align: center; }
+    #result-message { font-size: 13px; text-align: center; opacity: 0.75; }
+    .result-area-row {
+      display: flex; justify-content: space-between;
+      font-size: 15px; padding: 6px 2px;
+      border-bottom: 1px dashed #d8d2c2;
+    }
+    .result-area-row:last-child { border-bottom: none; }
+    .result-area-score { font-weight: 700; }
+    .wrong-item {
+      background: #fff; border: 1px solid #d8d2c2; border-radius: 10px;
+      padding: 10px 12px; display: flex; flex-direction: column; gap: 4px;
+    }
+    #result-wrong-list { display: flex; flex-direction: column; gap: 8px; }
+    .wrong-question { font-size: 14px; line-height: 1.9; }
+    .wrong-answer { font-size: 14px; font-weight: 700; color: #4a7d45; }
+
+    /* --- stats --- */
+    #stats-totals { font-size: 14px; line-height: 1.8; }
+    #stats-packs { font-size: 12px; opacity: 0.75; }
+    .stat-row, .weak-row {
+      display: grid; grid-template-columns: 6em 1fr auto;
+      align-items: center; gap: 8px; font-size: 13px; padding: 4px 0;
+    }
+    .weak-row { grid-template-columns: 1fr auto; }
+    .stat-bar {
+      height: 14px; background: #fff; border: 1px solid #d8d2c2;
+      border-radius: 999px; overflow: hidden;
+    }
+    .stat-bar-fill { height: 100%; background: #6aaa64; border-radius: 999px; }
+    .stat-value, .weak-value { font-size: 12px; opacity: 0.75; white-space: nowrap; }
+    .weak-topic { font-weight: 700; }
+    #reset-btn {
+      min-height: 44px;
+      background: transparent; color: #c96f5f;
+      border: 1px solid #c96f5f; border-radius: 10px;
+      font-size: 13px; padding: 8px 14px;
+    }
+    #reset-btn:hover { background: rgba(201, 111, 95, 0.08); }
+
+    /* --- トースト --- */
+    #toast {
+      position: fixed; top: 14px; left: 50%;
+      transform: translateX(-50%);
+      background: #3d4354; color: #f4f1e8;
+      padding: 8px 16px; border-radius: 8px; font-size: 14px;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+      z-index: 30; max-width: 90vw;
+    }
+    #toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>イチモン</h1>
+        <div class="subtitle">中学受験 一問一答</div>
+      </div>
+      <button id="mute" aria-label="サウンド切り替え">🔊</button>
+    </header>
+
+    <!-- ホーム: 設定してスタート -->
+    <section id="screen-home">
+      <!-- 教科カード(パック登録配列から render.js が生成。タップで教科を選ぶ) -->
+      <div id="subject-cards"></div>
+
+      <div class="card">
+        <h2>分野(タップで選ぶ)</h2>
+        <div id="area-chips" class="chips"></div>
+      </div>
+
+      <div class="card">
+        <h2>出題形式</h2>
+        <div id="type-chips" class="chips"></div>
+      </div>
+
+      <div class="card">
+        <h2>目標偏差値</h2>
+        <div class="slider-row">
+          <input id="target-slider" type="range" min="40" max="70" step="1" value="50"
+                 aria-label="目標偏差値">
+          <span id="target-value">50</span>
+        </div>
+        <div class="slider-scale"><span>40</span><span>55</span><span>70</span></div>
+      </div>
+
+      <div class="card">
+        <h2>モード</h2>
+        <div class="mode-row">
+          <button id="mode-normal" type="button" class="chip">ふつう</button>
+          <button id="mode-review" type="button" class="chip">ふくしゅう</button>
+        </div>
+        <button id="adaptive-toggle" type="button" class="chip">おまかせ調整</button>
+        <p class="mode-note">
+          ふつう: あたらしい問題+復習ミックス / ふくしゅう: 復習だけ<br>
+          おまかせ調整: セットの中で正解すると少しむずかしく、まちがえるとやさしくなる
+        </p>
+      </div>
+
+      <button id="start-btn" class="btn primary">スタート(10問)</button>
+      <button id="to-stats" class="btn">せいせきを見る</button>
+    </section>
+
+    <!-- 出題: 形式ごとのフロー(product-design.md §4.5)
+         recall: 読む→こたえをみる→○× / written: +模範解答・採点ポイント
+         choice: 選択肢タップ→自動採点→つぎへ / ordering: タップ順に番号→けってい→つぎへ -->
+    <section id="screen-quiz" hidden>
+      <div class="progress-track"><div id="quiz-progress-bar"></div></div>
+      <div class="quiz-head">
+        <span id="quiz-progress-text"></span>
+        <span>
+          <span id="quiz-type-chip" hidden></span>
+          <span id="quiz-meta"></span>
+        </span>
+      </div>
+
+      <div class="card">
+        <div id="quiz-question"></div>
+      </div>
+
+      <!-- choice: 選択肢4つ(シャッフル済み)。タップで自動採点 -->
+      <div id="choice-options" hidden></div>
+
+      <!-- ordering: タップした順に1,2,3,4の番号が付く(adr/0006 §5) -->
+      <div id="ordering-block" hidden>
+        <div id="ordering-items"></div>
+        <div class="ordering-actions">
+          <button id="ordering-reset" class="btn">やりなおし</button>
+          <button id="ordering-submit" class="btn primary">けってい</button>
+        </div>
+      </div>
+
+      <button id="reveal-btn" class="btn primary">こたえをみる</button>
+
+      <div id="answer-block" hidden>
+        <div id="quiz-answer"></div>
+        <!-- written: 採点ポイントの箇条書き -->
+        <div id="written-points" hidden>
+          <div class="explanation-label">さいてんポイント</div>
+          <ul id="written-points-list"></ul>
+          <p class="points-hint">ポイントをすべて言えていたら○</p>
+        </div>
+        <!-- ordering: 正しい順序と自分の順序の並記(位置ごとに✓✗) -->
+        <div id="ordering-result" hidden></div>
+        <div class="explanation-label">かいせつ</div>
+        <div id="quiz-explanation"><!-- render.js が中身を差し替える --></div>
+      </div>
+
+      <div id="grade-btns" hidden>
+        <button id="grade-wrong" class="btn">× できなかった</button>
+        <button id="grade-correct" class="btn">○ できた</button>
+      </div>
+      <p class="grade-hint" id="grade-hint" hidden>解説を読んでから、自分で○×をつけよう</p>
+
+      <!-- choice/ordering の自動採点後に進むボタン -->
+      <button id="next-btn" class="btn primary" hidden>つぎへ</button>
+
+      <button id="quiz-quit" class="btn ghost">やめてホームへ</button>
+    </section>
+
+    <!-- 結果: 成績と×一覧 -->
+    <section id="screen-result" hidden>
+      <div class="card">
+        <h2>けっか</h2>
+        <div id="result-score"></div>
+        <div id="result-message"></div>
+      </div>
+
+      <div class="card">
+        <h2>分野別</h2>
+        <div id="result-by-area"></div>
+      </div>
+
+      <div class="card" id="result-wrong-section">
+        <h2>今回の×(答えつき)</h2>
+        <div id="result-wrong-list"></div>
+      </div>
+
+      <button id="retry-wrong" class="btn primary">×だけもう一度</button>
+      <button id="result-home" class="btn">ホームへ</button>
+    </section>
+
+    <!-- 統計: 正答率と弱点 -->
+    <section id="screen-stats" hidden>
+      <div class="card">
+        <h2>せいせき</h2>
+        <div id="stats-totals"></div>
+        <div id="stats-packs"></div>
+      </div>
+
+      <div class="card" id="stats-by-area-section">
+        <h2>分野別の正答率</h2>
+        <div id="stats-by-area"></div>
+      </div>
+
+      <div class="card" id="stats-by-band-section">
+        <h2>偏差値帯別の正答率</h2>
+        <div id="stats-by-band"></div>
+      </div>
+
+      <div class="card" id="stats-by-type-section">
+        <h2>形式別の正答率</h2>
+        <div id="stats-by-type"></div>
+      </div>
+
+      <div class="card" id="stats-weak-section">
+        <h2>弱点トピック(正答率の低い順)</h2>
+        <div id="stats-weak"></div>
+      </div>
+
+      <button id="stats-home" class="btn">ホームへ</button>
+      <button id="reset-btn">記録をリセットする(元に戻せません)</button>
+    </section>
+  </div>
+
+  <div id="toast" role="status"></div>
+
+  <!-- ES Modules を使うため file:// では動かない。ローカルでは
+       `python3 -m http.server` 等で配信すること -->
+  <script type="module" src="./src/main.js"></script>
+<footer class="sm-provenance" style="font:12px/1.6 system-ui,sans-serif;color:#6b6b6b;padding:1rem;margin-top:2rem;border-top:1px solid #e2e2de;"><span>生成: 2026-08-30T12:55:19Z</span> · <span>ビルド: f89e3e7</span></footer></body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>santa0915 open-data</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #f7f7f5; --card: #fff; --fg: #1a1a1a; --muted: #6b6b6b;
+  --line: #e2e2de; --accent: #2f6f4f;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #16181a; --card: #202326; --fg: #e8e8e6; --muted: #9aa0a6;
+          --line: #2f3438; --accent: #7fd1a8; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg);
+  font-family: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  line-height: 1.6; }
+header { padding: 1.5rem 1rem 0.5rem; max-width: 60rem; margin: 0 auto; }
+h1 { font-size: 1.3rem; margin: 0 0 0.25rem; }
+.meta { color: var(--muted); font-size: 0.8rem; }
+main { max-width: 60rem; margin: 0 auto; padding: 0 1rem 3rem; }
+.controls { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
+input[type=search] { flex: 1 1 12rem; min-height: 44px; padding: 0 0.75rem;
+  border: 1px solid var(--line); border-radius: 8px; background: var(--card);
+  color: var(--fg); font-size: 1rem; }
+.chip { min-height: 44px; padding: 0 0.9rem; border: 1px solid var(--line);
+  border-radius: 999px; background: var(--card); color: var(--fg);
+  font-size: 0.85rem; cursor: pointer; }
+.chip[aria-pressed=true] { background: var(--accent); border-color: var(--accent);
+  color: #fff; }
+ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; }
+a.card { display: block; padding: 0.9rem 1rem; background: var(--card);
+  border: 1px solid var(--line); border-radius: 12px; text-decoration: none;
+  color: inherit; }
+a.card:hover { border-color: var(--accent); }
+.title { font-weight: 600; margin-bottom: 0.15rem; }
+.summary { color: var(--muted); font-size: 0.9rem; }
+.tags { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.tag { font-size: 0.72rem; padding: 0.1rem 0.5rem; border: 1px solid var(--line);
+  border-radius: 999px; color: var(--muted); }
+.empty { color: var(--muted); padding: 2rem 0; text-align: center; }
+footer { max-width: 60rem; margin: 0 auto; padding: 0 1rem 2rem;
+  color: var(--muted); font-size: 0.75rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>santa0915 open-data</h1>
+  <div class="meta">1 ビュー / 生成 2026-08-30T12:55:19Z</div>
+</header>
+<main>
+  <div class="controls">
+    <input type="search" id="q" placeholder="タイトル・説明・タグで絞り込む"
+           aria-label="検索">
+    <button class="chip" data-project="ichimon" aria-pressed="false">ichimon</button>
+  </div>
+  <ul id="list"></ul>
+</main>
+<footer>
+  このページは自動生成です(編集はソース側で行います)。
+  機械可読カタログ: <a href="catalog.json">catalog.json</a>
+</footer>
+<script>window.__CATALOG__ = {"schema": 1, "generated_at": "2026-08-30T12:55:19Z", "views": [{"id": "ichimon/app", "project": "ichimon", "view": "app", "title": "イチモン", "summary": "中学受験の社会・理科 一問一答(目標偏差値で難易度設定・間隔反復つき)", "tags": ["学習", "ゲーム", "スマホ"], "path": "p/ichimon/app/index.html", "updated_at": "2026-08-30T12:55:19Z", "digest": "610c5c0d2f5c0c89f345981bb2cf6197a744d0c799dc4e7881b0cbbb65557ee7", "build_ref": "f89e3e7", "source_versions": [], "files": [{"path": "p/ichimon/app/data/pack-rika.js", "sha256": "b4f9195a856f91a3282630157c8a3d90c5c3851a7b52dbede5f3e6d315f68349", "size": 146840}, {"path": "p/ichimon/app/data/pack-shakai.js", "sha256": "7f95d7c22226df7989591e287056a2a2c86ed5b3cd3996ba2ff9635a92e0bbea", "size": 179940}, {"path": "p/ichimon/app/index.html", "sha256": "1715f43c9fa6eef84248d77b3dbc8e0779d2b8906b04cb694179cb96be06d6e9", "size": 18658}, {"path": "p/ichimon/app/src/config.js", "sha256": "a4ee7100226d261d5f0cbbd0d4d594df0a66c2ac68dbe30c5fcdc6a4f140cd9d", "size": 1718}, {"path": "p/ichimon/app/src/main.js", "sha256": "9ccb449b45e9fb161b575d4c6ea07269ea10cd52433a13bc5d71c7aa6097b69e", "size": 16530}, {"path": "p/ichimon/app/src/render.js", "sha256": "2dd2c00af1ddd13b35504dc2af8983b01c5f0fa3f0a5a45926e6e33932d51bde", "size": 15859}, {"path": "p/ichimon/app/src/rng.js", "sha256": "e608499e20fa8e175cceeb5ca097837a02bab02660422f7bbd3294443d9e044d", "size": 966}, {"path": "p/ichimon/app/src/ruby.js", "sha256": "047bb5ee9fdfb1e42b2a86a553f734255b2c767f6caf7d82f83eedd0c8d3ddc3", "size": 1775}, {"path": "p/ichimon/app/src/schema.js", "sha256": "0be3f65e84bf2a60071681e7f2953ba470fb199b93b56ea1a15c7653fa8d002b", "size": 6365}, {"path": "p/ichimon/app/src/select.js", "sha256": "4ee80a4443e08495a5a170a5b0a786158e6b93367db1a98b0e16ae31782a24c1", "size": 5859}, {"path": "p/ichimon/app/src/session.js", "sha256": "73fd0cb4de0cea5601596db05559f928837901ae71bb929048b58ac272a930d5", "size": 7689}, {"path": "p/ichimon/app/src/sound.js", "sha256": "98a43dabc4ffb08daec935f5caca93b4ff15a72f12fcbcdf2909b46e2d884e83", "size": 1687}, {"path": "p/ichimon/app/src/srs.js", "sha256": "13ad46f937e2c304844672de5e671456295cf3d457b85e2e50b4e9055348ccd4", "size": 1351}, {"path": "p/ichimon/app/src/stats.js", "sha256": "c4780c8dea789d59a580195fa134d950cf3f3b868793578281e2606c66289ed9", "size": 4046}]}]};</script>
+<script>
+const views = window.__CATALOG__.views || [];
+const list = document.getElementById('list');
+const search = document.getElementById('q');
+const chips = Array.from(document.querySelectorAll('.chip'));
+let project = '';
+
+function render() {
+  const q = search.value.trim().toLowerCase();
+  const shown = views.filter(v => {
+    if (project && v.project !== project) return false;
+    if (!q) return true;
+    return [v.title, v.summary, v.project, v.view, (v.tags || []).join(' ')]
+      .join(' ').toLowerCase().includes(q);
+  });
+  list.innerHTML = '';
+  if (!shown.length) {
+    list.innerHTML = '<li class="empty">該当するビューがありません</li>';
+    return;
+  }
+  for (const v of shown) {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.className = 'card';
+    a.href = v.path;
+    const tags = (v.tags || []).map(t =>
+      `<span class="tag">${t}</span>`).join('');
+    a.innerHTML =
+      `<div class="title"></div><div class="summary"></div>` +
+      `<div class="tags"><span class="tag">${v.project}</span>` +
+      `<span class="tag">${v.updated_at.slice(0, 10)}</span>${tags}</div>`;
+    a.querySelector('.title').textContent = v.title;
+    a.querySelector('.summary').textContent = v.summary || '';
+    li.appendChild(a);
+    list.appendChild(li);
+  }
+}
+
+search.addEventListener('input', render);
+for (const chip of chips) {
+  chip.addEventListener('click', () => {
+    const value = chip.dataset.project || '';
+    project = (project === value) ? '' : value;
+    for (const c of chips) {
+      c.setAttribute('aria-pressed', String((c.dataset.project || '') === project));
+    }
+    render();
+  });
+}
+render();
+</script>
+</body>
+</html>
