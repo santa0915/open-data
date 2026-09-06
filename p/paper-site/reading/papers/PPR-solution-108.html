@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interpreting &quot;Interpretability&quot; and Explaining &quot;Explainability&quot; in Machine Learning in Physics</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-108" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Interpreting &quot;Interpretability&quot; and Explaining &quot;Explainability&quot; in Machine Learning in Physics</h1>
+<div class="muted">others ・ 関連度 0.55 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Rikab Gambhir; Luisa Lucie-Smith; Jesse Thaler</div>
+<div><span class="score">優先度 32</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.55 +22</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.26228v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>機械学習における「解釈性（interpretability）」と「説明性（explainability）」の概念を物理応用文脈で明確に区別し、前者をモデルの構造的透明性、後者をドメイン知識へのマッピング能力として定義する。両者のトレードオフ（表現力・適応性との関係）や内在的・事後的手法の選択基準を整理し、解釈性はモデルの固有特性ではなく意図的な設計選択であることを強調する。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>解釈性（構造的透明性）と説明性（ドメイン知識への対応付け）を明確に区別し、物理科学における役割を再定義した概念的新規性</p><p>解釈性vs表現力、説明性vs適応性のトレードオフを体系的に整理し、文脈に応じた手法選択の指針を示す技術的貢献</p><p>解釈性・説明性を固有特性ではなく「意図的な設計選択」と位置づけ、タスク指定と介入計画をモデル設計の核心に据える実用的な提言</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

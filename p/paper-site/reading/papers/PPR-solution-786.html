@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What Spatial Memory Must Store: Occlusion as the Test for Language-Agent Memory</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-786" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>What Spatial Memory Must Store: Occlusion as the Test for Language-Agent Memory</h1>
+<div class="muted">— ・ 関連度 0.90 ・ arXiv ・ 追跡 — ・ 再現性 — ・ 処理状況 —</div>
+<div class="muted">著者: Doeon Kwon, Junho Bang</div>
+<div><span class="score">優先度 46</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.90 +36</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.10299v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>言語エージェントの空間記憶（Memory Palace）において、幾何学的座標情報の役割を「遮蔽（Occlusion）」テストを通じて実証した研究。従来の近接性・重要度・鮮度の線形結合に代わり、幾何学ベースの重み付けが検索精度を大幅に向上させることを示し、記憶の「参照（recall）」と「可視性判定（visibility）」を分離する設計指針を提案。DDAアルゴリズムを用いた遮蔽判定により、壁越しの目標に対する認識精度を劇的に改善した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 空間記憶の設計指針を「遮蔽テスト」で定量的に検証し、従来のMemory Palaceアーキテクチャが幾何情報を軽視している欠陥を明確にした。</p><p>技術的貢献: 記憶参照と環境可視性判定を分離する設計原則を提示。保存されたボクセル幾何学とDDAアルゴリズムを用い、既存の視線锥やテキスト埋め込みに依存しない遮蔽計算手法を提案。</p><p>実験結果: 幾何学主導の重み付けによりHit@5が+0.3208向上。遮蔽判定ではcone-plus-DDAが0.982の精度を達成し、テキスト/FoVのみ（0.000）やコサイン類似度（0.533）を大幅に上回った。</p><p>実用性: 既存のエージェントパイプラインに組み込みやすい軽量な幾何学フィルタリングと遮蔽判定モジュールを提供するが、ボクセル地図の構築・維持コストが実環境適用の課題となる。</p><p>限界・課題: 著者自身も「遮蔽には幾何学が必要なのは自明」と認めており、本貢献は測定と分離にあると位置づけている。人間による複数ワールドでの盲検評価は未実施。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

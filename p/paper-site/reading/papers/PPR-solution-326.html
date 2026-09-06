@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linguistic Firewall: Geometry as Defense in Multi-Agent Systems Routing</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-326" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Linguistic Firewall: Geometry as Defense in Multi-Agent Systems Routing</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Dvir Alsheich; Adar Peleg; Ben Hagag; Rom Himelstein; Amit Levi; (+1)</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.30555v3">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>LLM基盤のマルチエージェントシステム（MAS）におけるエージェントルーティングのセキュリティ課題に対し、テキスト記述や静的埋め込みに依存しない動的能力評価手法「ANTAP」を提案する。エージェントに対して実質的なタスククエリを実行し、その応答挙動を共有意味空間内の固定演算子へ圧縮することで、メタデータベースの攻撃を排除する代数射影によるルーティングを実現する。実験では説明文注入攻撃に対しASRをほぼゼロに抑え（従来比67.3%→0%）、適応的埋め込み攻撃でも20%の成功率低下を示し、既存手法を大幅に上回る防御性能を検証した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>既存の静的・テキスト依存型エージェントプロファイリングから、動的クエリによる実証的能力評価へルーティングパラダイムを転換</p><p>エージェントの応答挙動を共有意味空間内の固定演算子へ圧縮し、代数射影のみでルーティングを行う「linguistic firewall」アーキテクチャを提案</p><p>説明文ベースの注入攻撃に対しASRをほぼゼロに抑え、適応的埋め込み攻撃でも20%の成功率低下を実現</p><p>実運用では動的テストによるオーバーヘッドと、演算子設計・意味空間アライメントの一般化が課題となる可能性がある</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

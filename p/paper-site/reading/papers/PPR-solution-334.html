@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Against the Monolithic Wireless World Model: Why NextG Needs Composable and Agentic Intelligence</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-334" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Against the Monolithic Wireless World Model: Why NextG Needs Composable and Agentic Intelligence</h1>
+<div class="muted">worth-reading ・ 関連度 0.80 ・ ICML 2026 Workshop on AI and ML for NextG ・ 追跡 Tier 1 ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Aladin Djuhera; Farhan Ahmed; Vlad C. Andrei; Swanand Ravindra Kadhe; Alecio Binotto; (+2)</div>
+<div><span class="score">優先度 67</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.80 +32</span><span class="chip">追跡優先度 Tier 1 +25</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.16689v2">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>6GネットワークにおけるAIネイティブ化の潮流を批判し、テキストや画像と異なり無線データ（CSIテンソル等）が自己完結的なトークン基盤を持たないため、単一大規模モデル（モノリシックなワールドモデル等）の適用には構造的限界があると指摘する。 その代わり、汎用推論モデルが専門的信号処理モジュールや古典アルゴリズム、デジタルツインなどを明示的なインターフェースで連携させる「構成可能かつ自律型（Agentic）なアーキテクチャ」を近中期の実装パスとして提案している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>無線データは設定依存・シミュレータ条件依存でありLLMのような自己完結型基盤が存在しないため、モノリシックな事前学習/後学習の前提が崩れることを理論的に指摘。</p><p>MoEや単一ワールドモデルに依存せず、汎用推論エンジンと専門モジュール・古典アルゴリズム・安全チェック等を連携させる「構成可能かつ自律型（Agentic）な分散アーキテクチャ」を設計指針として提示。</p><p>実装面では明示的なプログラム可能なインターフェース経由で標準準拠の検索やデジタルツインを組み込む現実的なロードマップを示すが、位置づけ論文のため定量的検証は含まれていない。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stochastic Multi-Objective Kinodynamic Planning Against Adversaries</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-249" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Stochastic Multi-Objective Kinodynamic Planning Against Adversaries</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Thomas Marshall Vielmetti; Daniel Cherenson; Dimitra Panagou</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2607.19284v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>確率的・ハイブリッドな敵対環境におけるマルチオブジェクティブ・キノダイナミック計画を扱う。既存のオープンループ確率制約計画が過度に保守的である問題を解決するため、閉ループ政策列への計画空間の転換とモンテカルロロールアウトによる木構築時のリスク評価を組み合わせたSMO-RRTおよびSMO-SSTアルゴリズムを提案する。実行コストと安全違反確率のパレート最適解を導出し、非ガウス・状態依存不確実性下での有限標本安全保証を理論的に示す。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>オープンループ軌道に依存する既存手法の保守性を解消し、閉ループ政策列を計画空間として採用</p><p>木構築過程にモンテカルロロールアウトによる確率的リスク評価を直接統合したSMO-RRT/SSTアルゴリズムを提案</p><p>非ガウス・状態依存不確実性に対する安全違反確率の有限標本上限を理論導出</p><p>実行コストと安全性のトレードオフを示すパレートフロントを生成し、自律走行や社会ナビゲーションへの応用が可能</p><p>SMO-SSTは選択的剪定により計算効率を向上させるが、確率的完全性は放棄</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

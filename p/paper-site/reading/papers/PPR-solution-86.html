@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Self-Pruned Key-Value Attention: Learning When to Write by Predicting Future Utility</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-86" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Self-Pruned Key-Value Attention: Learning When to Write by Predicting Future Utility</h1>
+<div class="muted">must-read ・ 関連度 0.91 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Fulltext Reviewed</div>
+<div class="muted">著者: Gergely Szilvasy [Meta FAIR]; Manuel Faysse [Meta FAIR; MICS, CentraleSupélec]; Maria Lomeli [Meta FAIR]; Matthijs Douze [Meta FAIR]; Pierre-Emmanuel Mazaré [Meta FAIR]; (+3)</div>
+<div><span class="score">優先度 56</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.91 +36</span><span class="chip">処理状況 Fulltext Reviewed +10</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.14037v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>長期コンテキスト処理におけるTransformerのKVキャッシュ肥大化を解決するため、各KVペアの将来の有用性を予測する軽量メカニズム「SP-KV」を提案。次トークン予測損失のみでLLMと予測器をエンドツーエンドに学習させ、入力に応じて動的にKVキャッシュを圧縮する手法である。検証損失やダウンストリームタスク性能への影響は最小限に抑えつつ、3〜10倍のキャッシュ削減と推論速度向上を実現した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>固定圧縮率やスライディングウィンドウに依存せず、学習済みチェックポイントから適応的にKVペアを動的に剪定する新規性</p><p>各KVペアの将来有用性をスコアリングする軽量予測器をLLMと共同でエンドツーエンド学習し、追加教師信号不要で実装可能</p><p>入力長や内容に応じて3〜10倍のKVキャッシュ削減を実現し、メモリ使用量とデコーディング速度を大幅に改善</p><p>層・ヘッド固有の構造的スパースパターンを発見し、ハイブリッド局所-大域アテンション設計への指針となる</p><p>閾値設定や予測器の誤りによる長期依存の欠落リスクなど、実装時のチューニングと信頼性検証が課題</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

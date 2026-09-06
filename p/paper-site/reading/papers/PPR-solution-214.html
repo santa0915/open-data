@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NVAITC AI Scientist: A Governed End-to-End Research System -- A Hypertension GWAS Case Study</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-214" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>NVAITC AI Scientist: A Governed End-to-End Research System -- A Hypertension GWAS Case Study</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Eddie Huang [NVIDIA AI Technology Center, NVIDIA Corporation]; Ken Liao [NVIDIA AI Technology Center, NVIDIA Corporation]; Iven Fu [NVIDIA AI Technology Center, NVIDIA Corporation]; Yang-Hsien Lin [NVIDIA AI Technology Center, NVIDIA Corporation]; Chao-Shun Zhan [NVIDIA AI Technology Center, NVIDIA Corporation]; (+12)</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2607.11084v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>NVIDIA AI Technology Centerが提案する「NAIS」は、医療・バイオインフォマティクス領域の科学的研究ワークフローを自律的に支援するガバナンス付きのエンドツーエンド型AIエージェントシステムである。本システムは研究計画立案からデータアクセス制御、再現可能なワークフロー実行、証拠生成、ヒューマン・イン・ザ・ループによる検証までを一貫して統合している。28万6千人分の血圧関連ゲノム・電子カルテデータを用いたGWASケーススタディでは、既存の疾患関連遺伝子座を正確に再現し、論文草案レベルの出力を生成することに成功した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 医療・バイオ領域の厳格なプライバシー制約下で、研究計画から論文草案までを自律的に実行する「ガバナンス付きエンドツーエンド型AIエージェント」の実装と実証。</p><p>技術的貢献: 提案レビュー、実行計画立案、コンピュテーションルーティング、再現可能なワークフローオーケストレーション、証拠生成、ヒューマン・イン・ザ・ループ検証を統合したシステムアーキテクチャの提示。</p><p>実験結果: 286,422人の血圧GWASにおいて既存の疾患関連遺伝子座（FGF5など）を再現し、最も強いシグナルで$-\log_{10}(p) \sim 70$を達成。二次デモではマルチモーダルGNNを用いた肝障害予測でAUC 0.842を記録。</p><p>実用性: 院内データや機密情報を利用する研究現場向けに、プライバシー保護と再現性を両立するガバナンス機構を備えており、実環境への導入ポテンシャルが高い。</p><p>限界・課題: 評価が血圧GWASと肝障害予測という特定領域のケーススタディに限定されており、他の科学分野やより複雑なマルチモーダル/大規模言語モデル連携での汎用性検証は今後の課題となる。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

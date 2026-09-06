@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marine Autonomous Vehicle Fleet Scheduling to Maximise Scientific Impact</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-439" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Marine Autonomous Vehicle Fleet Scheduling to Maximise Scientific Impact</h1>
+<div class="muted">others ・ 関連度 0.60 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Mehdi El Krari; Jonathan Smith; Maria Fox</div>
+<div><span class="score">優先度 34</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.60 +24</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2608.27271v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>海洋自律航行体（MAV）のフリート運用を最適化する混合整数線形計画法（MILP）モデルを提案。バッテリー容量やデータ収集時間窓などの制約下で、科学データの収集最大化と車両数・消費エネルギーの最小化を同時に達成する。既存の船舶航路と統合し、中継給油・加速移動を可能にする新規性を持ち、数十〜数百機のスケールアップ実験で秒〜分単位の高速求解を実現した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>既存船舶航路とMAV運用を統合し、中継給油・加速移動によるバッテリー制約の緩和を実現</p><p>MILPベースのフリートスケジューリングモデルにより、データ収集最大化とエネルギー/車両数最小化の多目的最適化を達成</p><p>数十機のシナリオで秒単位、数百機でも数分で求解可能という高い計算スケーラビリティを実証</p><p>What-if分析用のシミュレーションツールと意思決定支援のための可視化パッケージを提供</p><p>MILPの制約上、動的環境やリアルタイム障害対応への拡張が課題となる可能性</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

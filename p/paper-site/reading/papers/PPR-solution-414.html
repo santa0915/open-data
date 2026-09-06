@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rule of Thumb: Explaining Artificial Intelligence Systems using Partial Information</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-414" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Rule of Thumb: Explaining Artificial Intelligence Systems using Partial Information</h1>
+<div class="muted">others ・ 関連度 0.72 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Kaivalya Rawal; Daria Onitiu; Brent Mittelstadt; Sandra Wachter; Chris Russell</div>
+<div><span class="score">優先度 39</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.72 +29</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2608.10766v2">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>特定データポイントに対するAIシステムの挙動を予測する最も関連性の高い特徴量を、部分情報（partial information）のみから抽出する「Rule of Thumb (RoT)」という説明可能AI（XAI）手法を提案。モデル内部構造や勾配に依存しないモデル非依存設計により、LLMのゼロショット分類説明、ブラックボックスAIの外部監査、科学発見支援に応用可能。主要なAI規制要件を満たし、既存手法より大幅に高速な推論と直感的な可視化インターフェースを提供する。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: モデル内部構造や勾配情報に依存せず、入力部分情報と出力挙動の相関のみで特徴重要度を算出する「Rule of Thumb」枠組みを提案</p><p>技術的貢献: ブラックボックス環境でも適用可能なモデル非依存な説明生成アルゴリズムを開発し、計算コストを大幅に削減</p><p>実験結果: 既存のXAI手法と比較して推論速度が大幅に向上し、LLMゼロショット分類や外部監査タスクで実用的な説明品質を実現</p><p>実用性・規制対応: EU AI Act等の規制要件に対応した説明形式を提供し、専門職向けに直感的な可視化インターフェースを備える</p><p>限界: 部分情報のみに依存するため複雑な非線形相互作用や高次元特徴の組み合わせ効果の説明精度が低下する可能性があり、著者もその制約について言及している</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

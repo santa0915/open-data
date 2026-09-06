@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NVIDIA OmniDreams: Real-Time Generative World Model for Closed-Loop Autonomous Vehicle Simulation</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-125" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>NVIDIA OmniDreams: Real-Time Generative World Model for Closed-Loop Autonomous Vehicle Simulation</h1>
+<div class="muted">must-read ・ 関連度 0.92 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Fulltext Reviewed</div>
+<div class="muted">著者: NVIDIA; :; Aarti Basant; Amlan Kar; Despoina Paschalidou; (+30)</div>
+<div><span class="score">優先度 57</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.92 +37</span><span class="chip">処理状況 Fulltext Reviewed +10</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.03159v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>NVIDIAは自律走行車のクローズドループシミュレーション向けに、リアルタイム生成型ワールドモデル「OmniDreams」を提案する。Cosmos拡散モデルを基盤とし21,000時間の運転データでミッド・ポストトレーニングを施すことで、過去フレーム・シミュレータ状態・動作条件を自己回帰的に条件付けし、フォトリアリスティックなセンサー観測をリアルタイムに生成する。従来の再構築型シミュレータの静的データ依存性を克服し、極端天候や動的エージェントの振る舞いを再現可能とした。Alpamayo 1ポリシーとのクローズドループ統合で高い環境応答性を示す一方、OmniDreamsから派生したワールドアクションモデル（WAM）はNuRecデータセットでVLAベースのポリシーを1/5パラメータで凌駕し、生成モデルが次世代制御アーキテクチャの基盤となり得ることを実証している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: クローズドループ自律走行シミュレーション向けに、過去状態と動作条件をリアルタイムで条件付けする生成型ワールドモデルを提案。再構築型シミュレータの静的データ依存性と一般化限界を克服。</p><p>技術的貢献: NVIDIA Cosmos拡散モデルを基盤とし、21k時間の運転シナリオでミッド・ポストトレーニングを実施。自己回帰的に動画センサー観測を生成するアーキテクチャを採用し、環境との動的相互作用を忠実に再現。</p><p>実験結果: Alpamayo 1ポリシーとのクローズドループ統合で高い応答性を確認。WAM変種はNuRecデータセットでVLAベースのAlpamayo 1.5を凌駕し、パラメータ数を1/5に抑えることに成功。</p><p>実用性・限界: リアルタイム推論とスケーラブルなシミュレーション環境構築が可能だが、大規模運転データへの依存度が高く、極端な長尾事象の完全網羅性は未検証（要論文確認）。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agentic AI for Human Resources: LLM-Driven Candidate Assessment</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-341" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Agentic AI for Human Resources: LLM-Driven Candidate Assessment</h1>
+<div class="muted">worth-reading ・ 関連度 0.82 ・ 19th Conference of the European Chapter of the Association for Computational Linguistics (EACL 2026) ・ 追跡 Tier 2 ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Kamer Ali Yuksel; Abdul Basit Anees; Ashraf Elneima; Sanjika Hewavitharana; Mohamed Al-Badrashiny; (+1)</div>
+<div><span class="score">優先度 53</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.82 +33</span><span class="chip">追跡優先度 Tier 2 +10</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2603.26710v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>採用選考における候補者評価を自動化するマルチエージェントフレームワークを提案。職務記述書・履歴書・面接記録などを統合し、LLMが生成した役割固有の評価基準（ルーブリック）に基づき細粒度な評価レポートを作成する。従来の独立採点やペアワイズ比較に代わり、小規模候補者グループのリストワイズ順位付けとPlackett-Luceモデルを組み合わせるアクティブラーニング型トーナメント手法を導入し、サンプル効率とランキングの一貫性を向上させる。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 金融資産ランキングで検証されたリストワイズLLM選好モデルを採用者評価領域へ転用し、アクティブラーニングによる情報的サブセット選択（Active Listwise Tournament）を提案</p><p>技術的貢献: 役割固有のLLM生成ルーブリックとマルチエージェントアーキテクチャを組み合わせた、解釈可能で監査可能な細粒度評価パイプラインの実装</p><p>実用性: 従来のキーワードマッチングに依存しない透明な推薦・比較レポートを出力し、実務採用ワークフローへの組み込みを想定（定量的ベンチマーク結果は本文参照）</p><p>限界・課題: ドメイン特化型アプローチであり、評価基準のバイアス制御や大規模候補者群へのスケーラビリティは実証段階にある可能性が高い</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

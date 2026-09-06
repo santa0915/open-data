@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Denoising-Aware Temporal Point Cloud Completion for 3D Crop Architecture Recovery and Phenotypic Trait Extraction</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-432" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Denoising-Aware Temporal Point Cloud Completion for 3D Crop Architecture Recovery and Phenotypic Trait Extraction</h1>
+<div class="muted">others ・ 関連度 0.65 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Mrudul Mittal; Soumyashree Kar</div>
+<div><span class="score">優先度 36</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.65 +26</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2608.28343v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>農作物の時間的成長過程における3D点群再構築を目的とした研究。制御可能なノイズ・遮蔽を備えた合成データセットSynthCrop4Dを提案し、空間的デノイジング（Mamba-DG：Mambaベースのデノイザー）と過去段階の情報を利用する適応型Temporal PoinTr（点群補完ネットワーク）を組み合わせた2段階パイプラインを実装。合成データでChamfer Distance 0.0061、実データPheno4DでF-Score 0.2080を達成し、植物高・冠幅・体積などの形質抽出基盤を提供する。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 時間的成長過程の3D植物点群に対して、ノイズ・遮蔽レベルを制御可能な完全な幾何学的正解付き合成データセットSynthCrop4Dを初めて提供</p><p>技術的貢献: Mamba-DGによる空間デノイジングと、t-1期の情報を用いて自己遮蔽領域を復元する適応型Temporal PoinTrを組み合わせた2段階再構築パイプラインを提案</p><p>実験結果: 合成データでChamfer Distance 0.0061、実データでF-Score 0.2080を達成し、デノイジング工程が再構築品質に大きく寄与することを定量的に示した</p><p>実用性: 高スループットな作物の形質（高さ、冠幅、凸包体積など）抽出を可能にし、農業ロボットや精密農業のデータ基盤として応用可能</p><p>限界・課題: 実データでのF-Scoreが0.2前後と比較的低く、合成データから実世界へのドメインギャップや多様な栽培環境への汎化が今後の課題</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

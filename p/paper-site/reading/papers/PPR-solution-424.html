@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inverse Rendering for Modeling with Line Primitives</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-424" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Inverse Rendering for Modeling with Line Primitives</h1>
+<div class="muted">others ・ 関連度 0.35 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Kenji Tojo; Ariel Shamir; Nobuyuki Umetani; Bernd Bickel</div>
+<div><span class="score">優先度 24</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.35 +14</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2609.00625v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>毛髪や繊維などの複雑な構造を持つ実世界オブジェクトを、明示的な線分プリミティブを用いて逆レンダリングで再構築する手法を提案。多数の線分の最適化課題に対し、頂点位置・属性・離散接続性に対して情報豊富な勾配を生成する確率的微分可能ラスタライザを導入。合成・実データの実験により、表面ベース手法よりぼやけた境界の再現に優れ、体積表現と同等の品質を標準グラフィックスパイプラインと互換性のある明示的幾何で達成したことを示す。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>既存の3Dガウスなどの体積表現に依存せず、明示的な線分プリミティブのみで半透明・異方性構造を逆レンダリングで捉える新規性</p><p>頂点位置・属性・離散接続性に対して勾配を出力する確率的微分可能ラスタライザを開発し、多数の線分の最適化を可能にした技術的貢献</p><p>合成・実データベンチマークで表面ベース手法よりfuzzy boundaryの再現精度が向上し、体積表現と同等の視覚品質を達成</p><p>標準的な深度テストラスタライゼーションやシェーディングモデル、物理シミュレーションパイプラインへのシームレスな統合が可能で実用性が高い</p><p>多数の線分プリミティブによるメモリ/計算コスト、複雑なトポロジー時の接続性最適化の安定性については言及が限定的</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

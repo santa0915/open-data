@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fast Whole-Brain, Geometry-Aware Functional Alignment for Cross-Subject Decoding</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-189" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Fast Whole-Brain, Geometry-Aware Functional Alignment for Cross-Subject Decoding</h1>
+<div class="muted">others ・ 関連度 0.35 ・ Proceedings of the 9th Conference on Cognitive Computational Neuroscience ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Pierre-Louis Barbarant; Florent Meyniel; Bertrand Thirion</div>
+<div><span class="score">優先度 24</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.35 +14</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2607.10931v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>fMRIを用いた被験者間デコーディングにおいて、個人差による機能データのアライメント課題を解決する手法「SpectralOT」を提案。皮質幾何学情報をラプラス・ベルトラミ固有モードに埋め込み、機能的特徴量のアライメントと解剖学的構造の保持、計算効率のバランスを取る。最適輸送理論とスペクトル幾何学を組み合わせた正則化により、高速な全脳レベルでの機能アライメントを実現する。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 被験者間fMRIデータのアライメントに、皮質幾何学（ラプラス・ベルトラミ固有モード）を最適輸送の正則化項として組み込んだ手法を提案。</p><p>技術的貢献: 解剖学的構造を保ちつつ機能的特徴量をアライメントする「SpectralOT」アルゴリズムを開発し、計算コストを抑えた高速な全脳処理を実現。</p><p>実験結果: 本文要約のみでは定量的ベンチマーク結果が不明だが、既存のアライメント手法と比較して構造保持性と計算速度の両立を目的としている。</p><p>実用性: fMRI解析パイプラインへの組み込みが想定されているが、皮質メッシュデータの準備など事前処理制約がある。</p><p>限界・課題: 抽象文ではfMRI特有の空間解像度やノイズへの頑健性、他のモダリティ（EEG/MEG）や深層学習モデルとの統合可能性は未検証。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

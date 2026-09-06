@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learning AI Without a STEM Background: Mixed-Methods Evidence from a Diverse, Mixed-Cohort AIED Program</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-221" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Learning AI Without a STEM Background: Mixed-Methods Evidence from a Diverse, Mixed-Cohort AIED Program</h1>
+<div class="muted">others ・ 関連度 0.35 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Valentina Kuskova; Dmitry Zaytsev; Richard Johnson</div>
+<div><span class="score">優先度 24</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.35 +14</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2604.20870v2">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>本論文は、STEM背景を持たない学生や社会人を対象とした混合コホート型AI教育プログラム（AIED）の設計と実証評価を示す。技術的習熟度よりも倫理的推論・社会技術的判断・応用リテラシーを中核に据え、アンケート・自由記述・教員報告からなる混合手法で効果を測定した。その結果、参加者のAI概念への自信と社会的関連性知覚が有意に向上し、倫理的重み付けや文脈理解が重視される学習プロセスが確認された。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>STEM非専門職や成人学習者を統合した混合コホート型AIEDモデルを提案し、従来の技術偏重教育の参加障壁を克服する設計指針を示す。</p><p>倫理的スキャフォールディング・メンターシップ・対話型シナリオ学習を中核教材とし、技術習得より「責任ある判断」を学習成果として位置づける。</p><p>混合手法による実証で、参加者のAIリテラシー自信度と社会的関連性知覚が有意に向上したことを定量・定性両面から報告する。</p><p>政策・職場隣接分野へのAI教育普及に向けた設計インプリケーションを提示するが、長期追跡や技術習得との相関評価は今後の課題として残る。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

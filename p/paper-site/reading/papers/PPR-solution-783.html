@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SkillAxe: Sharpening LLM-Authored Agent Skills Through Evaluation-Guided Self-Refinement</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-783" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>SkillAxe: Sharpening LLM-Authored Agent Skills Through Evaluation-Guided Self-Refinement</h1>
+<div class="muted">— ・ 関連度 0.90 ・ arXiv ・ 追跡 — ・ 再現性 — ・ 処理状況 —</div>
+<div class="muted">著者: Srishti Gautam, Arjun Radhakrishna, Sumit Gulwani</div>
+<div><span class="score">優先度 46</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.90 +36</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.10546v2">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>LLM（大規模言語モデル）が生成したエージェント用スキル（自然言語指示書）の品質向上を目的とした、教師なし自己改善フレームワーク「SkillAxe」を提案。スキルの品質を4つの解釈可能な次元に分解し、正解ラベルや環境報酬を用いずに構造化された改善指針を自動生成する。SkillsBenchおよびSpreadsheetBenchでの評価により、LLM単体より相対28%のパス率向上を実現し、人間作成スキルとの性能差を47〜67%まで縮小。さらに過去のエージェント軌跡から継続的に学習するエンジンとして実証され、わずか22スキルで52%のパス率を達成した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 正解ラベルやテストスイート、環境報酬に依存しない「教師なし」のスキル自己診断・改善パイプラインを提案。</p><p>技術的貢献: スキル品質を「影響度」「トリガー精度」「指示準拠と故障帰属」「解決パス網羅性」の4次元に分解し、構造化改善ブリーフを自動生成する評価駆動自己修正機構。</p><p>実験結果: SkillsBenchでLLM単体スキルより相対28%のパス率向上、人間スキルとのギャップを47〜67%縮小。SpreadsheetBenchでは22スキルで16.0%→52.0%へ大幅改善。</p><p>実用性: 外部アノテーションや環境設定が不要なため、既存エージェントフレームワークへの組み込みが容易。継続学習エンジンとしての実証も完了。</p><p>限界・課題: 4次元の評価指標がすべてのドメインで万能かは未検証。また「教師なし」ゆえに評価基準の設計依存性や、複雑な環境での故障帰属精度に関する議論が必要。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

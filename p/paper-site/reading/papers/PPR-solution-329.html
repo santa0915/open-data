@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PIVOT: Bridging Planning and Execution in LLM Agents via Trajectory Refinement</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-329" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>PIVOT: Bridging Planning and Execution in LLM Agents via Trajectory Refinement</h1>
+<div class="muted">must-read ・ 関連度 0.92 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Fulltext Reviewed</div>
+<div class="muted">著者: Tuo Zhang; Alin-Ionut Popa; Yan Xu; Rui Song; Dimitrios Dimitriadis</div>
+<div><span class="score">優先度 57</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.92 +37</span><span class="chip">処理状況 Fulltext Reviewed +10</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.11225v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>LLMエージェントの計画と実行の乖離を解消する「PIVOT」という自己教師ありフレームワークを提案。 環境との対話を通じて生成された候補軌道（Trajectory）を検証し、構造化損失によるテキスト勾配で評価・反復最適化を行う4段階プロセス（PLAN-INSPECT-EVOLVE-VERIFY）で構成される。 DeepPlanningやGAIAベンチマークでSOTAを達成し、ヒューマンフィードバック有りで制約充足率が最大94%向上、自律動作時でも計算効率（トークン数3〜5分の1）と高い性能を両立している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 計画段階の出力そのものを最適化対象とし、環境実行結果と計画の乖離を「テキスト勾配」として構造化損失に落とし込む自己教師あり軌道最適化手法。</p><p>技術的貢献: PLAN-INSPECT-EVOLVE-VERIFYの4段階パイプラインと単調性保証付き受容プロセスにより、反復更新が解の品質を劣化させないことを担保。</p><p>実験結果: DeepPlanningおよびGAIAでSOTA達成。HITL有りで制約充足率が最大94%向上し、完全自律版でも競争手法より3〜5倍少ないトークン数で高性能を維持。</p><p>実用性: 外部RLループに依存せず既存エージェントの中間層に組み込み可能な軽量設計。テキスト勾配はLLMの推論能力を直接活用するため実装・拡張が容易。</p><p>限界・課題: 環境インタラクション回数が増加する反復プロセスのため、リアルタイム性や高コストシミュレーション環境での適用には制約がある可能性。テキスト勾配の品質は基盤LLMに依存。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ECHO: Terminal Agents Learn World Models for Free</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-127" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>ECHO: Terminal Agents Learn World Models for Free</h1>
+<div class="muted">must-read ・ 関連度 0.93 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Fulltext Reviewed</div>
+<div class="muted">著者: Vaishnavi Shrivastava; Piero Kauffmann; Ahmed Awadallah; Dimitris Papailiopoulos</div>
+<div><span class="score">優先度 57</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.93 +37</span><span class="chip">処理状況 Fulltext Reviewed +10</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.24517v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>CLIエージェントにおける環境フィードバック（stdout, ログ, エラー等）を教師信号として活用する学習手法ECHOを提案。標準的なGRPOの政策勾配損失に、エージェントが自身の行動によって生じる環境トークンを予測する補助損失を結合し、追加ロールアウトなしで同じフォワードパスで訓練可能にする。TerminalBench-2.0においてGRPOのpass@1を約2倍に向上させ、専門家のデモなしでも同等以上の性能を実現。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: エージェントRLで無視されがちな環境応答ストリームを「密な教師信号」として再定義し、既存のスパース報酬設定を補完するハイブリッド損失を提案</p><p>技術的貢献: ECHO（Environment Cross-entropy Hybrid Objective）により、政策勾配損失と環境トークン予測損失を単一フォワードパスで同時に最適化。追加ロールアウトや計算オーバーヘッドなしで実装可能</p><p>実験結果: TerminalBench-2.0でQwen3-8Bのpass@1を2.70%→5.17%、14Bを5.17%→10.79%に約2倍向上。環境予測精度も大幅に改善</p><p>実用性: 専門家のSFTデータや検証器（verifier）を必要とせず、純粋な環境相互作用のみで自己改善（verifier-free self-improvement）が可能</p><p>限界・課題: CLI/ターミナル環境に特化した評価であり、GUIエージェントや物理世界への汎化性、長文コンテキストでの予測安定性などは未検証</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

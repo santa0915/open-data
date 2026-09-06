@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>In vivo feasibility study of humanoid robots in surgery</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-319" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>In vivo feasibility study of humanoid robots in surgery</h1>
+<div class="muted">worth-reading ・ 関連度 0.87 ・ Nature (2026) ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Zekai Liang; Nikita Thareja; Peihan Zhang; Calvin Joyce; Soofiyan Atar; (+5)</div>
+<div><span class="score">優先度 45</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.87 +35</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2607.07972v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>汎用ヒューマノイドロボットと標準手術器具を用いた腹腔鏡手術のテレオペレーションフレームワークを構築し、ベンチトップ評価・多経験層の乾燥実験・in vivoブタ生体実験を通じて技術的実現可能性を定量的に評価している。 既存専用手術ロボットとの比較により、現在のヒューマノイドが達成可能な精度・制御性能と臨床展開に向けた具体的な課題を明確に示した。 汎用プラットフォームとしての拡張性と医療現場への適用ギャップの両面から、Physical AIの実世界導入の指針となる重要な実証研究である。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>専用手術ロボットではなく汎用ヒューマノイドと標準化された器具を用いたテレオペレーションフレームワークを提案し、既存プラットフォームとの比較ベンチマークを提供。</p><p>ベンチトップ評価、多様な外科医経験層を対象とした乾燥実験、in vivo生体実験の3段階で技術的実現可能性とタスク性能を定量化。</p><p>臨床展開に向けた精度・制御・安全性のギャップを明確にし、ヒューマノイド特有の自由度制御と安全インタラクションにおける技術的課題を特定。</p><p>実用性としては医療機器認証やリアルタイム制御の制約があるものの、汎用プラットフォームとしての拡張性は高く、後続の研究開発の指針となる。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

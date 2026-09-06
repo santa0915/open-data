@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unsupervised Features Mining via Activation Geometry</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-219" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Unsupervised Features Mining via Activation Geometry</h1>
+<div class="muted">worth-reading ・ 関連度 0.88 ・ ICML 2026 ・ 追跡 Tier 1 ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Amit LeVi; Elad David; Max Fomin</div>
+<div><span class="score">優先度 70</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.88 +35</span><span class="chip">追跡優先度 Tier 1 +25</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2607.04222v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>LLMの内部表現から教師なしで推論特徴を抽出するMAGフレームワークを提案。入力に自然言語指示Qを付加し、単一層での活性化差分$m(Q|p) - m(p)$を計測することで対象特徴を分離する。抽出した特徴は線形方向への近似が可能でベクトルステアリングによる意思決定制御や、プロンプトインジェクション防御用の訓練データ選定（Top-1 94.7%）に活用できることを実証。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>既存の教師あり・人間定義概念依存の解釈手法を排し、自然言語指示のみで特徴を教師なし抽出する新規性</p><p>単一層の活性化差分を用いた簡潔なMAGフレームワークにより、複雑な分解処理なしで推論特徴を分離可能</p><p>抽出特徴は線形方向への近似が成立し、ベクトルステアリングでモデルの判断を直接変更できることを実証</p><p>プロンプトインジェクション分類器プローブの訓練データ選定に応用し、RFD類似性基準でTop-1 94.7%の高精度達成</p><p>単一層読み出しに依存するため非線形特徴や多層分散表現への適用限界が課題として残る</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='PPR-solution-335.html'>次に読む →</a> ・ <a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

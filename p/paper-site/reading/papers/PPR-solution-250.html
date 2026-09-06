@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Comparative Study of MCP and A2A for Inter-Agent Coordination in LLM-Based Systems</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-250" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>A Comparative Study of MCP and A2A for Inter-Agent Coordination in LLM-Based Systems</h1>
+<div class="muted">worth-reading ・ 関連度 0.87 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Ionut Predoaia; Tuong Manh Vu; Konstantinos Barmpis; Dimitris Kolovos; Antonio García-Domínguez</div>
+<div><span class="score">優先度 45</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.87 +35</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2607.23884v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>LLMベースのエージェント間協調において、Model Context Protocol (MCP) と Agent2Agent (A2A) の実装比較を多角的な要件に基づいて行っている。MCPは軽量で調整複雑度が低い一方、A2Aはプロトコルレベルでのステートフル協調をネイティブサポートするが実装負荷が高いというトレードオフを実証的に明らかにした。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>MCPとA2Aの両プロトコルを用いた同一エージェント協調タスクの実装・評価比較</p><p>MCPは軽量・低複雑度だが、会話状態やタスクライフサイクル管理はアプリ層での明示的実装が必要</p><p>A2Aはプロトコルレベルでマルチターン協調をネイティブサポートするが、実装・調整の複雑度が大幅に高い</p><p>発見可能性、非同期通信、観測性、アクセス制御など7つの実装要件に基づく定量的/定性的評価</p><p>限定的な協調パターンに焦点を当てた経験報告であり、広範なMASへの一般化は明示的に避けている</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

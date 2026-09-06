@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glite ARF: Verifier-Driven Research with Parallel LLM Coding Agents</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-144" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Glite ARF: Verifier-Driven Research with Parallel LLM Coding Agents</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Vassili Philippov; Pavel Katunin; Dmitry Andreev; Igor Ostanin; Anton Nikolaev</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.27416v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>LLMコーディングエージェントを並列実行する実証研究の再現性・監査性を課題とし、自然言語指示に依存しない「Verifier-Driven Research」パラダイムを提案。PythonフレームワークGlite ARFにより、人間・エージェント・検証スクリプトの3層構造でタスク分離と不変性を強制し、BEA 2026語彙難易度課題でベースラインRMSEを約30〜36%改善して上位入賞。低コスト（API費約$450）かつオーバーヘッド1%で実証済み。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>既存の自然言語指示に依存するマルチエージェント研究を脱し、Python検証スクリプトでタスク分離・完了作業の不変性・プロベナンス追跡を強制する「Verifier-Driven Research」概念を提案</p><p>Claude CodeやCodex CLIなどのLLMコーディングエージェントを最大12並列で実行可能にするオープンソースフレームワークを提供し、構造化されたタスク分解と修正オーバーレイをサポート</p><p>BEA 2026語彙難易度課題（西独中3言語）でクローズド/オープントラックそれぞれ1位/2位を獲得し、公式ベースラインRMSEを29.9%/35.9%改善。データリーク検出にも成功</p><p>単一ラップトップ＋レンタルA100環境で約$450のAPI費で運用可能だが、外部LLM依存が強く、複雑なマルチモーダルや長期計画タスクへの拡張性は未検証</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

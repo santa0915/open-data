@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evaluating and Pricing Advertisements in AI-Generated Responses</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-224" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Evaluating and Pricing Advertisements in AI-Generated Responses</h1>
+<div class="muted">worth-reading ・ 関連度 0.82 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: John L. Turner-Smith; Zimeng Huang; Yuhan Fu; Yihang Zhang; Tonghan Wang</div>
+<div><span class="score">優先度 43</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.82 +33</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2607.27686v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>LLM駆動の検索エンジンにおける生成回答内広告の評価・価格決定手法を提案。行動ログや人間注釈に依存せず、心理学的エージェントシミュレーションでクリック意図と広告品質の滑らかな微分可能信号を生成し、パラメータ効率的な評価器へ蒸留する。ゼロショットLLM判定器を上回る関連性感度（79%）と人間同意率（86%）を示し、真実入札を最適化する価格決定ルールを実装。広告生成の訓練目的関数としても利用可能。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 行動ログやLLM判定器のバイアスに依存せず、心理学的エージェントシミュレーションでクリック意図を継続的に推定する手法を提案。</p><p>技術的貢献: シミュレーションデータを蒸留したパラメータ効率的な評価器により、クリック意図と広告品質3次元を滑らかで微分可能な信号として出力。</p><p>実験結果: 関連性感度79%（既存LLM判定器60-67%）、人間同意率86%、103種の架空製品への汎化に成功。</p><p>実用性: 導出した価格決定ルールは真実入札を最適化し、広告生成の訓練目的関数としても直接利用可能。</p><p>限界・課題: 架空製品での検証が中心であり、実在する複雑な市場環境や長期ユーザー行動への適用性は未検証。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

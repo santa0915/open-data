@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Female-RHINO: A Real-Time Scanner-Integrated Framework for Automated Quantitative Uterine MRI Analysis and Structured Reporting</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-119" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Female-RHINO: A Real-Time Scanner-Integrated Framework for Automated Quantitative Uterine MRI Analysis and Structured Reporting</h1>
+<div class="muted">others ・ 関連度 0.35 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Deepak Bhatia; Saad Ahmad; Smiti Tripathy; Maria Camila Bustos Vivas; Lieselotte Kratzsch; (+5)</div>
+<div><span class="score">優先度 24</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.35 +14</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.24390v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>子宮MRIの解剖学的ばらつきと観察者依存性を解消するため、MRIスキャナとリアルタイム連携する深層学習基盤の自動分析フレームワーク「Female-RHINO」を提案。500件以上のマルチセンターデータで学習したセグメンテーション・ランドマーク検出モデルを用い、子宮体積計測、筋腫・嚢胞の検出、6点解剖学的指標の抽出を自動化し、スキャン中に70秒以内に構造化レポートを生成する。独立検証コホートでDice係数0.82（子宮）/0.80（筋腫）、ランドマーク誤差3.7mmを実現し、臨床ワークフローへのリアルタイム統合実用性を示した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>MRIスキャン中のリアルタイム連携（inline communication）と自動構造化レポート生成を統合した臨床ワークフロー最適化型AIシステム</p><p>子宮セグメンテーション、筋腫/嚢胞検出、6点解剖学的ランドマーク抽出を単一エンドツーエンドパイプラインで実現する深層学習モデルの設計とマルチセンターデータでのロバストな学習</p><p>子宮Dice 0.82、筋腫Dice 0.80、ランドマーク平均半径誤差3.7mmを達成。スキャン中処理完了まで&lt;70秒でリアルタイム性を検証</p><p>放射線科医の介入なしに自動レポートを生成し、プロスペクティブな臨床環境でのデプロイメント成功により実装・導入のハードルが低い</p><p>ナボチアン嚢胞などの小病変検出精度がやや低く、極端なアーティファクトや未学習プロトコルへの頑健性は記載不足</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

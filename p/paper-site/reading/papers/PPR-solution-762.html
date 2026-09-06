@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Large Language Models as Supervised Extraction Assistants: Lowering the Barrier to Documentation Standard Adoption in Agent-Based Modelling</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-762" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Large Language Models as Supervised Extraction Assistants: Lowering the Barrier to Documentation Standard Adoption in Agent-Based Modelling</h1>
+<div class="muted">others ・ 関連度 0.60 ・ arXiv ・ 追跡 — ・ 再現性 — ・ 処理状況 —</div>
+<div class="muted">著者: Peer-Olaf Siebers, Christopher Frantz</div>
+<div><span class="score">優先度 34</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.60 +24</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.13749v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>Agent-Based Modelling（ABM）の文書化標準（ODDやRAT-RSなど）の採用障壁を下げるため、LLMを文書抽出・生成の補助ツールとして活用する可行性を検討した研究。4つのLLMを用いて既存のABM論文から基準に沿った記述を自動抽出し、記述型タスクでは高い一貫性を示したが、説明・評価型タスクでは精度が低下した。実用的な運用指針と人間の監督が必要なケースを提示し、ABM分野におけるLLM活用による報告透明性向上の可能性と課題を論じている。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: ABM分野の文書化標準（特にRAT-RS）の自動抽出・生成にLLMを適用し、再現性・透明性向上の実用アプローチを提案。</p><p>技術的貢献: 4種類のLLMを用いた比較評価により、プロンプト設計やタスク種別に応じた抽出性能の差を定量的に把握。</p><p>実験結果: 記述的な情報抽出では高い一貫性と信頼性を達成したが、因果推論や批判的評価が必要なタスクでは精度が低下し、人間の検証が不可欠であることを示した。</p><p>実用性: ドメイン特化型のLLM微調整や複雑なパイプライン構築なしに既存モデルで導入可能だが、専門知識を要する文脈の抽出には限界がある。</p><p>限界・課題: 生成結果の事実誤認リスクや、ドメイン固有の標準化プロセスへの統合方法が未確立であり、大規模なコミュニティ検証が必要。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strabo: Declarative Specification and Implementation of Agentic Interaction Protocols</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-88" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Strabo: Declarative Specification and Implementation of Agentic Interaction Protocols</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Samuel H. Christie; Amit K. Chopra; Munindar P. Singh</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.05043v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>本論文は、AIエージェント間の相互作用を形式化・標準化する「Strabo」フレームワークを提案する。既存の宣言型プロトコル（Langshaw）を用いてGoogleのUCP（Universal Commerce Protocol）のチェックアウトプロセスをモデル化し、Peachプログラミングモデルでエージェントを実装した。実証実験により、PeachエージェントがGoogleの実装と相互運用可能であることを示し、宣言型プロトコルの段階的導入による業界標準との互換性を実現する道筋を示した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: AIエージェント間の通信・相互作用を宣言型プロトコルで形式化し、業界標準UCPとのマッピングを初めて実証。</p><p>技術的貢献: Langshawという宣言型言語とPeachプログラミングモデルを活用し、エージェントの振る舞いを仕様駆動で記述・実行する基盤を提供。</p><p>実験結果: Peachで実装したエージェントがGoogleが公開しているUCP準拠エージェントとシームレスに相互運用（Interoperability）することを検証。</p><p>実用性: 既存の業界標準を完全に置き換えるのではなく、宣言型プロトコルを段階的に導入できる設計により、実環境への適用ハードルを低減。</p><p>限界・課題: 現時点ではe-commerceのチェックアウトという限定されたユースケースに焦点が当てられており、複雑なマルチエージェント協調や推論プロセスへの拡張性は今後の課題。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

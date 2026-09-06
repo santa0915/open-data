@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OrchJail: Jailbreaking Tool-Calling Text-to-Image Agents by Orchestration-Guided Fuzzing</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-332" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>OrchJail: Jailbreaking Tool-Calling Text-to-Image Agents by Orchestration-Guided Fuzzing</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ ICML 2026 ・ 追跡 Tier 1 ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Jianming Chen; Yawen Wang; Junjie Wang; Zhe Liu; Qing Wang; (+1)</div>
+<div><span class="score">優先度 69</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">追跡優先度 Tier 1 +25</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.07414v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>ツール呼び出し機能を持つテキスト画像生成（T2I）エージェントの安全性を評価・攻撃するための「OrchJail」フレームワークを提案。個別のツール呼び出しは安全でも、その順序や組み合わせ（オーケストレーション）によって有害な出力が生じる脆弱性を着目し、成功した攻撃軌跡とプロンプトの因果関係を学習してファジング探索を誘導する手法を実現。実験により既存エージェントで高い攻撃成功率・画像品質・効率化を達成し、既存防御策にも頑健であることを示した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 単一プロンプト改変ではなく、複数ツール呼び出しの「オーケストレーション順序・組み合わせ」を攻撃面として定式化し、既存のテキストベースジャイルブレイク手法の限界を克服。</p><p>技術的貢献: 成功した攻撃軌跡から因果関係を抽出し、ファジング探索空間を安全なパスから危険なマルチステップ行動へ直接誘導するオーケストレーション誘導ファジングを実現。</p><p>実験結果: 代表的なT2Iエージェントで攻撃成功率（ASR）と画像品質を向上させつつ、クエリコストを大幅に削減。既存のジャイルブレイク防御策にも頑健であることを実証。</p><p>実用性/課題: 防御側・開発側の脆弱性診断ツールとして即戦力となりうるが、特定エージェントの軌跡データに依存する学習フェーズが必要であり、汎用ファジングとのバランスが今後の課題。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='PPR-solution-338.html'>次に読む →</a> ・ <a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

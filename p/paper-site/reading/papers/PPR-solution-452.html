@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Particle-Based Conformal Prediction for Contact-Aware Uncertainty Calibration in Stratified Configuration Spaces</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-452" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Particle-Based Conformal Prediction for Contact-Aware Uncertainty Calibration in Stratified Configuration Spaces</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ 31 pages ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Luís Marques; Kristian Popov; Dmitry Berenson</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2608.09166v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>ロボットの環境接触（コンタクト）に伴う不確実性の分布変化を捉え、確率的に妥当な未来構成空間の予測領域を生成する「CaPTURe」手法を提案。粒子モデルと適合的予測（Conformal Prediction）を融合した幾何awareな補正フレームワークにより、接触有無にかかわらずユーザ指定のカバレッジ率を厳密に保証する。シミュレーション上の迷路ナビゲーションおよび精密ピッグインホール作業で、ベースライン比最大30%のタスク成功率向上と確実なカバレッジ達成を確認した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>粒子ベースの運動モデルと適合的予測（Conformal Prediction）を融合し、ストラティファイドな構成空間でも確率的に保証された不確実性領域を生成する新規フレームワーク</p><p>障害物接触時に生じるマルチモーダル分布や低次元多様体への制約を明示的にモデル化し、従来の平滑・単峰性仮定に依存しない補正を実現</p><p>シミュレーション2タスクでユーザ指定のカバレッジ率を厳密に達成し、タスク成功率をベースライン比最大30%絶対改善</p><p>実装・応用面では粒子サンプリングと局所補正の計算コストが課題となる一方、モデル不確実性が大きい実ロボットの安全計画への組み込みは容易</p><p>著者らはシミュレーション環境での検証にとどめており、実機での接触摩擦・センサーノイズなどの物理的複雑さに対する頑健性は今後の課題</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

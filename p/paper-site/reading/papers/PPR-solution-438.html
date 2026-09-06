@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact-Guided Exploration for Non-Prehensile Locomanipulation with Multi-Critic RL</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-438" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Contact-Guided Exploration for Non-Prehensile Locomanipulation with Multi-Critic RL</h1>
+<div class="muted">must-read ・ 関連度 0.92 ・ project website: https://tolomeis.github.io/contact-guided-exp Accepted in IEEE Robotics and Automation Letter (RA-L) 8 pages ・ 追跡 Tier 3 ・ 再現性 — ・ 処理状況 Fulltext Reviewed</div>
+<div class="muted">著者: Simone Tolomei; Mayank Mittal; Franco Angelini; Manolo Garabini; Paolo Salaris; (+1)</div>
+<div><span class="score">優先度 57</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.92 +37</span><span class="chip">処理状況 Fulltext Reviewed +10</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2608.28140v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>モバイルマニピュレータを用いた非把持型操作（押す・滑らせる）において、接触の希少性による強化学習の学習困難を解決するため、マルチクリティックRLフレームワーク内に接触誘導探索戦略を提案。一般化把持アルゴリズムから得た候補点に密な報酬を設定した探索用クリティックを用い、段階的に減衰させることでタスク最適方策へ収束させる。箱押しや椅子運搬などのシミュレーション評価に加え、四足モバイルマニピュレータでの実機検証により実世界展開可能性を実証。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 非把持型操作の接触探索を、一般化把持アルゴリズムと密な報酬を持つ専用クリティックで誘導するマルチクリティックRLアプローチ</p><p>技術的貢献: 探索用クリティックの報酬重みを段階的に減衰させることで、初期の接触獲得から最終的なタスク最適方策へのスムーズな移行を実現</p><p>実験結果: 箱押し・椅子運搬・食器洗い機開閉など複数タスクでシミュレーション成功率高く、実機（四足モバイルマニピュレータ）でも安定した操作を検証</p><p>実用性: 把持アルゴリズムの出力を流用するため物体形状への汎化性が高く、実ロボットへの組み込みが比較的低コストで可能</p><p>限界・課題: 接触モデルや摩擦係数の実機とシミュレーションのギャップ（Sim2Real）への言及が限定的であり、極端な物体形状や滑りやすい表面でのロバスト性検証は今後の課題</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

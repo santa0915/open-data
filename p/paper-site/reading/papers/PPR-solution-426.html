@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DARP: A Calibrated Dual-Arm RGB-D-IR Dataset for Multi-View Robotic Perception</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-426" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>DARP: A Calibrated Dual-Arm RGB-D-IR Dataset for Multi-View Robotic Perception</h1>
+<div class="muted">worth-reading ・ 関連度 0.80 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Manish Kansana; Mohammed Yusuf Mujawar; Sudip Mittal; Shahram Rahimi; Noorbakhsh Amiri Golilarz</div>
+<div><span class="score">優先度 42</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.80 +32</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2608.31002v2">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>本論文は、対向配置された2台の眼手型マニピュレータを用いたDARPデータセットを提案する。各アームにIntel RealSense（RGB-D-IR：赤外線を含む深度センサー）を搭載し、自動位置決め・適応的視点生成・マルチモーダル記録を実現している。10種類の卓上物体を対象に、学習ベースの補完を用いない決定論的多視点融合パイプラインにより幾何的一貫性を評価した結果、メディアン点群-メッシュ距離は2.13mm、RMSEは4.04mmを達成した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 固定ポーズやマーキングなしで物体を配置し、双腕の協調による適応的視点生成と自動ローカライゼーションを実現したデータセット。</p><p>技術的貢献: RGB-D-IRセンサーと同期されたロボット関節状態ログを提供し、共有計測フレームでのカメラ軌跡再構成を可能にするキャリブレーション情報を公開。</p><p>実験結果: 224枚の検証用RGB-Dキーフレーム（約156万点）に対し、学習補完なしでメディアン誤差2.13mm、RMSE 4.04mmの幾何的一貫性を達成。</p><p>実用性: 生センサーデータ・キャリブレーション・オブジェクトメタデータを公開しており、アクティブビジョンやマルチモーダル融合の研究基盤として再利用可能。</p><p>限界: 対象物体が10種類に限定されており、複雑な背景や未知物体への一般化には追加の収集・検証が必要。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unleashing LLMs in Bayesian Optimization: Preference-Guided Framework for Scientific Discovery</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-78" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Unleashing LLMs in Bayesian Optimization: Preference-Guided Framework for Scientific Discovery</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ International Conference on Learning Representations (ICLR) ・ 追跡 Tier 1 ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Xinzhe Yuan; Zhuo Chen; Jianshu Zhang; Huan Xiong; Nanyang Ye; (+2)</div>
+<div><span class="score">優先度 69</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">追跡優先度 Tier 1 +25</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.17976v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>LLMのセマンティック推論をベイズ最適化（BO）の意思決定ループに逐次統合するLGBOフレームワークを提案。既存手法がウォームスタートや候補生成に限定されるのに対し、領域拡張型優先度メカニズムでサロゲートモデルの平均値を安定シフトさせる。理論的に最悪ケースでも標準BOと同等以上であることを証明し、材料科学の湿式実験を含むベンチマークで収束速度を大幅に向上させた。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: LLMの推論能力をBOの全イテレーションに統合する初のフレームワーク（従来は初期化や候補生成のみ）</p><p>技術的貢献: 領域拡張型優先度メカニズムによりサロゲート平均値を制御可能にシフトさせ、理論的に最悪ケースでの性能保証を提供</p><p>実験結果: ドライベンチマークで既存手法を凌駕。湿式実験（電池電解液）では6イテレーションで最適値の90%達成（従来は10以上必要）</p><p>実用性・課題: LLMの優先度と目的関数の整合性が収束速度に直結。理論保証は「整合する場合」に限られ、一般化性能や推論コストの詳細は別途検証が必要</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='PPR-solution-219.html'>次に読む →</a> ・ <a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

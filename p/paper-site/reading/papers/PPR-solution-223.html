@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beyond Borrowed Histories: Person-Aligned User Simulation for Interactive Role-Playing Evaluation</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-223" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Beyond Borrowed Histories: Person-Aligned User Simulation for Interactive Role-Playing Evaluation</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Yuhang Zhu [University of Science and Technology of China]; Mingxuan Du [University of Science and Technology of China]; Benfeng Xu [University of Science and Technology of China; MetaStone Technology, Beijing, China]; Jie Gao [MetaStone Technology, Beijing, China]; Lingyun Yu [University of Science and Technology of China]; (+1)</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2607.27816v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>ロールプレイエージェント（RPA）の評価において、既存ベンチマークが抱える「固定対話履歴依存」と「ユーザー離脱型評価」の構造的限界を実証的に指摘。個人ごとにプロファイルに適合するLLMシミュレーターを用い、自由形式の多ターン対話を通じてエージェント能力を測定するPALATEフレームワークを提案。300種のキャラクタープロファイルとパーソナライズされた満足度評価基準（personalized rubrics）を導入することで、固定基準よりも人間の主観的満足度との一致度を向上させ、16のRPA候補に対してターン品質・長期対話能力・個別ユーザー体験を分離して解釈可能な評価を実現した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>既存RPA評価ベンチマークの「固定履歴依存」と「一般化評価基準」が実際の多ターン対話とユーザー体験を歪めることを実証的に指摘</p><p>個人ごとにカスタマイズされたLLMシミュレーターを構築し、凍結済みキャラクターパネル上で自由形式対話を行うPALATE評価フレームワークを提案</p><p>一般品質基準に加えパーソナライズされた満足度評価基準を導入し、保持データで人間の判断と高い一致を示すことを実証</p><p>16候補RPAの評価結果を「ターン品質」「長期セッション能力」「個別ユーザー体験」の3軸に分解し、システム間圧縮ではなく対話ペアごとの解釈可能な評価を提供</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

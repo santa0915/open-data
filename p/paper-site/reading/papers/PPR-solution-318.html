@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgenticFocus: Object-Preserving Mixed Reality Synthesis from Human FPV Video for Dexterous Humanoid Learning</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-318" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>AgenticFocus: Object-Preserving Mixed Reality Synthesis from Human FPV Video for Dexterous Humanoid Learning</h1>
+<div class="muted">worth-reading ・ 関連度 0.88 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Iaroslav Kolomiets; Miguel Altamirano Cabrera; Artem Lykov; Jeffrin Sam; Dmitrii Iarchuk; (+4)</div>
+<div><span class="score">優先度 45</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.88 +35</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2607.08857v2">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>人間の第一人称（FPV）動画をロボットの手先操作学習用デモに変換するMixed Reality合成パイプライン「AgenticFocus」を提案。 手と物体の相互遮蔽領域の幾何復元、全指・手首運動の再構築、カメラ相対座標に基づくリターゲティングにより、通常の動画から高精度な動作データを自動生成する。 評価では既存の跨ぎembodiedベースラインと比較して軌道誤差が低減し、SPARCスコアで-5.18と改善された。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 専用キャプチャ装置や複雑なセットアップなしで、一般的な人間のFPV動画から手先操作デモを生成するMR合成パイプラインを提案</p><p>技術的貢献: 手と物体の相互遮蔽領域の幾何復元、全指・手首運動の再構築、カメラ相対座標に基づくリターゲティングを統合し、視覚観測とロボット動作/状態の同期ペアを自動生成</p><p>実験結果: 既存の跨ぎembodiedベースラインと比較し軌道誤差が低減し、SPARCスコアで-5.18（比較対象は-5.56, -6.05）を達成</p><p>実用性: 通常の動画から学習データを構築できるため、大規模なロボット操作データセットの取得コストを大幅に削減可能</p><p>限界・課題: 著者言及なしだが、複雑な背景や極端な照明条件下での幾何復元の頑健性、および生成データの物理的整合性検証が今後の課題となる可能性がある</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

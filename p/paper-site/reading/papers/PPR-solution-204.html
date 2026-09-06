@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Real-Time Rulebook-Aware Nonlinear MPC for Autonomous Driving with Priority-Biased Tiered Slacks</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-204" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Real-Time Rulebook-Aware Nonlinear MPC for Autonomous Driving with Priority-Biased Tiered Slacks</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Hadi Hajieghrary; Benedikt Walter; Chaitanya Shinde; Paul Schmitt; Miguel Hurtado</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2607.10975v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>自動運転のモーションプランニングにおいて、安全性・規制・快適性・効率性の衝突をリアルタイムで解決する「W-SQP」という重み付き階層スラック非線形モデル予測制御（NMPC）を提案。9つの走行ルール群を4段階の優先度付き共有スラック制約として統合し、CasADi/IPOPTでオンライン求解。Waymo Open Motion Datasetの150シナリオでのクローズドループ評価では、ログ非依存プロトコルにより安全・規制遵守性能が人間運転と同等であることを実証。anytime性を持ち監査可能なNMPCプロトタイプとして位置づけられる。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 複数の走行ルール（9ファミリー）を優先度付き4段階スラック制約として統合し、ルール衝突時の振る舞いを明示的に制御するNMPCフレームワークの提案。</p><p>技術的貢献: 重み付き二次スラックペナルティにより低優先度ルールの違反を許容しつつ、アクチュエータ限界はハード制約として維持する「階層共有スラック」最適化問題の構築。</p><p>実験結果: Waymax上での150シナリオクローズドループ評価で、安全・規制遵守指標において人間運転と系統差なし。求解時間中央値28ms/最大104msで anytime 性を実証。</p><p>実用性: CasADi/IPOPTを用いた実装が公開されており、リアルタイム制御への組み込みが比較的容易。ただしハードリアルタイム保証は付与されていない。</p><p>限界・課題: 最難関・高乖離シナリオで局所的な性能低下が発生しており、形式的な安全性保証や厳密なリアルタイム性には至っていない。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

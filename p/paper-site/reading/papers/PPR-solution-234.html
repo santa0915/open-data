@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Integrating Contextual Embeddings into Evaluation of Expressive MIDI Piano Performances</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-234" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Integrating Contextual Embeddings into Evaluation of Expressive MIDI Piano Performances</h1>
+<div class="muted">others ・ 関連度 0.60 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Dmitrii Gavrilev; Ilya Borovik; Vladimir Viro</div>
+<div><span class="score">優先度 34</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.60 +24</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2607.27909v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>表現豊かなMIDIピアノ演奏の評価手法として、従来の音符単位の統計量に依存せず、自己教師ありシンボリック音楽モデル（Aria, CLaMP3）の文脈埋め込みを評価指標に統合する。聴覚実験により、この埋め込みベースの指標が従来の手法と同等の人間知覚との一致を示すことを実証。また、音符アライメント不要で分布類似度を測定するKernel Audio Distanceをシンボリック音楽領域に適応させ、再現性確保のため評価ユーティリティ集「Pereval」をオープンソースで公開した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 音符依存関係を無視しがちな従来の属性統計評価から、自己教師ありモデルの文脈埋め込みを用いた知覚ベースの評価へパラダイムシフトを図る。</p><p>技術的貢献: Kernel Audio Distanceをシンボリック音楽データに適応させ、音符アライメントなしで演奏間の条件付き分布類似度を測定可能にした。</p><p>実験結果: 聴覚評価実験において、埋め込みベースの指標が従来の手法と同等レベルで人間の知覚評価と一致することを示した。</p><p>実用性: 属性統計と深層特徴量評価を統合した「Pereval」ライブラリを公開し、生成モデルの評価・比較を容易にした。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

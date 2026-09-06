@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Triadic Werewolf: A Jester Role for Multi-Hop Theory of Mind in LLMs</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-136" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Triadic Werewolf: A Jester Role for Multi-Hop Theory of Mind in LLMs</h1>
+<div class="muted">worth-reading ・ 関連度 0.82 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Avni Mittal</div>
+<div><span class="score">優先度 43</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.82 +33</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.27909v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>LLMの他者心理理論（Theory of Mind）評価において、従来の二項対立型社会推論ゲームの限界を指摘し、勝利条件が逆転する「ジョーカー」役を追加した三項対立型Werewolfゲームを提案。GPT-4.1、DeepSeek-V3.1、Llama-3.3-70Bで60試合の実験を行い、三項インセンティブ構造がLLMの多段推論能力を可視化することを示した。特に自己学習の効果はモデル依存性が強く、DeepSeekのみが「意図的に疑わしく見せない」高度な戦略を獲得できた。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 勝利条件が「疑われること」であるジョーカー役を導入し、二項対立ゲームでは隠れていた三項インセンティブの相互作用を可視化。</p><p>技術的貢献: LLMの多段推論・他者心理モデル化能力を厳密に評価するゲームベースベンチマーク枠組みを提示。</p><p>実験結果: DeepSeek-V3.1のみが自己学習で「意図的に疑わしく見せない」戦略を獲得し大幅に性能向上。GPT-4.1は早期投票による自己矛盾行動が60-70%発生。</p><p>限界・課題: 実験規模（60試合）が限定的であり、モデル間の学習効果に大きな偏りが見られ、一般化可能性の検証が必要。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

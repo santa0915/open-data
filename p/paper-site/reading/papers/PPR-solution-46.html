@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accountability in Autonomous Drone-Based Firefighting: Insights From a Field Trial</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-46" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Accountability in Autonomous Drone-Based Firefighting: Insights From a Field Trial</h1>
+<div class="muted">others ・ 関連度 0.60 ・ International Conference on Information Systems ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Dzmitry Katsiuba, Anna Katharina Boos, Robin Hany, Mateusz Dolata, Gerhard Schwabe</div>
+<div><span class="score">優先度 34</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.60 +24</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.17831v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>消防現場での自律ドローン実証実験に基づき、自律エージェントの組織導入が責任帰属（accountability）に与える影響を実証的に分析した研究。Bovensの枠組みを用いて、階層構造内での役割不透明化と新たな人間-ドローン相互作用が生む責任問題を特定し、責任ある統合に向けた運用ガイドラインを提案している。技術開発ではなく社会実装・ガバナンスの視点が核心である。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 自律ドローンのアルゴリズム評価ではなく、実現場での組織統合プロセスにおける責任帰属メカニズムを実証的に可視化した点</p><p>技術的貢献: Bovensのガバナンス枠組みを自律エージェント導入文脈に適用し、階層型組織との衝突構造と相互作用課題を理論的に整理</p><p>実験結果: 2回のフィールドトライアルから得られた定性データに基づき、責任帰属の混乱パターンと運用上のボトルネックを実例で提示</p><p>実用性: 政策立案者や現場管理者向けに責任分散フレームワークと導入ガイドラインを提示しており、実システム配備時の組織適応に直接活用可能</p><p>限界・課題: アルゴリズム性能やセンサー制御の技術的検証ではなく社会科学的調査であるため、具体的な技術実装手順や定量的な性能指標は含まれていない</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

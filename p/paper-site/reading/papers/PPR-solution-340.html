@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>An Agentic Multi-Agent Architecture for Cybersecurity Risk Management</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-340" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>An Agentic Multi-Agent Architecture for Cybersecurity Risk Management</h1>
+<div class="muted">worth-reading ・ 関連度 0.82 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Ravish Gupta [BigCommerce]; Saket Kumar [University at Buffalo, The State University of New York, Buffalo, NY, USA]; Shreeya Sharma [Microsoft]; Maulik Dang [Amazon]; Abhishek Aggarwal [Amazon]</div>
+<div><span class="score">優先度 43</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.82 +33</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2603.20131v2">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>NIST CSF準拠のサイバーセキュリティリスクアセスメントを自動化する6段階マルチエージェントシステムを提案。各分析段階を分担するエージェント間で評価過程に応じて文脈が蓄積・共有される「成長型永続コンテキスト」機構を採用。実環境でのCISSP専門家との比較実験では85%の一致率と92%のリスクカバー率を15分以内で達成。ドメイン微調整は特定脅威検出に有効だったが、Tesla T4上では4096トークンのコンテキスト容量が主要なボトルネックとなった。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>各分析段階を分担するエージェント間で評価過程に応じて文脈が蓄積・共有される「成長型永続コンテキスト」機構を採用し、標準的な逐次パイプラインと差別化</p><p>NIST CSF準拠の6段階リスクアセスメント（組織プロファイリング〜推奨生成）を自動化する実装を提供</p><p>実環境（15人規模医療機関）でCISSP専門家3名との比較実験を実施し、重大度分類で85%一致、92%のリスクをカバー、処理時間を15分以内に短縮</p><p>ドメイン特化ファインチューニングモデルは一般モデルよりPHIやOT/IIoTなどの特定脅威を検出したが、Tesla T4上ではデフォルト4096トークンのコンテキスト容量がパイプライン全体の失敗原因となった</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

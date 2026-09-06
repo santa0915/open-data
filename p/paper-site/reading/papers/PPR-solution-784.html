@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decoupling Thought from Speech: Knowledge-Grounded Counterfactual Reasoning for Resilient Multi-Agent Argumentation</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-784" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Decoupling Thought from Speech: Knowledge-Grounded Counterfactual Reasoning for Resilient Multi-Agent Argumentation</h1>
+<div class="muted">— ・ 関連度 0.90 ・ arXiv ・ 追跡 — ・ 再現性 — ・ 処理状況 —</div>
+<div class="muted">著者: Jakub Masłowski, Jarosław A. Chudziak</div>
+<div><span class="score">優先度 46</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.90 +36</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.10475v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>大規模言語モデル（LLM）を用いたマルチエージェント対話において、長期実行時のロジック劣化や役割漂移を防ぐため、知識ベースの反事実推論（KG-CFR）を提案する。プライベートな計画バッファとパブリックな実行層を厳密に分離するデュアルステージアーキテクチャを採用し、不確実性下での動的資源配分シミュレーション環境で評価した。その結果、摂動後のクリティカルな品質低下を95%以上防止し、議論の総合品質スコアを0.694から0.822に向上させた。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>【新規性】マルチエージェント対話の評価基準を「最終出力精度」から「プロセス安定性（レジリエンス）」へ転換し、思考（計画）と発言（実行）の構造的分離を実証。</p><p>【技術的貢献】検索拡張生成（RAG）を活用したプライベートな計画層と公開実行層を独立させ、長期対話におけるアイデンティティ消失や論理ループをアーキテクチャレベルで抑制。</p><p>【実験結果】270件のシミュレーション軌道で評価し、摂動後のクリティカルな品質低下（Δ≤-0.20）を95%以上防止。議論品質スコアを0.694→0.822に向上させ、カスタム指標で安定性を定量化。</p><p>【実用性】計画と実行の分離により既存エージェントフレームワークへの組み込みが容易だが、ドクトリン（専門知識ベース）の整備と評価指標のカスタマイズが必要。</p><p>【限界・課題】評価環境が1v1v1の危機シミュレーションに限定されており、より複雑なマルチロールや現実世界の動的環境での一般化は未検証。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

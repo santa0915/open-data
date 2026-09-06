@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kosmos: An AI Scientist for Autonomous Discovery</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-82" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Kosmos: An AI Scientist for Autonomous Discovery</h1>
+<div class="muted">must-read ・ 関連度 0.92 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Fulltext Reviewed</div>
+<div class="muted">著者: Ludovico Mitchener; Angela Yiu; Benjamin Chang; Mathieu Bourdenx; Tyler Nadolski; (+32)</div>
+<div><span class="score">優先度 57</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.92 +37</span><span class="chip">処理状況 Fulltext Reviewed +10</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2511.02824v2">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>Kosmosは、データ駆動型の科学的研究を自動化する長期実行型AIエージェントである。構造化されたワールドモデルによりデータ解析エージェントと文献検索エージェントの情報を共有し、最大12時間・約200回のロールアウトで4万行以上のコード実行と1,500論文の読解を実現する。独立評価では報告文の79.4%が正確であり、共同研究者からは単一ランで平均6ヶ月分の研究時間を代替したと評価された。複数の学術分野で新規知見や未公開結果の再現に成功し、発見数がエージェント実行サイクルと線形にスケールすることを示した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>既存エージェントの長時間実行時の文脈消失・凝集性低下を克服し、12時間以上の自律的サイクルを実現</p><p>データ解析と文献検索のエージェント間で情報を統合する構造化ワールドモデルを採用し、推論の一貫性を維持</p><p>独立評価で報告文の79.4%が正確、発見数は実行サイクル数と線形相関。コードと文献を厳密に引用し追跡可能性を確保</p><p>計算コスト（1回あたり約4万行コード・1,500論文）は実運用時の制約要因となるが、ドメイン横断的な応用ポテンシャルが高い</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

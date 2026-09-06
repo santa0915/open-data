@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MeDxAgent: Multi-Agent Consultation for Interactive Medical Diagnosis</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-55" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>MeDxAgent: Multi-Agent Consultation for Interactive Medical Diagnosis</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Akshat Sanghvi, Naren Akash, Raza Imam, Amit Sharma, Mohit Jain</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.03416v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>医療診断における既存の単発・完全情報前提の評価課題に対し、臨床現場の対話型プロセスを模倣するマルチエージェントシステム「MeDxAgent」と大規模ベンチマーク「MeDxBench」を提案。プロンプト設計・対話フロー・エージェント間の役割分担を体系的に最適化し、特に初期情報収集から候補診断に基づく targeted questioning までの一連の設計が医師の推論パターンと一致して精度向上に寄与した。4,421症例のベンチマークでベースライン比10.3%の精度向上を実現し、完全情報オラクルとの性能差を52.3%まで縮小した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>既存の単発診断評価の限界を打破し、対話型・段階的仮説検証プロセスを評価する大規模ベンチマーク(MeDxBench)とマルチエージェントシステム(MeDxAgent)を同時に提案</p><p>プロンプト設計・対話フロー・エージェント役割分担を体系的に最適化。初期人口統計情報収集→対話要約の伝達→候補診断に基づく targeted questioning の組み合わせが医師の推論を模倣し、精度向上の核となる</p><p>20専門分野4,421症例のベンチマークでベースライン比10.3%の精度向上を実現。完全情報オラクルとのギャップを52.3%まで縮小</p><p>実臨床導入には説明可能性や規制対応が課題となるが、コード・データセットの公開予定により再現性と応用基盤が期待できる</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

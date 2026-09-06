@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Benchmarking MRI Representations for Deep Learning-Based Focal Cortical Dysplasia Segmentation</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-197" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Benchmarking MRI Representations for Deep Learning-Based Focal Cortical Dysplasia Segmentation</h1>
+<div class="muted">others ・ 関連度 0.55 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Soumen Ghosh; John Phamnguyen; Amit Soni Arya; Subhojit Mandal; Tilottama Goswami; (+1)</div>
+<div><span class="score">優先度 32</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.55 +22</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2607.15605v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>FCD（局所皮質形成異常）のMRI画像セグメンテーションにおいて、入力画像の表現形式が深層学習モデルに与える影響を系統的にベンチマークした研究。nnU-Netを用いて8つの入力を同一条件で比較し、従来のT1w+FLAIRに比値表現を加えた4チャネル構成がDiceスコア0.376（ベースライン比+5%相対改善）を達成したことを示している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: アーキテクチャ変更ではなく「MRI入力表現」に焦点を当て、前処理・最適化・検証を厳密に統一したベンチマーク研究</p><p>技術的貢献: 8種類の入力を同一のnnU-Netパイプラインで比較し、比値表現（ratio-derived）が微細病輪郭抽出に補完的に寄与することを定量的に実証</p><p>実験結果: 単独ではFLAIRが最良だが、4チャネル融合構成でDice 0.376を達成。比値表現単体では信頼性に欠けることが明確化</p><p>実用性・課題: 標本数が85例と比較的少なくDiceスコア自体は低め（FCDの微細さによる）。入力表現設計がアーキテクチャ同等に重要であることを示唆</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

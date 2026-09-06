@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RASC+: Retrieval-Constrained LLM Adjudication for Clinical Value Set Authoring</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-106" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>RASC+: Retrieval-Constrained LLM Adjudication for Clinical Value Set Authoring</h1>
+<div class="muted">worth-reading ・ 関連度 0.80 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Sumit Mukherjee</div>
+<div><span class="score">優先度 42</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.80 +32</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.23992v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>臨床用語コード体系の構築タスクにおいて、LLMの直接生成が困難な理由を踏まえ、「高リコールな候補プール取得」と「制約付きLLMによる選別」の2段階アプローチを提案。語彙awareな検索拡張とGPT-5を用いた盲検化 adjudication を組み合わせることで、既存ベースラインを大幅に上回る精度を実現しつつ、全てのコードが監査可能なプール由来であるという安全性・説明責任を担保する手法を示した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 巨大でバージョン管理された専門用語コードの直接生成を回避し、リコール最適化型候補プール構築＋制約付きLLM adjudication の2段階パイプラインを採用</p><p>技術的貢献: 語彙awareな展開とコード表示救済検索により候補取得率を0.553→0.730に向上。GPT-5による盲検化選別で精度を大幅に改善</p><p>実験結果: 完全テストセットのmacro F1をSAPBertベースライン（0.287）から0.549へ、未公開層でも0.533を達成</p><p>実用性・制約: 全コードが監査可能なプール由来のため医療現場での説明責任を担保しやすい。ただしGPT-5依存や特定ドメイン特化であり、一般化には追加検証が必要</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

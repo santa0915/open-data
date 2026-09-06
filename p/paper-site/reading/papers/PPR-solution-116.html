@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Counting Trees from Satellite Imagery with Noisy Supervision</title>
+<link rel="stylesheet" href="../assets/site.802574fe.css">
+</head>
+<body data-paper="PPR-solution-116" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Counting Trees from Satellite Imagery with Noisy Supervision</h1>
+<div class="muted">others ・ 関連度 0.50 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Dimitri Gominski; Maurice Mugabowindekwe; Qiue Xu; Xiaowei Tong; Martin Brandt; (+4)</div>
+<div><span class="score">優先度 30</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.50 +20</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.24786v2">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>衛星画像からの木本個体数推定を、不均衡最適輸送（UOT）を用いた空間密度マッチング問題として定式化。 航空機LiDAR由来のノイズを含む教師信号に対し、輸送残差を活用した自己修正機構を導入し、学習中に教師情報を段階的に精査する。 TinyTreesベンチマーク（2億1600万注釈、3大陸）で検出・回帰・既存輸送ベースラインを凌駕する性能を実現。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 密集林での樹冠境界の曖昧さを許容し、衛星画像の木本数推定を不均衡最適輸送（UOT）による密度マッチング問題として再定義。</p><p>技術的貢献: LiDAR由来のノイズ教師信号に対し、輸送残差に基づく自己修正機構を提案し、学習プロセス内で教師品質を動的に改善。</p><p>実験結果: TinyTreesベンチマーク（25,890 km²、63.9万件の手動検証注釈）でSOTAを更新し、密度推定のロバスト性を実証。</p><p>実用性・課題: 航空機LiDARデータが必須なため適用地域に制約あり。密集林における個体境界の定義そのものの曖昧さは根本課題として残る。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>
