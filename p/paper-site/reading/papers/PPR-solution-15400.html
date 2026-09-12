@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MEMTIER: Tiered Memory Architecture and Retrieval Bottleneck Analysis for Long-Running Autonomous AI Agents</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15400" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>MEMTIER: Tiered Memory Architecture and Retrieval Bottleneck Analysis for Long-Running Autonomous AI Agents</h1>
+<div class="muted">must-read ・ 関連度 0.90 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 PDF Fetched</div>
+<div class="muted">著者: Bronislav Sidik; Lior Rokach</div>
+<div><span class="score">優先度 51</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.90 +36</span><span class="chip">新しい +10</span><span class="chip">処理状況 PDF Fetched +5</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.03675v3">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>長期自律AIエージェントが直面するメモリ一貫性の劣化（72時間運用で成功率14%p低下）を解決するため、エピソード記憶と意味記憶を階層化するMEMTIERアーキテクチャを提案。 5つのシグナルに基づく重み付き検索エンジン、注意機構による認知重み更新、非同期コンソリデーションデーモン、PPOベースの検索重み適応ポリシーを組み合わせた。 LongMemEval-SベンチマークでQwen2.5-7B（6GB GPU）上でAcc=0.382を達成し、既存フラットファイル方式より33%p改善。外部モデルによる事前充填により単一セッション想起率0.714まで向上し、消費PC環境でも動作可能であることを実証。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 長期運用時のメモリ劣化を解消するため、エピソードJSONLストアと意味記憶ティアを非同期で連携する階層型メモリ構造を設計</p><p>技術的貢献: 5シグナル重み付き検索エンジン、注意機構由来の認知重み更新ループ、PPOによる検索重みのオンライン適応を統合</p><p>実験結果: LongMemEval-SでAcc=0.382 (+33%p), F1=0.412。DeepSeek-V4-Fact充填により想起率0.686-0.714を達成し、GPT-4oベースのRAG BM25を上回る</p><p>実用性: 6GB GPU搭載の消費PCで全フェーズ動作可能。エージェントランタイム「OpenClaw」に統合済みで実装・展開が容易</p><p>限界: 性能評価はカメラレディ版検証待ち。外部モデル（DeepSeek）への事前充填依存が高く、完全自律環境での閉ループ適応能力は未検証</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

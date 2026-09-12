@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TabClaw: An Interactive and Self-Evolving Agent for Spreadsheet Manipulation and Table Reasoning</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15124" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>TabClaw: An Interactive and Self-Evolving Agent for Spreadsheet Manipulation and Table Reasoning</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Mingyue Cheng; Shuo Yu; Daoyu Wang; Qingchuan Li; Xiaoyu Tao; (+3)</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.10316v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>TabClawはスプレッドシート操作と表形式データ推論を目的とした対話型自己進化型AIエージェントである。自然言語指示から意図を明確化し、編集可能な実行計画とReActスタイルのツール利用ループを可視化する。複数専門家エージェントによる並列推論と合意形成・不確実性マーカーを用いて分析結果を統合する。さらに反復作業からスキルを抽出・パッケージ化し、ユーザーフィードバックで継続的に自己進化させる機構を搭載し、ベンチマークで実行成功率と推論性能の向上を実証している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: スプレッドシート操作に特化した「対話型＋自己進化型」エージェントとして、意図明確化・実行計画の可視化・並列専門家エージェントによる推論を統合。</p><p>技術的貢献: ReActスタイルのツール利用ループと編集可能なワークフロー表示に加え、反復作業からスキルを抽出・パッケージ化し、ネガティブフィードバックで自動更新する継続学習機構を実現。</p><p>実験結果: スプレッドシート操作および表推論ベンチマークにおいて、既存手法より実行タスク完了率と推論精度を向上させつつ、分析プロセスの透明性を維持。</p><p>実用性: オープンソース提供、CSV/Excel対応、パッケージ形式のスキルインポートにより実装・展開が容易。ただしスプレッドシート固有の制約（計算式依存、巨大ファイル処理等）への言及は限定的。</p><p>限界・課題: ドメイン特化型であるため汎用性には課題があり、長期メモリ管理のスケーラビリティや非構造化データへの拡張性は今後の検討事項と推測される。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

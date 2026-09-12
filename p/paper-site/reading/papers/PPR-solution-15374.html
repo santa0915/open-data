@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SREGym: A Live Benchmark for AI SRE Agents with High-Fidelity Failure Scenarios</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15374" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>SREGym: A Live Benchmark for AI SRE Agents with High-Fidelity Failure Scenarios</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Jackson Clark; Yiming Su; Saad Mohammad Rafid Pial; Yifang Tian; Lily Gniedziejko; (+3)</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.07161v3">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>SREGymは、AIエージェントによる本番環境の障害診断・復旧（Agentic SRE）を評価するためのライブベンチマークフレームワークである。クラウドネイティブスタック上に高忠実度の故障注入器とノイズシミュレータを実装し、多層障害や相関故障など現実的な失敗シナリオ90件を提供する。最先端エージェントの性能を評価した結果、故障タイプによって最大40%の性能差が生じることを明らかにした。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>既存ベンチマークの簡略化・拡張困難な課題に対し、ライブ環境とモジュール型故障注入器を用いた高忠実度シミュレーションを提供</p><p>クラウドネイティブスタック上で多層障害・環境ノイズ・メタステーブル/相関故障を統合的に再現するフレームワークを設計・実装</p><p>最先端AIエージェントを90件の課題で評価し、故障の種類によってエンドツーエンドの成功率に最大40%の顕著な差があることを定量的に示した</p><p>モジュール設計により拡張が容易でオープンソース公開されており、エージェント開発・評価の実践的な基盤として即座に利用可能</p><p>シミュレーション環境と本番環境の乖離や計算コストの高さが制約となり、実環境での検証が今後の課題となる</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

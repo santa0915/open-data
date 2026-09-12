@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entropy-Based Observability for AI Agent Behavior</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15146" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Entropy-Based Observability for AI Agent Behavior</h1>
+<div class="muted">worth-reading ・ 関連度 0.82 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Olasimbo Ayodeji Arigbabu</div>
+<div><span class="score">優先度 43</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.82 +33</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.05872v3">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>AIエージェントの内部挙動をエントロピー指標で可視化する軽量フレームワークEOAを提案。従来のタスク成功率やコストといった結果重視の評価から、探索の多様性、行動選択の硬直性、ツール利用の集中度、実行中の不確実性減少率、反復実行時の挙動安定性など、トレースデータから直接導出される行動テレメトリへ焦点を当てる。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: エージェントの内部プロセス（探索・決定・ツール利用）をエントロピーベースで定量化し、結果指標だけでは見えない挙動特性を可視化する。</p><p>技術的貢献: 実行トレースから計算可能な軽量な行動テレメトリ指標群を統一的に定義・実装するフレームワークを提供。</p><p>実験結果: (本文抜粋のみでは詳細不明だが、標準エージェント環境でのベンチマーク検証が想定される) 指標間の相関やデバッグへの有用性を示すことが期待される。</p><p>実用性: 既存エージェントパイプラインへの組み込みコストが低く、リアルタイムまたはバッチでの挙動監視・分析に即応可能。</p><p>限界: トレースの粒度や品質に依存し、高レベルな推論プロセスや長期計画の因果関係を完全に捉えきれない可能性があり、著者による詳細な議論が必要。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

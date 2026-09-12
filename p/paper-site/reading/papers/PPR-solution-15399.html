@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evaluating Generative Models as Interactive Emergent Representations of Human-Like Collaborative Behavior</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15399" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Evaluating Generative Models as Interactive Emergent Representations of Human-Like Collaborative Behavior</h1>
+<div class="muted">worth-reading ・ 関連度 0.82 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Shinas Shaji; Teena Chakkalayil Hassan; Sebastian Houben; Alex Mitrevski</div>
+<div><span class="score">優先度 43</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.82 +33</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.03855v2">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>LLMエージェントと人間の協調行動を評価する実験フレームワークを提案。 2Dゲーム環境で色マッチングタスクを実施し、視点取得や共同計画など5つの「協調行動」指標をLLM判定器で自動検出。 明示的学習なしでも基盤モデルが協調行動を示すことを実証し、ユーザー調査では高い協調満足度を得た一方で応答速度などの課題も特定した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: LLMエージェントの「協調行動」を5つの指標で定量化し、LLM判定器を用いた自動評価手法を提案</p><p>技術的貢献: 2Dゲーム環境と人間-AI協調タスクを構築し、明示的学習なしに基盤モデルが示すemergent collaborative behaviorを実証する実験フレームワークを提供</p><p>実験結果: LLM判定器は人間注釈とfair-to-substantialな一致を示し、モデル間で協調行動の頻度・パターンに明確な差があることを明らかにした</p><p>実用性: 評価パイプラインが自動化されており、エージェントの協調能力ベンチマークや改善指標として再利用可能</p><p>限界・課題: 2Dシミュレーション環境に限定され物理的相互作用への一般化は未検証。応答速度や人間らしい対話生成の質が実用化のボトルネックとして指摘されている</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

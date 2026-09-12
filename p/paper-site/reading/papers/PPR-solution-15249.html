@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Infra-Bayesian Reinforcement Learning Agents Outperform Classical RL For Worst-Case Robustness</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15249" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Infra-Bayesian Reinforcement Learning Agents Outperform Classical RL For Worst-Case Robustness</h1>
+<div class="muted">worth-reading ・ 関連度 0.80 ・ RLC 2026: Accepted to Finding the Frame Workshop ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Manish Aryal; Faiyaz Azam; Agnivo Banerjee; Syed Mahir Ahamed; Sai Sidhanth Manoharan Jayanthi; (+10)</div>
+<div><span class="score">優先度 42</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.80 +32</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.23146v3">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>政策依存環境やKnightian不確実性下で古典的強化学習が直面するモデル誤指定問題に対し、Infra-Bayesianismに基づく意思決定枠組みを提案。不正確な仮説集合を更新し、事後期待値ではなく最悪ケースの最大化（maximin）により行動選択を行う Stateless RLエージェントを実装。Knightian環境での最悪ケースレグレット低減とNewcomb問題の最適解達成を確認し、モデル誤指定下でも堅牢な意思決定が可能であることを示した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>既存RLの「環境は固定」という仮定を破る政策依存・Knightian不確実性環境を対象とした初のProof-of-concept実装</p><p>事後確率分布の重み付け平均ではなく、不正確な仮説集合を用いた最悪ケース期待値最大化（maximin）による行動選択を実現</p><p>古典的RLエージェントと比較してKnightian環境での最悪ケースレグレットを低減し、Newcomb問題においても最適戦略を選択</p><p>有限出力・ステートレス問題に限定された実装であり、複雑な逐次環境や大規模エージェントへの拡張性は未検証</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

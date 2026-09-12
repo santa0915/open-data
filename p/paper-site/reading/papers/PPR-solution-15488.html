@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClawCoin: An Agentic AI-Native Cryptocurrency for Decentralized Agent Economies</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15488" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>ClawCoin: An Agentic AI-Native Cryptocurrency for Decentralized Agent Economies</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Shaoyu Li; Chaoyu Zhang; Hexuan Yu; Y. Thomas Hou; Wenjing Lou</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2604.19026v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>自律AIエージェントの推論コストを直接反映する「ClawCoin」を提案。既存の法定通貨ベース決済が計算リソースの実質消費量を表現できない課題に対し、標準化価格バスケット・オラクル検証・NAVベース保管庫・オンチェーン決済層からなる4層アーキテクチャで構成された計算コスト連動型通貨を実装。マルチエージェントシミュレータとOpenClaw環境での評価により、コスト変動下での実行容量安定化、Quote分散の低減、部分決済の解消を実現し、エージェント間協調の効率化を検証した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: エージェントの実際の推論コストを直接連動する通貨単位を定義し、既存の fiat/x402 系決済が計算リソースの実質消費量を表現できない課題を解決</p><p>技術的貢献: 価格バスケット指数・オラクル検証・NAVベースの mint/redeem バルト・オンチェーン決済層からなる4層アーキテクチャを設計</p><p>実験結果: OpenClaw テストベンチマークで、コストショック下での実行容量安定化、Quote分散の低減、部分決済の完全解消を検証</p><p>実用性・限界: Ethereum互換L2上にプロトタイプ実装済みだが、標準価格バスケットの選定やオラクルの信頼性、大規模エージェント環境へのスケーラビリティは実装課題として残る</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

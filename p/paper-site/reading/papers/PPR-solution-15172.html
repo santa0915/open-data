@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DMF: A Deterministic Memory Framework for Conversational AI Agents</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15172" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>DMF: A Deterministic Memory Framework for Conversational AI Agents</h1>
+<div class="muted">worth-reading ・ 関連度 0.87 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Matteo Stabile; Enrico Zimuel</div>
+<div><span class="score">優先度 45</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.87 +35</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.03463v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>対話型AIエージェントの長期メモリ管理において、既存のLLM依存の書き込み時要約を完全な決定論的パイプラインに置き換える「DMF」を提案。古典NLP解析、ベクトル幾何、数学的スコアリングを用いて各対話ターンに「Survival Score」を付与し、壁時計ではなく新規対話数に基づく減衰則で関連性を評価する。Mem0とのベンチマーク比較により同等精度を達成しつつ、メモリ準備時のトークン消費をゼロとし、全体で最大242倍のトークン削減を実現した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>LLMによる非決定論的要約を排除し、古典NLP・ベクトル幾何・数学的スコアリングに基づくCPUファーストの決定論的メモリ管理パイプラインを実現</p><p>対話ターン数に依存する減衰則 $\Omega_{\mathrm{eff}}(\Delta n)$ を導入し、壁時計時間ではなく会話の相対的な文脈変化でメモリ保持・破棄を制御</p><p>LoCoMoおよびLongMemEvalベンチマークでMem0と同等の精度を達成しつつ、メモリ準備時のトークン消費をゼロに抑え、全体推論コストを5〜242倍削減</p><p>メモリ選択プロセスの透明性と再現性を確保し、長期対話におけるエージェントの安定動作とコスト最適化に寄与</p><p>著者明記の課題は不明だが、古典的手法の制約から複雑な意味理解やドメイン特異的な文脈処理において精度が頭打ちになる可能性が残る</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Sensorless, Inherently Compliant Anthropomorphic Musculoskeletal Hand Driven by Electrohydraulic Actuators</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15559" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>A Sensorless, Inherently Compliant Anthropomorphic Musculoskeletal Hand Driven by Electrohydraulic Actuators</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ Accepted to IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) ・ 追跡 Tier 3 ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Misato Sonoda; Ronan Hinchet; Amirhossein Kazemipour; Yasunori Toshimitsu; Robert K. Katzschmann</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2603.24357v2">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>Peano-HASEL（電気水圧アクチュエータ）を用いたセンサーレス・本質的コンプライアンス型人間型筋腱手を開発。 遠隔配置と1:2プーリー機構で伸張量を機械的に増幅し、前腕部に収容。 アクチュエータの電流値のみから接触検知と閉ループ制御を実現する自己センシング機能を搭載。 実験では脆弱物（紙風船等）への非破壊把持と標準的な把持動作を実証し、外部センサー不要で安全な物理相互作用を達成した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 外部力覚/エンコーダーセンサーを一切搭載せず、HASELアクチュエータの電流値のみで接触検知・自己センシングを実現</p><p>技術的貢献: 遠隔配置による電気的危険の隔離と、1:2プーリー機構による軟性アクチュエータの有限伸張量の機械的増幅を統合</p><p>実験結果: 脆弱物（紙風船等）への非破壊把持や多様な把持タイプを実証し、本質的安全特性と閉ループ接触制御の有効性を確認</p><p>実用性・限界: 高積載能力より安全・コンプライアンスを優先。電流-力変換モデルの精度依存性があり、軟性アクチュエータのヒステリシスや経時変化への補正が課題</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

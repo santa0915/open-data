@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Importance of Out-of-Band Metadata for Safe Autonomous Agents: The Redpanda Agentic Data Plane</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15205" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>The Importance of Out-of-Band Metadata for Safe Autonomous Agents: The Redpanda Agentic Data Plane</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ 6 pages ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Tyler Akidau; Tyler Rockwood; Johannes Brüderl; Marc Millstone</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.29082v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>エンタープライズ環境での自律型AIエージェントの安全性課題（ハルシネーション、悪意ある操作、高速な被害拡大）に対し、エージェントの推論・実行パスとは独立した「アウトオブバンドメタデータチャネル」を用いたセキュリティ・ガバナンスアーキテクチャ「Redpanda Agentic Data Plane (ADP)」を提案する。データスコーピング、実行制約、改ざん防止監査証跡をエージェントが迂回できないインフラレベルで強制し、マルチエージェントのポートフォリオ運用システムで実証している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: エージェントの読み書きパスとは完全に分離したアウトオブバンドメタデータチャネルにより、セキュリティポリシーと監査データを決定論的に伝達するインフラ設計。</p><p>技術的貢献: データアクセスのスコーピング、実行時のアクション制約、改ざん防止監査ログの3段階ガバナンスをエージェントが検知・回避できない形で強制するアーキテクチャを実装。</p><p>実証結果: マルチエージェントによるポートフォリオ再平衡システムのデモで、クライアントごとのデータスコーピング、取引承認閾値、監査証跡の正確な強制を確認。</p><p>実用性・制約: Redpandaストリーミング基盤に依存した商用ソリューションであり、オープン標準や他環境への移植性は明示されていない。エージェント内部ロジックの改善ではなくインフラ層のガードレールに特化している点も留意。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

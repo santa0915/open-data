@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harnessing Generalist Agents for Contextualized Time Series</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15155" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Harnessing Generalist Agents for Contextualized Time Series</h1>
+<div class="muted">worth-reading ・ 関連度 0.82 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Zihao Li; Kaifeng Jin; Yuanchen Bei; Jiaru Zou; Avaneesh Kumar; (+6)</div>
+<div><span class="score">優先度 43</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.82 +33</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.05404v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>TimeClawは、汎用LLMエージェントに時系列データ固有のランタイム支援を統合するエージェントハーネスフレームワークである。実行可能な時系列解析ツール、経験蓄積による分析ルーチンの自動生成・再利用、エピソード型マルチモーダルメモリを組み込むことで、文脈付きの時系列推論とエンドツーエンドの分析ワークフローを実現する。エネルギー、金融、気象など複数ドメインのベンチマークで性能向上を実証。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 汎用LLMエージェントを時系列領域に特化させ、テキスト空間と構造化時系列信号のギャップを埋める「エージェントハーネス」概念を提案</p><p>技術的貢献: 実行可能な時系列解析ツール、経験蓄積による分析ルーチンの自動生成・再利用、エピソード型マルチモーダルメモリという3つのコアモジュールを統合</p><p>実験結果: エネルギー、金融、気象、交通など多様な実世界ドメインのベンチマークで、既存エージェント手法相比性能向上を確認</p><p>実用性: GitHub公開により再現性・応用が容易。文脈付き時系列分析のエンドツーエンドワークフロー構築に直接活用可能</p><p>限界・課題: 抽象的な記述から、特定ドメインへの汎化性や大規模時系列データにおけるメモリ/計算コストの制約は明示されていない</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

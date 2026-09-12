@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verification of Robust Multi-Agent Systems</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15576" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Verification of Robust Multi-Agent Systems</h1>
+<div class="muted">others ・ 関連度 0.60 ・ This is an extended version of the paper with the same title that will appear in the proceedings of AAMAS 2026. This version contains a technical appendix with proof details ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Raphaël Berthon; Joost-Pieter Katoen; Munyque Mittelmann; Aniello Murano</div>
+<div><span class="score">優先度 34</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.60 +24</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2602.13405v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>確率的多エージェントシステムにおける不完全情報と遷移確率の不確実性（摂動）を考慮した堅牢な戦略の検証問題を扱う。確率的・観測ベースのAlternating-time Temporal Logic (ATL) の拡張を用い、有界メモリ戦略に限定してモデル検査問題の堅牢性バリアントを定義する。異なる摂動モデル下での計算複雑性を厳密に特性化し、不確実環境におけるマルチエージェント検証のコストと理論的限界を明らかにする。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 確率的多分岐・不完全情報環境下で、摂動に強いマルチエージェント協調戦略のモデル検査問題を確率的ATL拡張と有界メモリ戦略の枠組みで定式化。</p><p>技術的貢献: 遷移確率の不確実性（摂動）の異なる定義ごとに検証問題の計算複雑性を厳密に特性化し、堅牢性の理論的コストを明確化。</p><p>実験結果: 本稿は理論解析と複雑性証明が主軸であり、定量的なベンチマークや実装評価は含まれていない。</p><p>実用性と限界: 有界メモリ戦略に焦点を当てているため無限履歴依存問題には適用不可。計算コストの厳密な評価により不確実環境設計の指針となるが、大規模システムへの直接適用には複雑性の壁が残る。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

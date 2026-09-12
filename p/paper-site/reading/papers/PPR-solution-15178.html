@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beyond One-shot: AI Agents for Learning in Field Experiments</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15178" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Beyond One-shot: AI Agents for Learning in Field Experiments</h1>
+<div class="muted">worth-reading ・ 関連度 0.80 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Junjie Luo; Ritu Agarwal; Gordon Gao</div>
+<div><span class="score">優先度 42</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.80 +32</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.02458v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>医療処方メッセージのA/Bテストデータ（約69万件）を用い、ツール連携型AIエージェントが過去の介入結果から原則を抽出し、新たなメッセージバリアントを自動生成する手法を提案。DIKW（Data-Information-Knowledge-Wisdom）推論エージェントと透明な根拠チェーンにより、ベースライン比でCTRを+6.5pp改善。一般LLMの汎用推論力ではなく、ドメイン固有の実験データこそが介入設計の価値源であることを実証し、反復的な学習基盤としてのエージェント活用可能性を示した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 大規模フィールド実験でAIエージェントが過去のA/Bテストデータを自律的に学習し、次期介入を設計する「反復的学習パイプライン」を実証</p><p>技術的貢献: ツール連携型DIKW推論エージェントと透明な根拠チェーン（evidence chain）により、データからドメイン固有の行動原則を抽出・構造化</p><p>実験結果: 医療メッセージ文脈で最良のAI生成バリアントがベースライン比CTR +6.5ppを達成（計693,139患者訪問）</p><p>限界・課題: 一般LLMのみでは介入成功を予測できず、ドメイン固有の実験データへの依存度が高い。実装には高品質な履歴実験データとドメイン特化型ツールセットが必須</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

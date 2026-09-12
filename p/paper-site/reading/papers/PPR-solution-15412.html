@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>These Aren&#x27;t the Reviews You&#x27;re Looking For How Humans Review AI-Generated Pull Requests</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15412" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>These Aren&#x27;t the Reviews You&#x27;re Looking For How Humans Review AI-Generated Pull Requests</h1>
+<div class="muted">worth-reading ・ 関連度 0.80 ・ Accepted to EASE 2026 ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Kacper Duma [Nicolaus Copernicus University in Toruń, Toruń, Poland]; Patryk Wróblewski [Nicolaus Copernicus University in Toruń, Toruń, Poland]; Jagoda Bobińska [Nicolaus Copernicus University in Toruń, Toruń, Poland]; Julia Winiarska [Nicolaus Copernicus University in Toruń, Toruń, Poland]; Piotr Przymus [Nicolaus Copernicus University in Toruń, Toruń, Poland]</div>
+<div><span class="score">優先度 42</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.80 +32</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.02273v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>GitHub上のAI生成Pull Request（PR）と人間作成PRのレビュー相互作用をAIDevデータセットで比較分析した研究。AI生成PRはレビュー未対応率が高く、付いた場合も人間の直接評価ではなくAIエージェントによる自動化処理や「エージェント誘導」が主流であることを実証。大規模コードマイニングにおいてレビュー活動量をヒューマンオーバーサイト（人間監視）の指標として単純に解釈することは誤りを招くことを示唆している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: AI生成コードPRと人間PRのレビュー生態系を大規模実証データで初めて比較し、Agentic workflowにおける相互作用のパターン差異を定量的に明らかにした。</p><p>技術的貢献: AIDevデータセットを用い、レビューが「人間の直接評価」「AIエージェントによる自動化処理」「人間のエージェント誘導」のいずれに分類されるかを構造化して分析した。</p><p>実験結果: AI生成PRはレビュー未対応率が高く、レビュー付きでも人間単独での関与が著しく低い。人間の関与は主にエージェントへの指示・修正依頼（steering）として現れる。</p><p>実用性/課題: 開発現場のAIコード支援ツールの設計や、大規模リポジトリデータからのヒューマンオーバーサイト計測手法に直接的な示唆を与えるが、GitHub単一プラットフォームのバイアスや特定言語・プロジェクトへの依存性が限界として指摘される可能性がある。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

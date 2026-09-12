@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beyond AI as Assistants: Toward Autonomous Discovery in Cosmology</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15308" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Beyond AI as Assistants: Toward Autonomous Discovery in Cosmology</h1>
+<div class="muted">worth-reading ・ 関連度 0.83 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Licong Xu; Thomas Borrett</div>
+<div><span class="score">優先度 43</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.83 +33</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.14791v2">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>宇宙論のデータ解析を対象に、LLM駆動の自律型AI科学者システム「CMBEvolve」と「CosmoEvolve」を提案。前者はコード進化と木探索により定量的目標を最適化し、後者は仮想マルチエージェントによるオープンエンドな研究ワークフローを自律実行する。弱レンズマップの分布外検出ベンチマークでスコアを反復改善し、ACT DR6データ解析では非自明な現象発見と分析診断書の自動生成を実現。宇宙論領域がAI科学者システムの制御・開放型ベンチマークとして有用であることを実証している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>[新規性] LLM駆動のコード進化・木探索型エージェントと、仮想マルチエージェント研究ラボという2つの自律科学発見アーキテクチャを宇宙論領域で統合提案。</p><p>[技術的貢献] 定量的最適化タスク向けとオープンエンドワークフロー向けで役割を分化させ、LLMの推論・コード生成能力を自律ループに組み込み。</p><p>[実験結果] 弱レンズマップの分布外検出ベンチマークでスコアを反復改善、ACT DR6解析では非自明なスケール依存現象の発見と分析診断書の自動生成を実現。</p><p>[実用性・課題] 宇宙論データに特化した実装だが、エージェントの自律探索パイプライン設計は他分野への転用が容易。計算コストやドメイン知識の依存性は未詳。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

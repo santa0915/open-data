@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sound-based Multi-Person 3D Pose Estimation</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15510" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Sound-based Multi-Person 3D Pose Estimation</h1>
+<div class="muted">others ・ 関連度 0.65 ・ Accepted at ECCV 2026 ・ 追跡 Tier 3 ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Yusuke Oumi; Yuto Shibata; Go Irie; Akisato Kimura; Yoshimitsu Aoki; (+1)</div>
+<div><span class="score">優先度 36</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.65 +26</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2609.04902v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>音響信号のみから複数人物の3D姿勢を推定する初の試みとして、SoundMHPE（Acoustic Multi-scale EncoderとTemporal Pose Decoderからなるエンコーダ・デコーダ構造）を提案。複雑な音の重なりや反射による伝播遅延を分離するため、マルチスケール特徴抽出とフレーム間アテンションを用いた時間的解離を実現。6時間の同期データセットAMP（432万フレーム）を構築し、ベースラインを上回る姿勢推定精度を検証した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>音響信号のみの複数人物3D姿勢推定は初の実装であり、視覚センサーに依存しないセンシング手法として新規性が高い</p><p>Acoustic Multi-scale Encoderで微細な周波数・時間特徴を抽出し、Temporal Pose Decoderのアテンション機構でフレーム間・人物間の信号重なりを解離するアーキテクチャを採用</p><p>AMPデータセット（6時間/432Kフレーム）を新規構築し、複数人物の姿勢推定タスクでベースラインモデルを明確に上回る性能を示した</p><p>環境音や壁面反射の影響を受けやすく、実環境でのロバスト性向上と計算コスト削減が今後の課題として残る</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

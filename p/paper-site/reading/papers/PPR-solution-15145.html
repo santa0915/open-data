@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evolving Agents in the Dark: Retrospective Harness Optimization via Self-Preference</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15145" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Evolving Agents in the Dark: Retrospective Harness Optimization via Self-Preference</h1>
+<div class="muted">must-read ・ 関連度 0.92 ・ Accepted to EMNLP 2026 (Findings). Code: https://github.com/wbopan/retro-harness ; Project website: https://paper-rho.wenbo.io ・ 追跡 Tier 2 ・ 再現性 — ・ 処理状況 PDF Fetched</div>
+<div class="muted">著者: Wenbo Pan; Shujie Liu; Chin-Yew Lin; Jingying Zeng; Xianfeng Tang; (+3)</div>
+<div><span class="score">優先度 62</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.92 +37</span><span class="chip">追跡優先度 Tier 2 +10</span><span class="chip">新しい +10</span><span class="chip">処理状況 PDF Fetched +5</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.05922v3">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>AIエージェントのハネス（スキル・ツール・ワークフロー）を外部ラベルなしで自己教師的に最適化するRHOを提案。過去の失敗軌跡から困難タスクを抽出し並列再実行した上で、自己検証とペアワイズ自己選好により更新案を選択する。SWE-Bench Proにおいて外部評価器を用いずに単発最適化のみで正答率59%→78%を達成し、長期セッションでの精度維持にも寄与する。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 外部ラベルや検証セットを一切不要とし、エージェントの過去軌跡のみでハネスを自律改善する自己教師型最適化枠組みを提示</p><p>技術的貢献: 困難タスクのコーセット抽出・並列再実行・自己検証・ペアワイズ自己選好による更新案選択という4段階パイプラインを構築</p><p>実験結果: SWE-Bench Proで正答率59%→78%（+19%p）を達成。ソフトウェア・技術作業・知識作業の3ドメインで汎用性を検証</p><p>実用性: 実デプロイ環境でのラベル収集コストを排除し、エージェントの継続的進化を可能にするため導入ハードルが低い</p><p>限界・課題: 自己選好に基づく更新は「自己満足」に陥るリスクや、並列再実行による計算コスト増大、長期軌跡のメモリ管理が実運用時の課題として残る</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

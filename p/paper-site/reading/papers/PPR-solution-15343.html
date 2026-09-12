@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent-First Tool API: A Semantic Interface Paradigm for Enterprise AI Agent Systems</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15343" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Agent-First Tool API: A Semantic Interface Paradigm for Enterprise AI Agent Systems</h1>
+<div class="muted">must-read ・ 関連度 0.92 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 PDF Fetched</div>
+<div class="muted">著者: Kai Pan; Rong Hou</div>
+<div><span class="score">優先度 52</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.92 +37</span><span class="chip">新しい +10</span><span class="chip">処理状況 PDF Fetched +5</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.10555v2">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>従来の人間向けCRUD型APIと自律型AIエージェントの要件間のミスマッチを指摘し、エージェント中心のツールインターフェース「Agent-First Tool API」を提案する。Six-Verb Semantic Protocol、構造化メタデータを提供するNTC、双層ガバナンスパイプラインの3要素で構成され、実環境のSaaSプラットフォーム（85ツール/6ドメイン）で検証された。結果としてタスク成功率が88%に達し、人間の介入を72.7%削減、エラー回復性能を5.8倍向上させた。MCPなどのトランスポート層とは直交するセマンティック層として位置づけられる。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>既存の人間向けCRUD APIをエージェント向けに再設計し、識別子依存や単発インタラクションなどの構造的欠陥を解消</p><p>ツール操作を「検索・解決・プレビュー・実行・検証・回復」の6フェーズに分解するプロトコルと、信頼度スコアや証拠連鎖を含む構造化契約（NTC）を採用</p><p>本番環境のマルチテナントSaaSで85ツールを対象に評価し、タスク成功率を64%→88%へ向上、人間の介入を72.7%削減</p><p>MCPなどの既存プロトコルと併用可能なセマンティックアプリケーション層として設計されており、実装・展開のハードルが低い</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

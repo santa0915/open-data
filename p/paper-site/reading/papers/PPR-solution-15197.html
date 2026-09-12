@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Syll: Open-Source Personal Automation with Cross-Surface Execution</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15197" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Syll: Open-Source Personal Automation with Cross-Surface Execution</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Bo Zhang; Borui Zhang; Chenghao Jiang; Minglei Shi; Xiaofeng Wang; (+3)</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.07594v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>Syllは、API・CLI・GUIなど異種インターフェースを横断して動作するオープンソースのマルチモーダルエージェント基盤です。ユーザーがデモンストレーションで手順を教えると再利用可能なスキルにコンパイルされ、エージェントの実行履歴はログやキーフレームとして可視化・監査可能になります。メモリやガバナンスルールもローカルファイルとして外部化されており、Adobe製品など実環境での検証を通じて、ユーザー主導のパーソナル自動化基盤としての実用性を示しています。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: API、CLI、GUIなど異種インターフェースを横断するマルチモーダルエージェント基盤として、ユーザーの手順教授と実行監査を統合した双方向インタラクション層を採用。</p><p>技術的貢献: デモンストレーションからスキルへの変換、実行結果のログ/キーフレーム化による可視化、メモリ・スキル・ガバナンスルールをローカルファイルとして外部化するアーキテクチャを提案。</p><p>実験結果: Adobe Photoshop/Audition、Stardew Valley、macOS Finderなど実プロダクション環境での動作検証を実施し、マルチモーダルルーティングとGUIリプレイの機構的評価で有効性を確認。</p><p>実用性: オープンソースかつセルフホスト可能で、ローカルファイルベースの設計により拡張・監査が容易。個人PCでのパーソナル自動化基盤として即戦力となる設計思想。</p><p>限界・課題: 論文では機構的検証に焦点が当てられており、大規模なベンチマークや複数エージェント間協調、スケーラビリティに関する定量的評価は限定的と推測される。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

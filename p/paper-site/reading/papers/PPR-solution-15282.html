@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remembering More, Risking More: Longitudinal Safety Risks in Memory-Equipped LLM Agents</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15282" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Remembering More, Risking More: Longitudinal Safety Risks in Memory-Equipped LLM Agents</h1>
+<div class="muted">must-read ・ 関連度 0.92 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 PDF Fetched</div>
+<div class="muted">著者: Ahmad Al-Tawaha; Shangding Gu; Peizhi Niu; Ruoxi Jia; Ming Jin</div>
+<div><span class="score">優先度 52</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.92 +37</span><span class="chip">新しい +10</span><span class="chip">処理状況 PDF Fetched +5</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.17830v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>メモリ搭載型LLMエージェントの安全性評価において、従来の単一タスク内評価では見逃される「長期運用によるメモリ蓄積の悪影響（temporal memory contamination）」を定量的に可視化する。 固定プローブセットとNullMemoryベースラインを用いた時系列評価プロトコルを提案し、8つのメモリアーキテクチャおよび実エージェントで検証した結果、曝露長が増すほど違反率が一貫して上昇することを示した。 さらに検索状態からリスクを検出可能なモニタを実証し、メモリ安全性を横断的（longitudinal）な特性として評価する必要性を提唱している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 既存の単一状態評価を補完し、長期運用における「メモリ蓄積による後続タスクへの悪影響」という新たな失敗モードを定義・可視化。</p><p>技術的貢献: 読み取り専用メモリスナップショットと固定プローブセットを用いたtrigger-probeプロトコル、およびNullMemory対照ベースラインを提案し、メモリ曝露の純粋な影響を分離評価可能に。</p><p>実験結果: 8アーキテクチャ＋実エージェントで検証した結果、メモリ使用エージェントはNullMemoryベースラインを一貫して上回り、曝露長が増すほど違反率が有意に上昇する傾向を確認。</p><p>実用性・限界: 検索状態からリスクを検出可能な高再現率モニタを実装したが、評価ドメインとアーキテクチャが限定されており、汎用的なメモリ機構や他エージェント形態への拡張が課題として残る。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

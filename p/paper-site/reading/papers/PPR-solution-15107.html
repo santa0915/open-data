@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agents All the Way Down; A Methodology for Building Custom AI Agents from Substrate to Production</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15107" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Agents All the Way Down; A Methodology for Building Custom AI Agents from Substrate to Production</h1>
+<div class="muted">worth-reading ・ 関連度 0.82 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Marc Alier Forment; Juanan Pereira; Francisco José García-Peñalvo; María José Casañ Guerrero</div>
+<div><span class="score">優先度 43</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.82 +33</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.11869v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>既存のポッドキャストやブログに散在するカスタムAIエージェント構築の実践を体系化し、「サブストレート→ビルディングブロック→反復的実装」からなるフレームワークフリーな方法论「Agents All the Way Down」を提案。LLMをソフトウェア部品として扱い、一般エージェントでプロトタイピング、CLIパッケージ化（Turtleパターン）、別エージェントによる行動テスト（Agent-tests-agent）を反復するワークフローと、マルチエージェント協調をCLI合成として簡素化する知見を示す。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: エージェント構築の断片的な実践を初めて体系化し、サブストレート定義と反復的開発プロセスを文書化</p><p>技術的貢献: MCP/関数呼び出し/CLIオーケストレーション等の構成要素を抽象化し、一般エージェント→CLIパッケージ→Agent-tests-agentテストのワークフロー(P3-P5)を提案</p><p>実用性: フレームワーク非依存で設計され、10日間で1開発者+AIペアプログラミングにより実プロダクション環境へ展開可能な軽量パターンを提供</p><p>限界・課題: 定量的ベンチマークや大規模比較実験が欠如しており、特定プラットフォーム(LAMB)での事例に依存。厳格なセキュリティ要件や複雑ドメインへの適用性については言及が限定的</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

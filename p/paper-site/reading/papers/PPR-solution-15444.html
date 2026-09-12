@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Poster: ClawdGo: Endogenous Security Awareness Training for Autonomous AI Agents</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15444" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Poster: ClawdGo: Endogenous Security Awareness Training for Autonomous AI Agents</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Jiaqi Li; Yang Zhao; Bin Sun; Yang Yu; Jian Chang; (+1)</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2604.24020v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>既存のエージェントプラットフォームにおけるプロンプトインジェクションやメモリ汚染などの脅威に対し、モデルパラメータの改修なしで推論時にエージェント自身にセキュリティ認識を習得させる内生的学習フレームワーク「ClawdGo」を提案。自己対戦によるカリキュラム学習とセッション間記憶蓄積を組み合わせた手法により、16セッションで脅威識別スコアを80.9から96.9へ向上させた。ただし、過度な訓練に伴う過検知（正当な処理を攻撃と誤分類）という精度-再現率のトレードオフも確認されている。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: モデル改修不要で推論時にエージェント自身にセキュリティ認識を習得させる内生的学習アプローチ</p><p>技術的貢献: 攻撃者/防御者/評価者のロールプレイによる自己対戦（ASAT）と、弱点優先のカリキュラムスケジューリング、および長期記憶蓄積機構（CSMA）の統合</p><p>実験結果: 16セッションでTLDTスコア80.9→96.9に向上し、ランダムスケジューリングを6.5ポイント上回る。メモリ蓄積により習得効果を持続</p><p>実用性: ベースモデルへの微調整が不要なため既存エージェント基盤（OpenClaw等）へ低コストで導入可能</p><p>限界・課題: 訓練過度による過検知（SACP現象：正当な能力評価をインジェクションと誤分類）が発生し、実運用時の閾値調整や外部監視との併用が課題</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

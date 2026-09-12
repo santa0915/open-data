@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>InferenceBench: A Benchmark for Open-Ended LLM Inference Optimization by AI Agents</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15261" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>InferenceBench: A Benchmark for Open-Ended LLM Inference Optimization by AI Agents</h1>
+<div class="muted">must-read ・ 関連度 0.90 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 PDF Fetched</div>
+<div class="muted">著者: Jehyeok Yeon; Ben Rank; Maksym Andriushchenko</div>
+<div><span class="score">優先度 51</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.90 +36</span><span class="chip">新しい +10</span><span class="chip">処理状況 PDF Fetched +5</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2607.20468v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>AIエージェントがLLM推論サーバーの構築と最適化を自律的に行う能力を評価するベンチマーク「InferenceBench」を提案。対象モデル・H100 GPU・2時間の時間制約下で、prefill/decodeレイテンシやスループットなどのボトルネックを孤立・複合的に最適化するタスクを設定。エージェントは基礎ベースラインや既定設定のvLLMを上回る性能を実現するも、単純なハイパーパラメータ探索には及ばず、多様な構成案の提案と体系的評価が課題であることを示した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>既存ベンチマークの「限定ワークフロー/既知レシピ依存」の課題に対し、推論サーバー構築と最適化というオープンエンドなAIエンジニアリングタスクを定義</p><p>H100 GPU・2時間制約下でprefill/decodeレイテンシやスループットを最適化する4つのシナリオを提供し、エージェントの自律的インフラ構築能力を定量的に評価する基盤を確立</p><p>15種類のフロントティアエージェントが基礎ベースラインに対し最大8.08倍、既定vLLM設定と同等〜上回る性能(4.05倍)を実現したが、単純なハイパーパラメータ探索には及ばなかった</p><p>エージェントは単一フレームワークに収束し多様性のある構成提案や体系的評価が不足しており、「ドメイン知識不足」ではなく「検証能力のボトルネック」が課題であることを実証</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

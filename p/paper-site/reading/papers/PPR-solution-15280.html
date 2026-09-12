@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LivePI: More Realistic Benchmarking of Agents Against Indirect Prompt Injection</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15280" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>LivePI: More Realistic Benchmarking of Agents Against Indirect Prompt Injection</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Lei Zhao; Abhay Bhaskar; Edgar Dobriban</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.17986v3">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>AIエージェントの外部ツール連携に伴う間接プロンプトインジェクション（IPI）リスクを評価するための実環境ベンチマーク「LivePI」を提案。7つの入力経路、12種類の攻撃手法、5つの悪意ある目的を対象に、実際のVM上でメール・チャット・Web・ファイルなどのライブインターフェースを用いて主要LLMの脆弱性を計測。グループチャット経由のインジェクションは全モデルで成功し、リポジトリリンク攻撃は重大なセキュリティ侵害を引き起こすことを示した。プロンプトフィルタリングとツール呼び出し承認を組み合わせた二段階防御が実環境でも高い防御率を実現することを検証している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 既存のシミュレーションベースの評価を脱し、実際のVM上でメール・チャット・Web・ファイルなどの「ライブ」インターフェースを用いた本格的なIPIベンチマークを提供。</p><p>技術的貢献: 7つの入力経路、12種類の攻撃レンダリング手法、5つの悪意ある目的（情報漏洩、セキュリティ設定変更、不正コード実行等）を網羅する構造化評価フレームワークを構築。</p><p>実験結果: GPT-5.3-Codex〜GLM-5の主要モデルで攻撃成功率が10.7%〜29.6%と広範囲に及ぶことを示し、グループチャット経由のインジェクションは全モデルで統一して成功。</p><p>実用性: 実際のデプロイ環境に近いテスト制御されたVM上で動作するため、エージェント開発者やセキュリティ担当者が防御策を検証・比較しやすい実装・評価基盤となる。</p><p>限界・課題: 著者は言及していないが、攻撃成功率の分母（特にリポジトリリンク等）が小さい点や、特定モデル向けに最適化された二段階防御の汎用性・オーバーヘッドは今後の検証課題となる。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

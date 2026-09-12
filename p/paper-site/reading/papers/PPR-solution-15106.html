@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notes2Skills: From Lab Notebooks to Certainty-Aware Scientific Agent Skills</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15106" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Notes2Skills: From Lab Notebooks to Certainty-Aware Scientific Agent Skills</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Shi Liu; Jiayao Chen; Chengwei Qin; Yanqing Hu; Jufan Zhang; (+1)</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.11897v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>ラボノート（実験記録）に含まれる「確実な観察」と「不確実な推測」を区別し、AIエージェントが安全に実験手順やスキルとして再利用できる形式に変換するNotes2Skillsフレームワークを提案。2段階のプロセスで著者の確信度（certainty）を保持しながら検証可能なスキルを生成し、湿式実験セッションでも不確実な記述の誤実行や確実な指示の過剰除去を防ぐことを実証。科学探求における信頼性の高いAI共同研究者の実現に向けた基盤技術を提供する。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 既存の研究論文や構造化データベースではなく、非公式なラボノートをエージェント入力として活用し、その中の「確信度」を明示的に抽出・保持する手法を提案。</p><p>技術的貢献: ラボノートのテキストから確実な記述と不確実な記述を分離・構造化し、検証可能なエージェント用スキル（手順/アクション）へ変換する2段階フレームワークを構築。</p><p>実験結果: 7つの条件設定と3回の湿式実験セッションで評価。確信度保持が唯一の構成要素として、不確実な推測の誤実行も確実な指示の過剰除去も起こさなかったことを示す。</p><p>実用性・限界: 科学探求ワークフローへの直接適用が可能だが、ラボノートの記述スタイルや分野依存性が変換精度に影響する可能性があり、汎用的なエージェント基盤への統合にはさらなる検証が必要。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

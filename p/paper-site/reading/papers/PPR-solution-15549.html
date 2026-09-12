@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Agents Under EU Law</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15549" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>AI Agents Under EU Law</h1>
+<div class="muted">worth-reading ・ 関連度 0.80 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Luca Nannini; Adam Leon Smith; Michele Joshua Maggini; Enrico Panai; Sandra Feliciano; (+4)</div>
+<div><span class="score">優先度 42</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.80 +32</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2604.04604v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>EU AI Act（欧州連合人工知能法）およびGDPR（一般データ保護規則）、CRA（サイバーレジリエンス法）等複数の法規制を統合し、自律型AIエージェントのコンプライアンス要件を体系的にマッピングした研究。既存のリスクベース規制と2026年策定予定の調和規格・GPAI（汎用AI行動規範）を照合し、9つのデプロイメントカテゴリ分類と12段階のコンプライアンスアーキテクチャを提案する。外部ツール呼び出しやマルチステップ実行における「振る舞いのドリフト」追跡が現行規制違反の主要因であることを指摘し、データフロー・接続システムの完全なインベントリ作成を基盤要件と結論づけている。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: EU AI Act、GDPR、CRA等複数の法規制と2026年策定予定の調和規格・GPAI行動規範を統合した初の体系的マッピングを提供。</p><p>技術的貢献: エージェントの外部ツール呼び出しやマルチステップ実行を9カテゴリに分類し、12段階のコンプライアンスアーキテクチャと規制トリガー対応表を提案。</p><p>実用性: 企業向けエージェント開発・デプロイ時の法的リスク評価フレームワークとして即座に活用可能。データフローや接続システムのインベントリ作成手順が具体化されている。</p><p>限界・課題: 「振る舞いのドリフト」の追跡が技術的に困難な高リスクエージェントは現行AI Actの必須要件を満たせないとし、実装コストと規制遵守のギャップを指摘。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

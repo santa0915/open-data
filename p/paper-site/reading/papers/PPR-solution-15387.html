@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SANEmerg: An Emergent Communication Framework for Semantic-aware Agentic AI Networking</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15387" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>SANEmerg: An Emergent Communication Framework for Semantic-aware Agentic AI Networking</h1>
+<div class="muted">worth-reading ・ 関連度 0.82 ・ Accepted at IEEE/IFIP WiOpt Workshop ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Yong Xiao; Haoran Zhou; Yujie Zhou; Marwan Krunz</div>
+<div><span class="score">優先度 43</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.82 +33</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.05861v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>大規模AIエージェントネットワークにおける通信・計算の非効率を解消するため、帯域幅制約下で自律的にシグナリングプロトコルを学習するSANEmergフレームワークを提案。重要度フィルタとMDL原理に基づく複雑度正則化により、限られたリソースでも高貢献度のメッセージを優先伝送し計算コストを抑える。プロトタイプ評価では既存手法 대비 タスク精度の向上と帯域幅・計算オーバーヘッドの大幅削減に成功。実環境でのマルチエージェント協調に応用可能だが、上位層の意図検出パイプラインへの依存が課題。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>既存の固定型ネットワークアーキテクチャに依存せず、エージェント間の自律的な「創発的通信」をネットワーク制約下で実現する新規フレームワーク</p><p>帯域幅適応型重要度フィルタと最小記述長（MDL）原理に基づく複雑度正則化を組み込み、計算能力が限られたエージェントでも効率的なシグナリングを可能に</p><p>プロトタイプ評価により、SOTA手法 대비 タスク精度の向上と帯域幅・計算オーバーヘッドの大幅削減を両立</p><p>実環境でのマルチエージェント協調に応用可能だが、上位層の「セマンティック意図検出」パイプラインの品質に依存する制約がある</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

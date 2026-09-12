@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Versatile AI Agent for Rare Disease Diagnosis and Risk Gene Prioritization</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15385" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>A Versatile AI Agent for Rare Disease Diagnosis and Risk Gene Prioritization</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Tianyu Liu; Wangjie Zheng; Rui Yang; Benny Kai Guo Loo; Hui Zhang; (+10)</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.06226v2">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>Hygieiaは、表現型・ゲノム・臨床記録を統合するマルチモーダルAIエージェントシステムであり、ルーター機構と知識強化により幻覚を抑制し疾患カテゴリに合わせた診断戦略を動的に切り替える。複数のベンチマークでSOTAを達成し、耶魯大学やDuke-NUSの臨床医との共同検証では医師の診断精度を最大60%上回る性能と実症例支援効果を証明した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 表現型・ゲノム・臨床記録を統合し、疾患カテゴリに応じて診断戦略を動的に切り替えるルーター型マルチモーダルAIエージェントを提案。</p><p>技術的貢献: 外部知識の活用とルーティング機構によりLLMの幻覚を抑制するフレームワークと、診断根拠を示す信頼度スコア生成機能を統合。</p><p>実験結果: 複数の医療診断ベンチマークでSOTAを達成し、臨床医との比較検証では診断精度が最大60%向上したことを実証。</p><p>実用性: 実際の臨床ワークフローに組み込むことを想定し、医師の負荷軽減と解釈可能性（interpretability）の向上を両立させる設計となっている。</p><p>限界・課題: 希少疾患という特定領域に特化しており、一般化医療や他のドメインへの適用範囲、およびリアルタイム臨床環境での長期安定性については言及が限定的。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

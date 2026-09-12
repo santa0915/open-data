@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent-X: Full Pipeline Acceleration of On-device AI Agents</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15345" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Agent-X: Full Pipeline Acceleration of On-device AI Agents</h1>
+<div class="muted">worth-reading ・ 関連度 0.88 ・ Accepted for publication at MobiSys-2026 ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Jinha Chung; Byeongjun Shin; Jiin Kim; Minsoo Rhu</div>
+<div><span class="score">優先度 45</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.88 +35</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.10380v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>オンデバイス環境でのLLMベースAIエージェントの推論パイプライン（prefill初期処理およびdecode逐次生成段階）を高速化するソフトウェア専用フレームワーク「Agent-X」を提案。エージェント固有の入力トークンパターンに特化したプロンプト書き換えによるプレフィックスキャッシング最適化と、追加モデル不要のスペキュラティブデコーディングを統合。代表的なエージェントワークロードにおいて精度低下なしでエンドツーエンド処理速度を1.61倍向上させ、既存エージェントシステムへのシームレスな統合を実現した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: オンデバイスAIエージェントのレイテンシボトルネックを体系的に特徴付け、解消した初の取り組み</p><p>技術的貢献: エージェント固有の入力パターンに合わせたプロンプト書き換えによるプレフィックスキャッシング最適化と、外部LLM不要のスペキュラティブデコーディングを統合</p><p>実験結果: 実機評価でエンドツーエンド速度が1.61倍向上し、精度への影響はゼロ</p><p>実用性: ソフトウェアのみで構成され既存エージェントパイプラインへ容易に組み込めるため、モバイル/エッジ端末への展開が容易</p><p>限界・課題: 抽象文から明らかな制約はないが、プロンプト書き換えの汎用性や特定デバイスアーキテクチャへの依存性は今後の検証が必要</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

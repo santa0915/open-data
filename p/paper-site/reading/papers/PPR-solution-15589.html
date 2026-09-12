@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HumanoidVLM: Vision-Language-Guided Impedance Control for Contact-Rich Humanoid Manipulation</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15589" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>HumanoidVLM: Vision-Language-Guided Impedance Control for Contact-Rich Humanoid Manipulation</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ This paper has been accepted for publication at LBR of HRI 2026 conference ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Yara Mahmoud; Yasheerah Yaqoot; Miguel Altamirano Cabrera; Dzmitry Tsetserukou</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2601.14874v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>本稿は、Unitree G1人型ロボットが単眼RGB画像からタスクに応じたインピーダンス制御パラメータとグリーパー設定を自動選択する「HumanoidVLM」を提案する。VLMによる意味推論とFAISSを用いたRAGで実験的に検証された剛性・減衰係数および把持角をカスタムデータベースから取得し、タスク空間インピーダンスコントローラへ直接組み込むことで接触豊かな操作を実現する。14の視覚シナリオで93%の検索精度を達成し、実機実験ではZ軸追従誤差1〜3.5cm、仮想力もタスク依存の設定と整合する安定した相互作用を検証した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 固定されたインピーダンスゲインやグリーパー設定に依存せず、VLMとRAGを用いて視覚入力からタスク適応的な制御パラメータを動的に取得するフレームワークを提案。</p><p>技術的貢献: VLMによる意味推論結果をFAISSベースの検索エンジンでカスタムデータベース（剛性・減衰係数、把持角）とマッピングし、タスク空間インピーダンスコントローラへ直接組み込むパイプラインを構築。</p><p>実験結果: 14シナリオで93%の検索精度を達成。実機ではZ軸追従誤差1〜3.5cm、仮想力が設定値と整合する安定した接触操作を検証。</p><p>実用性・限界: Unitree G1での実証であり、カスタムデータベースの構築に依存する。未知環境やデータベース外のタスクへの一般化は今後の課題として示唆されている。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Computational Thinking Development in AI Agent Creation_A Mixed-Methods Study</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15314" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Computational Thinking Development in AI Agent Creation_A Mixed-Methods Study</h1>
+<div class="muted">others ・ 関連度 0.35 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Yimeng Sun; Haiyang Xin; Qiannan Niu; Shuang Li; Lingyun Huang; (+1)</div>
+<div><span class="score">優先度 24</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.35 +14</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.14330v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>CocoFlowというノーコードプラットフォームを用いた5日間のワークショップ（93名）を通じて、中学生対象のAIエージェント作成が計算思考（CT）に与える影響を混合研究法で検証。初期CTレベルが中程度だった生徒が最も大きな成長を示す「最適発達ゾーン」効果を確認し、反復的テスト行動が自己効力感向上の予測因子であることを明らかにした。線形的な学習仮説を否定し、段階的な支援（スキャフォールディング）の必要性を提唱。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: AIエージェント作成プロセスにおける学習者の計算思考（抽象化・アルゴリズム的思考）の発達軌道を、初期レベル別に詳細に可視化した初の教育実証研究。</p><p>技術的貢献: 「最適発達ゾーン」効果（中程度CT層が最大成長）を統計的に証明し、反復的テスト行動と自己効力感の因果関係を特定。</p><p>実験結果: 抽象思考(d=0.71)・アルゴリズム的思考(d=0.70)に有意な向上を確認。η²=0.55の大きな効果量で初期CTレベルと成長率の非線形関係を定量化。</p><p>実用性: CocoFlowなどのノーコード環境を用いた短期集中ワークショップが、初学者のAIリテラシー育成に有効であることを示唆。</p><p>限界・課題: サンプルサイズ（93名）と期間（5日間）の制約があり、長期効果や他プラットフォームへの一般化は未検証。具体的なスキャフォールディング設計の詳細は不足。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

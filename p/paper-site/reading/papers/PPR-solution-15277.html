@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Causely: A Causal Intelligence Layer for Enterprise AI A Benchmark Study on SRE and Reliability Workflows</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15277" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Causely: A Causal Intelligence Layer for Enterprise AI A Benchmark Study on SRE and Reliability Workflows</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Dhairya Dalal; Endre Sara; Ben Yemini; Christine Miller; Shmuel Kliger</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.18327v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>SREワークフローにおけるAIエージェントの診断効率と信頼性を向上させるため、環境トポロジーや因果関係を構造化・オントロジーベースで維持する「Causely」という因果知能レイヤーを提案。生テレメトリデータを変換し、エージェントがリアルタイムで参照可能なクエリ可能モデルを提供する。24マイクロサービス構成のOpenTelemetryデモアプリに故障を注入したベンチマーク実験により、Causely利用により診断時間63%短縮、トークン消費60%削減、ツール呼び出し78%削減、根本原因特定精度が75%から100%へ向上することを示した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: エージェントの環境理解に伴う「意味解釈の税（トークン・遅延・推論信頼性の低下）」を解消し、因果関係とオントロジーに基づく構造化レイヤーを提案。</p><p>技術的貢献: 生テレメトリデータから環境トポロジー・属性依存性・因果関係を抽出し、エージェントがリアルタイムでクエリ可能な「因果知能モデル」へ変換するパイプラインを構築。</p><p>実験結果: 24マイクロサービス構成の故障注入ベンチマークにおいて、根本原因特定精度を75%→100%に向上させ、診断時間63%短縮、トークン消費60%削減、ツール呼び出し78%削減を実現。</p><p>実用性: OpenTelemetryと既存LLMバックエンド（Claude, GPT, Gemini等）に統合可能なレイヤー設計であり、エンタープライズSRE現場への適用が想定されている。</p><p>限界・課題: 評価が制御されたデモ環境および特定故障シナリオに限定されており、大規模分散システムや未知の故障パターンへの汎化性、オントロジー構築の自動化コストについては言及がない。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

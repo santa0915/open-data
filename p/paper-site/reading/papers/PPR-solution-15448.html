@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KISS Sorcar: A Stupidly-Simple General-Purpose and Software Engineering AI Assistant</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15448" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>KISS Sorcar: A Stupidly-Simple General-Purpose and Software Engineering AI Assistant</h1>
+<div class="muted">worth-reading ・ 関連度 0.88 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Koushik Sen</div>
+<div><span class="score">優先度 45</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.88 +35</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2604.23822v2">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>LLMエージェントの長期タスク実行における文脈制限・単一障害点・レビュー困難などの実装課題を解決するため、約2,900行の軽量な「KISS Agent Framework」上に構築された汎用AIエージェントIDE「KISS Sorcar」を提案。 5層の階層型アーキテクチャにより、予算管理付きReAct実行、セッション間要約による継続、並列サブエージェント、永続的履歴、Gitワークツリー分離という各関心を独立して処理する設計を採用し、システムプロンプトにエンジニアリング原則を埋め込むことで堅牢な開発支援を実現している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>既存エージェントの文脈切れやエラー連鎖を防ぐため、5層の階層型アーキテクチャとシステムプロンプトによる構造化制御を採用し、複雑なモデル微細調整に依存しない軽量設計を実現</p><p>予算追跡付きReAct、セッション間要約による自動継続、並列サブエージェント、永続的対話履歴、Gitワークツリー分離という5つの関心を明確に分離したモジュール化が特徴</p><p>オープンソースでIDEと統合された実装を提供し、長期のソフトウェアエンジニアリングやAI発見タスクにおけるレビュー性・再現性を大幅に改善する実用系フレームワーク</p><p>基盤モデルの能力依存度が高く、ツール呼び出しの信頼性や並列実行時の競合制御など、大規模展開時のスケーラビリティ課題は依然として残る</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

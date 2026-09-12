@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Think Before You Act -- A Neurocognitive Governance Model for Autonomous AI Agents</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15430" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Think Before You Act -- A Neurocognitive Governance Model for Autonomous AI Agents</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Eranga Bandara; Ross Gore; Asanga Gunaratna; Sachini Rajapakse; Isurunima Kularathna; (+10)</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2604.25684v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>自律型AIエージェントのガバナンス課題に対し、人間の自己統制（実行機能・抑制制御）をLLM推論にマッピングした「神経認知ガバナンスフレームワーク」を提案。全行動前にグローバル・ワークフロー・エージェント・状況の4層ルールセットを参照するPAGRL（Pre-Action Governance Reasoning Loop）を実装し、小売サプライチェーンの生産環境で検証。外部制約ではなく推論内部にガバナンスを組み込むことで、95%のコンプライアンス精度とゼロの誤エスカレーションを実現した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: エージェントのガバナンスを「外部制約」から「内部化された認知プロセス」へ転換し、人間の自己統制メカニズムをLLM推論構造に形式的にマッピング。</p><p>技術的貢献: 4層階層型ルールセットを参照するPAGRLループを設計し、意思決定前に構造的な吟味プロセスを挿入することで安全性と説明責任を向上。</p><p>実験結果: 小売サプライチェーンの生産ワークフローで95%のコンプライアンス精度と人間監視への誤エスカレーションゼロを達成。</p><p>実用性・限界: 既存エージェントフレームワークへの組み込みは容易だが、ルール定義のコストや複雑な状況での一般化性能に課題があり、著者もスケーラビリティと保守性を未解決点として指摘。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

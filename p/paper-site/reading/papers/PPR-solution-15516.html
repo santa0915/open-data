@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Repeated-Measurement Study for Cultural Analytics of English Song Lyrics Using Five Large Language Models</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15516" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>A Repeated-Measurement Study for Cultural Analytics of English Song Lyrics Using Five Large Language Models</h1>
+<div class="muted">others ・ 関連度 0.65 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: E. Cho Smith; Samuel Ho; Dawn Laux</div>
+<div><span class="score">優先度 36</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.65 +26</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2609.04428v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>本論文は、5つの大規模言語モデル（LLM）をゼロショット注釈者として用い、英語歌詞に表れる4つの社会的構成概念の測定における信頼性を評価した反復測定研究である。実行間の一貫性、モデル間の収束性、および教師あり分類への転移可能性を検証し、概念によって信頼性にばらつきがあることを実証した。LLM注釈をスケーラブルな測定値として利用する前に、反復安定性とモデル間収束の報告が不可欠であることを提言している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>LLM注釈のスケーラビリティへの注目に対し、測定としての信頼性（反復安定性・モデル間収束）を定量的に評価した新規性</p><p>ゼロショット推論における5モデル×4概念の体系的分析と、生成ラベルの教師あり分類への転移可能性を検証</p><p>自尊感情は高い信頼性を示す一方、承認欲求は不安定であり、概念依存でLLMの測定精度が異なることを実証</p><p>文化分析・ソーシャルサイエンス分野でのLLM活用ガイドラインとして有用だが、構成概念の有効性（validity）は証明されていない限界がある</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

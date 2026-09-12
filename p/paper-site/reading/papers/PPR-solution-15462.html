@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relational Archetypes: A Comparative Analysis of AV-Human and Agent-Human Interactions</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15462" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Relational Archetypes: A Comparative Analysis of AV-Human and Agent-Human Interactions</h1>
+<div class="muted">others ・ 関連度 0.70 ・ 4 pages ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Antoni Lorente; Amin Oueslati; Robin Staes-Polet</div>
+<div><span class="score">優先度 38</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.70 +28</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2604.22564v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>自律走行車（AV）と人間の相互作用に関するHCI・交通工学の知見を、AIエージェントと人間の相互作用に類推し、「関係性アーキタイプ」の分類体系を提案する。既存文献を跨いだ比較分析を通じて、両分野が共有する自律性・社会影響・経済変革ポテンシャルに着目し、エージェントの社会的受容や相互作用設計に関する新たな研究課題を提起している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: AV-人間間の相互作用モデルをAIエージェント-人間間に跨いで類推し、関係性アーキタイプ（対人・対物・協調・監視等）の分類枠組みを提示</p><p>技術的貢献: HCIと交通工学の先行研究を統合し、エージェントの社会的影響や相互作用設計に関する比較分析の基盤を提供</p><p>実験結果: 実証実験や定量的評価は含まれず、概念論文・位置づけ論文として理論的枠組みの提示に留まる</p><p>実用性: 技術実装には直接結びつかないが、エージェントの社会実装や倫理設計における議論の起点として活用可能</p><p>限界・課題: 類推に基づく仮説段階であり、エージェント固有の複雑性（例：非線形な意思決定・多モーダル性）を十分に反映していない可能性</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

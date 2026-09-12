@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1GC-7RC: One Graphic Card -- Seven Research Challenges! How Good Are AI Agents at Doing Your Job?</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15287" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>1GC-7RC: One Graphic Card -- Seven Research Challenges! How Good Are AI Agents at Doing Your Job?</h1>
+<div class="muted">must-read ・ 関連度 0.90 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 PDF Fetched</div>
+<div class="muted">著者: Robin-Nico Kampa; Fabian Deuser; Anna Bößendörfer; Konrad Habel; Norbert Oswald</div>
+<div><span class="score">優先度 51</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.90 +36</span><span class="chip">新しい +10</span><span class="chip">処理状況 PDF Fetched +5</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.17046v2">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>単一GPU・オフライン・厳格な時間制限という制約下で、AIコーディングエージェントがゼロからMLモデルを構築できる能力を評価するベンチマーク「1GC-7RC」を提案。言語モデリングから時系列予測まで7タスクを用意し、プロプライエタリ系とオープンソース系の計7エージェントを比較検証した結果、暗黙的なML知識や計画力、時間管理能力に大きな性能差があることを定量的に示した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 単一GPU・インターネットなし・40-120分の時間制限という実開発に近い制約でML構築能力を評価する初の標準化ベンチマーク</p><p>技術的貢献: データ準備・評価スクリプトをロックし学習コードのみ修正可能とする設計により、エージェントの暗黙的ML知識と自律計画力を純粋に抽出</p><p>実験結果: Claude/GPT/Qwen系など7エージェントの比較で、モデル規模やプロンプト戦略ではなく「実務的なMLドメイン知識」と「時間配分能力」が性能を分けることを示した</p><p>実用性・限界: モジュール設計によりタスク追加・制約変更が可能だが、オフライン/単一GPU制約は実際のクラウド開発環境とは乖離しており、エージェントの「リソース最適化」能力のみを測る点に留意が必要</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

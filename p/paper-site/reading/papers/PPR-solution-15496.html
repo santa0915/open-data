@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Architectural Design Decisions in AI Agent Harnesses</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15496" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Architectural Design Decisions in AI Agent Harnesses</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Hu Wei</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2604.18071v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>70件の公開AIエージェントシステムプロジェクトを対象に、ツール仲介・コンテキスト管理・安全制御などの基盤インフラ（Agent Harness）の設計決定をソースコード解析と文献調査により実証的に分析した。5つの recurring な設計次元とその共起パターンを特定し、軽量ツールからエンタープライズ向けまで5つの典型的なアーキテクチャパターンを抽出。データ駆動型の設計指針を提供する。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: AIエージェントのアルゴリズムではなく「周辺インフラ（Harness）」の設計決定に焦点を当てた初のコードベース実証研究。</p><p>技術的貢献: 70プロジェクトのソースコードと技術資料を体系的に解析し、サブエージェント構成・コンテキスト管理・ツールシステム・安全機構・オーケストレーションの5次元を抽出。共起分析により設計選択間の相関を定式化。</p><p>実験結果: ファイル永続型・ハイブリッドなコンテキスト戦略が主流であり、MCP/プラグイン拡張は新興として検出。中間分離は一般的だが高保証監査は稀。設計次元間の共起パターン（例：深い協調↔明示的コンテキストサービス）を特定。</p><p>実用性: 既存フレームワークの比較・選択基準や、新規Harness設計の指針として即座に活用可能。ただし定量的な性能ベンチマークではなく設計パターンの記述が中心。</p><p>限界・課題: 公開プロジェクトのみに限定されており商用システムの実態はカバーできない。横断的な共起分析であり因果関係や性能への直接的な影響評価は今後の課題。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

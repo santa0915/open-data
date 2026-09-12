@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sleeper Channels and Provenance Gates: Persistent Prompt Injection in Always-on Autonomous AI Agents</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15323" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Sleeper Channels and Provenance Gates: Persistent Prompt Injection in Always-on Autonomous AI Agents</h1>
+<div class="muted">worth-reading ・ 関連度 0.86 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Narek Maloyan; Dmitry Namiot</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.86 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.13471v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>常時稼働型自律AIエージェントにおける永続的プロンプトインジェクション攻撃「Sleeper Channels」を定義し、異なる入力表面間で記憶やタスクが蓄積・発火する持続的脅威を可視化した。対策として、アクションの正統性を検証する「Provenance Gates（D2防御）」を提案し、ワンショット所有者証憑と正規化ダイジェストによりリプレイやパラフレーズ改ざんを理論的に撃退する仕組みを示した。実装アーティファクトと静的監査ツールを提供し、ランタイムアダプターによる部分的なミディエーションフックの実証を行った。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: エージェントの永続化特性を利用した「Sleeper Channels（休眠チャネル）」という新たな攻撃経路を定義し、既存の即時インジェクションとは異なる持続的脅威を可視化した。</p><p>技術的貢献: 正規化アクションインスタンスダイジェストとワンショット所有者証憑を用いたD2防御層を提案し、パラフレーズ改ざん・複数入力権限再利用・リプレイ攻撃を防止する仕組みを示した。</p><p>実装・検証: 静的監査ツールとランタイムアダプター（10フック中5つ実装）を提供し、Node.js環境で42テストケースによる実証を行った。</p><p>限界・課題: 実証評価はプレレジストレーション段階であり、完全なミディエーションフックの実装や大規模実環境でのベンチマーク結果は未公開である。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

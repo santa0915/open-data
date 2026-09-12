@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ReflectiChain: Epistemic Grounding in LLM-Driven World Models for Supply Chain Resilience</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15123" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>ReflectiChain: Epistemic Grounding in LLM-Driven World Models for Supply Chain Resilience</h1>
+<div class="muted">worth-reading ・ 関連度 0.80 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Jia Luo</div>
+<div><span class="score">優先度 42</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.80 +32</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.10359v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>LLMの文脈推論と強化学習の最適化を統合し、サプライチェーンエージェントの「認識的ギャップ」を解消する手法を提案。物理保存則を組み込んだ生成型世界モデル（SC-WM）と、エピステミック／アレトリー不確実性を分離するダブルループ学習により、半シミュレーション環境での意思決定信頼性を向上させる。ベンチマークでは根拠一貫性スコアを33.0%改善し、外乱下でも82.3%の稼働率を維持、中程度圧力下で40.2%の性能向上（アンチフラジャイル）を示した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: LLMのsemantic制約と物理保存則を統合する「生成型サプライチェーン世界モデル」により、エージェントのグラウンディング問題を解決</p><p>技術的貢献: エピステミック不確実性（KL信頼領域制約付き政策適応）とアレトリー不確実性（潜在空間の確率的ロールアウト）を明示的に分離するダブルループ学習アーキテクチャ</p><p>実験結果: Semi-SimベンチマークでRationale Consistency Scoreを33.0%向上、外乱下で82.3%の稼働率維持、中程度圧力下で+40.2%の性能向上（アンチフラジャイル）を検証</p><p>実用性・限界: 10ノード規模の半シミュレーション環境に限定され、大規模ネットワークへのスケーラビリティや物理保存則の事前定義依存性が課題として指摘されている</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

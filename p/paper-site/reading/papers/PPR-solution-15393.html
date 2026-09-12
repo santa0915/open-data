@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DecodingTrust-Agent Platform (DTap): A Controllable and Interactive Red-Teaming Platform for AI Agents</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15393" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>DecodingTrust-Agent Platform (DTap): A Controllable and Interactive Red-Teaming Platform for AI Agents</h1>
+<div class="muted">must-read ・ 関連度 0.90 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 PDF Fetched</div>
+<div class="muted">著者: Zhaorun Chen; Xun Liu; Haibo Tong; Chengquan Guo; Yuzhou Nie; (+12)</div>
+<div><span class="score">優先度 51</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.90 +36</span><span class="chip">新しい +10</span><span class="chip">処理状況 PDF Fetched +5</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.04808v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>AIエージェントのセキュリティ評価を目的とした、制御可能かつインタラクティブなレッドチームプラットフォーム「DTap」を提案する。Google WorkspaceやSlackなど50以上のシミュレーション環境と14ドメインをカバーし、攻撃ベクトルを自律的に探索する自動レッドチームエージェント「DTap-Red」を搭載。これにより構築された大規模ベンチマーク「DTAP-Bench」を用いて主要AIエージェントの脆弱性を体系的に評価し、セキュリティポリシーや攻撃戦略のパターンを明らかにした。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: AIエージェントを対象とした制御可能・インタラクティブなレッドチームプラットフォームと自動攻撃探索エージェントを統合した初の包括的フレームワーク。</p><p>技術的貢献: プロンプト、ツール、スキル、環境など多様な注入ベクトルを自律的に探索するDTap-Redを搭載し、50以上のシミュレーション環境で再現性のある攻撃評価を実現。</p><p>実験結果: DTap-Benchを用いて主要バックボーンモデル搭載エージェントの大規模評価を実施し、セキュリティポリシーやリスクカテゴリに依存した体系的な脆弱性パターンを定量的に抽出。</p><p>実用性: 検証可能な自動ジャッジと標準化されたベンチマークにより、開発者がエージェントのセキュリティテストを容易に実施・比較可能。</p><p>限界・課題: シミュレーション環境が現実のAPI/インフラの完全な複雑さを代替しきれない可能性や、攻撃手法の進化に対する継続的な更新必要性が想定される。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

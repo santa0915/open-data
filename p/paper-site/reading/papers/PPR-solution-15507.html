@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agentic Frameworks for Reasoning Tasks: An Empirical Study</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15507" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Agentic Frameworks for Reasoning Tasks: An Empirical Study</h1>
+<div class="muted">worth-reading ・ 関連度 0.82 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Zeeshan Rasheed; Abdul Malik Sami; Muhammad Waseem; Kai-Kristian Kemell; Mika Saari; (+1)</div>
+<div><span class="score">優先度 43</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.82 +33</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2604.16646v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>22のAIエージェントフレームワークをBBH、GSM8K、ARCの3ベンチマークで統一環境下評価した大規模実証研究。 推論精度・実行時間・コスト・一貫性を測定し、性能差の主要因がモデル能力ではなくコンテキスト管理やリトライループなどの「オーケストレーション品質」にあることを明らかにした。 特に数学推論タスクで精度が急落する傾向を確認し、フレームワーク選定における設計指針を提示。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: GitHubから収集した1,200リポジトリから22の主要エージェントフレームワークを対象とした、推論タスク向けの大規模実証比較は初。</p><p>技術的貢献: アーキテクチャ分類に基づく統一評価枠組を提示し、モデル性能ではなく「オーケストレーション設計」が実用性を決定づけることを定量的に証明。</p><p>実験結果: 12フレームワークが安定動作（精度~75%、4-6秒/タスク、コスト$0.15前後）。数学推論(GSM8K)のみ精度が~44%と大幅低下。</p><p>実用性・課題: コンテキスト爆発や失敗時の高コストリトライがシステム崩壊の主因。フレームワーク選定では基盤モデルよりメモリ制御・エラーハンドリング・コスト管理を優先すべきとの実践的指針を示す。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

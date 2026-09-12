@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeFM: Learning Foundation Representations from Depth for Robotics</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15586" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>DeFM: Learning Foundation Representations from Depth for Robotics</h1>
+<div class="muted">must-read ・ 関連度 0.92 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 PDF Fetched</div>
+<div class="muted">著者: Manthan Patel; Jonas Frey; Mayank Mittal; Fan Yang; Alexander Hansson; (+3)</div>
+<div><span class="score">優先度 52</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.92 +37</span><span class="chip">新しい +10</span><span class="chip">処理状況 PDF Fetched +5</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2601.18923v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>ロボティクス向けに深さ画像のみで自己教師あり学習を行う基盤モデル「DeFM」を提案。 6000万枚の深さデータとDINO系自己蒸留損失を用いて幾何・意味的表現を学習し、マルチスケール対応の正規化手法を導入する。 分類・セグメンテーション・ナビゲーション・歩行・操作など多様なベンチマークでSOTAを達成し、sim-to-real転移も堅牢に確認された。 タスク特化のファインチューニング不要でオフザシェフ利用可能なモデルを公開し、実装コストを大幅に削減する。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>深さ画像専用大規模基盤モデルは既存手法が乏しい中、60M枚のデータとDINO系自己蒸留により初めて構築された。</p><p>マルチスケールでの計測値保持を可能にする新規入力正規化手法を採用し、幾何・意味的表現の汎化性を向上させた。</p><p>分類・セグメンテーション・ナビゲーション・歩行・操作の各ベンチマークでSOTAを記録し、sim-to-real転移も堅牢に達成。</p><p>モデル軽量化（ディストillation）によりリソース制約のあるロボット搭載が可能となり、ファインチューニング不要のオフザシェフ公開で実装コストを大幅に削減。</p><p>深さセンサー単一入力によるテクスチャ情報欠如や、極端な反射/照明環境でのロバスト性検証は今後の課題として想定される。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

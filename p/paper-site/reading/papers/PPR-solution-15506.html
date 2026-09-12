@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CapSeal: Capability-Sealed Secret Mediation for Secure Agent Execution</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15506" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>CapSeal: Capability-Sealed Secret Mediation for Secure Agent Execution</h1>
+<div class="muted">worth-reading ・ 関連度 0.82 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Shutong Jin; Ruiyi Guo; Ray C. C. Cheung</div>
+<div><span class="score">優先度 43</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.82 +33</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2604.16762v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>AIエージェントがAPIキーやSSH認証情報などの秘密情報を扱う際の漏洩リスクを解決するため、ローカル信頼済みブローカー経由で制限付き実行を可能にする「CapSeal」アーキテクチャを提案する。能力発行、スキーマ制約付きHTTP/SSH実行、リプレイ防止バインディング、改ざん検知監査証跡を組み合わせた設計により、エージェントへの秘密情報の直接渡しが不要な新しい実行モデルを実現する。Rust製プロトタイプとMCPアダプタの統合により、既存エージェント基盤への組み込みを想定している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: エージェントに秘密情報を直接渡す従来のモデルを廃止し、ローカルブローカー経由の「能力ベース（capability-sealed）」制限付き実行へ転換したセキュリティアーキテクチャ。</p><p>技術的貢献: スキーマ制約付きHTTP実行、ブローカー実行SSH、リプレイ防止セッションバインディング、ポリシー評価、改ざん検知監査証跡を統合し、非開示・制限使用・監査性を形式化。</p><p>実用性: Rust製プロトタイプとMCP（Model Context Protocol）アダプタの統合により、既存エージェントフレームワークへの組み込みが容易な設計。</p><p>限界・課題: 本稿ではセキュリティ目標の定義とアーキテクチャ設計に焦点が当てられており、定量的ベンチマーク結果や大規模実証は評価計画段階である点。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

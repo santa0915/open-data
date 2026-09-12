@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neither Layer Alone: Epistemic Integrity Requires Hierarchical Joint Design for Long-Running AI Agents</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15185" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Neither Layer Alone: Epistemic Integrity Requires Hierarchical Joint Design for Long-Running AI Agents</h1>
+<div class="muted">must-read ・ 関連度 0.92 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 PDF Fetched</div>
+<div class="muted">著者: Zhihong Shen</div>
+<div><span class="score">優先度 52</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.92 +37</span><span class="chip">新しい +10</span><span class="chip">処理状況 PDF Fetched +5</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.04017v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>長期実行型AIエージェントにおける「インターフェース揮発性（Interface Volatility）」を問題提起し、モデルとハーネスの境界で生じる信念・能力・目標コミットメントの崩壊を防ぐため、「エージェント認識的整合性（AEI）」をアーキテクチャの第一級制約として位置づける。モデルとハーネスの明示的なインターフェース契約に基づき、目標妥当性から呼び出しレベルの故障判別までを網羅する4階層構造を提案。これにより、フラットなアクションループに依存せず、永続状態を保ちつつ層間整合性を維持するエージェント設計のパラダイムシフトを提唱している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 長期エージェントの失敗原因を「モデルとハーネスの境界における意味の逸脱」と定義し、従来の単層最適化では解決できない根本課題を浮き彫りにした。</p><p>技術的貢献: モデル出力と環境制御を結びつける「4階層インターフェース契約」を提案。目標妥当性→アクション原型シーケンス→ツールインスタンス選択→呼び出しレベル故障判別の順で境界条件を形式化。</p><p>検証方針: 抽象的な理論枠組みだが、セッション跨ぎや独立した層アップグレード時にも信念・ツール・目標コミットメントが維持されるかを契約ベースで評価・学習する手法を提唱。</p><p>実用性: エージェントフレームワークの設計指針となり得るが、契約の具体的な形式化や自動検証ツールの実装には追加研究が必要。</p><p>限界: 理論的枠組みに留まるため、実際の複雑なツールチェーンや動的環境でのスケーラビリティ、契約違反時の回復メカニズムについては言及が限定的。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

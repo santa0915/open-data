@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Is Agent Memory a Database? Rethinking Data Foundations for Long-Term AI Agent Memory</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15229" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Is Agent Memory a Database? Rethinking Data Foundations for Long-Term AI Agent Memory</h1>
+<div class="muted">worth-reading ・ 関連度 0.88 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Abdelghny Orogat; Essam Mansour</div>
+<div><span class="score">優先度 45</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.88 +35</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.26252v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>長期動作するAIエージェントのメモリ基盤を再考し、従来のレコード/埋め込みベースのDBアプローチが抱える「成長制御不能」「意味的更新欠如」「容量依存忘却」「読み取り専用検索」の4つの失敗モードを指摘。状態遷移の正しさに着目した「Governed Evolving Memory (GEM)」理論枠組と、ingestion/revision/forgetting/retrieval の4演算子を提案し、プロトタイプ実装 MemState でその動作検証と既存手法とのアーキテクチャギャップを可視化する。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: エージェントメモリを「ストレージ」ではなく「状態管理ワークロード」と再定義し、レコードレベルの正しさから状態遷移レベルの正しさへパラダイムシフトを提案。</p><p>技術的貢献: GEM理論枠組により4つの状態演算子と6つの整合性条件を形式化し、従来のDB/ベクトルDBアーキテクチャではこれらを満たせないことを構造的に証明。</p><p>実験結果: プロトタイプ「MemState」をプロパティグラフバックエンド上に実装し、理論の動作検証と既存手法とのギャップを可視化。</p><p>限界・課題: 理論的枠組みと初期実装に留まり、大規模スケーラビリティや実際のエージェントワークロードでの定量的評価は今後の研究課題として提示されている。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

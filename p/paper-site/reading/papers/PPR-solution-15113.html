@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Coding Agents in Social Science: Methodologically Diverse, Empirically Consistent, Interpretively Vulnerable</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15113" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>AI Coding Agents in Social Science: Methodologically Diverse, Empirically Consistent, Interpretively Vulnerable</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Meysam Alizadeh; Fabrizio Gilardi; Mohsen Mosleh; Enkelejda Kasneci</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.11456v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>LLMコーディングエージェント（Claude Code, Codex）を社会科学の定量分析タスクに適用し、人間の多様な分析方法ベースラインと比較した実証研究。設計層（手法選択）と判定層（結論導出）を分離評価した結果、エージェントは人間と同等以上の方法論的多様性と推定精度を示したが、確証バイアス誘導プロンプトにより判断ルールを省略することで結論が劇的に反転する脆弱性を示した。AIのバイアスは「推定」ではなく「解釈・判定」段階に集中することを明らかにした。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>設計層（手法選択）と判定層（結論導出）を分離し、社会科学分析におけるAIエージェントのバイアス発生源を実証的に特定した新規枠組み</p><p>Claude CodeとCodexを移民・社会政策データセットで20回実行し、人間の多様な分析方法ベースラインと比較評価</p><p>エージェントは人間と同等以上の方法論的多様性を示し推定値も一致。プロンプトによる事前信念は手法選択を再編するが集計推定値には影響せず</p><p>判定層では確証バイアス誘導プロンプトで結論支持率が10%→90%に劇的変化（係数分布は不変のままルール省略により発生）</p><p>AI分析システムの信頼性向上には「推定精度」だけでなく「解釈・判定プロセスの制御」が不可欠であることを示唆</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Absorbing Complexity: An Interaction-Native Knowledge Harness for Financial LLM Agents</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15182" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Absorbing Complexity: An Interaction-Native Knowledge Harness for Financial LLM Agents</h1>
+<div class="muted">worth-reading ・ 関連度 0.87 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Ailiya Borjigin; Igor Stadnyk; Ben Bilski; Maksym Chikita; Dmytro Kyrylenko; (+2)</div>
+<div><span class="score">優先度 45</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.87 +35</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.01886v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>金融LLMエージェントが抱える「ユーザーへの複雑性転嫁」問題を解決するため、システム側で知識を自動吸収・管理するInKH（Interaction-Native Knowledge Harness）アーキテクチャを提案。パッシブな知識注入、有界コンテキストバッファ、時間的グラフメモリ、減衰・無効化機能により、古くついた文脈や不要な情報を動的に制御する。合成ベンチマークにおいて、従来手法比でレイテンシとトークンコストを約83%削減しつつ、タスク品質と監査追跡性を大幅に向上させた。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: エージェントのメモリ・知識管理を「ユーザー対話ネイティブ」な形でシステム側へ統合し、複雑性を吸収する設計指針を提示</p><p>技術的貢献: パッシブ知識注入、有界ワーキングコンテキスト、時間的グラフメモリ、成熟度/減衰/書き込み時無効化を組み合わせた動的メモリ管理機構</p><p>実験結果: 合成ベンチマーク（46,080評価）でレイテンシ82.95%・トークンコスト82.29%削減、古知識使用率96.58%削減を実現し、品質も向上</p><p>実用性/限界: 金融分野の監査対応（Wiki形式）を内蔵するが、評価は合成データに限定されており、実市場での検証やスケーラビリティ課題は未解決</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

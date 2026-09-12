@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GPTNT: Benchmarking Real-Time Collaboration Between Multimodal Agents on Keep Talking And Nobody Explodes</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15524" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>GPTNT: Benchmarking Real-Time Collaboration Between Multimodal Agents on Keep Talking And Nobody Explodes</h1>
+<div class="muted">must-read ・ 関連度 0.90 ・ Accepted by TMLR on 02 Sept 2026. Project website and code at https://gptnt.github.io ・ 追跡 — ・ 再現性 — ・ 処理状況 PDF Fetched</div>
+<div class="muted">著者: Amit Parekh; Sabrina McCallum; Kareem Al-Hasan; Malvina Nikandrou; Alessandro Suglia; (+1)</div>
+<div><span class="score">優先度 51</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.90 +36</span><span class="chip">新しい +10</span><span class="chip">処理状況 PDF Fetched +5</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.28514v2">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>「Keep Talking and Nobody Explodes」を基盤とした、マルチモーダルエージェント間のリアルタイム協調を評価する新ベンチマークGPTNTを提案。 時間制約・情報非対称性・不完全な通信条件下で、視覚情報を持つエージェントと指示書を持つエージェントが非同期に連携して爆弾解除を行うタスクを設定し、 既存の最先端モデル（クローズド/オープンソース）がリアルタイムで成功できないことを実証。 状態追跡や時間予算管理の弱点を詳細に分析し、長期進化可能なプロシージャル生成環境を採用している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 従来のターン制や簡略化された通信を排除し、時間圧力下での非同期リアルタイム協調と情報非対称性を評価する初のゲームベースベンチマーク。</p><p>技術的貢献: 視覚モダリティ（爆弾状態）とテキストモダリティ（解除手順）を持つ2エージェント間の状態追跡・意思疎通・エラー回復のボトルネックを詳細に分析。</p><p>実験結果: 最先端モデルはリアルタイムでの爆弾解除に完全失敗し、人間プレイヤーとの性能差を明確化。時間予算管理と曖昧さへの対応が主要な弱点として特定された。</p><p>実用性・限界: プロシージャル生成とMODコミュニティを活用して長期評価が可能だが、特定ゲーム環境に依存するため他ドメインへの汎用化にはアダプテーションが必要。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

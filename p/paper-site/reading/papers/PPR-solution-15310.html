@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>In-IDE Toolkit for Developers of AI-Based Features</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15310" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>In-IDE Toolkit for Developers of AI-Based Features</h1>
+<div class="muted">others ・ 関連度 0.68 ・ Published at IDE&#x27;26 co-located with ICSE&#x27;26 ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Yaroslav Sokolov; Yury Khudyakov; Lenar Sharipov; Andrei Gasparian; Parth Tiwary; (+1)</div>
+<div><span class="score">優先度 37</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.68 +27</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.14612v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>LLMやエージェント機能の開発・テストをIDEのデバッグループに統合する「AI Toolkit」プラグインを提案。実行時トレースの自動取得、階層的可視化、ワンクリックでデータセットへ追加する機能、およびユニットテスト風評価モジュールを実装。PyCharmでの初期 telemetry から、開発者の学習コスト低減と disciplined な開発習慣の定着に有効であることを示した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: LLM/エージェント機能の開発・テストをIDEネイティブなワークフローに統合し、実行時トレースと評価をシームレスに行う手法を提案</p><p>技術的貢献: 実行トリガーによる自動トレース取得、階層的可視化、ワンクリックでデータセットへ追加する機能、プラグイン可能なメトリクスを用いたユニットテスト風評価モジュールを実装</p><p>実験結果: PyCharmでの初期 telemetry から、Run画面でのプロモーション時に高い転換率を記録し、トレース取得ユーザーの継続利用率高く定着していることを示した</p><p>実用性/限界: 非ML専門家の開発者でもAI機能の開発・評価が可能になるが、現時点ではJetBrains IDE限定かつフレームワーク対応範囲が限定的であり、大規模なベンチマーク検証は今後の課題</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

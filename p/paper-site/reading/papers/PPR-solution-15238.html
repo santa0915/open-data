@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meta-Agent: From Task Descriptions to Verified Multi-Agent Systems</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15238" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Meta-Agent: From Task Descriptions to Verified Multi-Agent Systems</h1>
+<div class="muted">must-read ・ 関連度 0.90 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 PDF Fetched</div>
+<div class="muted">著者: Andy Xu; Yu-Wing Tai</div>
+<div><span class="score">優先度 51</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.90 +36</span><span class="chip">新しい +10</span><span class="chip">処理状況 PDF Fetched +5</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.25233v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>自然言語のタスク記述から、検証可能なマルチエージェントシステムを自動構築する「Meta-Agent」フレームワークを提案。構成フェーズでDAG形式のエージェント仕様とI/O契約を生成し外部検索で grounding し、実行フェーズで中間出力を検証ゲートで制御する。3段階のエラー帰属メカニズムにより局所・上流・構造的失敗を区別し、対象的な回復戦略を実装。コーディングや推論タスクでベースラインに対し成功率とワークフローの安定性を一貫して向上させた。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: タスク記述からDAG構造のエージェントワークフローを自動生成し、構成時と実行時の両方で検証メカニズムを組み込んだパイプライン</p><p>技術的貢献: I/O契約に基づく仕様生成、外部検索による grounding、3段階エラー帰属（局所/上流/構造的）による階層的回復戦略</p><p>実験結果: コーディング・文脈学習・オープンエンド推論タスクでマルチエージェントベースラインに対し成功率とワークフロー安定性を一貫して向上</p><p>実用性: プロンプト生成とツール設定を自動出力するため、既存エージェントフレームワークへの組み込みが容易だが、外部検索依存や大規模DAG生成時の計算コストは課題</p><p>限界・課題: 著者は明示的に言及していないが、複雑な構造化失敗時の再分解精度や、grounding データの鮮度・信頼性への依存度が実運用でのボトルネックとなる可能性</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

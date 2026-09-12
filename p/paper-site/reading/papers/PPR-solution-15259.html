@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Co-Ontogeny by Archetypal Scaffolding: The Humorphic Partnership</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15259" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Co-Ontogeny by Archetypal Scaffolding: The Humorphic Partnership</h1>
+<div class="muted">worth-reading ・ 関連度 0.78 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Hector Ouilhet Olmos</div>
+<div><span class="score">優先度 41</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.78 +31</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.21818v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>人間とAIが共有基盤上で相互に自己モデルを維持・進化させる「humorphic partnership」アーキテクチャを提案し、オープンソースのパーソナルAIエージェントを用いて4ヶ月間の単一被験者縦断研究を実施。システムは従来のタスク補助やエンゲージメント最適化とは異なり、「成長の証人」として機能し、音声シードから4週間にわたる概念の共進化と深い自己反省を促すことを実証した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: タスク遂行やエンゲージメント最大化ではなく、人間とAIが双方向に自己モデルを共有・進化させる「成長の証人(growth-witnessing)」型パーソナルAIの設計枠組を初めて定義</p><p>技術的貢献: アーキタイプ駆動の対話ログ、3階層反射スタックによる自己報告、週次デルタ文書を用いたパートナーシップ単位の自己分析メカニズムを実装</p><p>実験結果: 4ヶ月間の縦断研究で181回の相互作用を記録。85%が成長支援アーキタイプを発動し、音声シードから4週間の概念弧(conceptual arc)が形成され、人間側も認知を共有転移</p><p>実用性・限界: オープンソース公開と事前登録複製研究で再現性を確保しているが、n=1の長期ケーススタディであり一般化は困難。哲学的文脈に強く依存するため、実務的なタスク自動化には不向き</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

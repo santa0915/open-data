@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgentTrust: Runtime Safety Evaluation and Interception for AI Agent Tool Use</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15394" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>AgentTrust: Runtime Safety Evaluation and Interception for AI Agent Tool Use</h1>
+<div class="muted">must-read ・ 関連度 0.90 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 PDF Fetched</div>
+<div class="muted">著者: Chenglin Yang</div>
+<div><span class="score">優先度 51</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.90 +36</span><span class="chip">新しい +10</span><span class="chip">処理状況 PDF Fetched +5</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.04785v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>AIエージェントのツール呼び出し実行前に安全を評価・介入するランタイム防御層「AgentTrust」を提案。 シェルコマンドの難読化解除、複数ステップの攻撃連鎖検出（RiskChain）、LLM-as-Judgeによる判断を統合し、 実行前の verdict（許可/警告/ブロック/要確認）を返す。300シナリオ＋630実世界敵対シナリオからなるベンチマークで 高い判定精度と低レイテンシを実現し、MCP対応エージェントへ組み込み可能なサーバーとして公開している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: ツール呼び出し実行前のランタイム介入と、難読化解除・複数ステップ連鎖検出を統合した安全評価フレームワークは既存のポストハックベンチや静的ガードレールを補完する。</p><p>技術的貢献: シェルコマンドの正規化、SafeFixによる代替提案、RiskChainによる文脈依存攻撃検出、キャッシュ対応LLM-as-Judgeを組み合わせた高速判定パイプラインを実現。</p><p>実験結果: 内部ベンチマークで判定精度95.0%、リスクレベル精度73.7%を低ミリ秒レイテンシで達成。630シナリオの敵対テストでも約93%の難読化回避性能を確認。</p><p>実用性: MCPサーバーとして公開されAGPL-3.0ライセンスで提供されるため、既存エージェント基盤への組み込みが容易。ただしベンチマーク評価はパッチ済みルールセットでの結果でありゼロショット性能ではない。</p><p>限界・課題: 著者らは「パッチ適用後のルールセットで評価」「ゼロショット性能を主張していない」ことを明記しており、未調整状態での一般化能力や複雑なマルチモーダルツールへの拡張性は今後の検証課題となる。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Envisioning Sensemaking in Multi-Human, Multi-Agent Collaborative Knowledge Work</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15465" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Envisioning Sensemaking in Multi-Human, Multi-Agent Collaborative Knowledge Work</h1>
+<div class="muted">worth-reading ・ 関連度 0.80 ・ This is the Author&#x27;s Accepted Manuscript version of the article: Guan ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Zhitong Guan; Soo Young Rieh</div>
+<div><span class="score">優先度 42</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.80 +32</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.09840v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>生成AIが協働知識作業の意味形成（sensemaking）プロセスに与える影響を分析し、人間と複数のAIエージェントが協調する環境向けの設計指針を提示する。既存の単独解釈型GenAIの課題に対し、5つの設計原則（動的多層情報表現、理解ギャップの積極的架橋、批判的関与、検証可能性、説明責任）を提唱する。パートナー・共有空間・オーケストレーターという3種の役割分担型エージェントから構成される概念フレームワークにより、貢献の系譜追跡と解釈の進化可視化を実現する設計を示している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>既存GenAIが単独で解釈処理を完結させがちな課題に対し、マルチヒューマン・マルチエージェント協調環境での意味形成プロセスに焦点を当てた。</p><p>動的多層情報表現、理解ギャップの積極的特定・架橋、批判的関与、検証可能性、説明責任の5つの設計原則を提唱。</p><p>3種の役割分担型エージェントを用いた共有ワークスペース概念フレームワークを提示し、貢献の系譜と解釈の進化を追跡可能にする設計を示した。</p><p>実装コードや定量評価は含まれておらず、理論的・概念的な提言に留まるため、実際のシステム構築には追加の実証研究が必要。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

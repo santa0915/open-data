@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Operationalizing Ethics for AI Agents: How Developers Encode Values into Repository Context Files</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15388" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Operationalizing Ethics for AI Agents: How Developers Encode Values into Repository Context Files</h1>
+<div class="muted">worth-reading ・ 関連度 0.80 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Christoph Treude; Sebastian Baltes; Marc Cheong</div>
+<div><span class="score">優先度 42</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.80 +32</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.05584v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>AIコーディングエージェントのワークフローにおいて、開発者がリポジトリレベルのコンテキストファイル（例：AGENTS.md）に倫理原則や価値観を自然言語で埋め込む実践を調査。先行観察により公平性・プライバシー・アクセシビリティなどのカテゴリが抽出され、これらが「開発者主導のガバナンス層」としてエージェント行動を誘導することを示す。抽象的なAI倫理を具体的な開発インフラに統合する研究課題と実証的アプローチを提言している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: AIエージェントの行動制約を抽象的な倫理指針から、リポジトリ内の設定ファイル（コンテキスト）へ具体化する実践に着目し、実装レベルでのガバナンス枠組みを提示</p><p>技術的貢献: 開発者が埋め込む価値カテゴリを体系化し、自然言語指示がエージェントの行動をどう誘導するかを定義。既存のプロンプトエンジニアリングやRLHFとは異なり、リポジトリ管理フローに倫理を統合する視点を提供</p><p>調査結果: 実際の開発ワークフローでの利用実態を先行調査で可視化。定量的なベンチマークや新アルゴリズムではなく、実践観察と研究課題の整理が中心</p><p>実用性・課題: 複数貢献者間でのファイル調整プロセスやエージェントの指示遵守率検証など、今後の実装ガイドライン・評価基準策定に向けた基盤となる。実用的なテンプレートや自動検証ツールの開発が次のステップとして期待される</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

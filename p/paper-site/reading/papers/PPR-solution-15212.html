@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verifiable Benchmarking of Long-Horizon Spatial Biology</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15212" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Verifiable Benchmarking of Long-Horizon Spatial Biology</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Ian Diks; Harihara Muralidharan; Tim Proctor; Kenny Workman</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.28065v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>SpatialBench-Longは、生体空間データから未規定の手法を用いて科学的帰結を導出するAIエージェントの長期ホライゾン推論能力を評価するためのベンチマークです。CosMxやVisiumなどの多様な空間オミクス・組織画像データ24タスクを対象に、制御語彙と進捗ラブリックによる決定論的採点を実施しています。主要モデル（Gemini 3.5 Flash/GPT-5.5）とコーディングハーネスの組み合わせでも正解率は11.1%にとどまり、エージェントの科学的推論における課題を定量的に浮き彫りにしました。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 既存の知識・ワークフロー評価から脱し、生体空間データからのエンドツーエンドな科学的推論を測定する初の長期ホライゾンベンチマーク</p><p>技術的貢献: 24の多様な空間オミクス・組織画像タスクと、再現性・独立審査を経た「強化された候補帰結」、制御語彙に基づく決定論的採点システムを提供</p><p>実験結果: Gemini 3.5 Flash/GPT-5.5＋Pi/Codexハーネスが8/72ランで最高得点（11.1%）に留まり、長期推論の限界を定量的に示した</p><p>実用性・課題: 特定の腫瘍モデルや老化系に特化しており一般化は限定的だが、エージェント評価における「進捗ラブリック」設計は他分野への転用が期待できる</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>An Agentic Evaluation Architecture for Historical Bias Detection in Educational Textbooks</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15547" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>An Agentic Evaluation Architecture for Historical Bias Detection in Educational Textbooks</h1>
+<div class="muted">worth-reading ・ 関連度 0.80 ・ Accepted for ITS(Intelligent Tutoring Systems) 2026 Full Paper ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Gabriel Stefan; Adrian-Marius Dumitran</div>
+<div><span class="score">優先度 42</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.80 +32</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2604.07883v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>歴史教科書の暗黙的バイアス検出を目的としたマルチエージェント評価アーキテクチャを提案。多モーダルスクリーニング、5つの異種評価エージェントによる審議、メタエージェントによる判定統合に加え、「ソース帰属プロトコル」で著者の記述と引用文献を分離し誤検知を抑制。ルーマニアの高校歴史教科書270例で実証し、ゼロショットベースラインより重大度スコアを大幅に低減（5.4→2.9/7）、人間評価でも64.8%の支持を得た。1教科書約2ドルのコストで教育ガバナンスの意思決定支援ツールとして実用性を示した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>「ソース帰属プロトコル」により教科書の記述と引用史料を分離し、単一モデルの過剰なバイアス検出（偽陽性）を根本的に抑制</p><p>異種評価エージェント5体による審議とメタエージェントの統合機構が、専門ドメインにおける判断精度と人間同意率を向上</p><p>ルーマニア高校歴史教科書270件で実証し、重大度スコアをベースライン比約47%低減（5.4→2.9/7）、盲検人間評価で64.8%の支持を獲得</p><p>1教科書あたり約2ドルのコストで運用可能とし、教育行政・教材監査における経済的実用性を定量的に提示</p><p>対象が特定国の歴史教科書に限定されており、他言語・他分野への一般化やエージェント構成の最適化は今後の課題</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

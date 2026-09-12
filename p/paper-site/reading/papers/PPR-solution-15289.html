@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reliability and Effectiveness of Autonomous AI Agents in Supply Chain Management</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15289" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Reliability and Effectiveness of Autonomous AI Agents in Supply Chain Management</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Carol Xuan Long; David Simchi-Levi; Feng Zhu; Huangyuan Su; Andre P. Calmon; (+1)</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.17036v3">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>MITのビールゲームを用いたマルチエシェル供給チェーン環境において、自律型生成AIエージェントの推論時制御変数（モデル選択、ポリシー/ガードレール、データ共有、プロンプト設計）が性能に与える影響を実証。モデル能力が性能を支配する一方、ランダムな推論による意思決定不安定性が連鎖増幅する「エージェント・ブルワップ現象」を発見。この課題に対し、システム全体報酬を用いたGRPOベースの強化学習後学習フレームワークを提案し、テールイベントの抑制と信頼性向上に成功した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: マルチエージェント環境における推論時ランダム性の連鎖増幅現象「エージェント・ブルワップ」を初めて定式化・実証。</p><p>技術的貢献: 推論時の4つの制御変数を体系的に分析し、システムレベル報酬を用いたGRPO（Group Relative Policy Optimization）ベースの強化学習後学習手法を提案。</p><p>実験結果: 標準推論モデルが人間性能を上回る一方、最適化でコスト最大67%削減。提案手法はテールイベントを大幅に抑制し、意思決定の安定性を向上。</p><p>実用性: 既存LLMへのGRPO後学習適用で信頼性向上が可能だが、リアルタイムフィードバックや複雑な実環境への拡張には追加検証が必要。</p><p>限界・課題: 「繰り返しサンプリング」では不安定性が解消されないことを示したが、外部環境変化や非定常性への頑健性については未検証の可能性がある。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

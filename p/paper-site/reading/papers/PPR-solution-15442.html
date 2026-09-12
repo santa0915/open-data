@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgenticCache: Cache-Driven Asynchronous Planning for Embodied AI Agents</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15442" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>AgenticCache: Cache-Driven Asynchronous Planning for Embodied AI Agents</h1>
+<div class="muted">must-read ・ 関連度 0.90 ・ Accepted at MLSys 2026 ・ 追跡 — ・ 再現性 — ・ 処理状況 PDF Fetched</div>
+<div class="muted">著者: Hojoon Kim; Yuheng Wu; Thierry Tambe</div>
+<div><span class="score">優先度 51</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.90 +36</span><span class="chip">新しい +10</span><span class="chip">処理状況 PDF Fetched +5</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2604.24039v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>具現化AIエージェントの計画生成におけるLLM呼び出しの遅延・コスト課題に対し、計画遷移の局所性（plan locality）に着目したキャッシュ駆動型フレームワーク「AgenticCache」を提案。エージェントは頻出計画のランタイムキャッシュを参照して即時推論を行い、バックグラウンドで非同期にLLMがキャッシュを検証・更新する双方向アーキテクチャを採用。4つのマルチエージェント具現化ベンチマークで成功率22%向上、遅延65%削減、トークン使用量50%削減を実現し、低コストな具現化エージェントの実装パスを示した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 具現化エージェントの計画生成において「計画の局所性」を定量的に観測し、キャッシュ駆動型推論フレームワークを初めて提案。</p><p>技術的貢献: エージェントは頻出計画遷移のランタイムキャッシュを参照して即時行動決定を行い、バックグラウンドスレッドでLLMが非同期にキャッシュを検証・更新する双方向アーキテクチャを採用。</p><p>実験結果: 4つのマルチエージェント具現化ベンチマーク（12構成）でタスク成功率平均22%向上、シミュレーション遅延65%削減、トークン使用量50%削減を達成。</p><p>実用性: キャッシュの参照・更新ロジックが明確で既存エージェントフレームワークへの組み込みが容易。ただし、キャッシュヒット率が高い環境（計画の局所性が強いタスク）に限定される。</p><p>限界・課題: 初期探索フェーズや分布外（OOD）の状況ではキャッシュが機能せずLLM依存から完全に脱却できない点や、非同期更新時の競合制御が実環境で課題となる可能性がある。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

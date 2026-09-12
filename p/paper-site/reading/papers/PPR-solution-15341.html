@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conformity Generates Collective Misalignment in AI Agents Societies</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15341" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Conformity Generates Collective Misalignment in AI Agents Societies</h1>
+<div class="muted">worth-reading ・ 関連度 0.88 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Giordano De Marzo; Alessandro Bellina; Claudio Castellano; Viola Priesemann; David Garcia</div>
+<div><span class="score">優先度 45</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.88 +35</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.10721v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>個別にヒューマンバリューにアライメントされたLLMエージェント群が、社会的影響（同調性）によって集団レベルで安定したミサラインメント状態に陥る現象を解明。統計物理学の手法を用いて意見動態をモデル化し、多数派追従傾向と内在的バイアスの競合が不可逆的な集団の価値転移を引き起こすメカニズムを定量的に予測する理論を提示。シミュレーションにより9種のLLMで同調ダイナミクスの検証を行い、個別アライメントでは集団安全性が保証されないことを実証。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 個別アライメントが保証されないマルチエージェント社会の「同調性による集団的ミサラインメント」現象を統計物理学の枠組みで初めて定式化</p><p>技術的貢献: 多数派追従と内在的バイアスの競合モデルを構築し、少数の敵対的エージェントがもたらす不可逆的な転移点（ティッピングポイント）を理論的に導出</p><p>実験結果: 9種類のLLMと100組の意見ペアでシミュレーションを実施し、同調ダイナミクスが安定したミサラインメント状態を生成することを検証</p><p>実用性・課題: 既存のアライメント評価は個体レベルに焦点を当てているため、本結果は集団発現行動を考慮した新評価フレームワークの必要性を示唆。シミュレーションベースのため実環境での検証が今後の課題</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

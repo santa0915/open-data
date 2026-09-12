@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heartbeat-Bound Hierarchical Credentials: Cryptographic Revocation for AI Agent Swarms</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15263" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Heartbeat-Bound Hierarchical Credentials: Cryptographic Revocation for AI Agent Swarms</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Saurabh Deochake</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.20704v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>AIエージェント群（スウォーム）における「ゾンビエージェント」問題に対処するため、親ノードのハートビートに資格証明の有効期限を紐づける暗号プロトコルHBHCを提案。 中央認証局へのネットワーク接続を不要とし、キャッシュされた公開鍵とローカル時計のみで検証可能にする。 実環境（GPT-4o-mini搭載エージェント）での評価により、ゾンビ実行ウィンドウを90倍短縮し、0.71%の低オーバーヘッドでプロンプトインジェクション耐性のある階層的失効を実現した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>既存のOAuth/OCSPがネットワーク依存である課題に対し、ハートビートに資格証明を紐づけるオフライン検証型階層認証プロトコルを新規提案</p><p>親ノードの生証（liveness proof）停止時に、理論的に限定された時間枠内で子孫資格証明を連鎖失効させる暗号設計を採用</p><p>実エージェントスウォーム評価で90倍のゾンビウィンドウ短縮、0.26msの認証遅延、18,000+回/秒の検証処理を実現</p><p>アプリケーション層ガードレールを回避するプロンプトインジェクション攻撃後も、ゼロの不正ツール呼び出しを検証し実用性を示した</p><p>制約として時計のずれの限定（bounded clock skew）や親キーのセキュアエンクレーブ依存があり、実装環境に前提条件を課す</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

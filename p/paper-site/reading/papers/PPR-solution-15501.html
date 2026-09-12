@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SeekerGym: A Benchmark for Reliable Information Seeking</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15501" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>SeekerGym: A Benchmark for Reliable Information Seeking</h1>
+<div class="muted">worth-reading ・ 関連度 0.88 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Remy Kim; Minseung Lee; Shuo Li; Osbert Bastani</div>
+<div><span class="score">優先度 45</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.88 +35</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2604.17143v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>深層検索エージェントの情報取得「完全性」と「不確実性の定量化」を評価するためのベンチマークSeekerGymを提案。包括的な文書（Wikipedia記事やMLサーベイ論文）を対象にエージェントがクエリを発行し、どれだけ関連セクションを取得できるかを測定する。既存モデルの最高性能でもWikipediaで42.5%、MLサーベイで29.2%の取得率にとどまり、信頼性のある情報検索には大きな課題が残されていることを示した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: エージェントの情報検索における「欠落バイアス」を是正するため、取得の完全性と不確実性推定を同時に評価する初のベンチマーク。</p><p>技術的貢献: 文書全体がトピックを網羅している前提で、エージェントのクエリ戦略と結果のマッピングによる完全性スコアと不確実性キャリブレーション指標を定義。</p><p>実験結果: 最先端モデルでもWikipedia記事の42.5%、MLサーベイ論文の29.2%しか取得できず、現在のエージェント検索には大幅な改善余地があることを定量的に示した。</p><p>実用性・課題: 静的な大規模文書への適用が中心であり、動的なWeb検索やマルチモーダル対応への拡張が今後の課題として挙げられている。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

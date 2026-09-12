@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Security Risks in Tool-Enabled AI Agents: A Systematic Analysis of Privileged Execution Environments</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15354" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Security Risks in Tool-Enabled AI Agents: A Systematic Analysis of Privileged Execution Environments</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ Extended author preprint. A shortened version has been accepted as a short paper at IEEE COMPSAC 2026. 7 pages ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Hardik Goel</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.09721v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>ツール連携型AIエージェントのクラウド環境における特権実行環境のセキュリティリスクを体系的に分析した研究。既存の脆弱性ではなく「過剰な権限付与」「能力と意図の不一致」「環境内の暗黙的権限漏洩」が主要因であることを特定し、3つの典型シナリオと小規模実験で実証。エージェントの安全なクラウド展開に向けた設計指針と軽減策のトレードオフを提示している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: エージェント固有のセキュリティリスクを「過剰権限」「能力-意図ミスマッチ」「暗黙的権限漏洩」の3カテゴリで分類する新たなリスク-taxonomyを提案</p><p>技術的貢献: クラウド上の特権実行環境におけるエージェント動作の危険性を、3つの典型シナリオと制御実験で実証的に可視化</p><p>実験結果: 軽量な軽減策がリスク低減に有効だが、機能制約とのトレードオフがあることを定量的に示唆</p><p>実用性: 開発者がエージェントのクラウドデプロイ時に即座に適用可能な設計指針とアーキテクチャ上のベストプラクティスを提供</p><p>限界・課題: 対象が「小規模な制御環境」に限定されており、大規模分散システムや複雑なツールチェーンへの拡張性は今後の検証課題</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GeoNatureAgent Benchmark: Benchmarking LLM Agents for Environmental Geospatial Analysis Across Frontier and Open-Weight Foundation Models</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15096" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>GeoNatureAgent Benchmark: Benchmarking LLM Agents for Environmental Geospatial Analysis Across Frontier and Open-Weight Foundation Models</h1>
+<div class="muted">worth-reading ・ 関連度 0.85 ・ The 34th ACM International Conference on Advances in Geographic Information Systems (SIGSPATIAL &#x27;26) ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Gabriel Diaz-Ireland; Diego Prieto-Herráez; Mario García Peces; Javier Velázquez; Devika Jain</div>
+<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.12821v2">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>環境・地理空間データの分析ワークフローを自動化するLLMエージェントの評価ベンチマーク「GeoNatureAgent Benchmark」を提案。本番レベルの地理空間APIへの構造化ツール呼び出しを用い、93タスクで9つの最先端・オープンウェイトモデルを評価した結果、Claude Sonnet 4が最高性能（60.8%）を示したが、DeepSeek V3.2は同等性能の約11.6倍低コストで実用性を示した。リアルAPIを用いた評価は一般GISベンチマークより厳格であり、エージェントの実世界適用能力を正確に測る指標となり得ると結論づけている。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 環境・地理空間分析に特化し、本番レベルのAPIへの構造化ツール呼び出しを評価軸とした初のエージェントベンチマーク。</p><p>技術的貢献: 18カテゴリ93タスクからなる評価プロトコルと、自己ホスト可能な地理空間API基盤を提供し、エージェントの計画・ツール利用能力を定量化。</p><p>実験結果: Claude Sonnet 4が60.8%で首位、DeepSeek V3.2は性能比93%でコスト比1/11.6とコストパフォーマンスに優れることを示した。</p><p>実用性: オープンソースモデルの活用による低コスト運用の可能性を示唆し、実装・デプロイ時のモデル選定指針として有用。</p><p>限界・課題: 評価対象がスペイン・ポルトガルの環境指標に限定されており地理的横断性に注意が必要。リアルAPI依存のためネットワーク遅延やレート制限が実運用のボトルネックになり得る。</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

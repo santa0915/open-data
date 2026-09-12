@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oracle Poisoning: Corrupting Knowledge Graphs to Weaponise AI Agent Reasoning</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15351" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Oracle Poisoning: Corrupting Knowledge Graphs to Weaponise AI Agent Reasoning</h1>
+<div class="muted">worth-reading ・ 関連度 0.88 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Ben Kereopa-Yorke; Guillermo Diaz; Holly Wright; Reagan Johnston; Ron F. Del Rosario; (+1)</div>
+<div><span class="score">優先度 45</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.88 +35</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2605.09822v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>AIエージェントがツール経由で参照する動的な知識グラフ（KG）を改ざんし、推論プロセス自体は正しく保ったまま誤った結論を引き起こす「Oracle Poisoning」攻撃手法を定義・実証。 4200万ノードの生産環境用コードKGと9モデルを用いた実際のSDKツール呼び出し評価により、中程度の攻撃者スキルで指示付きクエリ時に偽造情報を100%信頼させることを示した。 プロンプト構成や評価モードが結果を大きく歪める重大な交絡因子であることを明らかにし、読み取り専用アクセス制御以外の防御は限定的であることを報告している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>既存のプロンプトインジェクションとは異なり、エージェントが推論する「データ（知識グラフ）」そのものを改ざんする新規攻撃クラスを定義</p><p>本番環境規模のKGと実際のツール呼び出しを用いた評価で、中程度スキル(L2)で指示付きクエリ時に269/270件の偽造情報を100%信頼させることを実証</p><p>プロンプト構成や「インライン評価 vs 実際のエージェント実行」が結果を大きく歪める重大な交絡因子であることを明らかにし、攻撃の閾値（breakpoints）を定量化</p><p>読み取り専用アクセス制御は有効だが、他の防御策はモデル依存で部分的であり、実装・運用上の制約が残る</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

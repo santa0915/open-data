@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aether: Network Validation Using Agentic AI and Digital Twin</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15495" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Aether: Network Validation Using Agentic AI and Digital Twin</h1>
+<div class="muted">worth-reading ・ 関連度 0.80 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Jordan Auge [Cisco Systems]; Sam Betts [Cisco Systems]; Giovanna Carofiglio [Cisco Systems]; Giulio Grassi [Cisco Systems]; Martin Gysi [Swisscom]; (+1)</div>
+<div><span class="score">優先度 42</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.80 +32</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2604.18233v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>ネットワーク変更検証の自動化手法「Aether」を提案。生成系マルチエージェントAIとネットワークデジタルツイン（モデル化・シミュレーション・エミュレーション統合）を連携させ、意図分析から検証・テストまでのライフサイクルを5つの専門エージェントで協調処理する。合成シナリオおよび実ISP障害データを用いた評価では、エラー検出率100%、診断カバレッジ92-96%、検証時間6〜7分を実現し、従来の手動/分散ツール方式の課題を解決することを示した。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 生成系AIエージェントとネットワークデジタルツインを連携させ、ネットワーク変更検証の自動化を実現した初の試み</p><p>技術的貢献: 意図分析から検証・テストまでをカバーする5つの専門エージェントをデジタルツイン上で協調動作させるオーケストレーションアーキテクチャを提案</p><p>実験結果: 合成シナリオと実ISP障害データで評価し、エラー検出率100%、診断カバレッジ92-96%、検証時間6〜7分という従来の手法を大幅に上回る性能を示した</p><p>実用性・限界: ネットワーク運用領域に特化した実装であり、デジタルツインの正確性・最新性に依存する。評価が特定の変更クラスと過去事例に限定されているため、汎用性の検証は今後の課題</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

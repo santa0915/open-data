@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vibe Medicine: Redefining Biomedical Research Through Human-AI Co-Work</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15451" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Vibe Medicine: Redefining Biomedical Research Through Human-AI Co-Work</h1>
+<div class="muted">worth-reading ・ 関連度 0.82 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Zihao Wu; Steven Xu; Bowen Chen; Shaowen Wan; Yiwei Li; (+6)</div>
+<div><span class="score">優先度 43</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.82 +33</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2604.23674v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>「Vibe Coding」の概念をバイオメディカル研究に拡張した「Vibe Medicine」パラダイムを提案。臨床医や研究者が自然言語でスキル拡張型AIエージェントを指揮し、複雑な多段階分析パイプラインを実行するヒューマン-AI共同作業フレームワークを示す。OpenClawやHermes Agentなどのエージェント基盤と、10分野にわたる1,000以上の医療スキルコレクションを統合した3層アーキテクチャを構築し、希少疾患診断や創薬リポジショニングなどのケーススタディでエンドツーエンドのワークフローを検証している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>新規性: 「Vibe Coding」の発想をバイオメディカル領域に転用し、専門職がAIエージェントを「研究ディレクター」として指揮するヒューマン-AI共同作業パラダイムを定義</p><p>技術的貢献: LLM・エージェントフレームワーク（OpenClaw/Hermes Agent）・1,000以上の医療スキルコレクションからなる3層インフラストラクチャと、10分野にわたるスキルの分類体系を提示</p><p>実験結果: 希少疾患診断、創薬リポジショニング、臨床試験設計のケーススタディを通じて、自然言語駆動型エージェントによる複雑な研究パイプラインの実行可能性を実証</p><p>実用性・課題: 医療領域特有のハルシネーション、データプライバシー、過依存リスクを明確に指摘し、信頼性と臨床統合に向けた今後の課題を整理</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>

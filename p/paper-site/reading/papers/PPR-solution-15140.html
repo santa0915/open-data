@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comparing Sentiment Contagion in AI-Agent and Human Social Networks: Evidence from MOLTBOOK</title>
+<link rel="stylesheet" href="../assets/site.e96eced7.css">
+</head>
+<body data-paper="PPR-solution-15140" data-state="unread">
+<nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
+<main>
+<h1>Comparing Sentiment Contagion in AI-Agent and Human Social Networks: Evidence from MOLTBOOK</h1>
+<div class="muted">worth-reading ・ 関連度 0.78 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Abstract Reviewed</div>
+<div class="muted">著者: Elyes Ben chaabane; Savindu Herath; Yash Raj Shrestha</div>
+<div><span class="score">優先度 41</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.78 +31</span><span class="chip">新しい +10</span></div>
+<div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
+<p><a href="http://arxiv.org/abs/2606.06665v1">原文を開く</a></p>
+<h2>要点</h2>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<h2>要約</h2>
+<div class='card'><p>自律型LLMエージェントのみで構成されたソーシャルネットワーク「MOLTBOOK」において、感情の伝播動態を実証分析した研究。約290万投稿と150万コメントを解析し、負の投稿は注目を集めるものの返信はむしろ中立化し、ネガティブ感情の日を跨いだ拡散は限定的であることを示した。エージェントネットワークは相互作用設計次第で感情的極端さを抑制する可能性があり、人間のSNSとは異なる挙動を示すことを実証している。</p></div>
+<h2>キーポイント</h2>
+<div class='card'><p>自律型LLMエージェントのみで構成された大規模ソーシャルネットワークにおける感情伝播を初めて実証分析した新規性</p><p>負の投稿は注目を集めるが返信は「中立化」に働き、ネガティブ感情の日を跨いだ拡散エビデンスは限定的であることを定量的に示した</p><p>エージェント間の相互作用設計が感情的極端さを抑制する方向に働く可能性を示唆し、マルチエージェントシステムの安定性設計への示唆を与える</p><p>実証規模は大きいものの感情分析手法やエージェント構成の詳細が明記されていないため、再現性・一般化には留意が必要</p></div>
+<details id="deep"><summary>手法と報告実験を開く</summary>
+<h2>手法</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+<h2>報告実験</h2>
+<p class='muted'>台帳用の申告がありません。</p>
+</details>
+
+<p><a href='../index.html'>一覧に戻る</a></p>
+</main>
+<script>
+const KEY = 'paper_site:read:';
+const RANK = {unread: 0, summary: 1, full: 2, shelved: -1};
+const id = document.body.dataset.paper;
+function stored() { try { return localStorage.getItem(KEY + id); } catch (e) { return null; } }
+function current() {
+  const baked = document.body.dataset.state || 'unread';
+  const local = stored();
+  if (!local) return baked;
+  if (local === 'shelved' || baked === 'shelved') return 'shelved';
+  return RANK[local] >= RANK[baked] ? local : baked;
+}
+function save(state) {
+  try { localStorage.setItem(KEY + id, state); } catch (e) { /* 保存できなくても読める */ }
+  show();
+}
+function advance(state) {
+  const now = current();
+  if (now === 'shelved' || RANK[now] >= RANK[state]) return;
+  save(state);
+}
+function show() {
+  const state = current();
+  document.getElementById('state-label').textContent =
+    {unread: '未読', summary: 'サマリ済', full: '通読済', shelved: '棚上げ'}[state];
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.classList.toggle('on', button.dataset.value === state);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  show();
+  advance('summary');
+  const deep = document.getElementById('deep');
+  if (deep) deep.addEventListener('toggle', () => { if (deep.open) advance('full'); });
+  for (const button of document.querySelectorAll('.state-button')) {
+    button.addEventListener('click', () => save(button.dataset.value));
+  }
+});
+</script>
+</body>
+</html>
