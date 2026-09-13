@@ -1,0 +1,316 @@
+/* 投資プラットフォーム 公開サイト — 生成物。手で編集しない。
+   配色は commons のハウスパレット（dataviz 検証済み）。 */
+
+:root {
+    color-scheme: light;
+    --page: #f9f9f7;
+    --surface-1: #fcfcfb;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --gridline: #e1e0d9;
+    --baseline: #c3c2b7;
+    --accent: #2a78d6;
+    --good: #0ca30c;
+    --warning: #c77700;
+    --serious: #cc3311;
+    --series-1: #2a78d6;
+    --series-2: #eb6834;
+    --series-3: #1baf7a;
+    --series-4: #eda100;
+    --series-5: #e87ba4;
+    --border: rgba(11,11,11,0.10);
+    --wash: rgba(11,11,11,0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface-1: #1a1a19;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --gridline: #2c2c2a;
+    --baseline: #383835;
+    --accent: #3987e5;
+    --good: #3ec93e;
+    --warning: #e0a020;
+    --serious: #ef5a4a;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --series-5: #d55181;
+    --border: rgba(255,255,255,0.10);
+    --wash: rgba(255,255,255,0.06);
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--text-primary);
+  font-family: system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-block: 24px;
+  padding-inline: 16px;
+}
+
+a { color: var(--accent); }
+
+/* タップ対象は 44px 以上（契約 M4） */
+a.nav, .card a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: none;
+}
+a.nav:hover, .card a:hover { text-decoration: underline; }
+
+h1 { font-size: 22px; margin: 0 0 4px; letter-spacing: .01em; }
+h2 { font-size: 17px; margin: 0 0 2px; }
+h3 { font-size: 14px; margin: 0 0 8px; color: var(--text-secondary); font-weight: 600; }
+
+.sub { color: var(--text-secondary); font-size: 13px; margin: 0; }
+.muted { color: var(--text-muted); font-size: 12px; }
+
+header.page {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+}
+
+section { margin-bottom: 32px; }
+section > header { margin-bottom: 12px; }
+
+.card {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+/* ── KPI 行（stat tile）──────────────────────────── */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+@media (max-width: 640px) {
+  .kpis { grid-template-columns: repeat(2, 1fr); }
+}
+.kpi {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.kpi .label { font-size: 12px; color: var(--text-secondary); }
+.kpi .value { font-size: 26px; font-weight: 650; letter-spacing: -.01em; line-height: 1.25; }
+.kpi .unit { font-size: 13px; font-weight: 400; color: var(--text-secondary); margin-left: 2px; }
+.kpi .note { font-size: 12px; color: var(--text-muted); }
+
+/* ── 鮮度メーター / ファネル（HTML + CSS。SVG にしない）──── */
+.bars { display: grid; gap: 10px; }
+.bar-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 200px;
+  align-items: center;
+  gap: 12px;
+}
+@media (max-width: 640px) {
+  .bar-row { grid-template-columns: 1fr; gap: 2px; }
+  .bar-row .bar-meta { text-align: left; }
+}
+.bar-label { font-size: 13px; color: var(--text-primary); }
+.bar-track {
+  position: relative;
+  height: 14px;
+  background: var(--wash);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 4px 0 0 4px;
+  min-width: 4px;
+}
+/* 想定サイクルを持たない行。トラックの存在だけ示し、棒は描かない。 */
+.bar-track.is-void {
+  background: none;
+  border-top: 1px solid var(--gridline);
+  height: 1px;
+}
+.bar-fill.is-full { border-radius: 4px; }
+/* 滞留分。色に加えてテクスチャでも区別する（CVD・印刷対応） */
+.bar-fill.overdue {
+  background-image: repeating-linear-gradient(
+    135deg, transparent 0 3px, rgba(255,255,255,.45) 3px 6px
+  );
+}
+.bar-limit {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  width: 2px;
+  background: var(--baseline);
+}
+.bar-meta { font-size: 12px; color: var(--text-secondary); text-align: right; }
+
+.st-good { background: var(--good); }
+.st-warning { background: var(--warning); }
+.st-serious { background: var(--serious); }
+.st-none { background: var(--baseline); }
+.mark { font-size: 11px; margin-right: 3px; }
+.mark-good { color: var(--good); }
+.mark-warning { color: var(--warning); }
+.mark-serious { color: var(--serious); }
+.mark-none, .mark-na { color: var(--text-muted); }
+
+.funnel .bar-fill { background: var(--accent); }
+.funnel .bar-track { height: 18px; }
+
+/* ── 実施カレンダー（SVG）──────────────────────── */
+.cal svg { width: 100%; height: auto; display: block; }
+.cal .daily { display: block; }
+.cal .weekly { display: none; }
+@media (max-width: 720px) {
+  .cal .daily { display: none; }
+  .cal .weekly { display: block; }
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 10px;
+}
+.legend .swatch {
+  width: 12px; height: 12px; border-radius: 2px; display: inline-block;
+  vertical-align: -2px; margin-right: 2px;
+}
+
+/* ── テーブル代替（全チャートに必須）──────────────── */
+details.table-twin { margin-top: 12px; }
+details.table-twin > summary {
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-secondary);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+.scroll-x { overflow-x: auto; }
+table { border-collapse: collapse; font-size: 13px; width: 100%; }
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--gridline);
+  white-space: nowrap;
+}
+th { color: var(--text-secondary); font-weight: 600; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ── ポータル（build/index.html）────────────────── */
+/* 見出しを左の柱にしてカードを右に流す。1 枚しかない群でも横幅が空かない。 */
+.group {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 16px;
+  padding-block: 14px;
+  border-top: 1px solid var(--gridline);
+}
+.group:first-of-type { border-top: none; }
+.group h2 {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin: 6px 0 0;
+  letter-spacing: .04em;
+}
+.view-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+@media (max-width: 640px) {
+  .group { grid-template-columns: 1fr; gap: 8px; }
+}
+.view-card {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-height: 44px;              /* 契約 M4: タップ対象 */
+  padding: 14px 16px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+.view-card:hover { border-color: var(--accent); }
+/* 記録の無いページは沈める。開いて空だった、を避ける。 */
+.view-card.is-empty { background: none; }
+.view-card.is-empty .card-title { color: var(--text-secondary); }
+.card-title { font-size: 15px; font-weight: 650; }
+.card-question { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+.card-state { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.card-state.is-empty { font-style: italic; }
+
+/* ── トレードプランの価格帯（V7）───────────────── */
+/* 行の中は詰め、行の間は空ける。どの銘柄の価格かを取り違えないため。 */
+.plans { display: grid; gap: 22px; margin-top: 14px; }
+.plan-row { border-top: 1px solid var(--gridline); padding-top: 14px; }
+.plan-row:first-child { border-top: none; padding-top: 0; }
+.plan-row > * + * { margin-top: 2px; }
+.plan-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 13px;
+}
+.plan-symbol { font-weight: 650; }
+.plan-bullet svg { width: 100%; height: auto; display: block; }
+.plan-prices { font-variant-numeric: tabular-nums; }
+
+/* ── バッジ（新顔・消失）────────────────────────── */
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  line-height: 1.5;
+  padding: 0 5px;
+  border-radius: 3px;
+  background: var(--accent);
+  color: var(--surface-1);
+  vertical-align: 1px;
+}
+.badge.gone { background: var(--baseline); color: var(--text-primary); }
+
+.empty {
+  color: var(--text-muted);
+  font-size: 13px;
+  padding: 20px;
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+}
+
+footer.page {
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  margin-top: 40px;
+  font-size: 12px;
+  color: var(--text-muted);
+}

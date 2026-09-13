@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>投資PF 公開データ</title>
+<link rel="stylesheet" href="../assets/site.f6e79a31.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="page">
+  <p><a class="nav" href="../">← ポータルへ戻る</a></p>
+  <h1>公開データ</h1>
+  <p class="sub">サイトの図表のもとになっている集計済みデータ。ライセンス: CC BY 4.0</p>
+</header>
+
+<div class="card" style="margin-bottom:12px">
+  <h3><a href="runs.csv">runs.csv</a></h3>
+  <p class="sub">実施台帳。いつどの分析を実施したか（1 実施 1 行）</p>
+  <p class="muted">0 行・0.1 KiB</p>
+  <p class="muted">列: run_uid / analysis / skill / granularity / executed_at / data_date / origin_kind / region / preset</p>
+</div><div class="card" style="margin-bottom:12px">
+  <h3><a href="screening-streak.csv">screening-streak.csv</a></h3>
+  <p class="sub">銘柄別の常連度。screen（地域 × プリセット）単位の集計（1 銘柄 1 行）</p>
+  <p class="muted">0 行・0.2 KiB</p>
+  <p class="muted">列: appearances=ランクイン回数 / rate=ランクイン率 / current_streak=現在の連続 / score_delta=初回スコアからの変化 / is_new・is_gone=直近の出入り</p>
+</div>
+
+<footer class="page">
+  <p>集計結果のみを公開している。銘柄ごとの明細指標（PER・PBR 等の日次系列）と、
+  金額・保有株数・取得単価は含まれない。</p>
+</footer>
+
+</div>
+</body>
+</html>

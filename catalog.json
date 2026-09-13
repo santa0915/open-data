@@ -1,7 +1,82 @@
 {
   "schema": 1,
-  "generated_at": "2026-09-13T04:11:54Z",
+  "generated_at": "2026-09-13T06:39:49Z",
   "views": [
+    {
+      "id": "investment/site",
+      "project": "investment",
+      "view": "site",
+      "title": "投資プラットフォーム",
+      "summary": "マクロ認識→投資判断→実行→振り返りの運用記録（実施状況・スクリーニング・セクター・売買・予実・暴落）",
+      "tags": [
+        "投資",
+        "ダッシュボード"
+      ],
+      "kind": "page",
+      "license": "",
+      "path": "p/investment/site/index.html",
+      "updated_at": "2026-09-13T06:39:49Z",
+      "digest": "fe8fa46c92f89146315983ecac4f75775170e0b44d6d52b94e815254511166a3",
+      "build_ref": null,
+      "source_versions": [],
+      "files": [
+        {
+          "path": "p/investment/site/assets/site.f6e79a31.css",
+          "sha256": "9e94d48b2da59b297c7489976f9a02cd30663aef1f1fa145974b1f19f53f65f5",
+          "size": 9461
+        },
+        {
+          "path": "p/investment/site/crash/index.html",
+          "sha256": "a332c336d6ec89005ab459174c4771a9ecb008ae92e564ab520f5b42fe886a45",
+          "size": 967
+        },
+        {
+          "path": "p/investment/site/data/index.html",
+          "sha256": "e9e5f839443f506921a4c3359555c00a94ae09718e45d5331181860bd6023b1a",
+          "size": 1616
+        },
+        {
+          "path": "p/investment/site/data/runs.csv",
+          "sha256": "344cfea1f0e588b71e5e65bceeccf55b45b0f1de8ca77752c4426a36b3042995",
+          "size": 84
+        },
+        {
+          "path": "p/investment/site/data/screening-streak.csv",
+          "sha256": "8d0b658ef9c3ef889a36ddbc86e98399e2e88bd87855c42bb089858f3d0b10af",
+          "size": 173
+        },
+        {
+          "path": "p/investment/site/index.html",
+          "sha256": "bb6664fa56a6111ece2a775f39e508fd84fba5848d0b84d860b3641ef41c5f56",
+          "size": 3739
+        },
+        {
+          "path": "p/investment/site/overview/index.html",
+          "sha256": "9fd489e405d8d294e58a12926347485141f8cef87b965c01a8d5d11f3f6953ef",
+          "size": 6903
+        },
+        {
+          "path": "p/investment/site/screening/index.html",
+          "sha256": "3a60f386c93e45879fe2b80b41e484629d99f4cdd9261368b296f955df87bb08",
+          "size": 1121
+        },
+        {
+          "path": "p/investment/site/sector/index.html",
+          "sha256": "e37bb8779696ced96256c260c7dc37a71322c257024ff5e478d4aedced793866",
+          "size": 1101
+        },
+        {
+          "path": "p/investment/site/strategy/index.html",
+          "sha256": "74f78102d6e1120ce7280c1668e26ebdf3bae6c4549fe71fc796fbee0ebc42e9",
+          "size": 958
+        },
+        {
+          "path": "p/investment/site/thesis/index.html",
+          "sha256": "5ff45a4239bac5b5bd0d491c445f9265a37a3499b6280cc9312a2749c7c2cf7d",
+          "size": 1111
+        }
+      ]
+    },
     {
       "id": "yomoji/app",
       "project": "yomoji",
