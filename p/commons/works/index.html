@@ -1,0 +1,570 @@
+<!doctype html>
+<!--
+  公開している成果物 — 生成物。手で編集しない(生成器は deliverables-map)。
+  カタログは末尾の <script> に埋め込まれる。
+  このテンプレートはローカル版と公開版で共用する。**公開版にも出る文面なので、
+  リポジトリ内のパスや個人に関する情報を書かないこと**(tests/test_public.py が検知する)。
+-->
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>公開している成果物</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='6' height='6' x='1' y='1' rx='1.5' fill='%232a78d6'/%3E%3Crect width='6' height='6' x='9' y='1' rx='1.5' fill='%231baf7a'/%3E%3Crect width='6' height='6' x='1' y='9' rx='1.5' fill='%23eda100'/%3E%3Crect width='6' height='6' x='9' y='9' rx='1.5' fill='%23eb6834'/%3E%3C/svg%3E">
+<style>
+  /* ---- トークン(dataviz 検証済みパレット。light/dark とも選定済み) ---- */
+  :root {
+    color-scheme: light;
+    --page:           #f9f9f7;
+    --surface-1:      #fcfcfb;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --gridline:       #e1e0d9;
+    --baseline:       #c3c2b7;
+    --border:         rgba(11, 11, 11, 0.10);
+    --wash:           rgba(11, 11, 11, 0.04);
+    --series-1:       #2a78d6;
+    --series-2:       #eb6834;
+    --series-3:       #1baf7a;
+    --series-4:       #eda100;
+    --series-5:       #e87ba4;
+    --accent:         #2a78d6;
+    --good:           #0ca30c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --page:           #0d0d0d;
+      --surface-1:      #1a1a19;
+      --text-primary:   #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted:     #898781;
+      --gridline:       #2c2c2a;
+      --baseline:       #383835;
+      --border:         rgba(255, 255, 255, 0.10);
+      --wash:           rgba(255, 255, 255, 0.06);
+      --series-1:       #3987e5;
+      --series-2:       #d95926;
+      --series-3:       #199e70;
+      --series-4:       #c98500;
+      --series-5:       #d55181;
+      --accent:         #3987e5;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page:           #0d0d0d;
+    --surface-1:      #1a1a19;
+    --text-primary:   #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted:     #898781;
+    --gridline:       #2c2c2a;
+    --baseline:       #383835;
+    --border:         rgba(255, 255, 255, 0.10);
+    --wash:           rgba(255, 255, 255, 0.06);
+    --series-1:       #3987e5;
+    --series-2:       #d95926;
+    --series-3:       #199e70;
+    --series-4:       #c98500;
+    --series-5:       #d55181;
+    --accent:         #3987e5;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 24px 20px 64px; }
+
+  /* ---- ヘッダ ---- */
+  .topbar {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    align-items: flex-end; justify-content: space-between;
+    padding-bottom: 20px; border-bottom: 1px solid var(--gridline); margin-bottom: 24px;
+  }
+  h1 { font-size: 22px; font-weight: 650; margin: 0 0 4px; letter-spacing: .01em; }
+  .sub { margin: 0; color: var(--text-secondary); font-size: 13px; }
+  .topbar-actions { display: flex; align-items: center; gap: 8px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--text-secondary);
+    border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px;
+    background: var(--surface-1); white-space: nowrap;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-muted); flex: none; }
+  .badge[data-live="true"] .dot { background: var(--good); }
+  button {
+    font: inherit; color: var(--text-secondary); background: var(--surface-1);
+    border: 1px solid var(--border); border-radius: 8px; padding: 5px 12px; cursor: pointer;
+  }
+  button:hover { background: var(--wash); }
+  button[aria-pressed="true"] { color: var(--text-primary); border-color: var(--baseline); background: var(--wash); }
+
+  /* ---- 統計タイル ---- */
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .tile { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+  .tile .label { font-size: 12px; color: var(--text-secondary); }
+  .tile .value { font-size: 26px; font-weight: 650; letter-spacing: -.01em; line-height: 1.25; }
+  .tile.hero .value { font-size: 48px; line-height: 1.1; }
+  .tile .note { font-size: 12px; color: var(--text-muted); }
+
+  /* ---- カード共通 ---- */
+  .panel { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; }
+  .panel h2 { font-size: 14px; font-weight: 620; margin: 0 0 2px; }
+  .panel .cap { font-size: 12px; color: var(--text-secondary); margin: 0 0 14px; }
+
+  /* ---- チャート ---- */
+  .charts { display: grid; grid-template-columns: 1.15fr 1fr; gap: 12px; margin-bottom: 24px; }
+  @media (max-width: 860px) { .charts { grid-template-columns: 1fr; } }
+
+  .barlist { display: flex; flex-direction: column; gap: 2px; }
+  .barrow {
+    display: grid; grid-template-columns: minmax(96px, 205px) 1fr auto;
+    align-items: center; gap: 10px; padding: 1px 0; cursor: pointer;
+    border: 0; background: none; text-align: left; width: 100%; font: inherit; color: inherit;
+  }
+  .barrow:hover .barlabel { color: var(--text-primary); }
+  .barlabel {
+    font-size: 12px; color: var(--text-secondary); display: flex; align-items: center; gap: 6px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .swatch { width: 8px; height: 8px; border-radius: 2px; flex: none; }
+  .bartrack { height: 14px; display: flex; align-items: center; }
+  .bar { height: 14px; border-radius: 0 4px 4px 0; min-width: 2px; }
+  .barvalue { font-size: 12px; color: var(--text-secondary); font-variant-numeric: tabular-nums; min-width: 2.2em; text-align: right; }
+  .barrow[aria-pressed="true"] { background: var(--wash); border-radius: 6px; }
+
+  .recent { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .recent li { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: baseline; padding: 5px 0; border-bottom: 1px solid var(--gridline); }
+  .recent li:last-child { border-bottom: 0; }
+  .recent .when { font-size: 12px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+  .recent .what { font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .recent .what a { text-decoration: none; }
+  .recent .what a:hover { text-decoration: underline; }
+  .recent .where { font-size: 11px; color: var(--text-muted); white-space: nowrap; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; font-size: 12px; color: var(--text-secondary); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+  /* ---- 操作列 ---- */
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+  .search {
+    flex: 1 1 260px; min-width: 200px; font: inherit; color: var(--text-primary);
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px; padding: 7px 12px;
+  }
+  .search::placeholder { color: var(--text-muted); }
+  select {
+    font: inherit; font-size: 14px; color: var(--text-secondary); background: var(--surface-1);
+    border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 13px;
+    border: 1px solid var(--border); border-radius: 999px; padding: 4px 12px;
+    background: var(--surface-1); color: var(--text-secondary); cursor: pointer;
+  }
+  .chip[aria-pressed="true"] { color: var(--text-primary); border-color: var(--baseline); background: var(--wash); }
+  .chip .count { color: var(--text-muted); font-variant-numeric: tabular-nums; }
+
+  .meta-line { font-size: 12px; color: var(--text-secondary); margin: 0 0 12px; }
+
+  /* ---- 成果物カード ---- */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+  .card {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
+    padding: 14px 16px; display: flex; flex-direction: column; gap: 8px;
+  }
+  .card-top { display: flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--text-muted); }
+  .card-top .path { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .kind { margin-left: auto; border: 1px solid var(--border); border-radius: 999px; padding: 1px 8px; white-space: nowrap; }
+  .card h3 { font-size: 15px; font-weight: 620; margin: 0; line-height: 1.4; }
+  .card p { margin: 0; font-size: 13px; color: var(--text-secondary); }
+  .tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tag { font-size: 11px; color: var(--text-muted); border: 1px solid var(--gridline); border-radius: 6px; padding: 0 6px; }
+  .card-foot {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+    margin-top: auto; padding-top: 8px; border-top: 1px solid var(--gridline);
+    font-size: 12px; color: var(--text-muted);
+  }
+  .card-foot .links { margin-left: auto; display: flex; gap: 10px; }
+  .card-foot a { color: var(--accent); text-decoration: none; }
+  .card-foot a:hover { text-decoration: underline; }
+
+  /* ---- テーブル ---- */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface-1); }
+  .tablewrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
+  th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--gridline); white-space: nowrap; }
+  th { font-size: 12px; font-weight: 600; color: var(--text-secondary); position: sticky; top: 0; background: var(--surface-1); }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: 0; }
+
+  .empty { color: var(--text-secondary); padding: 32px 0; text-align: center; }
+  footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--gridline); font-size: 12px; color: var(--text-muted); }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+
+  #tip {
+    position: fixed; z-index: 20; pointer-events: none; opacity: 0;
+    background: var(--surface-1); color: var(--text-primary);
+    border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px;
+    font-size: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, .12); transition: opacity .1s;
+  }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body data-palette="#2a78d6,#eb6834,#1baf7a,#eda100,#e87ba4">
+<div class="wrap">
+
+  <header class="topbar">
+    <div>
+      <h1>公開している成果物</h1>
+      <p class="sub" id="subtitle">9件 / 最終更新 2026-09-13</p>
+    </div>
+    <div class="topbar-actions">
+      <span class="badge" id="live" data-live="false" title="ローカルサーバ経由なら自動で追従します"><span class="dot"></span><span id="live-text">スナップショット</span></span>
+      <button id="theme" type="button" title="表示テーマを切り替える">◐ テーマ</button>
+    </div>
+  </header>
+
+  <section class="tiles" id="tiles" aria-label="全体の統計"></section>
+
+  <section class="charts">
+    <figure class="panel" style="margin:0">
+      <h2>セクション別の成果物数</h2>
+      <p class="cap">クリックでそのセクションだけに絞り込む</p>
+      <div class="barlist" id="chart-sections"></div>
+      <div class="legend" id="legend-areas"></div>
+    </figure>
+    <figure class="panel" style="margin:0">
+      <h2>最近の更新</h2>
+      <p class="cap">最終更新が新しい順。追加した成果物はここに出る</p>
+      <ol class="recent" id="recent"></ol>
+    </figure>
+  </section>
+
+  <section aria-label="絞り込み">
+    <div class="controls">
+      <input class="search" id="q" type="search" placeholder="検索(名前・説明・タグ・パス)　/ でフォーカス" autocomplete="off">
+      <select id="kind" aria-label="種別で絞り込む"></select>
+      <select id="sort" aria-label="並び順">
+        <option value="updated">更新が新しい順</option>
+        <option value="files">ファイル数が多い順</option>
+        <option value="name">名前順</option>
+        <option value="section">セクション順</option>
+      </select>
+      <button id="view" type="button" aria-pressed="false">表で見る</button>
+    </div>
+    <div class="chips" id="chips"></div>
+  </section>
+
+  <p class="meta-line" id="result-meta"></p>
+  <section class="grid" id="cards"></section>
+  <div class="tablewrap hidden" id="tablewrap">
+    <table>
+      <thead><tr><th>成果物</th><th>セクション</th><th>種別</th><th>更新</th><th class="num">ファイル</th><th>パス</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p>ここに出るのは<strong>公開済みの成果物だけ</strong>です。<a href="../../../">公開ページの一覧へ</a></p>
+    <p id="digest"></p>
+  </footer>
+</div>
+<div id="tip" role="status" aria-live="polite"></div>
+
+<script>
+const CATALOG = {"generated_at":"9件 / 最終更新 2026-09-13","repo":{"name":"","remote":""},"totals":{"deliverables":9,"sections":1,"files":244,"bytes":1799136,"recent":1,"playable":9,"tested":9,"latest_update":"2026-09-13"},"areas":[{"id":"play","label":"遊ぶ","count":9,"slot":1}],"sections":[{"path":"ゲーム","title":"ゲーム","summary":"","area":"play","depth":0,"count":9}],"kinds":[{"id":"game","label":"ゲーム","count":9}],"deliverables":[{"id":"p-ichimon-app","path":"p/ichimon/app/","name":"ichimon","title":"イチモン","summary":"中学受験の社会(地理・歴史・公民)と理科(物理・化学・生物・地学)を対象にした、 解説つき一問一答の学習アプリ。 目標偏差値(40〜70)で出題難易度を設定でき、まちがえた問題は 間隔反復(Leitner方式)で忘れたころに自動で再出題される。","area":"play","section":"ゲーム","section_title":"ゲーム","kind":"game","is_dir":true,"tags":["ブラウザで動く","テストあり"],"status":null,"files":79,"bytes":974568,"code_files":44,"doc_files":14,"commits":0,"updated":"2026-09-13","created":"2026-07-12","entry":null,"playable":"p/ichimon/app/","has_tests":true,"links":[{"label":"▶ イチモン","href":"../../../p/ichimon/app/"},{"label":"▶ イチモン 取得テーマカタログ","href":"../../../p/ichimon/themes/"}]},{"id":"p-uso-boshi-app","path":"p/uso-boshi/app/","name":"uso-boshi","title":"ウソボシ","summary":"宇宙船のクルー7人、そのうち2人がウソつきの「侵入者」。いわゆる 「人狼/Among Us」型の正体隠匿ゲームを、1人プレイ×AIボット6人で遊べる 形にしたオリジナル作品。会話は構造化メニュー(CO・結果報告・「あやしい」等)で、 あなたも騙りCO・偽の調査報告が自由にできる。","area":"play","section":"ゲーム","section_title":"ゲーム","kind":"game","is_dir":true,"tags":["ブラウザで動く","テストあり"],"status":null,"files":21,"bytes":133954,"code_files":14,"doc_files":7,"commits":0,"updated":"2026-07-20","created":"2026-07-20","entry":null,"playable":"p/uso-boshi/app/","has_tests":true,"links":[{"label":"▶ 開く","href":"../../../p/uso-boshi/app/"}]},{"id":"p-nuri-logi-app","path":"p/nuri-logi/app/","name":"nuri-logi","title":"ヌリロジ","summary":"行と列の数字をたよりにマスを塗ると絵があらわれる、いわゆる 「イラストロジック/ノノグラム」型のパズルゲーム。全12問オリジナルのドット絵。 ラインソルバを内蔵し、全問が「一意解」かつ「論理だけで解ける (当てずっぽう不要)」ことをテストで機械証明済み。","area":"play","section":"ゲーム","section_title":"ゲーム","kind":"game","is_dir":true,"tags":["ブラウザで動く","テストあり"],"status":null,"files":22,"bytes":119632,"code_files":15,"doc_files":7,"commits":0,"updated":"2026-07-19","created":"2026-07-19","entry":null,"playable":"p/nuri-logi/app/","has_tests":true,"links":[{"label":"▶ 開く","href":"../../../p/nuri-logi/app/"}]},{"id":"p-hako-oshi-app","path":"p/hako-oshi/app/","name":"hako-oshi","title":"ハコオシ","summary":"箱をゴールへ押して運ぶ、いわゆる「倉庫番」型のパズルゲーム。全12面オリジナル。 BFSソルバを内蔵しており、ヒント(最適の一押し)と詰み判定 (「この局面からは解けません」)が使える。同梱レベルは全面が 「解けること」をテストで機械証明済み。","area":"play","section":"ゲーム","section_title":"ゲーム","kind":"game","is_dir":true,"tags":["ブラウザで動く","テストあり"],"status":null,"files":20,"bytes":96572,"code_files":13,"doc_files":7,"commits":0,"updated":"2026-07-18","created":"2026-07-18","entry":null,"playable":"p/hako-oshi/app/","has_tests":true,"links":[{"label":"▶ 開く","href":"../../../p/hako-oshi/app/"}]},{"id":"p-yomoji-app","path":"p/yomoji/app/","name":"yomoji","title":"ヨモジ","summary":"ひらがな4文字のことばを8回以内に当てる、日本語のことば当てパズル。 いわゆる「Wordle」型メカニクスの日本語オリジナル実装。 緑(位置も文字も一致)・黄(文字は含まれる)・灰(含まれない)に加え、 「おしい」(濁点・半濁点・小書きだけが違う) を教えてくれるのが本作の独自ルール。","area":"play","section":"ゲーム","section_title":"ゲーム","kind":"game","is_dir":true,"tags":["ブラウザで動く","テストあり"],"status":null,"files":22,"bytes":103848,"code_files":14,"doc_files":8,"commits":0,"updated":"2026-07-12","created":"2026-07-12","entry":null,"playable":"p/yomoji/app/","has_tests":true,"links":[{"label":"▶ 開く","href":"../../../p/yomoji/app/"}]},{"id":"p-four-winds-app","path":"p/four-winds/app/","name":"four-winds","title":"フォーウィンズ","summary":"15秒ごとにスクロール方向と機体の向きが 右→上→左→下 と回り続ける シューティングゲーム。いわゆる「グラディウス」型(強制スクロール+カプセル 強化)のメカニクスに、「前」の定義が回転する独自ルールを重ねたオリジナル作品。","area":"play","section":"ゲーム","section_title":"ゲーム","kind":"game","is_dir":true,"tags":["ブラウザで動く","テストあり"],"status":null,"files":21,"bytes":112367,"code_files":13,"doc_files":8,"commits":0,"updated":"2026-07-12","created":"2026-07-12","entry":null,"playable":"p/four-winds/app/","has_tests":true,"links":[{"label":"▶ 開く","href":"../../../p/four-winds/app/"}]},{"id":"p-nine-grid-app","path":"p/nine-grid/app/","name":"nine-grid","title":"ナイングリッド","summary":"ナンバープレース(9×9に1〜9を重複なく埋める、いわゆる「数独」型)のパズルゲーム。 問題は毎回その場で自動生成され、すべて解が一意であることが保証されている。","area":"play","section":"ゲーム","section_title":"ゲーム","kind":"game","is_dir":true,"tags":["ブラウザで動く","テストあり"],"status":null,"files":19,"bytes":84022,"code_files":11,"doc_files":8,"commits":0,"updated":"2026-07-08","created":"2026-07-08","entry":null,"playable":"p/nine-grid/app/","has_tests":true,"links":[{"label":"▶ 開く","href":"../../../p/nine-grid/app/"}]},{"id":"p-cosmo-merge-app","path":"p/cosmo-merge/app/","name":"cosmo-merge","title":"コズモマージ","summary":"落下×合体の物理パズルゲーム。同じ天体をぶつけると1段階大きい天体に進化し、 最終形「太陽」を目指す。いわゆる「スイカゲーム」型メカニクスのオリジナル実装。","area":"play","section":"ゲーム","section_title":"ゲーム","kind":"game","is_dir":true,"tags":["ブラウザで動く","テストあり"],"status":null,"files":20,"bytes":78245,"code_files":13,"doc_files":7,"commits":0,"updated":"2026-07-08","created":"2026-07-08","entry":null,"playable":"p/cosmo-merge/app/","has_tests":true,"links":[{"label":"▶ 開く","href":"../../../p/cosmo-merge/app/"}]},{"id":"p-twin-leap-app","path":"p/twin-leap/app/","name":"twin-leap","title":"ツインリープ","summary":"2人協力型のアクションパズルプラットフォーマー。1台のキーボードを2人で分け合い、 頭に乗り合い、スイッチを押し合って、ふたりともドアにたどり着けばクリア。 いわゆる「PICO PARK」型の協力メカニクスのオリジナル実装。","area":"play","section":"ゲーム","section_title":"ゲーム","kind":"game","is_dir":true,"tags":["ブラウザで動く","テストあり"],"status":null,"files":20,"bytes":95928,"code_files":12,"doc_files":8,"commits":0,"updated":"2026-07-08","created":"2026-07-08","entry":null,"playable":"p/twin-leap/app/","has_tests":true,"links":[{"label":"▶ 開く","href":"../../../p/twin-leap/app/"}]}],"digest":"f98c85e19d5c38d5"};
+
+const state = {
+  data: CATALOG,
+  q: "",
+  areas: new Set(),
+  section: null,
+  kind: "",
+  sort: "updated",
+  table: false,
+};
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) =>
+  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const seriesVar = (slot) => `var(--series-${((slot - 1) % 5) + 1})`;
+
+// 末尾セグメントだけでは意味が立たない一般名は親を1つ足して表示する
+const GENERIC_SEGMENTS = new Set(["raw", "projects", "docs", "design", "evaluations", "personas", "templates", "skills", "examples", "src"]);
+function shortSection(path) {
+  const parts = path.split("/");
+  const last = parts[parts.length - 1];
+  return GENERIC_SEGMENTS.has(last) && parts.length > 1 ? parts.slice(-2).join("/") : last;
+}
+
+function areaSlot(areaId) {
+  const found = (state.data.areas || []).find((a) => a.id === areaId);
+  return found ? found.slot : 1;
+}
+function fmtBytes(n) {
+  if (!n) return "0 B";
+  const units = ["B", "KB", "MB", "GB"];
+  let i = 0, v = n;
+  while (v >= 1024 && i < units.length - 1) { v /= 1024; i++; }
+  return (v >= 10 || i === 0 ? Math.round(v) : v.toFixed(1)) + " " + units[i];
+}
+
+/* ---- ツールチップ(チャートのホバー層) ---- */
+const tip = $("tip");
+function showTip(evt, html) {
+  tip.innerHTML = html;
+  tip.style.opacity = "1";
+  const pad = 12;
+  const rect = tip.getBoundingClientRect();
+  let x = evt.clientX + pad, y = evt.clientY + pad;
+  if (x + rect.width > window.innerWidth - 8) x = evt.clientX - rect.width - pad;
+  if (y + rect.height > window.innerHeight - 8) y = evt.clientY - rect.height - pad;
+  tip.style.left = x + "px";
+  tip.style.top = y + "px";
+}
+function hideTip() { tip.style.opacity = "0"; }
+function bindTip(el, html) {
+  el.addEventListener("mouseenter", (e) => showTip(e, html));
+  el.addEventListener("mousemove", (e) => showTip(e, html));
+  el.addEventListener("mouseleave", hideTip);
+}
+
+/* ---- 統計タイル ---- */
+function renderTiles() {
+  const t = state.data.totals;
+  const tiles = [
+    { label: "成果物", value: t.deliverables, note: `${state.data.sections.length} セクション`, hero: true },
+    { label: "ファイル総数", value: t.files.toLocaleString(), note: fmtBytes(t.bytes) },
+    { label: "直近30日に更新", value: t.recent, note: t.latest_update ? `最終更新 ${t.latest_update}` : "" },
+    { label: "ブラウザで動く", value: t.playable, note: "index.html を持つ成果物" },
+    { label: "テストあり", value: t.tested, note: "tests/ を持つ成果物" },
+  ];
+  $("tiles").innerHTML = tiles.map((tile) => `
+    <div class="tile${tile.hero ? " hero" : ""}">
+      <div class="label">${esc(tile.label)}</div>
+      <div class="value">${esc(tile.value)}</div>
+      <div class="note">${esc(tile.note)}</div>
+    </div>`).join("");
+}
+
+/* ---- セクション別 横棒(エリアで色分け・直接ラベルつき) ---- */
+function renderSections() {
+  const rows = state.data.sections.filter((s) => s.count > 0).slice(0, 14);
+  const max = Math.max(1, ...rows.map((s) => s.count));
+  const host = $("chart-sections");
+  host.innerHTML = "";
+  rows.forEach((s) => {
+    const btn = document.createElement("button");
+    btn.className = "barrow";
+    btn.type = "button";
+    btn.setAttribute("aria-pressed", String(state.section === s.path));
+    const color = seriesVar(areaSlot(s.area));
+    const label = shortSection(s.path);
+    btn.innerHTML = `
+      <span class="barlabel" title="${esc(s.path)}"><span class="swatch" style="background:${color}"></span>${esc(label)}</span>
+      <span class="bartrack"><span class="bar" style="width:${(s.count / max) * 100}%;background:${color}"></span></span>
+      <span class="barvalue">${s.count}</span>`;
+    bindTip(btn, `<strong>${esc(s.title || s.path)}</strong><br>${esc(s.path)}<br>成果物 ${s.count} 件`);
+    btn.addEventListener("click", () => {
+      state.section = state.section === s.path ? null : s.path;
+      render();
+    });
+    host.appendChild(btn);
+  });
+
+  const hidden = state.data.sections.filter((s) => s.count > 0).length - rows.length;
+  $("legend-areas").innerHTML = state.data.areas.map((a) =>
+    `<span><span class="swatch" style="background:${seriesVar(a.slot)}"></span>${esc(a.label)}</span>`).join("") +
+    (hidden > 0 ? `<span style="color:var(--text-muted)">ほか ${hidden} セクション</span>` : "");
+}
+
+/* ---- 最近の更新(時間軸は棒グラフより一覧のほうが読める) ---- */
+function renderRecent() {
+  const rows = state.data.deliverables
+    .slice()
+    .sort((a, b) => (b.updated || "").localeCompare(a.updated || ""))
+    .slice(0, 9);
+  $("recent").innerHTML = rows.map((d) => {
+    const href = (d.links || [])[0]?.href || d.playable || d.entry || d.path;
+    return `<li>
+      <span class="when">${esc((d.updated || "—").slice(5))}</span>
+      <span class="what" title="${esc(d.path)}"><a href="${esc(href)}" target="_blank" rel="noopener">${esc(d.title)}</a></span>
+      <span class="where"><span class="swatch" style="background:${seriesVar(areaSlot(d.area))}"></span> ${esc(kindLabel(d.kind))}</span>
+    </li>`;
+  }).join("");
+}
+
+/* ---- 絞り込みUI ---- */
+function renderChips() {
+  $("chips").innerHTML = state.data.areas.map((a) => `
+    <button class="chip" type="button" data-area="${esc(a.id)}" aria-pressed="${state.areas.has(a.id)}">
+      <span class="swatch" style="background:${seriesVar(a.slot)}"></span>${esc(a.label)}
+      <span class="count">${a.count}</span>
+    </button>`).join("") +
+    (state.section ? `<button class="chip" type="button" data-clear-section="1" aria-pressed="true">セクション: ${esc(state.section)} ✕</button>` : "");
+
+  $("chips").querySelectorAll("[data-area]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.area;
+      state.areas.has(id) ? state.areas.delete(id) : state.areas.add(id);
+      render();
+    });
+  });
+  const clear = $("chips").querySelector("[data-clear-section]");
+  if (clear) clear.addEventListener("click", () => { state.section = null; render(); });
+
+  const kindSelect = $("kind");
+  if (kindSelect.options.length !== state.data.kinds.length + 1) {
+    kindSelect.innerHTML = `<option value="">すべての種別</option>` +
+      state.data.kinds.map((k) => `<option value="${esc(k.id)}">${esc(k.label)}（${k.count}）</option>`).join("");
+    kindSelect.value = state.kind;
+  }
+}
+
+/* ---- 一覧 ---- */
+function filtered() {
+  const q = state.q.trim().toLowerCase();
+  let items = state.data.deliverables.filter((d) => {
+    if (state.areas.size && !state.areas.has(d.area)) return false;
+    if (state.section && d.section !== state.section) return false;
+    if (state.kind && d.kind !== state.kind) return false;
+    if (!q) return true;
+    return [d.title, d.name, d.path, d.summary, d.section_title, (d.tags || []).join(" ")]
+      .join(" ").toLowerCase().includes(q);
+  });
+  const by = {
+    updated: (a, b) => (b.updated || "").localeCompare(a.updated || ""),
+    files: (a, b) => b.files - a.files,
+    name: (a, b) => a.title.localeCompare(b.title, "ja"),
+    section: (a, b) => a.section.localeCompare(b.section) || a.name.localeCompare(b.name, "ja"),
+  }[state.sort];
+  return items.slice().sort(by);
+}
+
+function kindLabel(id) {
+  const k = state.data.kinds.find((x) => x.id === id);
+  return k ? k.label : id;
+}
+
+function links(d) {
+  const out = [];
+  const remote = (state.data.repo || {}).remote;
+  // 公開版: 公開先だけを出す(ローカルの入口・リポジトリへのリンクは持たない)
+  if ((d.links || []).length) {
+    return d.links.map((l) => `<a href="${esc(l.href)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join("");
+  }
+  if (d.playable) out.push(`<a href="${esc(d.playable)}" target="_blank" rel="noopener">▶ 開く</a>`);
+  if (d.entry) out.push(`<a href="${esc(d.entry)}" target="_blank" rel="noopener">説明</a>`);
+  if (remote) out.push(`<a href="${esc(remote)}/tree/main/${esc(d.path)}" target="_blank" rel="noopener">GitHub</a>`);
+  return out.join("");
+}
+
+function renderList() {
+  const items = filtered();
+  const total = state.data.deliverables.length;
+  $("result-meta").textContent = items.length === total
+    ? `${total} 件すべてを表示中`
+    : `${items.length} / ${total} 件を表示中`;
+
+  if (!items.length) {
+    $("cards").innerHTML = `<p class="empty">該当する成果物がありません。</p>`;
+    $("tbody").innerHTML = "";
+    return;
+  }
+
+  $("cards").innerHTML = items.map((d) => `
+    <article class="card">
+      <div class="card-top">
+        <span class="swatch" style="background:${seriesVar(areaSlot(d.area))}"></span>
+        <span class="path" title="${esc(d.path)}">${esc(d.section)}</span>
+        <span class="kind">${esc(kindLabel(d.kind))}</span>
+      </div>
+      <h3>${esc(d.title)}</h3>
+      ${d.summary ? `<p>${esc(d.summary)}</p>` : ""}
+      ${(d.tags || []).length ? `<div class="tags">${d.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div>` : ""}
+      <div class="card-foot">
+        <span>${esc(d.updated || "—")}</span>
+        <span>${d.files} ファイル</span>
+        ${d.status ? `<span>${esc(d.status)}</span>` : ""}
+        <span class="links">${links(d)}</span>
+      </div>
+    </article>`).join("");
+
+  $("tbody").innerHTML = items.map((d) => `
+    <tr>
+      <td>${esc(d.title)}</td>
+      <td>${esc(d.section)}</td>
+      <td>${esc(kindLabel(d.kind))}</td>
+      <td>${esc(d.updated || "—")}</td>
+      <td class="num">${d.files}</td>
+      <td><code>${esc(d.path)}</code></td>
+    </tr>`).join("");
+}
+
+function render() {
+  renderTiles();
+  renderSections();
+  renderRecent();
+  renderChips();
+  renderList();
+  $("digest").textContent = `カタログ digest: ${state.data.digest}`;
+  $("cards").classList.toggle("hidden", state.table);
+  $("tablewrap").classList.toggle("hidden", !state.table);
+}
+
+/* ---- 入力 ---- */
+$("q").addEventListener("input", (e) => { state.q = e.target.value; renderList(); });
+$("kind").addEventListener("change", (e) => { state.kind = e.target.value; renderList(); });
+$("sort").addEventListener("change", (e) => { state.sort = e.target.value; renderList(); });
+$("view").addEventListener("click", (e) => {
+  state.table = !state.table;
+  e.target.setAttribute("aria-pressed", String(state.table));
+  e.target.textContent = state.table ? "カードで見る" : "表で見る";
+  render();
+});
+$("theme").addEventListener("click", () => {
+  const root = document.documentElement;
+  const dark = root.dataset.theme
+    ? root.dataset.theme === "dark"
+    : window.matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = dark ? "light" : "dark";
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "/" && document.activeElement !== $("q")) { e.preventDefault(); $("q").focus(); }
+  if (e.key === "Escape") { $("q").value = ""; state.q = ""; renderList(); }
+});
+
+/* ---- リアルタイム追従: catalog.json が取れる環境(--serve)では自動更新 ---- */
+function setLive(on, at) {
+  $("live").dataset.live = String(on);
+  $("live-text").textContent = on ? "ライブ(自動更新)" : "スナップショット";
+  if (at) $("subtitle").textContent = `スキャン: ${at}`;
+}
+async function poll() {
+  if (!location.protocol.startsWith("http")) { setLive(false); return; }  // file:// では取りにいかない
+  try {
+    const res = await fetch("catalog.json", { cache: "no-store" });
+    if (!res.ok) throw new Error("no live catalog");
+    const next = await res.json();
+    const changed = next.digest !== state.data.digest;
+    state.data = next;
+    setLive(true, next.generated_at);
+    if (changed) render();
+  } catch {
+    setLive(false);
+  }
+}
+render();
+poll();
+setInterval(() => { if (document.visibilityState === "visible") poll(); }, 8000);
+</script>
+<footer class="sm-provenance" style="font:12px/1.6 system-ui,sans-serif;color:#6b6b6b;padding:1rem;margin-top:2rem;border-top:1px solid #e2e2de;"><span>生成: 2026-09-13T04:11:54Z</span></footer></body>
+</html>

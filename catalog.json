@@ -1,7 +1,631 @@
 {
   "schema": 1,
-  "generated_at": "2026-09-13T01:34:28Z",
+  "generated_at": "2026-09-13T04:11:54Z",
   "views": [
+    {
+      "id": "yomoji/app",
+      "project": "yomoji",
+      "view": "app",
+      "title": "ヨモジ",
+      "summary": "ひらがな4文字を8回以内に当てる、ことば当てパズル(濁点違いは「おしい」)",
+      "tags": [
+        "ゲーム",
+        "パズル",
+        "スマホ"
+      ],
+      "kind": "page",
+      "license": "",
+      "path": "p/yomoji/app/index.html",
+      "updated_at": "2026-09-13T04:11:54Z",
+      "digest": "812b86ff7dd499c94cda007655b02f1155d188f30e3dc4a934c08ac24760289d",
+      "build_ref": null,
+      "source_versions": [],
+      "files": [
+        {
+          "path": "p/yomoji/app/index.html",
+          "sha256": "64aec9303be92a275fd273d79c04a5a0d143b5408f44c31e128586cc17090e04",
+          "size": 10378
+        },
+        {
+          "path": "p/yomoji/app/src/config.js",
+          "sha256": "23239afe42203b6be378f89ba4cfa780dc9fde1d29eb84895c6d06eba6c57e8a",
+          "size": 665
+        },
+        {
+          "path": "p/yomoji/app/src/game.js",
+          "sha256": "4bdd07cc1cd18c0ea2ae356f21afae06d6ac0d5fc7af07995a221cef35d2e8c5",
+          "size": 7224
+        },
+        {
+          "path": "p/yomoji/app/src/judge.js",
+          "sha256": "f9377f90f1cf3af87ae3ae9cf7a06a3d364f2f8c8260d6c0e3106aee657da79f",
+          "size": 2275
+        },
+        {
+          "path": "p/yomoji/app/src/kana.js",
+          "sha256": "58d5fb7a5b508d4d0d320cb89b79555a2a490a37dbdd8ff3a4e092f0485f1c03",
+          "size": 8706
+        },
+        {
+          "path": "p/yomoji/app/src/main.js",
+          "sha256": "0652e62299e91a45b3c620be988c391c67d049999f3610f33e4cf0f936bf334a",
+          "size": 10495
+        },
+        {
+          "path": "p/yomoji/app/src/render.js",
+          "sha256": "0dcdc8f6ffbda9dcc1d464904765f7536de9e59a553e64fd4280eadaf842e67b",
+          "size": 5981
+        },
+        {
+          "path": "p/yomoji/app/src/rng.js",
+          "sha256": "cd0b5f85ff7f6b4e605800e31753586384962fe102c998ab2e2829cd3fc23eae",
+          "size": 889
+        },
+        {
+          "path": "p/yomoji/app/src/sound.js",
+          "sha256": "0f42a15271d3029b9c88903b0e6159e7640c94f03bfe525e849a6aa5cc3dac2d",
+          "size": 1934
+        },
+        {
+          "path": "p/yomoji/app/src/words.js",
+          "sha256": "3c984c5ce48806263487ca222688a8f477ccdfde6e97806cb73bbe81436b56ce",
+          "size": 5312
+        }
+      ]
+    },
+    {
+      "id": "uso-boshi/app",
+      "project": "uso-boshi",
+      "view": "app",
+      "title": "ウソボシ",
+      "summary": "クルー7人のうち2人がウソつき。AIボット6人と遊ぶ1人用の正体隠匿ゲーム",
+      "tags": [
+        "ゲーム",
+        "推理",
+        "スマホ"
+      ],
+      "kind": "page",
+      "license": "",
+      "path": "p/uso-boshi/app/index.html",
+      "updated_at": "2026-09-13T04:11:54Z",
+      "digest": "126f9fd1423f53e9ad68db7f4b3f450f1f8e8302cf6505ca1fb459b536f3f866",
+      "build_ref": null,
+      "source_versions": [],
+      "files": [
+        {
+          "path": "p/uso-boshi/app/index.html",
+          "sha256": "db3a802621ba63566314eb75fc7f743d289360686d776d432631733d29d22f6d",
+          "size": 10731
+        },
+        {
+          "path": "p/uso-boshi/app/src/bots.js",
+          "sha256": "cf1d53234f4266eeb1c207e90bc8501d82262a88e461c558373eafb3b3487602",
+          "size": 12392
+        },
+        {
+          "path": "p/uso-boshi/app/src/characters.js",
+          "sha256": "59c57518ef3babd04cd6151050b56a9298c408eac354a416392c3c3b23ba856d",
+          "size": 1000
+        },
+        {
+          "path": "p/uso-boshi/app/src/config.js",
+          "sha256": "8e72f2594077d9376516e448fdc670d211cd4800fdffe021d1beedadcea27016",
+          "size": 3603
+        },
+        {
+          "path": "p/uso-boshi/app/src/game.js",
+          "sha256": "9f6ecad5c0015de4515898d41d4f2dd984ed60789258df1d063e7f26df487ba3",
+          "size": 14227
+        },
+        {
+          "path": "p/uso-boshi/app/src/main.js",
+          "sha256": "379b56d20c4d86d2ab2fb5bb5e7848deaf4ef1b34fc25586701f9e82d2ef6489",
+          "size": 13464
+        },
+        {
+          "path": "p/uso-boshi/app/src/render.js",
+          "sha256": "fff38d138828647fc83fa2d36b2fe70380912ebe8cf6dca82c2827a8b3eee0fd",
+          "size": 11927
+        },
+        {
+          "path": "p/uso-boshi/app/src/rng.js",
+          "sha256": "930e7b1c2f5b64663107cf96a96bc7d8182501f9db263b9847fc0fd287a4eb9f",
+          "size": 1080
+        },
+        {
+          "path": "p/uso-boshi/app/src/sound.js",
+          "sha256": "aa96d4646d9fb0e800fc6c267582076f870aaace7d4f6f3800fad09ac52fb1c0",
+          "size": 2215
+        },
+        {
+          "path": "p/uso-boshi/app/src/text.js",
+          "sha256": "139bd3199eae44fe7f96d6a1afd5df09a5746d2edd309555e58f7a2c26e0a073",
+          "size": 4701
+        }
+      ]
+    },
+    {
+      "id": "twin-leap/app",
+      "project": "twin-leap",
+      "view": "app",
+      "title": "ツインリープ",
+      "summary": "1台のキーボードを2人で分け合う協力アクションパズル(全5面・PC専用)",
+      "tags": [
+        "ゲーム",
+        "アクション",
+        "PC専用"
+      ],
+      "kind": "page",
+      "license": "",
+      "path": "p/twin-leap/app/index.html",
+      "updated_at": "2026-09-13T04:11:54Z",
+      "digest": "1a750ca7bb79cb1498676b2755fdb476aeb022033896a8dc6a6ad0d3ebeac8f6",
+      "build_ref": null,
+      "source_versions": [],
+      "files": [
+        {
+          "path": "p/twin-leap/app/index.html",
+          "sha256": "2a57125f5853117782ee51b644c1881e0560e3a70f5ab778fa1fe26f63ab3e1f",
+          "size": 4809
+        },
+        {
+          "path": "p/twin-leap/app/src/config.js",
+          "sha256": "558e4fcd0900a153b974860b314ce2c52533a434430f3806a6b20ef74a12a414",
+          "size": 2175
+        },
+        {
+          "path": "p/twin-leap/app/src/game.js",
+          "sha256": "6a9512b3672f1eeb8437c3f294680e0a5609481721737d3d199c66e928f09f28",
+          "size": 9601
+        },
+        {
+          "path": "p/twin-leap/app/src/levels.js",
+          "sha256": "5a18f225a6ecd083253e9aeeac7079d90a8d24dbee040c4d34491e9c38f92ed5",
+          "size": 6142
+        },
+        {
+          "path": "p/twin-leap/app/src/main.js",
+          "sha256": "c4c361d5569a90f080d4b3131ed9d61692e936e7b6c872e00d7b80b8f0d7fa93",
+          "size": 4440
+        },
+        {
+          "path": "p/twin-leap/app/src/physics.js",
+          "sha256": "c43d5d69886432dacfd953601570bb72b299501121df867cb7fc1d57445fa296",
+          "size": 2928
+        },
+        {
+          "path": "p/twin-leap/app/src/render.js",
+          "sha256": "81d26dba51ab87b36adefc1883a6dac2bf4584d8f829a1eecc6db41dea56ca43",
+          "size": 5807
+        },
+        {
+          "path": "p/twin-leap/app/src/sound.js",
+          "sha256": "1569a3c2f79651d8750c43208ebdb70810f848411841871dcece94c4eca8cda1",
+          "size": 1869
+        }
+      ]
+    },
+    {
+      "id": "nuri-logi/app",
+      "project": "nuri-logi",
+      "view": "app",
+      "title": "ヌリロジ",
+      "summary": "行と列の数字をたよりにマスを塗ると絵があらわれる論理パズル(全12問)",
+      "tags": [
+        "ゲーム",
+        "パズル",
+        "スマホ"
+      ],
+      "kind": "page",
+      "license": "",
+      "path": "p/nuri-logi/app/index.html",
+      "updated_at": "2026-09-13T04:11:54Z",
+      "digest": "547548ff9ec6e5ea52a3ab82a877d424615f06ddebf29d18d9a0d230bf44353e",
+      "build_ref": null,
+      "source_versions": [],
+      "files": [
+        {
+          "path": "p/nuri-logi/app/index.html",
+          "sha256": "4d9d8216aac86b35887b091ca6cd0f440d8710f1f4e7d8b10725222773f28591",
+          "size": 10958
+        },
+        {
+          "path": "p/nuri-logi/app/src/board.js",
+          "sha256": "8b0910ccd575ca0b0927fc41d480b870179b0f3627df54012e5fe6014ef340c7",
+          "size": 8257
+        },
+        {
+          "path": "p/nuri-logi/app/src/config.js",
+          "sha256": "5c1f0148ecbbb7023f690b3ac2120d7a9610bd51d7b59b90a6dcb0ec2bf3bace",
+          "size": 1956
+        },
+        {
+          "path": "p/nuri-logi/app/src/hint.js",
+          "sha256": "9961385ef0d1c9fe0c5a12079445031314c72a852be33ca46388af7db29a8b97",
+          "size": 2229
+        },
+        {
+          "path": "p/nuri-logi/app/src/linesolver.js",
+          "sha256": "bf3c06439c79fd88587fef3576180ac1628c7b1af28678755212d6c3bcd7407d",
+          "size": 3780
+        },
+        {
+          "path": "p/nuri-logi/app/src/main.js",
+          "sha256": "08269a011eee81c53ab169f4979f2d53eb620394a919306e7e208f0216ba7088",
+          "size": 12137
+        },
+        {
+          "path": "p/nuri-logi/app/src/puzzles.js",
+          "sha256": "b62835801c6f2edcb3d2920921df962a05456bbbb001d11c63b1351fa3a884d4",
+          "size": 8249
+        },
+        {
+          "path": "p/nuri-logi/app/src/render.js",
+          "sha256": "d07122cdd8a10e26e80e058ecf7b41e956bd99e7794a70735f530862b2b2da0e",
+          "size": 8254
+        },
+        {
+          "path": "p/nuri-logi/app/src/solver.js",
+          "sha256": "5fdbe7ffd8f6a812c2366cd414d9817fb0259235b567588c3e4f77790fa1482e",
+          "size": 4704
+        },
+        {
+          "path": "p/nuri-logi/app/src/sound.js",
+          "sha256": "1f27152127db8bbe3d77dc47bd75fd0ec2926fbb69e76f294ab79ad017d86a5f",
+          "size": 2229
+        }
+      ]
+    },
+    {
+      "id": "nine-grid/app",
+      "project": "nine-grid",
+      "view": "app",
+      "title": "ナイングリッド",
+      "summary": "9×9に1〜9を埋める数独パズル(問題は毎回自動生成・解は常に一意)",
+      "tags": [
+        "ゲーム",
+        "パズル",
+        "スマホ"
+      ],
+      "kind": "page",
+      "license": "",
+      "path": "p/nine-grid/app/index.html",
+      "updated_at": "2026-09-13T04:11:54Z",
+      "digest": "c1b8a10e5b847e96c88280ed25c28993fcf8223c1281b89b0760a5a859102381",
+      "build_ref": null,
+      "source_versions": [],
+      "files": [
+        {
+          "path": "p/nine-grid/app/index.html",
+          "sha256": "3364379211a47621ed7decd03012fbab415d2a9ffe5d4cd270c1d92c3967e1f4",
+          "size": 7872
+        },
+        {
+          "path": "p/nine-grid/app/src/config.js",
+          "sha256": "5627927e8fa8ba7d09089e4413126275d6ac8ec31387038e356e5bb9539463c4",
+          "size": 1205
+        },
+        {
+          "path": "p/nine-grid/app/src/game.js",
+          "sha256": "893ff0acc6a3ad4e4e714b0f006edd210afe294d3b23178f88480f9cd2919a41",
+          "size": 7733
+        },
+        {
+          "path": "p/nine-grid/app/src/main.js",
+          "sha256": "9fc09c3af243cb711ccf3e3e0b5cd8b9cced7d8804e5548138f45f8c83d92760",
+          "size": 6487
+        },
+        {
+          "path": "p/nine-grid/app/src/render.js",
+          "sha256": "3de71448422f92f859969369394247010ef99e60cacc116a03b3f39e6d30dea1",
+          "size": 4062
+        },
+        {
+          "path": "p/nine-grid/app/src/rng.js",
+          "sha256": "db7212006983457094c51cc96e245f08c34aaea88580699a9f95eb3ee4c82a61",
+          "size": 882
+        },
+        {
+          "path": "p/nine-grid/app/src/sound.js",
+          "sha256": "bce6951ca82dd18255e571c6b8fe945830e3f619103808fde86ccda96dd3506c",
+          "size": 1908
+        },
+        {
+          "path": "p/nine-grid/app/src/sudoku.js",
+          "sha256": "612a6021c60a9900f2efb7b4c2bb3517a059c239ba47602a1b228bc481d82c01",
+          "size": 9168
+        }
+      ]
+    },
+    {
+      "id": "ichimon/themes",
+      "project": "ichimon",
+      "view": "themes",
+      "title": "イチモン 取得テーマカタログ",
+      "summary": "中学受験の事実データを Wikidata / e-Stat から取る100テーマの定義(SPARQL つき)",
+      "tags": [
+        "データ",
+        "中学受験",
+        "Wikidata",
+        "SPARQL"
+      ],
+      "kind": "dataset",
+      "license": "CC0",
+      "path": "p/ichimon/themes/index.html",
+      "updated_at": "2026-09-13T04:11:54Z",
+      "digest": "4e829a67a0ba90c4ff63f8c8fd7708ba67bcfaf87d915eca66d66a4881b43fc8",
+      "build_ref": null,
+      "source_versions": [],
+      "files": [
+        {
+          "path": "p/ichimon/themes/index.html",
+          "sha256": "9f2e573d18d89733e9f226da9a4588404aa5bda0ddbb318c213b500627f175b5",
+          "size": 8675
+        },
+        {
+          "path": "p/ichimon/themes/themes.csv",
+          "sha256": "59c79ee35588950bdcb56e9bbc7df5abc9123e3dff70f80d1975c7be38bc2187",
+          "size": 17164
+        },
+        {
+          "path": "p/ichimon/themes/themes.json",
+          "sha256": "f796badc06e9ff746087a1dccc985d04cec6ff3a2b593f52f94819d850e78e88",
+          "size": 110996
+        }
+      ]
+    },
+    {
+      "id": "hako-oshi/app",
+      "project": "hako-oshi",
+      "view": "app",
+      "title": "ハコオシ",
+      "summary": "箱をゴールへ押して運ぶ倉庫番型パズル(全12面・ヒントと詰み判定つき)",
+      "tags": [
+        "ゲーム",
+        "パズル",
+        "スマホ"
+      ],
+      "kind": "page",
+      "license": "",
+      "path": "p/hako-oshi/app/index.html",
+      "updated_at": "2026-09-13T04:11:54Z",
+      "digest": "503496bca84d9ec9b1de232525dedd7b74fe3e6d6dc86917a8f07a8015ab674b",
+      "build_ref": null,
+      "source_versions": [],
+      "files": [
+        {
+          "path": "p/hako-oshi/app/index.html",
+          "sha256": "8a3d85d9787a05f618c8709ea6395309cdc789f61cc441a584b45017c7b5e141",
+          "size": 9465
+        },
+        {
+          "path": "p/hako-oshi/app/src/config.js",
+          "sha256": "41c40bbceb935317eeeecd455e7198a90dcfa517c70837b98aec1a13a62d104f",
+          "size": 1069
+        },
+        {
+          "path": "p/hako-oshi/app/src/deadlock.js",
+          "sha256": "7c782528fd30071629c1d8bb3b45cbac67600de88396885b8355f642810a23f7",
+          "size": 1412
+        },
+        {
+          "path": "p/hako-oshi/app/src/levels.js",
+          "sha256": "0a4b84fb8b68255319a7745e5f3adca6f245ab54b8d87fe0b8de74142caa36e0",
+          "size": 6813
+        },
+        {
+          "path": "p/hako-oshi/app/src/main.js",
+          "sha256": "4203ccf9e05aa380120fedf6a21936425c88aa52dbcdff33329c165c47c02a4f",
+          "size": 9389
+        },
+        {
+          "path": "p/hako-oshi/app/src/render.js",
+          "sha256": "eed3db93d5c6548cc2bb4e9cd4160e222610d458eae59071a9411c61e1cfe35b",
+          "size": 6899
+        },
+        {
+          "path": "p/hako-oshi/app/src/sokoban.js",
+          "sha256": "a499533cbaee8d3ced08b2b83294c2ba2922cc5f1e44de80b2580f425b2965cc",
+          "size": 3940
+        },
+        {
+          "path": "p/hako-oshi/app/src/solver.js",
+          "sha256": "a92f4e5592e5e4cbbcbc893794ff838619a6b413104512dfac157951fe9227dc",
+          "size": 6897
+        },
+        {
+          "path": "p/hako-oshi/app/src/sound.js",
+          "sha256": "b3ff1e414e856f41195541a1e7045e2b6c41d147cb12858d39be1d544dec1f1f",
+          "size": 2282
+        }
+      ]
+    },
+    {
+      "id": "four-winds/app",
+      "project": "four-winds",
+      "view": "app",
+      "title": "フォーウィンズ",
+      "summary": "15秒ごとに「前」が右→上→左→下と回るシューティング(PC専用)",
+      "tags": [
+        "ゲーム",
+        "アクション",
+        "PC専用"
+      ],
+      "kind": "page",
+      "license": "",
+      "path": "p/four-winds/app/index.html",
+      "updated_at": "2026-09-13T04:11:54Z",
+      "digest": "947ad6079546242d9f7281a326c97f376122a3282fe7412561d80078bea26a2c",
+      "build_ref": null,
+      "source_versions": [],
+      "files": [
+        {
+          "path": "p/four-winds/app/index.html",
+          "sha256": "2638430e6338bfb7cd0b56b9c5aea882ba68587ac986c5866cb61647c0f6b06b",
+          "size": 4840
+        },
+        {
+          "path": "p/four-winds/app/src/config.js",
+          "sha256": "d8ae3ce2ab92c7f0d272391e939ae34656e204f362ac4c431346fd5302684e7f",
+          "size": 4113
+        },
+        {
+          "path": "p/four-winds/app/src/directions.js",
+          "sha256": "e1f23bed6e4bb728d5041765934d67fc2be65d198b2d9a12abf4ad4169607a3b",
+          "size": 1819
+        },
+        {
+          "path": "p/four-winds/app/src/enemies.js",
+          "sha256": "49024d5d18b687924bc8680c9d2795ade8ecc7d102d0c03f5071d062d29ca45b",
+          "size": 7849
+        },
+        {
+          "path": "p/four-winds/app/src/game.js",
+          "sha256": "6933c213f4786aa84c4d85ca8ae349e3b99b6d85587aa0d0caf5a9f3e0f0a9be",
+          "size": 13871
+        },
+        {
+          "path": "p/four-winds/app/src/main.js",
+          "sha256": "090e2537902822c3194f9773145f45354b2307434c46cb648c5f0e433029cd53",
+          "size": 5679
+        },
+        {
+          "path": "p/four-winds/app/src/render.js",
+          "sha256": "f939fc0b31fb9f69d4ba6087c62cb81a10481d2184b615e89c18e9ffa4008778",
+          "size": 10876
+        },
+        {
+          "path": "p/four-winds/app/src/rng.js",
+          "sha256": "bbe3ad5c9b08196e7ff5d42b58459041b31a8a9a453e707f4050b36b3fb3e8d5",
+          "size": 935
+        },
+        {
+          "path": "p/four-winds/app/src/sound.js",
+          "sha256": "6e9f3521f736b99e46e33da3681354af367750dfd320ed3fc100637a5327c6e5",
+          "size": 3749
+        },
+        {
+          "path": "p/four-winds/app/src/stage.js",
+          "sha256": "f0f7472bd5fbd16249cb9337f3bd89d85f98e73cff061e785daa95ad5b3f8a19",
+          "size": 4661
+        }
+      ]
+    },
+    {
+      "id": "cosmo-merge/app",
+      "project": "cosmo-merge",
+      "view": "app",
+      "title": "コズモマージ",
+      "summary": "同じ天体をぶつけて育てる落下×合体の物理パズル。最終形は太陽",
+      "tags": [
+        "ゲーム",
+        "パズル",
+        "スマホ"
+      ],
+      "kind": "page",
+      "license": "",
+      "path": "p/cosmo-merge/app/index.html",
+      "updated_at": "2026-09-13T04:11:54Z",
+      "digest": "6bea46b4b778eca2cfa82061392961fe9fa1589cef254f8e0a0f75828e52e398",
+      "build_ref": null,
+      "source_versions": [],
+      "files": [
+        {
+          "path": "p/cosmo-merge/app/index.html",
+          "sha256": "209375e741d17fe28702955fc4a3f10c223793038af0e1edb622790003909553",
+          "size": 4536
+        },
+        {
+          "path": "p/cosmo-merge/app/src/config.js",
+          "sha256": "f443fecc039129b462e2d6c80f8a1e803c5324fa5fc5e73421a880df581b55f2",
+          "size": 2431
+        },
+        {
+          "path": "p/cosmo-merge/app/src/game.js",
+          "sha256": "33f74d59c0d320d69e97eb24975b6dd98e015f89931be2fd87535f8dca659b22",
+          "size": 5981
+        },
+        {
+          "path": "p/cosmo-merge/app/src/main.js",
+          "sha256": "2e07e9523a6eb7caae001648eb77eb6e8317ba2a4a44ec590743ba267dbe60c1",
+          "size": 5283
+        },
+        {
+          "path": "p/cosmo-merge/app/src/physics.js",
+          "sha256": "d3d38a496e5d192d85620754c03fc844f026c30cdc79fa672ff838771eb4b72d",
+          "size": 5335
+        },
+        {
+          "path": "p/cosmo-merge/app/src/render.js",
+          "sha256": "1c574f71372ba88f6122b999cb808bbd3b102d24faf278cc3ff929951886ea40",
+          "size": 5710
+        },
+        {
+          "path": "p/cosmo-merge/app/src/rng.js",
+          "sha256": "fb3040940d69821de801b22f696efbe7fc9717b0d5b08c4317a150177fe0e576",
+          "size": 1187
+        },
+        {
+          "path": "p/cosmo-merge/app/src/sound.js",
+          "sha256": "b4600d23402bc8c2ddd663a1d953d67d17ab99e211e544f2ed264f3b4c3d89f1",
+          "size": 2105
+        },
+        {
+          "path": "p/cosmo-merge/app/src/theme.js",
+          "sha256": "62f5491743373f80988439bc392e683ba0f9e9c78322ee18f93b3ad275d764c1",
+          "size": 1731
+        }
+      ]
+    },
+    {
+      "id": "commons/works",
+      "project": "commons",
+      "view": "works",
+      "title": "公開している成果物",
+      "summary": "公開済みの成果物だけを集めた索引(検索・絞り込み・並べ替えつき)",
+      "tags": [
+        "一覧"
+      ],
+      "kind": "page",
+      "license": "",
+      "path": "p/commons/works/index.html",
+      "updated_at": "2026-09-13T04:11:54Z",
+      "digest": "982d256e4f5214c2a5ef0a34f622dd5870197838c87bf7837111bcb862e8b6a2",
+      "build_ref": null,
+      "source_versions": [],
+      "files": [
+        {
+          "path": "p/commons/works/index.html",
+          "sha256": "9771d9d8530608364f3bbf6d7b2bb35f572dcedc268fe1aa73bda22381b98262",
+          "size": 34468
+        }
+      ]
+    },
+    {
+      "id": "commons/games",
+      "project": "commons",
+      "view": "games",
+      "title": "ゲーム作品集",
+      "summary": "ブラウザで動くオリジナルゲーム9本の一覧(インストール不要)",
+      "tags": [
+        "ゲーム",
+        "一覧"
+      ],
+      "kind": "page",
+      "license": "",
+      "path": "p/commons/games/index.html",
+      "updated_at": "2026-09-13T04:11:54Z",
+      "digest": "37b040879bc6181142312d89427e97a2ad1213cba424c139dee47656c3c2c21b",
+      "build_ref": null,
+      "source_versions": [],
+      "files": [
+        {
+          "path": "p/commons/games/index.html",
+          "sha256": "d8a00898abe74c6b2f3cde7b6e7e19a9b2f1a4099f0940e80baba6ded5b5c8e3",
+          "size": 9037
+        }
+      ]
+    },
     {
       "id": "paper-site/reading",
       "project": "paper-site",

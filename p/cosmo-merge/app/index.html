@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>コズモマージ — Cosmo Merge</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%23ffd76a'/%3E%3C/svg%3E">
+  <style>
+    /* 依存ゼロ方針のため CSS もこのファイルに内包する(外部CDN禁止) */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      background: radial-gradient(ellipse at 50% 20%, #1a2340 0%, #0a0e1e 70%);
+      color: #dde4f2;
+      font-family: system-ui, "Hiragino Sans", "Noto Sans JP", sans-serif;
+      touch-action: manipulation; /* ダブルタップズーム抑止 */
+    }
+
+    .wrap {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    h1 { font-size: 18px; letter-spacing: 2px; }
+
+    .hud {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 14px;
+    }
+    .hud .label { opacity: 0.6; font-size: 11px; display: block; }
+    .hud .value { font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+    #next {
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+    }
+
+    #mute {
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      font-size: 16px;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+
+    .stage { position: relative; width: 100%; }
+
+    canvas#game {
+      display: block;
+      width: 100%;
+      height: auto;
+      cursor: crosshair;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    #overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      background: rgba(5, 8, 18, 0.82);
+      border-radius: 8px;
+    }
+    #overlay[hidden] { display: none; }
+    #overlay h2 { font-size: 26px; letter-spacing: 4px; }
+    #overlay p { font-size: 15px; opacity: 0.85; }
+    #final-score { font-size: 34px; font-weight: 800; color: #ffd76a; }
+
+    #restart {
+      background: #ffd76a;
+      color: #1a1a2a;
+      border: none;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 10px 32px;
+      cursor: pointer;
+    }
+    #restart:hover { background: #ffe79a; }
+
+    .help { font-size: 11px; opacity: 0.5; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>コズモマージ</h1>
+      <div class="hud">
+        <div>
+          <span class="label">スコア</span>
+          <span class="value" id="score">0</span>
+        </div>
+        <div>
+          <span class="label">ベスト</span>
+          <span class="value" id="best">0</span>
+        </div>
+        <div>
+          <span class="label">つぎ</span>
+          <canvas id="next" width="48" height="48"></canvas>
+        </div>
+        <button id="mute" aria-label="サウンド切り替え">🔊</button>
+      </div>
+    </header>
+
+    <div class="stage">
+      <canvas id="game"></canvas>
+      <div id="overlay" hidden>
+        <h2>ゲームオーバー</h2>
+        <p>スコア</p>
+        <div id="final-score">0</div>
+        <button id="restart">もういちど</button>
+      </div>
+    </div>
+
+    <p class="help">
+      マウス/タッチで位置を決めてクリックで投下 ・ キーボード: ←→ 移動 / スペース 投下<br>
+      同じ天体をぶつけると進化。デッドラインを超えたらゲームオーバー。
+    </p>
+  </div>
+
+  <!-- ES Modules を使うため file:// では動かない。ローカルでは
+       `python3 -m http.server` 等で配信すること(README 参照) -->
+  <script type="module" src="./src/main.js"></script>
+<footer class="sm-provenance" style="font:12px/1.6 system-ui,sans-serif;color:#6b6b6b;padding:1rem;margin-top:2rem;border-top:1px solid #e2e2de;"><span>生成: 2026-09-13T04:11:54Z</span></footer></body>
+</html>

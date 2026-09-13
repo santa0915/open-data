@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ツインリープ — Twin Leap</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='1' y='4' width='7' height='8' rx='2' fill='%23e0564a'/%3E%3Crect x='8' y='4' width='7' height='8' rx='2' fill='%234a86e0'/%3E%3C/svg%3E">
+  <style>
+    /* 依存ゼロ方針のため CSS もこのファイルに内包する(外部CDN禁止) */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      background: #e7e3d6;
+      color: #3d4354;
+      font-family: system-ui, "Hiragino Sans", "Noto Sans JP", sans-serif;
+    }
+
+    .wrap {
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    h1 { font-size: 18px; letter-spacing: 2px; }
+
+    .hud { display: flex; align-items: center; gap: 18px; font-size: 14px; }
+    .hud .label { opacity: 0.55; font-size: 11px; display: block; }
+    .hud .value { font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+    #mute {
+      background: none;
+      border: 1px solid rgba(61, 67, 84, 0.3);
+      border-radius: 8px;
+      font-size: 16px;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+
+    .stage { position: relative; width: 100%; }
+
+    canvas#game {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 24px rgba(61, 67, 84, 0.25);
+    }
+
+    #overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      background: rgba(38, 42, 54, 0.85);
+      border-radius: 8px;
+      color: #f4f1e8;
+    }
+    #overlay[hidden] { display: none; }
+    #overlay h2 { font-size: 30px; letter-spacing: 5px; }
+    #final-stats { font-size: 18px; color: #ffd76a; font-weight: 700; }
+
+    #restart {
+      background: #ffd76a;
+      color: #1a1a2a;
+      border: none;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 10px 32px;
+      cursor: pointer;
+    }
+    #restart:hover { background: #ffe79a; }
+
+    .help {
+      font-size: 12px;
+      opacity: 0.65;
+      text-align: center;
+      line-height: 1.7;
+    }
+    .help .p1 { color: #c04236; font-weight: 700; }
+    .help .p2 { color: #3568b8; font-weight: 700; }
+    kbd {
+      background: #fff;
+      border: 1px solid #c9c3b4;
+      border-bottom-width: 2px;
+      border-radius: 4px;
+      padding: 0 5px;
+      font-family: inherit;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>ツインリープ</h1>
+      <div class="hud">
+        <div>
+          <span class="label">レベル</span>
+          <span class="value" id="level">1 / 5</span>
+        </div>
+        <div>
+          <span class="label">タイム</span>
+          <span class="value" id="time">0:00.0</span>
+        </div>
+        <div>
+          <span class="label">ミス</span>
+          <span class="value" id="deaths">0</span>
+        </div>
+        <button id="mute" aria-label="サウンド切り替え">🔊</button>
+      </div>
+    </header>
+
+    <div class="stage">
+      <canvas id="game"></canvas>
+      <div id="overlay" hidden>
+        <h2>ぜんクリア!</h2>
+        <div id="final-stats"></div>
+        <button id="restart">さいしょから</button>
+      </div>
+    </div>
+
+    <p class="help">
+      2人協力ゲーム(1人でも両手で遊べます) ・ <span class="p1">プレイヤー1</span>:
+      <kbd>A</kbd><kbd>D</kbd> 移動 <kbd>W</kbd> ジャンプ ・
+      <span class="p2">プレイヤー2</span>:
+      <kbd>←</kbd><kbd>→</kbd> 移動 <kbd>↑</kbd> ジャンプ ・
+      <kbd>R</kbd> やりなおし<br>
+      あいぼうの頭には乗れる。カギでドアを開けて、<b>ふたりとも</b>ドアに入ろう。
+    </p>
+  </div>
+
+  <!-- ES Modules を使うため file:// では動かない。ローカルでは
+       `python3 -m http.server` 等で配信すること(README 参照) -->
+  <script type="module" src="./src/main.js"></script>
+<footer class="sm-provenance" style="font:12px/1.6 system-ui,sans-serif;color:#6b6b6b;padding:1rem;margin-top:2rem;border-top:1px solid #e2e2de;"><span>生成: 2026-09-13T04:11:54Z</span></footer></body>
+</html>

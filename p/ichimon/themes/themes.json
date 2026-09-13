@@ -1,0 +1,2764 @@
+{
+  "schema_version": 1,
+  "title": "イチモン 取得テーマカタログ",
+  "description": "中学受験の事実データを Wikidata / e-Stat から取得するためのテーマ定義。SPARQL クエリと、出題の形(例文)を含む。",
+  "license": "CC0-1.0",
+  "caution": "status が draft / fixed-untested のものはライブ未検証のクエリです。そのまま動く保証はありません。",
+  "counts": {
+    "total": 100,
+    "by_status": {
+      "draft": 67,
+      "fixed-untested": 16,
+      "live-verified": 17
+    },
+    "by_source": {
+      "e-stat": 11,
+      "wikidata": 89
+    },
+    "by_kind": {
+      "pair": 31,
+      "rank": 38,
+      "single-region": 31
+    },
+    "by_area": {
+      "公民": 8,
+      "化学": 6,
+      "地学": 7,
+      "地理": 47,
+      "歴史": 29,
+      "生物": 3
+    }
+  },
+  "themes": [
+    {
+      "id": "airport-region",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "空港と地域",
+      "subject": "空港",
+      "tags": [
+        "地理",
+        "空港"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 52,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある空港です。国際線・国内線の主要空港は利用者数とあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q1248784 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "animal-lifespan-rank",
+      "area": "seibutsu",
+      "area_name": "生物",
+      "topic": "生き物の寿命",
+      "subject": "生き物の寿命",
+      "tags": [
+        "理科",
+        "動物",
+        "寿命"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "live-verified",
+      "status_note": "実際に取得して結果を確認済み",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 64,
+        "2": 64,
+        "3": 64,
+        "5": 64
+      },
+      "example_question": "生き物の中で1番目に寿命が長いとされるのは何ですか。",
+      "example_explanation": null,
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "lifespan"
+      },
+      "sparql": "SELECT ?itemLabel ?lifespan WHERE {\n  ?item wdt:P31 wd:Q16521 ; wdt:P2250 ?lifespan ; rdfs:label ?ja .\n  FILTER(LANG(?ja) = \"ja\")\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?lifespan)\nLIMIT 10",
+      "stats_data_id": null
+    },
+    {
+      "id": "animal-speed-rank",
+      "area": "seibutsu",
+      "area_name": "生物",
+      "topic": "動物の最高速度",
+      "subject": "動物の最高速度",
+      "tags": [
+        "理科",
+        "動物",
+        "速度"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "live-verified",
+      "status_note": "実際に取得して結果を確認済み",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 52,
+        "2": 62,
+        "3": 62,
+        "5": 62
+      },
+      "example_question": "動物のうち1番目に速く移動できるのは何ですか。",
+      "example_explanation": null,
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "speed"
+      },
+      "sparql": "SELECT ?itemLabel ?speed WHERE {\n  ?item wdt:P31 wd:Q16521 ; wdt:P2052 ?speed ; rdfs:label ?ja .\n  FILTER(LANG(?ja) = \"ja\")\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?speed)\nLIMIT 10",
+      "stats_data_id": null
+    },
+    {
+      "id": "apple-harvest",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "農業(果物)",
+      "subject": "りんごの収穫量",
+      "tags": [
+        "統計",
+        "農業",
+        "果物"
+      ],
+      "source": "e-stat",
+      "kind": "rank",
+      "status": "fixed-untested",
+      "status_note": "一度失敗し、直したが再取得は未確認",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 45,
+        "2": 55,
+        "3": 55,
+        "5": 62
+      },
+      "example_question": "りんごの収穫量が日本一多い都道府県はどこですか。",
+      "example_explanation": "◯◯はりんごの収穫量が全国1位です(出典: 政府統計 e-Stat)。統計は年によって変わるため、順位は基準年とセットで覚えましょう。",
+      "result_keys": {
+        "name": "name",
+        "value": "val"
+      },
+      "sparql": null,
+      "stats_data_id": "0002119814"
+    },
+    {
+      "id": "basin-region",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "盆地と地域",
+      "subject": "盆地",
+      "tags": [
+        "地理",
+        "盆地"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 54,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある盆地です。盆地は昼夜の気温差が大きく、果樹栽培がさかんな地域が多くあります。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q166620 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "battle-region",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "戦いの舞台",
+      "subject": "古戦場",
+      "tags": [
+        "歴史",
+        "戦い"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 56,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯の舞台は△△です。戦いの年と勝敗、その後の影響を整理しましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q178561 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "bay-region",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "湾と地域",
+      "subject": "湾",
+      "tags": [
+        "地理",
+        "湾"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 52,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△に面する湾です。湾は港や工業地帯の立地と結びつけて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q39594 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "bird-wingspan-rank",
+      "area": "seibutsu",
+      "area_name": "生物",
+      "topic": "鳥の翼幅",
+      "subject": "鳥の翼幅",
+      "tags": [
+        "理科",
+        "動物",
+        "鳥"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 64,
+        "2": 64,
+        "3": 64,
+        "5": 64
+      },
+      "example_question": "翼幅が1番目に大きい鳥は何ですか。",
+      "example_explanation": null,
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "wingspan"
+      },
+      "sparql": "SELECT ?itemLabel ?wingspan WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q5113 ; wdt:P2050 ?wingspan .\n  FILTER(?wingspan > 2)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?wingspan)\nLIMIT 10",
+      "stats_data_id": null
+    },
+    {
+      "id": "bridge-region",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "橋と地域",
+      "subject": "橋",
+      "tags": [
+        "地理",
+        "橋"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "fixed-untested",
+      "status_note": "一度失敗し、直したが再取得は未確認",
+      "hensachi": 56,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある橋です。本州と四国・本州と九州を結ぶ橋は特によく問われます。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P17 wd:Q17 ; wdt:P131 ?pref ; rdfs:label ?ja .\n  ?pref wdt:P31 wd:Q50337 .\n  FILTER(LANG(?ja) = \"ja\" && (STRENDS(?ja, \"橋\")))\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel\nLIMIT 300",
+      "stats_data_id": null
+    },
+    {
+      "id": "cape-region",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "岬と地域",
+      "subject": "岬",
+      "tags": [
+        "地理",
+        "岬"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 56,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある岬です。日本の東西南北の端にあたる岬は特によく問われます。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q185113 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "castle-builder",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "城と築城者",
+      "subject": "築城者",
+      "tags": [
+        "歴史",
+        "戦国",
+        "城"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "live-verified",
+      "status_note": "実際に取得して結果を確認済み",
+      "hensachi": 58,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯を築いたのはだれですか。",
+      "example_explanation": "◯◯を築いたのは△△です。城と築いた武将、支配した地域をセットで覚えましょう。",
+      "result_keys": {
+        "name": "castleLabel",
+        "value": "founderLabel"
+      },
+      "sparql": "SELECT ?castleLabel ?founderLabel WHERE {\n  ?castle wdt:P31/wdt:P279* wd:Q23413 ; wdt:P17 wd:Q17 ; wdt:P112 ?founder ; rdfs:label ?cja .\n  ?founder rdfs:label ?fja .\n  FILTER(LANG(?cja) = \"ja\" && LANG(?fja) = \"ja\")\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nLIMIT 60",
+      "stats_data_id": null
+    },
+    {
+      "id": "castle-region",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "城と地域",
+      "subject": "城",
+      "tags": [
+        "歴史",
+        "城"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 50,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある城です。城を築いた人物や時代とあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q23413 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "cattle-stock",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "畜産業",
+      "subject": "肉用牛の飼育頭数",
+      "tags": [
+        "統計",
+        "畜産"
+      ],
+      "source": "e-stat",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 45,
+        "2": 55,
+        "3": 55,
+        "5": 62
+      },
+      "example_question": "肉用牛の飼育頭数が日本一多い都道府県はどこですか。",
+      "example_explanation": "◯◯は肉用牛の飼育頭数が全国1位です(出典: 政府統計 e-Stat)。統計は年によって変わるため、順位は基準年とセットで覚えましょう。",
+      "result_keys": {
+        "name": "name",
+        "value": "val"
+      },
+      "sparql": null,
+      "stats_data_id": null
+    },
+    {
+      "id": "cave-region",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "洞窟・鍾乳洞と地域",
+      "subject": "洞窟",
+      "tags": [
+        "地理",
+        "洞窟"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 60,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある洞窟(鍾乳洞)です。石灰岩が地下水に溶かされてできた地形です。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q35509 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "classic-work-author",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "古典作品と作者",
+      "subject": "古典の作者",
+      "tags": [
+        "歴史",
+        "文学"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "fixed-untested",
+      "status_note": "一度失敗し、直したが再取得は未確認",
+      "hensachi": 52,
+      "hensachi_by_rank": null,
+      "example_question": "「◯◯」の作者はだれですか。",
+      "example_explanation": "「◯◯」の作者は△△です。成立した時代とあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "authorLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?authorLabel WHERE {\n  ?item wdt:P495 wd:Q17 ;\n        wdt:P31/wdt:P279? wd:Q7725634 ;\n        wdt:P50 ?author ;\n        rdfs:label ?ja .\n  FILTER(LANG(?ja) = \"ja\")\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel\nLIMIT 300",
+      "stats_data_id": null
+    },
+    {
+      "id": "comet-orbit-period",
+      "area": "chigaku",
+      "area_name": "地学",
+      "topic": "彗星の公転周期",
+      "subject": "彗星の公転周期",
+      "tags": [
+        "理科",
+        "天体",
+        "彗星"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "live-verified",
+      "status_note": "実際に取得して結果を確認済み",
+      "hensachi": 66,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯が太陽のまわりを1周するのにかかる時間はおよそ何年ですか。",
+      "example_explanation": "◯◯の公転周期は約△△年です。よく知られるハレー彗星は約76年周期で地球に近づきます。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "period"
+      },
+      "sparql": "SELECT ?itemLabel ?period WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q3559 ; rdfs:label ?ja ;\n        p:P2146/psv:P2146 ?value .\n  ?value wikibase:quantityAmount ?period ; wikibase:quantityUnit wd:Q577 .\n  FILTER(LANG(?ja) = \"ja\" && ?period > 0 && ?period < 300)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?period\nLIMIT 15",
+      "stats_data_id": null
+    },
+    {
+      "id": "country-continent",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "国と大陸",
+      "subject": "大陸",
+      "tags": [
+        "地理",
+        "世界",
+        "大陸"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 50,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの大陸ですか。",
+      "example_explanation": "◯◯は△△にあります。各大陸と主要な国の位置を地図で確認しましょう。",
+      "result_keys": {
+        "name": "countryLabel",
+        "value": "continentLabel"
+      },
+      "sparql": "SELECT ?countryLabel ?continentLabel WHERE {\n  ?country wdt:P31 wd:Q6256 ; wdt:P30 ?continent .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?countryLabel\nLIMIT 200",
+      "stats_data_id": null
+    },
+    {
+      "id": "country-currency",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "世界の国と通貨",
+      "subject": "世界の通貨",
+      "tags": [
+        "地理",
+        "世界",
+        "通貨"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 58,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯で使われている通貨は何ですか。",
+      "example_explanation": "◯◯の通貨は△△です。貿易や為替の学習ともつながります。",
+      "result_keys": {
+        "name": "countryLabel",
+        "value": "currencyLabel"
+      },
+      "sparql": "SELECT ?countryLabel ?currencyLabel WHERE {\n  ?country wdt:P31 wd:Q6256 ; wdt:P38 ?currency .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?countryLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "country-gdp-rank",
+      "area": "koumin",
+      "area_name": "公民",
+      "topic": "国のGDP",
+      "subject": "国内総生産(GDP)",
+      "tags": [
+        "公民",
+        "経済",
+        "世界"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 48,
+        "2": 56,
+        "3": 56,
+        "5": 64
+      },
+      "example_question": "国内総生産(GDP)が世界で1番目に大きい国はどこですか。",
+      "example_explanation": "◯◯はGDPが世界1位の国です。GDPは国の経済規模を示す指標で、年により変動します。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "gdp"
+      },
+      "sparql": "SELECT ?itemLabel ?gdp WHERE {\n  ?item wdt:P31 wd:Q6256 ; wdt:P2131 ?gdp .\n  FILTER(?gdp > 500000000000)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?gdp)\nLIMIT 15",
+      "stats_data_id": null
+    },
+    {
+      "id": "country-language",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "国と公用語",
+      "subject": "公用語",
+      "tags": [
+        "地理",
+        "世界",
+        "言語"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 56,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯の公用語は何ですか。",
+      "example_explanation": "◯◯の公用語は△△です。公用語が複数ある国もあるため、主要言語をまとめて覚えましょう。",
+      "result_keys": {
+        "name": "countryLabel",
+        "value": "languageLabel"
+      },
+      "sparql": "SELECT ?countryLabel ?languageLabel WHERE {\n  ?country wdt:P31 wd:Q6256 ; wdt:P37 ?language .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?countryLabel\nLIMIT 100",
+      "stats_data_id": null
+    },
+    {
+      "id": "country-un-year",
+      "area": "koumin",
+      "area_name": "公民",
+      "topic": "国連加盟年",
+      "subject": "国連加盟年",
+      "tags": [
+        "公民",
+        "国際",
+        "国連"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 62,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯が国際連合に加盟したのは西暦何年ですか。",
+      "example_explanation": "◯◯は西暦△△年に国連に加盟しました。国連は1945年に設立され、現在193か国が加盟しています。",
+      "result_keys": {
+        "name": "countryLabel",
+        "value": "year"
+      },
+      "sparql": "SELECT ?countryLabel (YEAR(?joined) AS ?year) WHERE {\n  ?country wdt:P31 wd:Q6256 ; p:P463 ?stmt .\n  ?stmt ps:P463 wd:Q1065 ; pq:P580 ?joined .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?year\nLIMIT 100",
+      "stats_data_id": null
+    },
+    {
+      "id": "dam-region",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "ダムと地域",
+      "subject": "ダム",
+      "tags": [
+        "地理",
+        "ダム"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 58,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にあるダムです。水力発電・治水・かんがい用水の供給など多くの役割を担っています。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q12323 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "earthquake-year",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "地震と年",
+      "subject": "地震の発生年",
+      "tags": [
+        "歴史",
+        "災害",
+        "地震"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 52,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯が発生したのは西暦何年ですか。",
+      "example_explanation": "◯◯は西暦△△年に発生した地震・震災です。震源地と被害、その後の復興もあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "year"
+      },
+      "sparql": "SELECT ?itemLabel (YEAR(?date) AS ?year) WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q7944 ; wdt:P17 wd:Q17 ; wdt:P585 ?date ; rdfs:label ?ja .\n  FILTER(LANG(?ja) = \"ja\")\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?year\nLIMIT 50",
+      "stats_data_id": null
+    },
+    {
+      "id": "element-density-rank",
+      "area": "kagaku",
+      "area_name": "化学",
+      "topic": "元素と密度",
+      "subject": "元素の密度",
+      "tags": [
+        "理科",
+        "元素",
+        "密度"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 66,
+        "2": 66,
+        "3": 66,
+        "5": 66
+      },
+      "example_question": "密度が1番目に大きい元素は何ですか。",
+      "example_explanation": null,
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "density"
+      },
+      "sparql": "SELECT ?itemLabel ?density WHERE {\n  ?item wdt:P31 wd:Q11344 ; wdt:P1086 ?num ; wdt:P2054 ?density .\n  FILTER(?num <= 92)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?density)\nLIMIT 10",
+      "stats_data_id": null
+    },
+    {
+      "id": "element-discovery-year",
+      "area": "kagaku",
+      "area_name": "化学",
+      "topic": "元素の発見年",
+      "subject": "元素の発見年",
+      "tags": [
+        "理科",
+        "元素",
+        "発見"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 66,
+      "hensachi_by_rank": null,
+      "example_question": "元素「◯◯」が発見されたのは西暦何年ですか。",
+      "example_explanation": "◯◯は西暦△△年に発見されました。元素の発見は化学の歴史と関連づけて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "year"
+      },
+      "sparql": "SELECT ?itemLabel (YEAR(?discovery) AS ?year) WHERE {\n  ?item wdt:P31 wd:Q11344 ; wdt:P1086 ?num ; wdt:P575 ?discovery .\n  FILTER(?num <= 20)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?year",
+      "stats_data_id": null
+    },
+    {
+      "id": "element-melting-rank",
+      "area": "kagaku",
+      "area_name": "化学",
+      "topic": "元素と融点",
+      "subject": "元素の融点",
+      "tags": [
+        "理科",
+        "元素",
+        "融点"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 66,
+        "2": 66,
+        "3": 66,
+        "5": 66
+      },
+      "example_question": "原子番号1〜20の元素の中で融点が1番目に高い元素は何ですか。",
+      "example_explanation": "◯◯は原子番号1〜20の元素の中で1番目に融点が高い元素です。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "melting"
+      },
+      "sparql": "SELECT ?itemLabel ?melting WHERE {\n  ?item wdt:P31 wd:Q11344 ; wdt:P1086 ?num ; wdt:P2101 ?melting .\n  FILTER(?num <= 20)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?melting)\nLIMIT 10",
+      "stats_data_id": null
+    },
+    {
+      "id": "element-number",
+      "area": "kagaku",
+      "area_name": "化学",
+      "topic": "元素と原子番号",
+      "subject": "原子番号",
+      "tags": [
+        "理科",
+        "元素"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 64,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯の原子番号はいくつですか。",
+      "example_explanation": "◯◯の原子番号は△△です。原子番号は原子核にある陽子の数を表します。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "num"
+      },
+      "sparql": "SELECT ?itemLabel ?num WHERE {\n  ?item wdt:P31 wd:Q11344 ; wdt:P1086 ?num .\n  FILTER(?num <= 20)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?num",
+      "stats_data_id": null
+    },
+    {
+      "id": "element-symbol",
+      "area": "kagaku",
+      "area_name": "化学",
+      "topic": "元素と記号",
+      "subject": "元素記号",
+      "tags": [
+        "理科",
+        "元素"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 58,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯の元素記号は何ですか。",
+      "example_explanation": "◯◯の元素記号は△△です。おもな元素の記号は正確に書けるようにしましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "symbol"
+      },
+      "sparql": "SELECT ?itemLabel ?symbol WHERE {\n  ?item wdt:P31 wd:Q11344 ; wdt:P246 ?symbol ; wdt:P1086 ?num .\n  FILTER(?num <= 20)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?num",
+      "stats_data_id": null
+    },
+    {
+      "id": "era-start-year",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "元号",
+      "subject": "元号の始まり",
+      "tags": [
+        "歴史",
+        "元号"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "fixed-untested",
+      "status_note": "一度失敗し、直したが再取得は未確認",
+      "hensachi": 60,
+      "hensachi_by_rank": null,
+      "example_question": "元号の「◯◯」が始まったのは西暦何年ですか。",
+      "example_explanation": "◯◯は西暦△△年に始まった元号です。元号と西暦の対応は年表問題でよく問われます。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "year"
+      },
+      "sparql": "SELECT ?itemLabel (YEAR(?start) AS ?year) WHERE {\n  ?item wdt:P31 wd:Q24706 .\n  OPTIONAL { ?item wdt:P580 ?s1 }\n  OPTIONAL { ?item wdt:P571 ?s2 }\n  BIND(COALESCE(?s1, ?s2) AS ?start)\n  FILTER(BOUND(?start))\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?year",
+      "stats_data_id": null
+    },
+    {
+      "id": "event-year",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "年号",
+      "subject": "出来事の年",
+      "tags": [
+        "歴史",
+        "年号"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "fixed-untested",
+      "status_note": "一度失敗し、直したが再取得は未確認",
+      "hensachi": 52,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯が起きたのは西暦何年ですか。",
+      "example_explanation": "◯◯は西暦△△年のできごとです。前後のできごととの順序もあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "year"
+      },
+      "sparql": "SELECT ?itemLabel (YEAR(?date) AS ?year) WHERE {\n  VALUES ?cls { wd:Q1656682 wd:Q13418847 wd:Q198 wd:Q178561 }\n  ?item wdt:P17 wd:Q17 ; wdt:P31 ?cls ; wdt:P585 ?date ; rdfs:label ?ja .\n  FILTER(LANG(?ja) = \"ja\")\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?year\nLIMIT 300",
+      "stats_data_id": null
+    },
+    {
+      "id": "festival-region",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "お祭りと地域",
+      "subject": "お祭り",
+      "tags": [
+        "歴史",
+        "祭り"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "fixed-untested",
+      "status_note": "一度失敗し、直したが再取得は未確認",
+      "hensachi": 54,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△で行われる祭りです。各地の伝統的なお祭りと地域の歴史をあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P17 wd:Q17 ; wdt:P131 ?pref ; rdfs:label ?ja .\n  ?pref wdt:P31 wd:Q50337 .\n  FILTER(LANG(?ja) = \"ja\" && (STRENDS(?ja, \"祭\") || STRENDS(?ja, \"祭り\") || STRENDS(?ja, \"まつり\")))\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel\nLIMIT 300",
+      "stats_data_id": null
+    },
+    {
+      "id": "figure-birthplace",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "人物と出身地",
+      "subject": "人物の出身都道府県",
+      "tags": [
+        "歴史",
+        "人物"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "fixed-untested",
+      "status_note": "一度失敗し、直したが再取得は未確認",
+      "hensachi": 54,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯はどの都道府県の出身ですか。",
+      "example_explanation": "◯◯は△△の出身です。活躍した分野や時代とあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31 wd:Q5 ; wdt:P27 wd:Q17 ; wdt:P19 ?birthCity ; wdt:P569 ?birth ; rdfs:label ?ja .\n  ?birthCity wdt:P131* ?pref .\n  ?pref wdt:P31 wd:Q50337 .\n  FILTER(LANG(?ja) = \"ja\" && YEAR(?birth) < 1950)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel\nLIMIT 200",
+      "stats_data_id": null
+    },
+    {
+      "id": "fishery-catch",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "水産業",
+      "subject": "漁業の水あげ量",
+      "tags": [
+        "統計",
+        "水産業"
+      ],
+      "source": "e-stat",
+      "kind": "rank",
+      "status": "fixed-untested",
+      "status_note": "一度失敗し、直したが再取得は未確認",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 45,
+        "2": 55,
+        "3": 55,
+        "5": 62
+      },
+      "example_question": "漁業の水あげ量が日本一多い都道府県はどこですか。",
+      "example_explanation": "◯◯は漁業の水あげ量が全国1位です(出典: 政府統計 e-Stat)。統計は年によって変わるため、順位は基準年とセットで覚えましょう。",
+      "result_keys": {
+        "name": "name",
+        "value": "val"
+      },
+      "sparql": null,
+      "stats_data_id": "0002001226"
+    },
+    {
+      "id": "garden-region",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "庭園と地域",
+      "subject": "庭園",
+      "tags": [
+        "歴史",
+        "庭園"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "fixed-untested",
+      "status_note": "一度失敗し、直したが再取得は未確認",
+      "hensachi": 58,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある庭園です。日本三名園(偕楽園・兼六園・後楽園)は特によく問われます。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P17 wd:Q17 ; wdt:P131 ?pref ; rdfs:label ?ja .\n  ?pref wdt:P31 wd:Q50337 .\n  FILTER(LANG(?ja) = \"ja\" && (STRENDS(?ja, \"園\") && !CONTAINS(?ja, \"公園\") && !CONTAINS(?ja, \"動物園\") && !CONTAINS(?ja, \"遊園\")))\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel\nLIMIT 300",
+      "stats_data_id": null
+    },
+    {
+      "id": "historical-capital-region",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "古代の都",
+      "subject": "都",
+      "tags": [
+        "歴史",
+        "都"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 50,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は現在の△△に置かれました。都がどの時代に置かれたかをあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q1549591 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "hot-spring-region",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "温泉と地域",
+      "subject": "温泉",
+      "tags": [
+        "地理",
+        "温泉"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "live-verified",
+      "status_note": "実際に取得して結果を確認済み",
+      "hensachi": 56,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある温泉です。日本は火山国のため全国に温泉地があります。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q655311 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "industrial-output",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "工業",
+      "subject": "工業製品の出荷額",
+      "tags": [
+        "統計",
+        "工業"
+      ],
+      "source": "e-stat",
+      "kind": "rank",
+      "status": "fixed-untested",
+      "status_note": "一度失敗し、直したが再取得は未確認",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 48,
+        "2": 60,
+        "3": 60,
+        "5": 60
+      },
+      "example_question": "工業製品の出荷額が日本一多い都道府県はどこですか。",
+      "example_explanation": "◯◯は工業製品の出荷額が全国1位です(出典: 政府統計 e-Stat)。統計は年によって変わるため、順位は基準年とセットで覚えましょう。",
+      "result_keys": {
+        "name": "name",
+        "value": "val"
+      },
+      "sparql": null,
+      "stats_data_id": "0004003974"
+    },
+    {
+      "id": "intl-court-hq",
+      "area": "koumin",
+      "area_name": "公民",
+      "topic": "国際裁判所と本部",
+      "subject": "国際裁判所の本部",
+      "tags": [
+        "公民",
+        "国際",
+        "法"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "live-verified",
+      "status_note": "実際に取得して結果を確認済み",
+      "hensachi": 62,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯の本部が置かれているのはどの都市ですか。",
+      "example_explanation": "◯◯の本部は△△にあります。国際裁判所は国家間の紛争を法的に解決する機関です。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "hqLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?hqLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q1262438 ; wdt:P159 ?hq .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nLIMIT 20",
+      "stats_data_id": null
+    },
+    {
+      "id": "intl-org-abbrev",
+      "area": "koumin",
+      "area_name": "公民",
+      "topic": "国際機関の略称",
+      "subject": "国際機関の略称",
+      "tags": [
+        "公民",
+        "国際"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 54,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯をアルファベットの略称で何といいますか。",
+      "example_explanation": "◯◯の略称は△△です。略称と正式名称・役割をセットで覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "abbrev"
+      },
+      "sparql": "SELECT ?itemLabel ?abbrev WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q484652 ; wdt:P1813 ?abbrev .\n  FILTER(LANG(?abbrev) = \"en\")\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "intl-org-founded",
+      "area": "koumin",
+      "area_name": "公民",
+      "topic": "国際機関の設立",
+      "subject": "国際機関の設立年",
+      "tags": [
+        "公民",
+        "国際"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 60,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯が設立されたのは西暦何年ですか。",
+      "example_explanation": "◯◯は△△年に設立されました。設立の背景となったできごともあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "year"
+      },
+      "sparql": "SELECT ?itemLabel (YEAR(?date) AS ?year) WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q484652 ; wdt:P571 ?date .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?year",
+      "stats_data_id": null
+    },
+    {
+      "id": "intl-org-hq",
+      "area": "koumin",
+      "area_name": "公民",
+      "topic": "国際機関",
+      "subject": "国際機関の本部",
+      "tags": [
+        "公民",
+        "国際"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 56,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯の本部が置かれている都市はどこですか。",
+      "example_explanation": "◯◯の本部は△△にあります。国際機関は役割と本部所在地をセットで覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "hqLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?hqLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q484652 ; wdt:P159 ?hq .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "island-rank",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "島と面積",
+      "subject": "島の面積",
+      "tags": [
+        "地理",
+        "島"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 48,
+        "2": 48,
+        "3": 58,
+        "5": 58
+      },
+      "example_question": "日本で1番目に面積が広い島は何ですか。",
+      "example_explanation": null,
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "area"
+      },
+      "sparql": "SELECT ?itemLabel ?area WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q23442 ;\n        wdt:P17 wd:Q17 ;\n        wdt:P2046 ?area .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?area)\nLIMIT 30",
+      "stats_data_id": null
+    },
+    {
+      "id": "kofun-region",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "古墳と地域",
+      "subject": "古墳",
+      "tags": [
+        "歴史",
+        "古墳"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "fixed-untested",
+      "status_note": "一度失敗し、直したが再取得は未確認",
+      "hensachi": 56,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある古墳です。古墳の形(前方後円墳など)と時代もあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P17 wd:Q17 ; wdt:P131 ?pref ; rdfs:label ?ja .\n  ?pref wdt:P31 wd:Q50337 .\n  FILTER(LANG(?ja) = \"ja\" && (STRENDS(?ja, \"古墳\")))\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel\nLIMIT 300",
+      "stats_data_id": null
+    },
+    {
+      "id": "lake-rank",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "湖と面積",
+      "subject": "湖の面積",
+      "tags": [
+        "地理",
+        "湖"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 42,
+        "2": 52,
+        "3": 52,
+        "5": 62
+      },
+      "example_question": "日本で1番目に面積が広い湖は何ですか。",
+      "example_explanation": null,
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "area"
+      },
+      "sparql": "SELECT ?itemLabel ?area WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q23397 ;\n        wdt:P17 wd:Q17 ;\n        wdt:P2046 ?area .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?area)\nLIMIT 30",
+      "stats_data_id": null
+    },
+    {
+      "id": "literary-work-year",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "文学作品と成立年",
+      "subject": "文学作品の成立年",
+      "tags": [
+        "歴史",
+        "文学"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 52,
+      "hensachi_by_rank": null,
+      "example_question": "「◯◯」が刊行(成立)されたのは西暦何年ですか。",
+      "example_explanation": "「◯◯」は西暦△△年ごろに成立しました。作者と成立した時代の文化もあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "year"
+      },
+      "sparql": "SELECT ?itemLabel (YEAR(?date) AS ?year) WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q7725634 ; wdt:P495 wd:Q17 ; wdt:P577 ?date ; rdfs:label ?ja .\n  FILTER(LANG(?ja) = \"ja\")\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?year\nLIMIT 100",
+      "stats_data_id": null
+    },
+    {
+      "id": "meiji-event-year",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "明治時代のできごと",
+      "subject": "明治時代のできごと",
+      "tags": [
+        "歴史",
+        "明治"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "live-verified",
+      "status_note": "実際に取得して結果を確認済み",
+      "hensachi": 52,
+      "hensachi_by_rank": null,
+      "example_question": "明治時代に◯◯が起きたのは西暦何年ですか。",
+      "example_explanation": "◯◯は西暦△△年(明治時代)のできごとです。明治の近代化・文明開化の流れとあわせて整理しましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "year"
+      },
+      "sparql": "SELECT ?itemLabel (YEAR(?date) AS ?year) WHERE {\n  VALUES ?cls { wd:Q1656682 wd:Q13418847 wd:Q198 wd:Q178561 wd:Q7944 wd:Q3839081 wd:Q131569 }\n  ?item wdt:P17 wd:Q17 ; wdt:P31 ?cls ; wdt:P585 ?date ; rdfs:label ?ja .\n  FILTER(LANG(?ja) = \"ja\" && ?date >= \"1868-01-01T00:00:00Z\"^^xsd:dateTime && ?date < \"1912-07-30T00:00:00Z\"^^xsd:dateTime)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?year\nLIMIT 100",
+      "stats_data_id": null
+    },
+    {
+      "id": "mikan-harvest",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "農業(果物)",
+      "subject": "みかんの収穫量",
+      "tags": [
+        "統計",
+        "農業",
+        "果物"
+      ],
+      "source": "e-stat",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 45,
+        "2": 55,
+        "3": 55,
+        "5": 62
+      },
+      "example_question": "みかんの収穫量が日本一多い都道府県はどこですか。",
+      "example_explanation": "◯◯はみかんの収穫量が全国1位です(出典: 政府統計 e-Stat)。統計は年によって変わるため、順位は基準年とセットで覚えましょう。",
+      "result_keys": {
+        "name": "name",
+        "value": "val"
+      },
+      "sparql": null,
+      "stats_data_id": null
+    },
+    {
+      "id": "mine-region",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "鉱山と地域",
+      "subject": "鉱山",
+      "tags": [
+        "歴史",
+        "鉱業"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 60,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある(あった)鉱山です。採掘された鉱物資源と歴史をあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q820477 ; wdt:P17 wd:Q17 ; wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel\nLIMIT 100",
+      "stats_data_id": null
+    },
+    {
+      "id": "mineral-hardness-rank",
+      "area": "kagaku",
+      "area_name": "化学",
+      "topic": "鉱物とモース硬度",
+      "subject": "モース硬度",
+      "tags": [
+        "理科",
+        "鉱物",
+        "岩石"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "live-verified",
+      "status_note": "実際に取得して結果を確認済み",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 58,
+        "2": 58,
+        "3": 64,
+        "5": 64
+      },
+      "example_question": "モース硬度が1番目に低い(やわらかい)鉱物は何ですか。",
+      "example_explanation": null,
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "hardness"
+      },
+      "sparql": "SELECT ?itemLabel ?hardness WHERE {\n  ?item wdt:P1088 ?hardness ; wikibase:sitelinks ?sl ; rdfs:label ?ja .\n  FILTER(LANG(?ja) = \"ja\" && ?sl > 25)\n  FILTER NOT EXISTS { ?item wdt:P31 wd:Q11344 }\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?hardness\nLIMIT 12",
+      "stats_data_id": null
+    },
+    {
+      "id": "moon-radius-rank",
+      "area": "chigaku",
+      "area_name": "地学",
+      "topic": "太陽系の衛星",
+      "subject": "衛星の大きさ",
+      "tags": [
+        "理科",
+        "天体",
+        "衛星"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "live-verified",
+      "status_note": "実際に取得して結果を確認済み",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 64,
+        "2": 64,
+        "3": 64,
+        "5": 64
+      },
+      "example_question": "太陽系で1番目に半径が大きい衛星は何ですか。",
+      "example_explanation": null,
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "radius"
+      },
+      "sparql": "SELECT ?itemLabel ?radius WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q2537 ; wdt:P2120 ?radius ; rdfs:label ?ja .\n  FILTER(LANG(?ja) = \"ja\" && ?radius > 500)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?radius)\nLIMIT 12",
+      "stats_data_id": null
+    },
+    {
+      "id": "mountain-rank",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "山と標高",
+      "subject": "山の高さ",
+      "tags": [
+        "地理",
+        "山"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 40,
+        "2": 50,
+        "3": 50,
+        "5": 60
+      },
+      "example_question": "日本で1番目に高い山は何ですか。",
+      "example_explanation": null,
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "elevation"
+      },
+      "sparql": "SELECT ?itemLabel ?elevation WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q8502 ;\n        wdt:P17 wd:Q17 ;\n        wdt:P2044 ?elevation .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?elevation)\nLIMIT 30",
+      "stats_data_id": null
+    },
+    {
+      "id": "museum-region",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "博物館・美術館と地域",
+      "subject": "博物館",
+      "tags": [
+        "歴史",
+        "博物館"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 58,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある博物館・美術館です。収蔵品や設立背景とあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q33506 ; wdt:P17 wd:Q17 ; wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel\nLIMIT 100",
+      "stats_data_id": null
+    },
+    {
+      "id": "national-park-region",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "国立公園",
+      "subject": "国立公園",
+      "tags": [
+        "地理",
+        "国立公園"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 58,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある国立公園です。自然を守るために国が指定した地域です。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q46169 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "national-treasure-region",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "国宝と地域",
+      "subject": "国宝",
+      "tags": [
+        "歴史",
+        "国宝"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "fixed-untested",
+      "status_note": "一度失敗し、直したが再取得は未確認",
+      "hensachi": 60,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある国宝です。文化財は時代・つくられた目的とあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P1435 wd:Q1139795 ; wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel\nLIMIT 300",
+      "stats_data_id": null
+    },
+    {
+      "id": "ngo-hq",
+      "area": "koumin",
+      "area_name": "公民",
+      "topic": "国際NGOと本部",
+      "subject": "NGOの本部",
+      "tags": [
+        "公民",
+        "国際",
+        "NGO"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "live-verified",
+      "status_note": "実際に取得して結果を確認済み",
+      "hensachi": 64,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯(NGO)の本部が置かれているのはどの都市ですか。",
+      "example_explanation": "◯◯の本部は△△にあります。NGOは非政府組織として国際問題に取り組む民間団体です。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "hqLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?hqLabel WHERE {\n  ?item wdt:P31 wd:Q79913 ; wdt:P159 ?hq ; wikibase:sitelinks ?sl ; rdfs:label ?ja .\n  FILTER(LANG(?ja) = \"ja\" && ?sl > 30)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?sl)\nLIMIT 25",
+      "stats_data_id": null
+    },
+    {
+      "id": "nobel-japanese",
+      "area": "koumin",
+      "area_name": "公民",
+      "topic": "日本人のノーベル賞",
+      "subject": "ノーベル賞の分野",
+      "tags": [
+        "公民",
+        "ノーベル賞",
+        "科学"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 56,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯はどの分野でノーベル賞を受賞しましたか。",
+      "example_explanation": "◯◯は△△を受賞しました。日本人のノーベル賞受賞者は理系分野が多いことも覚えておきましょう。",
+      "result_keys": {
+        "name": "personLabel",
+        "value": "prizeLabel"
+      },
+      "sparql": "SELECT ?personLabel ?prizeLabel WHERE {\n  ?person wdt:P27 wd:Q17 ; wdt:P166 ?prize .\n  ?prize wdt:P31/wdt:P279* wd:Q7191 .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?personLabel\nLIMIT 50",
+      "stats_data_id": null
+    },
+    {
+      "id": "ocean-area-rank",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "海洋と面積",
+      "subject": "海洋の面積",
+      "tags": [
+        "地理",
+        "世界",
+        "海洋"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 48,
+        "2": 60,
+        "3": 60,
+        "5": 60
+      },
+      "example_question": "世界で1番目に広い海洋は何ですか。",
+      "example_explanation": "◯◯は世界で1番目に広い海洋です。五大洋(太平洋・大西洋・インド洋・北極海・南極海)を覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "area"
+      },
+      "sparql": "SELECT ?itemLabel ?area WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q9430 ; wdt:P2046 ?area .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?area)\nLIMIT 10",
+      "stats_data_id": null
+    },
+    {
+      "id": "ocean-trench-depth-rank",
+      "area": "chigaku",
+      "area_name": "地学",
+      "topic": "海溝と深さ",
+      "subject": "海溝の深さ",
+      "tags": [
+        "理科",
+        "地学",
+        "海洋"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "live-verified",
+      "status_note": "実際に取得して結果を確認済み",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 54,
+        "2": 64,
+        "3": 64,
+        "5": 64
+      },
+      "example_question": "世界で1番目に深い海溝は何ですか。",
+      "example_explanation": null,
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "depth"
+      },
+      "sparql": "SELECT ?itemLabel ?depth WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q119253 ; rdfs:label ?ja .\n  FILTER(LANG(?ja) = \"ja\")\n  OPTIONAL { ?item wdt:P2044 ?elevation }\n  OPTIONAL { ?item wdt:P4511 ?vertical }\n  BIND(COALESCE(-?elevation, ?vertical) AS ?depth)\n  FILTER(BOUND(?depth) && ?depth > 0)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?depth)\nLIMIT 10",
+      "stats_data_id": null
+    },
+    {
+      "id": "painting-artist",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "絵画と作者",
+      "subject": "絵画の作者",
+      "tags": [
+        "歴史",
+        "芸術",
+        "絵画"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "live-verified",
+      "status_note": "実際に取得して結果を確認済み",
+      "hensachi": 56,
+      "hensachi_by_rank": null,
+      "example_question": "「◯◯」を描いた画家はだれですか。",
+      "example_explanation": "「◯◯」の作者は△△です。絵画は成立した時代の文化や画風とあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "authorLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?authorLabel WHERE {\n  ?item wdt:P31 wd:Q3305213 ; wdt:P495 wd:Q17 ; wdt:P170 ?author ; rdfs:label ?ja .\n  FILTER(LANG(?ja) = \"ja\")\n  FILTER(STRSTARTS(STR(?author), \"http://www.wikidata.org/entity/Q\"))\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nLIMIT 100",
+      "stats_data_id": null
+    },
+    {
+      "id": "peninsula-region",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "半島と地域",
+      "subject": "半島",
+      "tags": [
+        "地理",
+        "半島"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 50,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある半島です。海に突き出た地形で、周辺の海流や漁業とあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q34763 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "pig-stock",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "畜産業",
+      "subject": "豚の飼育頭数",
+      "tags": [
+        "統計",
+        "畜産"
+      ],
+      "source": "e-stat",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 45,
+        "2": 55,
+        "3": 55,
+        "5": 62
+      },
+      "example_question": "豚の飼育頭数が日本一多い都道府県はどこですか。",
+      "example_explanation": "◯◯は豚の飼育頭数が全国1位です(出典: 政府統計 e-Stat)。統計は年によって変わるため、順位は基準年とセットで覚えましょう。",
+      "result_keys": {
+        "name": "name",
+        "value": "val"
+      },
+      "sparql": null,
+      "stats_data_id": null
+    },
+    {
+      "id": "plain-region",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "平野と地域",
+      "subject": "平野",
+      "tags": [
+        "地理",
+        "平野"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 46,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△に広がる平野です。おもな平野は流れる川とセットで覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q205895 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "planet-diameter-rank",
+      "area": "chigaku",
+      "area_name": "地学",
+      "topic": "惑星の大きさ",
+      "subject": "惑星の大きさ",
+      "tags": [
+        "理科",
+        "天体"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 48,
+        "2": 48,
+        "3": 58,
+        "5": 58
+      },
+      "example_question": "太陽系で1番目に大きい惑星は何ですか。",
+      "example_explanation": "◯◯は太陽系で1番目に大きい惑星です。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "diameter"
+      },
+      "sparql": "SELECT ?itemLabel ?diameter WHERE {\n  ?item wdt:P31 wd:Q30014 ; wdt:P2386 ?diameter .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?diameter)",
+      "stats_data_id": null
+    },
+    {
+      "id": "planet-distance-rank",
+      "area": "chigaku",
+      "area_name": "地学",
+      "topic": "太陽系の惑星",
+      "subject": "惑星の距離",
+      "tags": [
+        "理科",
+        "天体"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 45,
+        "2": 45,
+        "3": 45,
+        "5": 55
+      },
+      "example_question": "太陽から1番目に近い惑星は何ですか。",
+      "example_explanation": "◯◯は太陽から1番目の惑星です。「水金地火木土天海」の順で覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "dist"
+      },
+      "sparql": "SELECT ?itemLabel ?dist WHERE {\n  ?item wdt:P31 wd:Q30014 ; wdt:P2583 ?dist .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?dist",
+      "stats_data_id": null
+    },
+    {
+      "id": "planet-moons-rank",
+      "area": "chigaku",
+      "area_name": "地学",
+      "topic": "惑星の衛星",
+      "subject": "惑星の衛星の数",
+      "tags": [
+        "理科",
+        "天体"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 62,
+        "2": 62,
+        "3": 62,
+        "5": 62
+      },
+      "example_question": "衛星の数が太陽系で1番目に多い惑星は何ですか。",
+      "example_explanation": null,
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "moons"
+      },
+      "sparql": "SELECT ?itemLabel (COUNT(?moon) AS ?moons) WHERE {\n  ?item wdt:P31 wd:Q30014 . ?moon wdt:P397 ?item .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nGROUP BY ?itemLabel\nORDER BY DESC(?moons)",
+      "stats_data_id": null
+    },
+    {
+      "id": "plateau-region",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "高原と地域",
+      "subject": "高原",
+      "tags": [
+        "地理",
+        "高原"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 56,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある高原です。夏でも涼しく、野菜の栽培や酪農がさかんな地域が多くあります。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q75520 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "pm-year",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "内閣総理大臣と就任年",
+      "subject": "首相の就任年",
+      "tags": [
+        "歴史",
+        "近代",
+        "政治"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 62,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯が内閣総理大臣に就任したのは西暦何年ですか。",
+      "example_explanation": "◯◯は西暦△△年に内閣総理大臣に就任しました。在任中のできごとや政策とあわせて覚えましょう。",
+      "result_keys": {
+        "name": "personLabel",
+        "value": "year"
+      },
+      "sparql": "SELECT ?personLabel (YEAR(?start) AS ?year) WHERE {\n  ?person p:P39 ?stmt .\n  ?stmt ps:P39 wd:Q30461 ; pq:P580 ?start .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?year\nLIMIT 70",
+      "stats_data_id": null
+    },
+    {
+      "id": "postwar-event-year",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "戦後のできごと",
+      "subject": "戦後のできごと",
+      "tags": [
+        "歴史",
+        "戦後",
+        "現代"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "live-verified",
+      "status_note": "実際に取得して結果を確認済み",
+      "hensachi": 52,
+      "hensachi_by_rank": null,
+      "example_question": "戦後に◯◯が起きたのは西暦何年ですか。",
+      "example_explanation": "◯◯は西暦△△年(戦後)のできごとです。復興・高度経済成長・民主化の流れとあわせて整理しましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "year"
+      },
+      "sparql": "SELECT ?itemLabel (YEAR(?date) AS ?year) WHERE {\n  VALUES ?cls { wd:Q1656682 wd:Q13418847 wd:Q198 wd:Q178561 wd:Q7944 wd:Q3839081 wd:Q131569 }\n  ?item wdt:P17 wd:Q17 ; wdt:P31 ?cls ; wdt:P585 ?date ; rdfs:label ?ja .\n  FILTER(LANG(?ja) = \"ja\" && ?date >= \"1945-08-16T00:00:00Z\"^^xsd:dateTime && ?date < \"2000-01-01T00:00:00Z\"^^xsd:dateTime)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?year\nLIMIT 100",
+      "stats_data_id": null
+    },
+    {
+      "id": "pref-area-rank",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "都道府県の面積",
+      "subject": "都道府県の面積",
+      "tags": [
+        "地理",
+        "面積"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 42,
+        "2": 52,
+        "3": 52,
+        "5": 60
+      },
+      "example_question": "面積が日本で1番目に広い都道府県はどこですか。",
+      "example_explanation": null,
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "area"
+      },
+      "sparql": "SELECT ?itemLabel ?area WHERE {\n  ?item wdt:P31 wd:Q50337 ; wdt:P2046 ?area .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?area)\nLIMIT 47",
+      "stats_data_id": null
+    },
+    {
+      "id": "pref-capital",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "都道府県と県庁所在地",
+      "subject": "県庁所在地",
+      "tags": [
+        "地理",
+        "県庁所在地"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 45,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯の県庁所在地の都市はどこですか。",
+      "example_explanation": "◯◯の県庁所在地は△△です。都道府県名と県庁所在地名が異なるものは特によく問われます。",
+      "result_keys": {
+        "name": "prefLabel",
+        "value": "capitalLabel"
+      },
+      "sparql": "SELECT ?prefLabel ?capitalLabel WHERE {\n  ?pref wdt:P31 wd:Q50337 ; wdt:P36 ?capital .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?prefLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "pref-population-estat",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "人口",
+      "subject": "人口",
+      "tags": [
+        "統計",
+        "人口"
+      ],
+      "source": "e-stat",
+      "kind": "rank",
+      "status": "fixed-untested",
+      "status_note": "一度失敗し、直したが再取得は未確認",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 42,
+        "2": 52,
+        "3": 52,
+        "5": 60
+      },
+      "example_question": "人口が日本一多い都道府県はどこですか。",
+      "example_explanation": "◯◯は人口が全国1位です(出典: 政府統計 e-Stat)。統計は年によって変わるため、順位は基準年とセットで覚えましょう。",
+      "result_keys": {
+        "name": "name",
+        "value": "val"
+      },
+      "sparql": null,
+      "stats_data_id": "0000150008"
+    },
+    {
+      "id": "pref-population-rank",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "都道府県の人口",
+      "subject": "都道府県の人口",
+      "tags": [
+        "地理",
+        "人口"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 42,
+        "2": 52,
+        "3": 52,
+        "5": 60
+      },
+      "example_question": "人口が日本で1番目に多い都道府県はどこですか。",
+      "example_explanation": null,
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "population"
+      },
+      "sparql": "SELECT ?itemLabel ?population WHERE {\n  ?item wdt:P31 wd:Q50337 ; wdt:P1082 ?population .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?population)\nLIMIT 47",
+      "stats_data_id": null
+    },
+    {
+      "id": "province-prefecture",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "旧国名と都道府県",
+      "subject": "旧国名",
+      "tags": [
+        "地理",
+        "旧国名"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "fixed-untested",
+      "status_note": "一度失敗し、直したが再取得は未確認",
+      "hensachi": 52,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯は現在のどの都道府県にあたりますか。",
+      "example_explanation": "◯◯は現在のおもに△△にあたる旧国名(令制国)です。旧国名は都道府県とセットで覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P3842 ?pref ; rdfs:label ?ja .\n  ?pref wdt:P31 wd:Q50337 .\n  FILTER(LANG(?ja) = \"ja\" && STRENDS(?ja, \"国\"))\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel\nLIMIT 300",
+      "stats_data_id": null
+    },
+    {
+      "id": "rice-harvest",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "農業(米)",
+      "subject": "米の収穫量",
+      "tags": [
+        "統計",
+        "農業",
+        "米"
+      ],
+      "source": "e-stat",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 45,
+        "2": 55,
+        "3": 55,
+        "5": 62
+      },
+      "example_question": "米の収穫量が日本一多い都道府県はどこですか。",
+      "example_explanation": "◯◯は米の収穫量が全国1位です(出典: 政府統計 e-Stat)。統計は年によって変わるため、順位は基準年とセットで覚えましょう。",
+      "result_keys": {
+        "name": "name",
+        "value": "val"
+      },
+      "sparql": null,
+      "stats_data_id": null
+    },
+    {
+      "id": "river-rank",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "川と長さ",
+      "subject": "川の長さ",
+      "tags": [
+        "地理",
+        "川"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 42,
+        "2": 50,
+        "3": 50,
+        "5": 60
+      },
+      "example_question": "日本で1番目に長い川は何ですか。",
+      "example_explanation": null,
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "length"
+      },
+      "sparql": "SELECT ?itemLabel ?length WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q4022 ;\n        wdt:P17 wd:Q17 ;\n        wdt:P2043 ?length .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?length)\nLIMIT 30",
+      "stats_data_id": null
+    },
+    {
+      "id": "ruins-region",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "遺跡と地域",
+      "subject": "遺跡",
+      "tags": [
+        "歴史",
+        "遺跡"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "fixed-untested",
+      "status_note": "一度失敗し、直したが再取得は未確認",
+      "hensachi": 50,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある遺跡です。どの時代の遺跡かをあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P17 wd:Q17 ; wdt:P131 ?pref ; rdfs:label ?ja .\n  ?pref wdt:P31 wd:Q50337 .\n  FILTER(LANG(?ja) = \"ja\" && (STRENDS(?ja, \"遺跡\")))\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel\nLIMIT 300",
+      "stats_data_id": null
+    },
+    {
+      "id": "shogun-period",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "江戸将軍と就任年",
+      "subject": "将軍の就任年",
+      "tags": [
+        "歴史",
+        "江戸",
+        "将軍"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "live-verified",
+      "status_note": "実際に取得して結果を確認済み",
+      "hensachi": 60,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯が将軍に就任したのは西暦何年ですか。",
+      "example_explanation": "◯◯は西暦△△年に将軍に就任しました。在任中のできごとや政策もあわせて整理しましょう。",
+      "result_keys": {
+        "name": "personLabel",
+        "value": "year"
+      },
+      "sparql": "SELECT ?personLabel (YEAR(?start) AS ?year) WHERE {\n  ?person p:P39 ?stmt .\n  ?stmt ps:P39 wd:Q131767 ; pq:P580 ?start .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?year\nLIMIT 30",
+      "stats_data_id": null
+    },
+    {
+      "id": "showa-event-year",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "昭和戦前のできごと",
+      "subject": "昭和戦前のできごと",
+      "tags": [
+        "歴史",
+        "昭和",
+        "戦争"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "live-verified",
+      "status_note": "実際に取得して結果を確認済み",
+      "hensachi": 52,
+      "hensachi_by_rank": null,
+      "example_question": "昭和時代前半に◯◯が起きたのは西暦何年ですか。",
+      "example_explanation": "◯◯は西暦△△年(昭和戦前期)のできごとです。軍国主義の拡大と太平洋戦争の流れとあわせて整理しましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "year"
+      },
+      "sparql": "SELECT ?itemLabel (YEAR(?date) AS ?year) WHERE {\n  VALUES ?cls { wd:Q1656682 wd:Q13418847 wd:Q198 wd:Q178561 wd:Q7944 wd:Q3839081 wd:Q131569 }\n  ?item wdt:P17 wd:Q17 ; wdt:P31 ?cls ; wdt:P585 ?date ; rdfs:label ?ja .\n  FILTER(LANG(?ja) = \"ja\" && ?date >= \"1926-12-25T00:00:00Z\"^^xsd:dateTime && ?date < \"1945-08-16T00:00:00Z\"^^xsd:dateTime)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?year\nLIMIT 100",
+      "stats_data_id": null
+    },
+    {
+      "id": "shrine-region",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "神社と地域",
+      "subject": "神社",
+      "tags": [
+        "歴史",
+        "神社"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 56,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある神社です。歴史上の人物やできごととの関わりも問われます。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q845945 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "soybean-harvest",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "農業(豆類)",
+      "subject": "大豆の収穫量",
+      "tags": [
+        "統計",
+        "農業",
+        "豆類"
+      ],
+      "source": "e-stat",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 45,
+        "2": 55,
+        "3": 55,
+        "5": 62
+      },
+      "example_question": "大豆の収穫量が日本一多い都道府県はどこですか。",
+      "example_explanation": "◯◯は大豆の収穫量が全国1位です(出典: 政府統計 e-Stat)。統計は年によって変わるため、順位は基準年とセットで覚えましょう。",
+      "result_keys": {
+        "name": "name",
+        "value": "val"
+      },
+      "sparql": null,
+      "stats_data_id": null
+    },
+    {
+      "id": "star-brightness-rank",
+      "area": "chigaku",
+      "area_name": "地学",
+      "topic": "星の明るさ",
+      "subject": "恒星の明るさ",
+      "tags": [
+        "理科",
+        "天体"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "fixed-untested",
+      "status_note": "一度失敗し、直したが再取得は未確認",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 50,
+        "2": 62,
+        "3": 62,
+        "5": 62
+      },
+      "example_question": "地球から見て1番目に明るい恒星は何ですか(太陽を除く)。",
+      "example_explanation": "◯◯は地球から見て1番目に明るい恒星です。星の明るさは等級で表し、数が小さいほど明るく見えます。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "mag"
+      },
+      "sparql": "SELECT ?itemLabel ?mag WHERE {\n  ?item wdt:P31 wd:Q523 ;\n        wdt:P59 ?constellation ;\n        wdt:P1215 ?mag ;\n        rdfs:label ?ja .\n  FILTER(LANG(?ja) = \"ja\")\n  FILTER(?mag < 1.5)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?mag\nLIMIT 10",
+      "stats_data_id": null
+    },
+    {
+      "id": "strait-region",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "海峡と地域",
+      "subject": "海峡",
+      "tags": [
+        "地理",
+        "海峡"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "live-verified",
+      "status_note": "実際に取得して結果を確認済み",
+      "hensachi": 56,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある海峡です。船の通行量が多い主要海峡は位置と名前をセットで覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q37901 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "tea-harvest",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "農業(茶)",
+      "subject": "お茶(茶)の収穫量",
+      "tags": [
+        "統計",
+        "農業",
+        "茶"
+      ],
+      "source": "e-stat",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 45,
+        "2": 55,
+        "3": 55,
+        "5": 62
+      },
+      "example_question": "お茶(茶)の収穫量が日本一多い都道府県はどこですか。",
+      "example_explanation": "◯◯はお茶(茶)の収穫量が全国1位です(出典: 政府統計 e-Stat)。統計は年によって変わるため、順位は基準年とセットで覚えましょう。",
+      "result_keys": {
+        "name": "name",
+        "value": "val"
+      },
+      "sparql": null,
+      "stats_data_id": null
+    },
+    {
+      "id": "temple-region",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "寺院と地域",
+      "subject": "寺院",
+      "tags": [
+        "歴史",
+        "寺院"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 52,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある寺院です。建てられた時代と目的をあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q44539 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "treaty-year",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "条約と年",
+      "subject": "条約の年",
+      "tags": [
+        "歴史",
+        "条約"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 58,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯が結ばれたのは西暦何年ですか。",
+      "example_explanation": "◯◯は西暦△△年に結ばれました。どの戦争・交渉の結果かをあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "year"
+      },
+      "sparql": "SELECT ?itemLabel (YEAR(?date) AS ?year) WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q131569 ;\n        wdt:P585 ?date .\n  FILTER EXISTS { ?item wdt:P17 wd:Q17 }\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?year",
+      "stats_data_id": null
+    },
+    {
+      "id": "tunnel-region",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "トンネルと地域",
+      "subject": "トンネル",
+      "tags": [
+        "地理",
+        "トンネル"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 56,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にあるトンネルです。新幹線や高速道路のトンネルは交通の大動脈として重要です。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q44377 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "volcano-region",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "火山と地域",
+      "subject": "火山",
+      "tags": [
+        "地理",
+        "火山"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 54,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある火山です。火山の周辺には温泉やカルデラなどの地形が見られます。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q8072 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "war-year",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "戦争と年",
+      "subject": "戦争の年",
+      "tags": [
+        "歴史",
+        "戦争"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 54,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯が始まったのは西暦何年ですか。",
+      "example_explanation": "◯◯は西暦△△年に始まりました。原因と結果、講和条約もセットで整理しましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "year"
+      },
+      "sparql": "SELECT ?itemLabel (YEAR(?date) AS ?year) WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q198 ;\n        wdt:P585 ?date .\n  FILTER EXISTS { ?item wdt:P17 wd:Q17 }\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?year",
+      "stats_data_id": null
+    },
+    {
+      "id": "waterfall-region",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "滝と地域",
+      "subject": "滝",
+      "tags": [
+        "地理",
+        "滝"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "live-verified",
+      "status_note": "実際に取得して結果を確認済み",
+      "hensachi": 56,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある滝です。日本三名瀑(華厳の滝・那智の滝・袋田の滝)は特によく問われます。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q34038 ;\n        wdt:P17 wd:Q17 ;          # 日本\n        wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .        # 都道府県に限定\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "wheat-harvest",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "農業(穀物)",
+      "subject": "小麦の収穫量",
+      "tags": [
+        "統計",
+        "農業",
+        "穀物"
+      ],
+      "source": "e-stat",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 45,
+        "2": 55,
+        "3": 55,
+        "5": 62
+      },
+      "example_question": "小麦の収穫量が日本一多い都道府県はどこですか。",
+      "example_explanation": "◯◯は小麦の収穫量が全国1位です(出典: 政府統計 e-Stat)。統計は年によって変わるため、順位は基準年とセットで覚えましょう。",
+      "result_keys": {
+        "name": "name",
+        "value": "val"
+      },
+      "sparql": null,
+      "stats_data_id": null
+    },
+    {
+      "id": "world-area-rank",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "世界の国の面積",
+      "subject": "世界の国の面積",
+      "tags": [
+        "地理",
+        "世界",
+        "面積"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 45,
+        "2": 52,
+        "3": 52,
+        "5": 60
+      },
+      "example_question": "世界で1番目に面積が広い国はどこですか。",
+      "example_explanation": null,
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "area"
+      },
+      "sparql": "SELECT ?itemLabel ?area WHERE {\n  ?item wdt:P31 wd:Q6256 ; wdt:P2046 ?area .\n  FILTER(?area > 500000)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?area)\nLIMIT 15",
+      "stats_data_id": null
+    },
+    {
+      "id": "world-country-capital",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "世界の国と首都",
+      "subject": "世界の首都",
+      "tags": [
+        "地理",
+        "世界",
+        "首都"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 50,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯の首都はどこですか。",
+      "example_explanation": "◯◯の首都は△△です。世界の主要国の首都は位置とあわせて覚えましょう。",
+      "result_keys": {
+        "name": "countryLabel",
+        "value": "capitalLabel"
+      },
+      "sparql": "SELECT ?countryLabel ?capitalLabel WHERE {\n  ?country wdt:P31 wd:Q6256 ; wdt:P36 ?capital .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?countryLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "world-desert-rank",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "世界の砂漠",
+      "subject": "砂漠の面積",
+      "tags": [
+        "地理",
+        "世界",
+        "砂漠"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 52,
+        "2": 64,
+        "3": 64,
+        "5": 64
+      },
+      "example_question": "世界で1番目に広い砂漠は何ですか。",
+      "example_explanation": "◯◯は世界で1番目に広い砂漠です。サハラ砂漠が最大で、次いでアラビア砂漠・ゴビ砂漠が続きます。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "area"
+      },
+      "sparql": "SELECT ?itemLabel ?area WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q8514 ; wdt:P2046 ?area .\n  FILTER(?area > 200000)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?area)\nLIMIT 10",
+      "stats_data_id": null
+    },
+    {
+      "id": "world-heritage-region",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "世界遺産",
+      "subject": "世界遺産",
+      "tags": [
+        "歴史",
+        "世界遺産"
+      ],
+      "source": "wikidata",
+      "kind": "single-region",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 52,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯があるのはどの都道府県ですか。",
+      "example_explanation": "◯◯は△△にある世界遺産です。登録の理由とあわせて覚えましょう。",
+      "result_keys": {
+        "name": "itemLabel",
+        "region": "prefLabel"
+      },
+      "sparql": "SELECT ?itemLabel ?prefLabel WHERE {\n  ?item wdt:P1435 wd:Q9259 ; wdt:P17 wd:Q17 ; wdt:P131 ?pref .\n  ?pref wdt:P31 wd:Q50337 .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?itemLabel",
+      "stats_data_id": null
+    },
+    {
+      "id": "world-heritage-year",
+      "area": "rekishi",
+      "area_name": "歴史",
+      "topic": "世界遺産の登録年",
+      "subject": "世界遺産の登録年",
+      "tags": [
+        "歴史",
+        "世界遺産"
+      ],
+      "source": "wikidata",
+      "kind": "pair",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": 62,
+      "hensachi_by_rank": null,
+      "example_question": "◯◯が世界遺産に登録されたのは西暦何年ですか。",
+      "example_explanation": "◯◯は△△年に世界遺産に登録されました。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "year"
+      },
+      "sparql": "SELECT ?itemLabel (YEAR(?date) AS ?year) WHERE {\n  ?item wdt:P1435 wd:Q9259 ; wdt:P17 wd:Q17 ; p:P1435 ?st .\n  ?st ps:P1435 wd:Q9259 ; pq:P580 ?date .\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY ?year",
+      "stats_data_id": null
+    },
+    {
+      "id": "world-island-rank",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "世界の島の面積",
+      "subject": "世界の島の面積",
+      "tags": [
+        "地理",
+        "世界",
+        "島"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 50,
+        "2": 62,
+        "3": 62,
+        "5": 62
+      },
+      "example_question": "世界で1番目に面積が大きい島は何ですか。",
+      "example_explanation": "◯◯は世界で1番目に大きい島です。グリーンランド・ニューギニア・ボルネオの順はよく問われます。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "area"
+      },
+      "sparql": "SELECT ?itemLabel ?area WHERE {\n  ?item wdt:P31/wdt:P279* wd:Q23442 ; wdt:P2046 ?area .\n  FILTER(?area > 500000)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?area)\nLIMIT 10",
+      "stats_data_id": null
+    },
+    {
+      "id": "world-lake-rank",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "世界の湖",
+      "subject": "世界の湖の面積",
+      "tags": [
+        "地理",
+        "世界",
+        "湖"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 50,
+        "2": 62,
+        "3": 62,
+        "5": 62
+      },
+      "example_question": "世界で1番目に面積が広い湖は何ですか。",
+      "example_explanation": null,
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "area"
+      },
+      "sparql": "SELECT ?itemLabel ?area WHERE {\n  ?item wdt:P31 wd:Q23397 ; wdt:P2046 ?area .\n  FILTER(?area > 30000)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?area)\nLIMIT 10",
+      "stats_data_id": null
+    },
+    {
+      "id": "world-mountain-rank",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "世界の山",
+      "subject": "世界の山の高さ",
+      "tags": [
+        "地理",
+        "世界",
+        "山"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 45,
+        "2": 60,
+        "3": 60,
+        "5": 60
+      },
+      "example_question": "世界で1番目に高い山は何ですか。",
+      "example_explanation": null,
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "elevation"
+      },
+      "sparql": "SELECT ?itemLabel ?elevation WHERE {\n  ?item wdt:P31 wd:Q8502 ; wdt:P2044 ?elevation .\n  FILTER(?elevation > 8000)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?elevation)\nLIMIT 10",
+      "stats_data_id": null
+    },
+    {
+      "id": "world-population-rank",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "世界の国の人口",
+      "subject": "世界の国の人口",
+      "tags": [
+        "地理",
+        "世界",
+        "人口"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 45,
+        "2": 52,
+        "3": 52,
+        "5": 60
+      },
+      "example_question": "世界で1番目に人口が多い国はどこですか。",
+      "example_explanation": "◯◯は世界1位の人口を持つ国です(推計値のため年により変動します)。",
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "population"
+      },
+      "sparql": "SELECT ?itemLabel ?population WHERE {\n  ?item wdt:P31 wd:Q6256 ; wdt:P1082 ?population .\n  FILTER(?population > 50000000)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?population)\nLIMIT 15",
+      "stats_data_id": null
+    },
+    {
+      "id": "world-river-rank",
+      "area": "chiri",
+      "area_name": "地理",
+      "topic": "世界の川",
+      "subject": "世界の川の長さ",
+      "tags": [
+        "地理",
+        "世界",
+        "川"
+      ],
+      "source": "wikidata",
+      "kind": "rank",
+      "status": "draft",
+      "status_note": "ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)",
+      "hensachi": null,
+      "hensachi_by_rank": {
+        "1": 45,
+        "2": 60,
+        "3": 60,
+        "5": 60
+      },
+      "example_question": "世界で1番目に長い川は何ですか。",
+      "example_explanation": null,
+      "result_keys": {
+        "name": "itemLabel",
+        "value": "length"
+      },
+      "sparql": "SELECT ?itemLabel ?length WHERE {\n  ?item wdt:P31 wd:Q4022 ; wdt:P2043 ?length .\n  FILTER(?length > 4000)\n  SERVICE wikibase:label { bd:serviceParam wikibase:language \"ja\". }\n}\nORDER BY DESC(?length)\nLIMIT 10",
+      "stats_data_id": null
+    }
+  ]
+}

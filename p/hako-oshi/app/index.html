@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ハコオシ — Hako-Oshi</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='2' y='5' width='12' height='9' rx='1' fill='%23b9855a' stroke='%236b4a30' stroke-width='1'/%3E%3Cpath d='M2 5 L8 2 L14 5' fill='none' stroke='%236b4a30' stroke-width='1.2'/%3E%3Cline x1='8' y1='2' x2='8' y2='9' stroke='%236b4a30' stroke-width='1'/%3E%3C/svg%3E">
+  <style>
+    /* 依存ゼロ方針のため CSS もこのファイルに内包する(外部CDN禁止) */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      background: #ede7d8;
+      color: #4a3f30;
+      font-family: system-ui, "Hiragino Sans", "Noto Sans JP", sans-serif;
+    }
+
+    .wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      min-height: 100%;
+    }
+
+    header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    h1 { font-size: 18px; letter-spacing: 2px; }
+    .hud { display: flex; align-items: center; gap: 14px; font-size: 13px; }
+    .hud .label { opacity: 0.6; font-size: 11px; display: block; }
+    .hud .value { font-size: 16px; font-weight: 700; font-variant-numeric: tabular-nums; }
+    #mute {
+      background: none; border: 1px solid rgba(74,63,48,0.3);
+      border-radius: 8px; font-size: 15px; padding: 3px 7px; cursor: pointer;
+    }
+
+    button { font: inherit; color: inherit; }
+
+    /* --- レベル選択画面 --- */
+    /* 画面切り替えはhidden属性で行う。IDセレクタでdisplayを指定すると
+       既定の [hidden]{display:none} より詳細度が高くなり消えなくなるため、
+       [hidden] を明示的に上書きしておく(姉妹作ichimonと同じ対策)。 */
+    #screen-select[hidden], #screen-play[hidden] { display: none; }
+    #screen-select { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    #level-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      width: 100%;
+    }
+    .level-card {
+      display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+      background: #fff; border: 1px solid #cdc3a9; border-bottom-width: 2px;
+      border-radius: 8px; padding: 8px 10px; cursor: pointer; text-align: left;
+    }
+    .level-card:hover { background: #fbf8ef; }
+    .level-card.cleared { border-color: #7a9a6f; background: #f2f7ee; }
+    .level-num { font-size: 11px; opacity: 0.6; }
+    .level-name { font-size: 14px; font-weight: 700; }
+    .level-stat { font-size: 11px; opacity: 0.75; }
+
+    /* --- プレイ画面 --- */
+    #screen-play { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .stage { position: relative; }
+    #board {
+      position: relative;
+      display: grid;
+      background: #d8cfb4;
+      border: 3px solid #4a3f30;
+      border-radius: 6px;
+      box-shadow: 0 4px 24px rgba(74, 63, 48, 0.2);
+    }
+    .tile { width: 100%; height: 100%; }
+    .tile.wall { background: #6b5c46; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15); }
+    .tile.floor { background: #e8e0c9; }
+    .tile.goal {
+      background: #e8e0c9;
+      box-shadow: inset 0 0 0 3px #c98a4b;
+    }
+
+    .player, .box {
+      position: absolute;
+      width: var(--tile);
+      height: var(--tile);
+      transition: left 0.12s linear, top 0.12s linear;
+      display: flex; align-items: center; justify-content: center;
+      font-size: calc(var(--tile) * 0.55);
+    }
+    .player { z-index: 3; }
+    .player::before { content: '🧑'; }
+    .box { z-index: 2; }
+    .box::before { content: '📦'; }
+    .box.on-goal::before { content: '✅'; }
+    .box.dead { filter: drop-shadow(0 0 4px #c33); }
+
+    .hint-arrow {
+      position: absolute;
+      width: var(--tile);
+      height: var(--tile);
+      z-index: 4;
+      display: flex; align-items: center; justify-content: center;
+      font-size: calc(var(--tile) * 0.8);
+      color: #1c73c4;
+      text-shadow: 0 0 4px #fff, 0 0 4px #fff;
+      pointer-events: none;
+      animation: pulse 0.8s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+    #warning {
+      width: 100%;
+      background: #fbe3c9;
+      border: 1px solid #c98a4b;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 13px;
+      text-align: center;
+    }
+    #warning[hidden] { display: none; }
+
+    .controls { display: flex; gap: 6px; width: 100%; flex-wrap: wrap; }
+    .controls button {
+      flex: 1; min-width: 70px; padding: 8px 0;
+      background: #fff; border: 1px solid #cdc3a9; border-bottom-width: 2px;
+      border-radius: 8px; font-size: 13px; cursor: pointer;
+    }
+    .controls button:hover { background: #fbf8ef; }
+
+    #hint-message {
+      width: 100%; text-align: center; font-size: 12px; min-height: 1.4em; opacity: 0.85;
+    }
+
+    /* --- クリアオーバーレイ --- */
+    #clear-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 12px;
+      background: rgba(74, 63, 48, 0.9);
+      border-radius: 6px; color: #f4f1e8; text-align: center; padding: 16px;
+    }
+    #clear-overlay[hidden] { display: none; }
+    #clear-overlay h2 { font-size: 26px; letter-spacing: 4px; }
+    #clear-stats { font-size: 14px; }
+    #clear-best { font-size: 13px; color: #ffd76a; font-weight: 700; }
+    #clear-overlay .controls { justify-content: center; }
+    #clear-overlay button { border-color: transparent; background: #f4f1e8; color: #4a3f30; }
+
+    .help { font-size: 11px; opacity: 0.65; text-align: center; line-height: 1.7; }
+    kbd {
+      background: #fff; border: 1px solid #cdc3a9; border-bottom-width: 2px;
+      border-radius: 4px; padding: 0 4px; font-family: inherit;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html, body { background: #201c17; color: #ece6d8; }
+      .level-card, .controls button { background: #2c2620; border-color: #4a3f30; color: #ece6d8; }
+      .level-card:hover, .controls button:hover { background: #362f27; }
+      .level-card.cleared { background: #26301f; border-color: #5f8455; }
+      #board { background: #171410; border-color: #ece6d8; }
+      .tile.floor, .tile.goal { background: #2c2620; }
+      #warning { background: #3a2f1c; border-color: #c98a4b; color: #ece6d8; }
+      kbd { background: #2c2620; border-color: #4a3f30; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>ハコオシ</h1>
+      <div class="hud">
+        <div>
+          <span class="label">レベル</span>
+          <span class="value" id="hud-level">-</span>
+        </div>
+        <div>
+          <span class="label">歩数</span>
+          <span class="value" id="hud-moves">0</span>
+        </div>
+        <div>
+          <span class="label">押し数</span>
+          <span class="value" id="hud-pushes">0</span>
+        </div>
+        <div>
+          <span class="label">パー</span>
+          <span class="value" id="hud-par">-</span>
+        </div>
+        <button id="mute" aria-label="サウンド切り替え">🔊</button>
+      </div>
+    </header>
+
+    <div id="screen-select">
+      <p>クリアしたい面を選ぼう(未クリアの面も選べます)</p>
+      <div id="level-grid"></div>
+    </div>
+
+    <div id="screen-play" hidden>
+      <div id="warning" hidden>つんだかも? <kbd>Z</kbd>でもどそう</div>
+      <div class="stage">
+        <div id="board" aria-label="ハコオシの盤面"></div>
+        <div id="clear-overlay" hidden>
+          <h2>クリア!</h2>
+          <div id="clear-stats"></div>
+          <div id="clear-best"></div>
+          <div class="controls">
+            <button id="next-level">つぎのレベルへ</button>
+            <button id="back-to-select-clear">レベル選択へ</button>
+          </div>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="undo-btn">もどす <kbd>Z</kbd></button>
+        <button id="restart-btn">やりなおす <kbd>R</kbd></button>
+        <button id="hint-btn">ヒント <kbd>H</kbd></button>
+        <button id="back-to-select">レベル選択 <kbd>Esc</kbd></button>
+      </div>
+      <p id="hint-message"></p>
+      <p class="help">
+        移動: <kbd>↑↓←→</kbd> / <kbd>WASD</kbd>(スマホはスワイプ)・
+        押すだけ(引けません)。全部の箱をゴールに載せたらクリア。
+      </p>
+    </div>
+  </div>
+
+  <!-- ES Modules を使うため file:// では動かない。ローカルでは
+       `python3 -m http.server` 等で配信すること(README 参照) -->
+  <script type="module" src="./src/main.js"></script>
+<footer class="sm-provenance" style="font:12px/1.6 system-ui,sans-serif;color:#6b6b6b;padding:1rem;margin-top:2rem;border-top:1px solid #e2e2de;"><span>生成: 2026-09-13T04:11:54Z</span></footer></body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ヌリロジ — Nuri-Logi</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='1' y='1' width='14' height='14' fill='%23ede7d8' stroke='%234a3f30' stroke-width='1'/%3E%3Crect x='3' y='3' width='4' height='4' fill='%23e0564a'/%3E%3Crect x='9' y='3' width='4' height='4' fill='%234a3f30'/%3E%3Crect x='3' y='9' width='4' height='4' fill='%234a3f30'/%3E%3Crect x='9' y='9' width='4' height='4' fill='%23e0564a'/%3E%3C/svg%3E">
+  <style>
+    /* 依存ゼロ方針のため CSS もこのファイルに内包する(外部CDN禁止) */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      background: #ede7d8;
+      color: #4a3f30;
+      font-family: system-ui, "Hiragino Sans", "Noto Sans JP", sans-serif;
+    }
+
+    .wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      min-height: 100%;
+    }
+
+    header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    h1 { font-size: 18px; letter-spacing: 2px; }
+    .hud { display: flex; align-items: center; gap: 14px; font-size: 13px; }
+    .hud .label { opacity: 0.6; font-size: 11px; display: block; }
+    .hud .value { font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; }
+    #mute {
+      background: none; border: 1px solid rgba(74,63,48,0.3);
+      border-radius: 8px; font-size: 15px; padding: 3px 7px; cursor: pointer;
+    }
+
+    button { font: inherit; color: inherit; }
+
+    /* 画面切り替え(hidden属性)。[hidden]の詳細度を明示的に上書きしておく */
+    #screen-select[hidden], #screen-play[hidden] { display: none; }
+    #screen-select { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+
+    /* --- パズル選択画面 --- */
+    #puzzle-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      width: 100%;
+    }
+    .puzzle-card {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      background: #fff; border: 1px solid #cdc3a9; border-bottom-width: 2px;
+      border-radius: 8px; padding: 8px 6px; cursor: pointer; text-align: center;
+    }
+    .puzzle-card:hover { background: #fbf8ef; }
+    .puzzle-card.cleared { border-color: #7a9a6f; background: #f2f7ee; }
+    .puzzle-thumb {
+      width: 56px; height: 56px; display: flex; align-items: center; justify-content: center;
+      background: #ede7d8; border: 1px solid #cdc3a9; border-radius: 4px; overflow: hidden;
+    }
+    .puzzle-thumb.unknown { font-size: 22px; opacity: 0.4; }
+    .thumb-grid {
+      width: 100%; height: 100%; display: grid;
+      grid-template-columns: repeat(var(--thumb-cols), 1fr);
+      grid-template-rows: repeat(var(--thumb-rows), 1fr);
+    }
+    .puzzle-meta { display: flex; flex-direction: column; gap: 1px; }
+    .puzzle-name { font-size: 12px; font-weight: 700; }
+    .puzzle-stat { font-size: 10px; opacity: 0.75; }
+
+    /* --- プレイ画面 --- */
+    #screen-play { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .stage { position: relative; max-width: 100%; overflow: auto; }
+
+    .nonogram {
+      --clear-color: #e0564a;
+      display: grid;
+      justify-content: center;
+      background: #fff;
+      border: 2px solid #4a3f30;
+      border-radius: 4px;
+      padding: 6px;
+    }
+    .corner { background: transparent; }
+    .clue {
+      display: flex; font-size: 11px; font-weight: 700; color: #4a3f30;
+      transition: opacity 0.3s ease;
+    }
+    .clue.dim { opacity: 0.3; }
+    .clue-col {
+      flex-direction: column; align-items: center; justify-content: flex-end;
+      padding: 2px 3px 4px; min-width: calc(var(--cell) * 0.7); line-height: 1.15;
+    }
+    .clue-row {
+      flex-direction: row; align-items: center; justify-content: flex-end;
+      gap: 4px; padding: 0 6px 0 2px; white-space: nowrap;
+    }
+    .clue.thick-right { border-right: 2px solid #4a3f30; }
+    .clue.thick-bottom { border-bottom: 2px solid #4a3f30; }
+
+    .cell {
+      width: var(--cell); height: var(--cell);
+      background: #fdfcf8;
+      border: 1px solid #cdc3a9;
+      border-right-width: 0; border-bottom-width: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: calc(var(--cell) * 0.55); font-weight: 700; color: #b04a3f;
+      cursor: pointer; user-select: none; touch-action: none;
+      transition: background-color 0.5s ease, color 0.35s ease, border-color 0.35s ease;
+    }
+    /* グリッド外周・5マスごとの太罫線 */
+    .nonogram .cell { border-right-width: 1px; border-bottom-width: 1px; }
+    .cell.thick-right { border-right-width: 2px; border-right-color: #4a3f30; }
+    .cell.thick-bottom { border-bottom-width: 2px; border-bottom-color: #4a3f30; }
+    .cell.filled { background: #4a3f30; }
+    .cell.crossed { color: #b04a3f; }
+
+    .cell.hint-mistake { animation: blink-red 0.5s ease-in-out infinite; }
+    .cell.hint-deduce { animation: blink-green 0.5s ease-in-out infinite; }
+    @keyframes blink-red {
+      0%, 100% { box-shadow: inset 0 0 0 2px #d43b2c; }
+      50% { box-shadow: inset 0 0 0 4px #d43b2c; }
+    }
+    @keyframes blink-green {
+      0%, 100% { box-shadow: inset 0 0 0 2px #4c9a4c; }
+      50% { box-shadow: inset 0 0 0 4px #4c9a4c; }
+    }
+
+    /* クリア演出: 1) 罫線・×がフェード 2) 塗りマスが問題色に彩色 */
+    .nonogram.clearing .cell { border-color: transparent; color: transparent; }
+    .nonogram.clearing .clue { opacity: 0; }
+    .nonogram.colored .cell.filled { background: var(--clear-color); }
+
+    .controls { display: flex; gap: 6px; width: 100%; flex-wrap: wrap; }
+    .controls button {
+      flex: 1; min-width: 64px; padding: 8px 0;
+      background: #fff; border: 1px solid #cdc3a9; border-bottom-width: 2px;
+      border-radius: 8px; font-size: 13px; cursor: pointer;
+    }
+    .controls button:hover { background: #fbf8ef; }
+    .controls button.active { background: #4a3f30; color: #f4f1e8; border-color: #4a3f30; }
+
+    #clear-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+      background: rgba(74, 63, 48, 0.92);
+      border-radius: 4px; color: #f4f1e8; text-align: center; padding: 16px;
+    }
+    #clear-overlay[hidden] { display: none; }
+    #clear-overlay h2 { font-size: 24px; letter-spacing: 3px; }
+    #clear-name { font-size: 16px; font-weight: 700; }
+    #clear-stats { font-size: 13px; }
+    #clear-best { font-size: 12px; color: #ffd76a; font-weight: 700; min-height: 1.3em; }
+    #clear-overlay .controls { justify-content: center; }
+    #clear-overlay button { border-color: transparent; background: #f4f1e8; color: #4a3f30; }
+
+    .help { font-size: 11px; opacity: 0.65; text-align: center; line-height: 1.7; }
+    kbd {
+      background: #fff; border: 1px solid #cdc3a9; border-bottom-width: 2px;
+      border-radius: 4px; padding: 0 4px; font-family: inherit;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html, body { background: #201c17; color: #ece6d8; }
+      .puzzle-card, .controls button { background: #2c2620; border-color: #4a3f30; color: #ece6d8; }
+      .puzzle-card:hover, .controls button:hover { background: #362f27; }
+      .puzzle-card.cleared { background: #26301f; border-color: #5f8455; }
+      .puzzle-thumb { background: #171410; border-color: #4a3f30; }
+      .nonogram { background: #171410; border-color: #ece6d8; }
+      .cell { background: #241f19; border-color: #4a3f30; color: #e0a89e; }
+      .cell.filled { background: #ece6d8; }
+      .clue { color: #ece6d8; }
+      .clue.thick-right, .clue.thick-bottom { border-color: #ece6d8; }
+      .cell.thick-right { border-right-color: #ece6d8; }
+      .cell.thick-bottom { border-bottom-color: #ece6d8; }
+      kbd { background: #2c2620; border-color: #4a3f30; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>ヌリロジ</h1>
+      <div class="hud">
+        <div>
+          <span class="label">問題</span>
+          <span class="value" id="hud-name">-</span>
+        </div>
+        <div>
+          <span class="label">タイム</span>
+          <span class="value" id="hud-timer">0:00</span>
+        </div>
+        <div>
+          <span class="label">ヒント</span>
+          <span class="value" id="hud-hints">0</span>
+        </div>
+        <button id="mute" aria-label="サウンド切り替え">🔊</button>
+      </div>
+    </header>
+
+    <div id="screen-select">
+      <p>解きたい問題を選ぼう(未クリアは絵柄が「?」で伏せてあります)</p>
+      <div id="puzzle-grid"></div>
+    </div>
+
+    <div id="screen-play" hidden>
+      <div class="stage">
+        <div id="board" aria-label="ヌリロジの盤面"></div>
+        <div id="clear-overlay" hidden>
+          <h2>クリア!</h2>
+          <div id="clear-name"></div>
+          <div id="clear-stats"></div>
+          <div id="clear-best"></div>
+          <div class="controls">
+            <button id="next-puzzle">つぎの問題へ</button>
+            <button id="back-to-select-clear">問題選択へ</button>
+          </div>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="tool-fill" class="active">ぬる</button>
+        <button id="tool-cross">×</button>
+        <button id="undo-btn">もどす <kbd>Z</kbd></button>
+        <button id="hint-btn">ヒント <kbd>H</kbd></button>
+      </div>
+      <div class="controls">
+        <button id="reset-btn">リセット</button>
+        <button id="back-to-select">問題選択 <kbd>Esc</kbd></button>
+      </div>
+      <p class="help">
+        左クリック/タップ: 選んだツールで塗る・右クリック: ×固定(ドラッグ可)・
+        数字は連続して塗るマスの数。塗りが解答と一致した瞬間クリア(×は思考補助)。
+      </p>
+    </div>
+  </div>
+
+  <!-- ES Modules を使うため file:// では動かない。ローカルでは
+       `python3 -m http.server` 等で配信すること(README 参照) -->
+  <script type="module" src="./src/main.js"></script>
+<footer class="sm-provenance" style="font:12px/1.6 system-ui,sans-serif;color:#6b6b6b;padding:1rem;margin-top:2rem;border-top:1px solid #e2e2de;"><span>生成: 2026-09-13T04:11:54Z</span></footer></body>
+</html>

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テーマカタログ</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #f7f7f5; --card: #fff; --fg: #1a1a1a; --muted: #6b6b6b;
+  --line: #e2e2de; --accent: #2f6f4f; --warn-bg: #fdf3e3; --warn-line: #e0b872;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #16181a; --card: #202326; --fg: #e8e8e6; --muted: #9aa0a6;
+          --line: #2f3438; --accent: #7fd1a8; --warn-bg: #2d2617; --warn-line: #7a6230; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg);
+  font-family: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  line-height: 1.75; overflow-wrap: anywhere; }
+.wrap { max-width: 54rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+h1 { font-size: 1.35rem; margin: 0 0 0.25rem; }
+h2 { font-size: 1rem; margin: 2rem 0 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--line); }
+p, li { font-size: 0.92rem; }
+.lead { color: var(--muted); margin: 0 0 1.25rem; }
+.warn { background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 12px; padding: 0.85rem 1rem; margin: 1rem 0; }
+.warn p { margin: 0.35rem 0; }
+.files { list-style: none; padding: 0; display: grid; gap: 0.5rem; }
+.files a { display: flex; flex-wrap: wrap; align-items: center; gap: 0 0.5rem;
+  min-height: 44px; padding: 0.4rem 0.9rem;
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  text-decoration: none; color: inherit; font-weight: 600; }
+.files a:hover { border-color: var(--accent); }
+.files .name { white-space: nowrap; }  /* ファイル名は途中で折らない */
+.files .note { font-weight: 400; color: var(--muted); font-size: 0.8rem; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.85rem; min-width: 20rem; }
+th, td { text-align: left; padding: 0.4rem 0.7rem; border-bottom: 1px solid var(--line);
+  vertical-align: top; }
+th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; }
+code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.82rem; }
+pre { background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  padding: 0.8rem; overflow-x: auto; }
+footer { color: var(--muted); font-size: 0.78rem; margin-top: 2.5rem; }
+footer a { color: inherit; display: inline-block; min-height: 44px; line-height: 44px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>イチモン 取得テーマカタログ</h1>
+  <p class="lead">中学受験の社会・理科の問題を作るために、<strong>事実データをどこからどう取るか</strong>を
+  100テーマ分そろえた定義集です。Wikidata の SPARQL クエリ89本と、
+  e-Stat の統計表の指定を含みます。学習アプリ「イチモン」で実際に使っている定義をそのまま公開しています。</p>
+
+  <div class="warn">
+    <p><strong>大事な注意 — 100本のうち、実際に動かして確認できているのは17本です。</strong></p>
+    <p>この環境から Wikidata / e-Stat へ到達できない状態で書いた下書きが多く含まれます。
+    各テーマの <code>status</code> を必ず見てください。0件が返ったらクエリ側の調整が要ります。</p>
+  </div>
+
+  <h2>ファイル</h2>
+  <ul class="files">
+    <li><a href="themes.json"><span class="name">themes.json</span><span class="note">全フィールド。SPARQL 本文つき</span></a></li>
+    <li><a href="themes.csv"><span class="name">themes.csv</span><span class="note">表計算で開ける平板版。SPARQL は含みません</span></a></li>
+  </ul>
+
+  <h2>検証状態(status)</h2>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>status</th><th class="num">件数</th><th>意味</th></tr></thead>
+      <tbody>
+        <tr><td><code>draft</code></td><td class="num">67</td><td>ライブ未検証(この環境から Wikidata / e-Stat へ到達できないまま書いた下書き)</td></tr>
+        <tr><td><code>fixed-untested</code></td><td class="num">16</td><td>一度失敗し、直したが再取得は未確認</td></tr>
+        <tr><td><code>live-verified</code></td><td class="num">17</td><td>実際に取得して結果を確認済み</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>内訳</h2>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>分野</th><th class="num">テーマ数</th></tr></thead>
+      <tbody>
+        <tr><td>公民</td><td class="num">8</td></tr>
+        <tr><td>化学</td><td class="num">6</td></tr>
+        <tr><td>地学</td><td class="num">7</td></tr>
+        <tr><td>地理</td><td class="num">47</td></tr>
+        <tr><td>歴史</td><td class="num">29</td></tr>
+        <tr><td>生物</td><td class="num">3</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>出典 / 出題の形</th><th class="num">テーマ数</th></tr></thead>
+      <tbody>
+        <tr><td>e-stat</td><td class="num">11</td></tr>
+        <tr><td>wikidata</td><td class="num">89</td></tr>
+        <tr><td>pair</td><td class="num">31</td></tr>
+        <tr><td>rank</td><td class="num">38</td></tr>
+        <tr><td>single-region</td><td class="num">31</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>出題の形の意味: <code>pair</code> = X に対する Y を答える(1行=1問) / <code>single-region</code> = 所在する1都道府県を答える / <code>rank</code> = 数値の降順ランキングを答える</p>
+  <p>e-Stat の11テーマのうち、統計表ID(<code>stats_data_id</code>)まで確定しているのは4件です。
+  残りは表を選ぶところから作業が要ります。</p>
+
+  <h2>フィールド</h2>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>名前</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>テーマの識別子</td></tr>
+        <tr><td><code>area</code> / <code>area_name</code></td><td>分野(chiri=地理 など)</td></tr>
+        <tr><td><code>topic</code> / <code>subject</code></td><td>扱う題材と、答えさせる対象</td></tr>
+        <tr><td><code>tags</code></td><td>絞り込み用のタグ</td></tr>
+        <tr><td><code>source</code></td><td><code>wikidata</code> / <code>e-stat</code></td></tr>
+        <tr><td><code>kind</code></td><td>出題の形(上表)</td></tr>
+        <tr><td><code>status</code> / <code>status_note</code></td><td>検証状態(上表)</td></tr>
+        <tr><td><code>hensachi</code> / <code>hensachi_by_rank</code></td><td>想定難易度の目安(偏差値)。ランキング形式は順位ごと</td></tr>
+        <tr><td><code>example_question</code> / <code>example_explanation</code></td><td>出題文・解説文の例(◯◯ は伏せ字)</td></tr>
+        <tr><td><code>result_keys</code></td><td>取得結果のどの列を使うか</td></tr>
+        <tr><td><code>sparql</code></td><td>Wikidata へ投げるクエリ本文(e-Stat は null)</td></tr>
+        <tr><td><code>stats_data_id</code></td><td>e-Stat の統計表ID(未確定は null)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>使い方</h2>
+  <p>たとえば「地理で、実際に動作確認できているテーマ」だけを取り出すには:</p>
+  <pre>jq '.themes[] | select(.area == "chiri" and .status == "live-verified") | {id, topic}' themes.json</pre>
+  <p><code>sparql</code> の中身は Wikidata Query Service にそのまま貼り付けて実行できます。</p>
+
+  <h2>出典と利用条件</h2>
+  <ul>
+    <li>このカタログ(クエリ本文・分類・例文)は自作です。<strong>CC0-1.0</strong> として公開します。自由に使ってください</li>
+    <li>Wikidata のデータは CC0。取得したデータを使うときは Wikidata の規約に従ってください</li>
+    <li>e-Stat(政府統計の総合窓口)のデータを使うときは、出典の表示が必要です</li>
+    <li>取得できるのは<strong>事実</strong>です。問題文・解説文の表現は自分で書き起こしてください</li>
+  </ul>
+</div>
+<footer>
+  <a href="../../../">公開ページの一覧へ</a>
+</footer>
+<footer class="sm-provenance" style="font:12px/1.6 system-ui,sans-serif;color:#6b6b6b;padding:1rem;margin-top:2rem;border-top:1px solid #e2e2de;"><span>生成: 2026-09-13T04:11:54Z</span></footer></body>
+</html>

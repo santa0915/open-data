@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ゲーム作品集</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #f7f7f5; --card: #fff; --fg: #1a1a1a; --muted: #6b6b6b;
+  --line: #e2e2de; --accent: #2f6f4f; --accent-fg: #fff;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #16181a; --card: #202326; --fg: #e8e8e6; --muted: #9aa0a6;
+          --line: #2f3438; --accent: #7fd1a8; --accent-fg: #10231a; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg);
+  font-family: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  line-height: 1.7; }
+.wrap { max-width: 64rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+h1 { font-size: 1.4rem; margin: 0 0 0.35rem; }
+.lead { color: var(--muted); font-size: 0.9rem; margin: 0 0 1.5rem; }
+h2 { font-size: 0.85rem; color: var(--muted); font-weight: 600; margin: 2rem 0 0.75rem;
+  letter-spacing: 0.04em; }
+ul { list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 0.85rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); }
+a.card { display: flex; flex-direction: column; gap: 0.5rem; height: 100%;
+  padding: 1rem; background: var(--card); border: 1px solid var(--line);
+  border-radius: 14px; text-decoration: none; color: inherit; }
+a.card:hover, a.card:focus-visible { border-color: var(--accent); }
+.top { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; }
+.genre { font-size: 0.72rem; padding: 0.1rem 0.55rem; border: 1px solid var(--line);
+  border-radius: 999px; color: var(--muted); }
+.pc { font-size: 0.72rem; padding: 0.1rem 0.55rem; border-radius: 999px;
+  border: 1px solid var(--accent); color: var(--accent); }
+.title { font-size: 1.1rem; font-weight: 700; margin: 0; }
+.catch { margin: 0; font-size: 0.92rem; }
+.note { margin: 0; color: var(--muted); font-size: 0.78rem; }
+.catch, .note, .title { overflow-wrap: anywhere; }
+.foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 0.5rem; margin-top: auto; padding-top: 0.35rem; }
+.date { color: var(--muted); font-size: 0.75rem; }
+.play { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1rem;
+  border-radius: 999px; background: var(--accent); color: var(--accent-fg);
+  font-size: 0.9rem; font-weight: 600; }
+footer { max-width: 64rem; margin: 0 auto; padding: 0 1rem 2.5rem;
+  color: var(--muted); font-size: 0.78rem; }
+footer a { color: inherit; display: inline-block; min-height: 44px; line-height: 44px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>ブラウザで動くゲーム 9本</h1>
+    <p class="lead">すべてオリジナル実装。外部ライブラリを使わず、HTML と JavaScript だけで作っています。
+    インストール不要、開いたらすぐ遊べます。</p>
+  </header>
+  <main>
+    <h2>スマホでもPCでも遊べる</h2>
+    <ul>
+      <li>
+        <a class="card" href="../../yomoji/app/">
+          <div class="top"><span class="genre">ことば</span></div>
+          <p class="title">ヨモジ</p>
+          <p class="catch">ひらがな4文字を8回以内に。濁点・小書きだけの違いは「おしい」で教えてくれる</p>
+          <p class="note">語彙240語を「編集禁止の設計資産」として扱う方式を検証した作</p>
+          <div class="foot">
+            <span class="date">2026-07-11</span>
+            <span class="play">▶ あそぶ</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="../../nuri-logi/app/">
+          <div class="top"><span class="genre">パズル</span></div>
+          <p class="title">ヌリロジ</p>
+          <p class="catch">数字をたよりにマスを塗ると絵があらわれる。全12問が「論理だけで解ける」</p>
+          <p class="note">ラインソルバ内蔵。一意解かつ当てずっぽう不要であることをテストで機械証明</p>
+          <div class="foot">
+            <span class="date">2026-07-14</span>
+            <span class="play">▶ あそぶ</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="../../hako-oshi/app/">
+          <div class="top"><span class="genre">パズル</span></div>
+          <p class="title">ハコオシ</p>
+          <p class="catch">箱をゴールへ押して運ぶ。詰んだら「解けません」と教えてくれる</p>
+          <p class="note">BFSソルバ内蔵。全12面の可解性と最短手数をテストで機械証明</p>
+          <div class="foot">
+            <span class="date">2026-07-13</span>
+            <span class="play">▶ あそぶ</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="../../nine-grid/app/">
+          <div class="top"><span class="genre">パズル</span></div>
+          <p class="title">ナイングリッド</p>
+          <p class="catch">9×9に1〜9を埋める。問題はその場で自動生成され、解は必ず一つ</p>
+          <p class="note">自作のソルバとジェネレータで一意解を保証。難易度3種+きょうの1問</p>
+          <div class="foot">
+            <span class="date">2026-07-07</span>
+            <span class="play">▶ あそぶ</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="../../ichimon/app/">
+          <div class="top"><span class="genre">学習</span></div>
+          <p class="title">イチモン</p>
+          <p class="catch">中学受験の社会・理科を一問一答で。目標偏差値で難しさが変わる</p>
+          <p class="note">オリジナル作問444問(CC0)。まちがえた問題は間隔反復で戻ってくる</p>
+          <div class="foot">
+            <span class="date">2026-07-12</span>
+            <span class="play">▶ あそぶ</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="../../uso-boshi/app/">
+          <div class="top"><span class="genre">推理</span></div>
+          <p class="title">ウソボシ</p>
+          <p class="catch">クルー7人のうち2人がウソつき。あなたも騙りCO・偽の報告ができる</p>
+          <p class="note">AIボット6人と1人で遊ぶ。全自動対戦300回でバランスを機械ゲート</p>
+          <div class="foot">
+            <span class="date">2026-07-19</span>
+            <span class="play">▶ あそぶ</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="../../cosmo-merge/app/">
+          <div class="top"><span class="genre">パズル</span></div>
+          <p class="title">コズモマージ</p>
+          <p class="catch">同じ天体をぶつけると1段階大きくなる。最終形の太陽をめざす</p>
+          <p class="note">自作の2D円物理。ライブラリを使わずに落下と合体を実装した第1作</p>
+          <div class="foot">
+            <span class="date">2026-07-07</span>
+            <span class="play">▶ あそぶ</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+    <h2>PC専用(キーボードが要ります)</h2>
+    <ul>
+      <li>
+        <a class="card" href="../../four-winds/app/">
+          <div class="top"><span class="genre">シューティング</span><span class="pc">PC専用</span></div>
+          <p class="title">フォーウィンズ</p>
+          <p class="catch">15秒ごとにスクロール方向が右→上→左→下と回る。「前」の定義が変わり続ける</p>
+          <p class="note">固定タイムステップの自作ループ。1ステージ+ボス</p>
+          <div class="foot">
+            <span class="date">2026-07-11</span>
+            <span class="play">▶ あそぶ</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="../../twin-leap/app/">
+          <div class="top"><span class="genre">アクション</span><span class="pc">PC専用</span></div>
+          <p class="title">ツインリープ</p>
+          <p class="catch">1台のキーボードを2人で分け合う。頭に乗り、スイッチを押し合って、ふたりでゴールへ</p>
+          <p class="note">自作のAABBプラットフォーマー物理。全5レベル</p>
+          <div class="foot">
+            <span class="date">2026-07-07</span>
+            <span class="play">▶ あそぶ</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </main>
+</div>
+<footer>
+  <a href="../../../">公開ページの一覧へ</a>
+</footer>
+<footer class="sm-provenance" style="font:12px/1.6 system-ui,sans-serif;color:#6b6b6b;padding:1rem;margin-top:2rem;border-top:1px solid #e2e2de;"><span>生成: 2026-09-13T04:11:54Z</span></footer></body>
+</html>
