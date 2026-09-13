@@ -10,26 +10,27 @@
 <nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
 <main>
 <h1>Toward Generalist Autonomous Research via Hypothesis-Tree Refinement</h1>
-<div class="muted">must-read ・ 関連度 0.92 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Fulltext Reviewed</div>
+<div class="muted">must-read ・ 関連度 0.92 ・ — ・ 追跡 — ・ 再現性 High ・ 処理状況 Fulltext Reviewed</div>
 <div class="muted">著者: Jiajie Jin; Yuyang Hu; Kai Qiu; Qi Dai; Chong Luo; (+13)</div>
-<div><span class="score">優先度 57</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
-<div class="chips"><span class="chip">関連度 0.92 +37</span><span class="chip">処理状況 Fulltext Reviewed +10</span><span class="chip">新しい +10</span></div>
+<div><span class="score">優先度 72</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.92 +37</span><span class="chip">Ablation / Sensitivity あり +15</span><span class="chip">処理状況 Fulltext Reviewed +10</span><span class="chip">新しい +10</span></div>
 <div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
 <p><a href="http://arxiv.org/abs/2606.11926v1">原文を開く</a></p>
 <h2>要点</h2>
-<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>Autonomous Optimization (AO) / 自律的研究プロセスの自動化</td></tr><tr><th>Main Contribution</th><td>ArborフレームワークとHypothesis-Tree Refinement(HTR)による長期自律的探索の構造化メモリ管理、Coordinator/Executor分離アーキテクチャ、held-out merge gate機構の提案</td></tr><tr><th>Novelty</th><td>永続仮説ツリー状態管理、dev/test評価器厳密分離、洞察の階層的逆伝播、検証外スコアに基づく候補採用ゲート</td></tr></table></div>
 <h2>要約</h2>
 <div class='card'><p>自律的な科学的研究ループ（仮説生成・実験・抽象化）を実現する「Arbor」フレームワークを提案。長期記憶として仮説・成果物・証拠・知見を連結するHypothesis Tree Refinement (HTR) と、戦略調整役のコーディネーターと実行役のエグゼキューターからなる階層型エージェント構成を採用。6つの実研究タスクにおいて人間介入なしで反復改善を実現し、Codex/Claude Code比で平均2.5倍以上の汎化性能向上を達成。MLE-Bench LiteではGPT-5.5と連携して86.36%のAny Medalを記録。</p></div>
 <h2>キーポイント</h2>
 <div class='card'><p>新規性: 長期にわたる研究プロセスをトラッキングする「Hypothesis Tree Refinement (HTR)」という永続的ツリー構造を導入し、仮説と証拠・知見の時間軸横断的連携を実現</p><p>技術的貢献: グローバル戦略を担う長期コーディネーターと孤立環境で仮説を検証する短期エグゼキューターからなる階層型アーキテクチャにより、知識の蓄積と探索前線の洗練を自動化</p><p>実験結果: 6つの実研究タスク（モデル学習・ハーンサー設計・データ合成など）で全タスク最良の汎化性能を達成し、ベースラインツール比で平均2.5倍以上の相対向上を実現</p><p>実用性・制約: ステップごとの人間監督なしで自律最適化（AO）環境を構築可能だが、基盤モデル（GPT-5.5等）の推論能力と隔離されたワークツリー実行環境に依存</p></div>
 <details id="deep"><summary>手法と報告実験を開く</summary>
 <h2>手法</h2>
-<p class='muted'>台帳用の申告がありません。</p>
+<div class="card"><h3>Arbor (Hypothesis-Tree Refinement / HTR) <span class="muted">Autonomous Research Agent / Multi-Agent Framework</span></h3><p>長期Coordinatorと短期Executorの2層構造。永続仮説ツリー($T=(V,E)$)で研究状態を管理。各ノードは仮説($h_n$)、洞察($\iota_n$)、メタデータ($\mu_n$)で構成。並列Executor実行環境隔離(git worktree)。</p><div class="pair"><div><b>効く条件</b><br>長期ホライズン探索、文脈窓肥大化回避が必要、dev過適合防止が必須なタスク</div><div><b>効かない条件</b><br>バックボーンモデルの能力とタスク要件(推論重視/知識重視)の適合性が低い場合</div></div><p class="muted">重要ハイパラ: 展開数k, 最大サイクル数(20), 最大木深さ(2), トークン予算上限</p></div>
 <h2>報告実験</h2>
-<p class='muted'>台帳用の申告がありません。</p>
+<div class="scroll-x"><table><tr><th>型</th><th>タスク / データセット</th><th>Baseline</th><th>Treatment</th><th>Δ</th><th>条件</th><th>根拠</th></tr><tr><td>Benchmark / Generalization</td><td>AO Task Suite (Optimizer Design, Architecture Design, Terminal-Bench 2.0, BrowseComp, Search-Agent, Math-Reasoning Data Synthesis) / MLE-Bench Lite / AO Task Suite dev/test splits</td><td>BrowseComp: Codex 50.00, Claude Code 53.33 / Terminal-Bench: Claude Code Dev 75.00→Test 71.70<br><span class="muted">Codex (GPT-5.5), Claude Code (Claude Opus 4.6), AIDE, ML-Master 2.0等13系統</span></td><td>BrowseComp Test 67.67 / Terminal-Bench Test 77.36(+7.55%) / Math-Reasoning pass-gap +19.79<br><span class="muted">Arbor(GPT-5.5/Claude Opus 4.6/Gemini-3-Flash), デフォルト予算(20サイクル/深さ2)</span></td><td>+3.01%〜+22.00% (タスク依存)</td><td>dev(探索用)/test(ホールドアウト検証用)厳密分離 / 48時間壁時計制限内、単一プロンプト記述、dev/test分離、held-out merge gate適用 / シード2回平均(評価器依存)</td><td>Table 2, Figure 1(c), Section 5.3</td></tr><tr><td>Benchmark</td><td>MLE-Bench Lite / MLE-Bench Lite (公式タスク設定・採点ルール)</td><td>他エージェントのAny medal率(詳細数値はTable 3参照)<br><span class="muted">InternAgent, ML-Master 2.0, AI-Scientist, LoongFlow等13システム</span></td><td>GPT-5.5: Above median 95.45%, Gold 77.27%, Any medal 86.36% / Gemini-3-Flash: Any medal 81.82%<br><span class="muted">Arbor(Gemini-3-Flash / GPT-5.5バックボーン), コントローラー/アダプター固定</span></td><td>他手法中最上位</td><td>公式分割準拠 / 公式プロトコル準拠、メダル閾値適用 / 公式評価準拠</td><td>Table 3, Section 5.4</td></tr><tr><td>Ablation ★</td><td>MLE-Bench Lite / MLE-Bench Lite</td><td>FullArbor Any medal 81.82%<br><span class="muted">FullArbor vs _w/o tree vs _w/o insight feedback</span></td><td>_w/o tree 63.64% / _w/o insight feedback 54.54%<br><span class="muted">平坦な実験キュー化、上位伝播無効化</span></td><td>-18.18% (tree除去) / -27.28% (insight除去)</td><td>公式分割準拠 / Claude Opus 4.6バックボーン固定、ツールアクセス・ワークスペース予算・評価プロトコル厳密統一 / 全バリアント実行成功率100%</td><td>Table 4, Figure 4, Section 5.7</td></tr><tr><td>Generalization / Robustness</td><td>BrowseComp (train), HLE, DeepSearchQA (test) / BrowseComp dev/test, HLE, DeepSearchQA</td><td>BrowseComp初期 45.33% / HLE初期 25.50% / DeepSearchQA初期 61.00±6.76%<br><span class="muted">—</span></td><td>BrowseComp 67.67% / HLE 31.50% / DeepSearchQA 69.00±6.41%<br><span class="muted">BrowseComp最適化→コード凍結→未見タスク直接評価(追加チューニングなし)</span></td><td>+22.34% (BrowseComp) / +6.00% (HLE) / +8.00% (DeepSearchQA)</td><td>BrowseComp開発フィードバックのみ使用、コードベース凍結後評価 / 凍結ハルネスによる転移性能測定 / シード平均(評価器依存)</td><td>Figure 3(b), Section 5.6</td></tr><tr><td>Efficiency</td><td>AO Task Suite / MLE-Bench Lite / 同上</td><td>単一軌道ベースラインと同等規模<br><span class="muted">単一軌道ベースライン(Codex, Claude Code)</span></td><td>20.12M〜43.19Mトークン / 同等予算内でより高い汎化性能<br><span class="muted">Arborの構造化トークン配分(競合仮説維持/孤立実行/証拠比較/探索木更新)</span></td><td>同等コストで改善率向上</td><td>Figure 4とTable 5による可視化・比較</td><td>Figure 4, Table 5, Section 5.8</td></tr></table></div>
 </details>
-
-<p><a href='../index.html'>一覧に戻る</a></p>
+<h2>つながり</h2>
+<p>同じ手法ファミリ: <a href="../index.html?family=Autonomous Research Agent / Multi-Agent Framework&state=">Autonomous Research Agent / Multi-Agent Framework</a></p>
+<p><a href='PPR-solution-454.html'>次に読む →</a> ・ <a href='../index.html'>一覧に戻る</a></p>
 </main>
 <script>
 const KEY = 'paper_site:read:';

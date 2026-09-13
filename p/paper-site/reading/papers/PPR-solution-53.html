@@ -12,8 +12,8 @@
 <h1>SkillAxe: Sharpening LLM-Authored Agent Skills Through Evaluation-Guided Self-Refinement</h1>
 <div class="muted">worth-reading ・ 関連度 0.85 ・ arXiv ・ 追跡 — ・ 再現性 — ・ 処理状況 —</div>
 <div class="muted">著者: Srishti Gautam, Arjun Radhakrishna, Sumit Gulwani</div>
-<div><span class="score">優先度 44</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
-<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">新しい +10</span></div>
+<div><span class="score">優先度 59</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.85 +34</span><span class="chip">Ablation / Sensitivity あり +15</span><span class="chip">新しい +10</span></div>
 <div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
 <p><a href="http://arxiv.org/abs/2606.10546v2">原文を開く</a></p>
 <h2>要点</h2>
@@ -26,10 +26,10 @@
 <h2>手法</h2>
 <p class='muted'>台帳用の申告がありません。</p>
 <h2>報告実験</h2>
-<p class='muted'>台帳用の申告がありません。</p>
+<div class="scroll-x"><table><tr><th>型</th><th>タスク / データセット</th><th>Baseline</th><th>Treatment</th><th>Δ</th><th>条件</th><th>根拠</th></tr><tr><td>Benchmark</td><td>スプレッドシート/ドキュメント操作タスク (SkillsBench) / SkillsBench</td><td>No-skill: 42.7% (Fair), LLM-self: 39.0% (Fair)/32.5% (Nat), Human: 62.3% (Fair)/51.9% (Nat)<br><span class="muted">No-skill, LLM-self, Human</span></td><td>SKILLAXE: 54.5% (Fair)/41.6% (Nat)<br><span class="muted">SKILLAXE（1イテレーション改善済み）</span></td><td>LLM-self比相対28%向上、Humanとのギャップ47〜67%縮小</td><td>89タスク中6除外、有効77タスク / k=2回試行の平均報酬をタスク間平均。マルチモーダルフェアグレーダーと保守的ネイティブ検証器の2方式並列適用。 / k=2 / ブートストラップ法による95%信頼区間（±8〜10pp）</td><td>Table 2, Figure 3, Section 4.1, Section 4.2</td></tr><tr><td>Benchmark / Generalization</td><td>スプレッドシート操作（Excel Copilot） / SpreadsheetBench</td><td>No skill: 16.0%, LLM-self library: 52.0%<br><span class="muted">No skill, LLM-self library (69スキル)</span></td><td>SKILLAXE library: 52.0%<br><span class="muted">SKILLAXE library (22スキル, 埋め込み類似度+3ゾーンルーティング+2フェーズ改善)</span></td><td>スキル数を68%削減（69→22）しつつ同等精度達成。アクティベーション頻度35.8%（LLM-self比約1.8倍）</td><td>訓練200タスク／テスト50タスク（seed=42） / ホールドアウトテストセットで正答率を計測。スキルマニフェスト参照とget_skill_mdツールによる動的呼び出し。</td><td>Table 3, Section 4.3</td></tr><tr><td>Ablation / Sensitivity</td><td>SkillsBench / SpreadsheetBench (Trigger Embedding) / 抽出した6スキル（SpreadsheetBench）, 23タスク（符号検定）</td><td>Human: Margin 0.051, LLM-self: Margin 0.031<br><span class="muted">Human, LLM-self</span></td><td>SKILLAXE: Margin 0.148, Rank=1 73.9%<br><span class="muted">SKILLAXEトリガー（Guardrailステップ付き除外句付与）</span></td><td>Mean Marginが人間比約3倍向上。正解類似度+0.128、誤り最大類似度+0.031</td><td>埋め込み空間でのコサイン類似度とマージン計算。23タスクで符号検定実施。 / 23タスク全体での二項検定（p &lt; 0.02）</td><td>Table 6, Table 7, Section E</td></tr><tr><td>Ablation ★</td><td>SkillsBenchタスク（大幅向上8タスク） / SkillsBench</td><td>初期スコア: 0.00〜0.60<br><span class="muted">LLM-self (初期スキル)</span></td><td>改善後スコア: 0.17〜1.00, ∆: +0.17〜+0.50<br><span class="muted">SKILLAXE改善後スキル</span></td><td>court-form-fillingで最大+0.50。コンプライアンス指標によりフィールド順序制約違反を特定・是正</td><td>ネイティブ検証器によるタスク単位の定量比較。5/8タスクがゼロ報酬から改善。</td><td>Table 4, Section A</td></tr></table></div>
 </details>
 
-<p><a href='../index.html'>一覧に戻る</a></p>
+<p><a href='PPR-solution-219.html'>次に読む →</a> ・ <a href='../index.html'>一覧に戻る</a></p>
 </main>
 <script>
 const KEY = 'paper_site:read:';

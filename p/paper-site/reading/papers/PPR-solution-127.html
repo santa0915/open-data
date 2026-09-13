@@ -10,26 +10,27 @@
 <nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
 <main>
 <h1>ECHO: Terminal Agents Learn World Models for Free</h1>
-<div class="muted">must-read ・ 関連度 0.93 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Fulltext Reviewed</div>
+<div class="muted">must-read ・ 関連度 0.93 ・ — ・ 追跡 — ・ 再現性 High ・ 処理状況 Fulltext Reviewed</div>
 <div class="muted">著者: Vaishnavi Shrivastava; Piero Kauffmann; Ahmed Awadallah; Dimitris Papailiopoulos</div>
-<div><span class="score">優先度 57</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
-<div class="chips"><span class="chip">関連度 0.93 +37</span><span class="chip">処理状況 Fulltext Reviewed +10</span><span class="chip">新しい +10</span></div>
+<div><span class="score">優先度 72</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
+<div class="chips"><span class="chip">関連度 0.93 +37</span><span class="chip">Ablation / Sensitivity あり +15</span><span class="chip">処理状況 Fulltext Reviewed +10</span><span class="chip">新しい +10</span></div>
 <div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
 <p><a href="http://arxiv.org/abs/2605.24517v1">原文を開く</a></p>
 <h2>要点</h2>
-<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>CLIターミナルエージェントにおけるスパースな結果報酬のみを用いた強化学習（GRPO）の課題を解決し、環境フィードバックを密な教師信号として活用したエージェントポリシーの学習</td></tr><tr><th>Main Contribution</th><td>環境観測トークンの予測クロスエントロピー損失をポリシー勾配損失にハイブリッド化したECHO手法の提案。追加ロールアウトなしで既存GRPOパイプラインに組み込み、pass@1を約2倍向上させ、expert SFT依存を低減</td></tr><tr><th>Novelty</th><td>GRPOのフォワードパスとロールアウトを再利用して環境トークン位置のlogitsにクロスエントロピー損失を適用。警告トークンをフィルタリングし、固定重みλによる自己annealing効果を活用する設計</td></tr></table></div>
 <h2>要約</h2>
 <div class='card'><p>CLIエージェントにおける環境フィードバック（stdout, ログ, エラー等）を教師信号として活用する学習手法ECHOを提案。標準的なGRPOの政策勾配損失に、エージェントが自身の行動によって生じる環境トークンを予測する補助損失を結合し、追加ロールアウトなしで同じフォワードパスで訓練可能にする。TerminalBench-2.0においてGRPOのpass@1を約2倍に向上させ、専門家のデモなしでも同等以上の性能を実現。</p></div>
 <h2>キーポイント</h2>
 <div class='card'><p>新規性: エージェントRLで無視されがちな環境応答ストリームを「密な教師信号」として再定義し、既存のスパース報酬設定を補完するハイブリッド損失を提案</p><p>技術的貢献: ECHO（Environment Cross-entropy Hybrid Objective）により、政策勾配損失と環境トークン予測損失を単一フォワードパスで同時に最適化。追加ロールアウトや計算オーバーヘッドなしで実装可能</p><p>実験結果: TerminalBench-2.0でQwen3-8Bのpass@1を2.70%→5.17%、14Bを5.17%→10.79%に約2倍向上。環境予測精度も大幅に改善</p><p>実用性: 専門家のSFTデータや検証器（verifier）を必要とせず、純粋な環境相互作用のみで自己改善（verifier-free self-improvement）が可能</p><p>限界・課題: CLI/ターミナル環境に特化した評価であり、GUIエージェントや物理世界への汎化性、長文コンテキストでの予測安定性などは未検証</p></div>
 <details id="deep"><summary>手法と報告実験を開く</summary>
 <h2>手法</h2>
-<p class='muted'>台帳用の申告がありません。</p>
+<div class="card"><h3>ECHO (Environment Cross-entropy Hybrid Objective) <span class="muted">Agentic RL / 補助予測損失</span></h3><p>GRPOの出力ロジットを環境観測トークン位置で再利用し、追加アーキテクチャ変更なし</p><div class="pair"><div><b>効く条件</b><br>タスクに予測可能で行動と連動性の高い環境フィードバック構造がある場合。大規模モデルほど環境ダイナミクス内面化の恩恵が大きい</div><div><b>効かない条件</b><br>$\lambda &gt; 0.05$の場合、観測目標とポリシー更新が競合しロールアウトが退化。フィードバックが行動と直接結びつきにくいタスク（例：TBLite）では検証者なし適応で性能低下。警告トークンを含むと勾配消失</div></div><p class="muted">重要ハイパラ: 損失重み$\lambda$ (0.01〜0.05が安定範囲)、サンプリング温度 (学習時0.8、評価時0.6)、ロールアウト数 (16)</p></div>
 <h2>報告実験</h2>
-<p class='muted'>台帳用の申告がありません。</p>
+<div class="scroll-x"><table><tr><th>型</th><th>タスク / データセット</th><th>Baseline</th><th>Treatment</th><th>Δ</th><th>条件</th><th>根拠</th></tr><tr><td>Benchmark</td><td>ターミナルエージェント / TerminalBench-2.0, val100, ITD, TBLite</td><td>8B: 2.70%, 14B: 5.17%<br><span class="muted">GRPO (Qwen3-8B/14B)</span></td><td>8B: 5.17%, 14B: 10.79%<br><span class="muted">ECHO ($\lambda=0.05$)</span></td><td>+2.47pp (8B), +5.62pp (14B)</td><td>val100 (検証), ITD, TBLite, TB2 p@k / Terminus-2ハーネス下で温度0.6、pass@k評価。チェックポイントを厳密にマッチング</td><td>Table 1, Section 5.1</td></tr><tr><td>Ablation ★</td><td>環境トークン予測 / Qwen3-32B生成オフポリシー軌道</td><td>GRPO: val100(0.24), ITD(0.39), TBLite(0.30) [14B基準]<br><span class="muted">GRPO, 初期方策</span></td><td>ECHO: val100(0.07), ITD(0.31), TBLite(0.23) [14B基準]<br><span class="muted">ECHO適用モデル</span></td><td>大幅な交差エントロピー低下</td><td>val100, ITD, TBLite / 各タスク8軌道（計2,168）で予測誤差を測定。分布内/外を比較</td><td>Figure 3, Section 5.2</td></tr><tr><td>Benchmark</td><td>ターミナルエージェント / val100, ITD, TBLite, TerminalBench-2.0</td><td>val100/ITDでSFT構成を上回る(&gt;100%), TBLite 88.9%, TB2 pass@kで~50%<br><span class="muted">GRPO, Expert-SFT+GRPO</span></td><td>内部評価でgap超過, TB2でギャップの半分を解消<br><span class="muted">ECHO (Qwen3-8Bベース)</span></td><td>内部評価ではSFT利点をほぼ完全回復, TB2では約50%回復</td><td>val100, ITD, TBLite, TB2 p@1/3/5 / SFT gapとECHO liftを算出し、閉鎖率を比較</td><td>Table 4, Section C</td></tr><tr><td>Efficiency</td><td>学習効率・推論コスト / 内部評価, TerminalBench-2.0</td><td>8B収束ステップ基準, TB2タイムアウト19.8%, ターン/トークン基準<br><span class="muted">GRPO-only</span></td><td>8Bで1.5〜2.3倍高速収束, TB2タイムアウト9.0%, 完了トークン最大30%削減<br><span class="muted">ECHO</span></td><td>学習ステップ数1.5-2.3倍削減, 推論ターン/トークン大幅削減</td><td>aggregate score, TBLite, TB2 / 対応するGRPOランの最高検証スコアを初めて超えるステップ数を計測。推論統計を比較</td><td>Table 2 &amp; 3, Section 5.4</td></tr><tr><td>Ablation ★</td><td>OOD適応・自己改善 / val100, PyTerm, ITD, TBLite</td><td>初期チェックポイント基準<br><span class="muted">ECHO最強チェックポイント（GRPO項マスク）</span></td><td>val100 +3.8pp, PyTerm +10.0pp, ITD +5.2pp, TBLite -3.9pp<br><span class="muted">$L_{env}$のみで~100ステップ継続学習（clean tool callsフィルタリング有無）</span></td><td>連動性の高いフィードバックでは大幅改善, 構造が異なるTBLiteでは低下</td><td>val100 (in-dist), PyTerm/ITD (OOD), TBLite / フィードバック構造が異なるベンチマークで適応効果とフィルタリングの効果を比較</td><td>Figure 5, Section 5.5</td></tr><tr><td>Sensitivity ★</td><td>ハイパーパラメータ感度 / 訓練データ (8870タスク)</td><td>N/A<br><span class="muted">N/A</span></td><td>0.01〜0.05で安定学習。&gt;0.05で頭打ち/退化。&lt;0.01で損失振動<br><span class="muted">$\lambda \in \{0.001, 0.005, 0.01, 0.02, 0.05, 0.1, 0.2\}$ 探索</span></td><td>最適範囲外では性能劣化または学習不安定化</td><td>$\lambda$を変化させ学習進行と性能を比較。勾配競合や早期飽和を観察</td><td>Section 3.3</td></tr><tr><td>Ablation ★</td><td>観測データ選択 / 訓練ロールアウト</td><td>warning CE: ステップ60で&lt;0.05 natsに急減<br><span class="muted">全観測メッセージ使用</span></td><td>env CE: 0.05〜0.10 natsでプラトーし勾配を維持<br><span class="muted">警告ブロックを除外した環境トークンのみ ($O&#x27;$) を使用</span></td><td>警告トークン除去により学習終盤まで有益な勾配が持続</td><td>warning CEとenv CEの学習動態を比較。ステップ60付近でのwarning CE飽和を確認</td><td>Section 3.2, Figure 6 (Appendix A)</td></tr></table></div>
 </details>
-
-<p><a href='../index.html'>一覧に戻る</a></p>
+<h2>つながり</h2>
+<p>同じ手法ファミリ: <a href="../index.html?family=Agentic RL / 補助予測損失&state=">Agentic RL / 補助予測損失</a></p>
+<p><a href='PPR-solution-15105.html'>次に読む →</a> ・ <a href='../index.html'>一覧に戻る</a></p>
 </main>
 <script>
 const KEY = 'paper_site:read:';

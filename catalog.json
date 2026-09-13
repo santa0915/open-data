@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-09-12T02:39:28Z",
+  "generated_at": "2026-09-13T01:31:31Z",
   "views": [
     {
       "id": "paper-site/reading",
@@ -16,8 +16,8 @@
       "kind": "page",
       "license": "",
       "path": "p/paper-site/reading/index.html",
-      "updated_at": "2026-09-12T02:39:28Z",
-      "digest": "bdecd808d1a9bef9f521b9e0bde1fb8e4889d8fd2ab836d23127ff3ec55f4999",
+      "updated_at": "2026-09-13T01:31:31Z",
+      "digest": "c8d6e4d309c86d3922c0d3669f1079306436732efe7ea0d3e021dfc6b1cc1517",
       "build_ref": null,
       "source_versions": [],
       "files": [
@@ -33,8 +33,8 @@
         },
         {
           "path": "p/paper-site/reading/index.html",
-          "sha256": "041b5e0b888f2eb63abf01e2d5c5039fc948f2906c1d296925e2bb28536f980b",
-          "size": 2157696
+          "sha256": "252ace3849e4de26470cda85d0b6ca77f47ce62e507a244746f760035ac8eea2",
+          "size": 2159702
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-10.html",
@@ -188,8 +188,8 @@
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-127.html",
-          "sha256": "981716385a0c3a90ec3890b891d5f560b05869b6675d952f4c748cf246f9ccb7",
-          "size": 5125
+          "sha256": "22ff81d096449f225578dbaa1f4c3eabe871bc170f6a4dd7120da519233f3d7b",
+          "size": 11354
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-128.html",
@@ -298,8 +298,8 @@
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-15095.html",
-          "sha256": "935166bac9e9b2eb3e55242afe0d2de06e61d25dc222908bc7004ba20b594700",
-          "size": 4971
+          "sha256": "b975a99f61242c4c7d0347dd5a0826a7ecf5e961cfa782b64a79e9d5dbac9dcf",
+          "size": 7718
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-15096.html",
@@ -348,8 +348,8 @@
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-15105.html",
-          "sha256": "774425e169221fc1ce4d9ccd4d5badb4f7497c559d39c8ae40ff22bb015621b6",
-          "size": 5146
+          "sha256": "f11c44ebcef0a57ed62276715fbbcd8621e75562fcf4f9520c0091b3d0314042",
+          "size": 10311
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-15106.html",
@@ -423,8 +423,8 @@
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-15120.html",
-          "sha256": "9ef04279743a3666e7ccba524dfc2a202fb18a4476824cc5328b042fb42a3a61",
-          "size": 5080
+          "sha256": "041c417c8d49e092168032ef16b526dea71f60e600d435cf317c5413eb3af984",
+          "size": 6886
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-15121.html",
@@ -3293,8 +3293,8 @@
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-306.html",
-          "sha256": "87572ed9019ff43f655c42bfef6bfb05a15902dc0e0fb8482415a2de4db85f0e",
-          "size": 5384
+          "sha256": "1fd61173adbf888189eabe5c1b36a97811e806adeb224012020a1ee3ac284c29",
+          "size": 5383
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-307.html",
@@ -3313,8 +3313,8 @@
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-31.html",
-          "sha256": "f6359eecc7fe5da93fc57e438af50d2d65f4a8bbfddb144c64f0f96164025917",
-          "size": 4878
+          "sha256": "f6f66a45b767ea00741a76bb81f41772745f85add553988cd7e38299490e4f34",
+          "size": 4821
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-310.html",
@@ -3438,8 +3438,8 @@
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-332.html",
-          "sha256": "730b7c0424d805343e05da70431b5d86c66d7e4308b9166d47badc30b756e64b",
-          "size": 5360
+          "sha256": "6f7112deb04a45e138b3a6500d539648fb22867dc1ab0fcecd652ec0545dcab7",
+          "size": 5303
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-333.html",
@@ -3468,8 +3468,8 @@
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-338.html",
-          "sha256": "4ab7b51247beb47388919a7b41e81015bb4d9d6be734a9c4d6d52250499caccb",
-          "size": 5153
+          "sha256": "8a9554e10babc124d1056fa0e0d728208b026a6401fb15e534e7fe3710b76eda",
+          "size": 5097
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-339.html",
@@ -3813,8 +3813,8 @@
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-454.html",
-          "sha256": "9a2c7d56f1e1312538dd3667c1b3934eeb221cf3872844d56149d088d015dcfe",
-          "size": 5187
+          "sha256": "4814d48370e0112377afd1039d548ed89c5a94becc2a781b1fd1347addec8250",
+          "size": 14807
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-455.html",
@@ -3863,8 +3863,8 @@
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-53.html",
-          "sha256": "61ecf87b820e3523e4e51eed3064bf3cf77c63855eacc9de232be5d5773126c9",
-          "size": 5316
+          "sha256": "a071679e47c53fd347334645cb654384e9929a2b97a6b4be79b94855bb801add",
+          "size": 8467
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-54.html",
@@ -3938,8 +3938,8 @@
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-78.html",
-          "sha256": "b11fc5b5ce90ca8b7a7570e63d555cbc4f7e53e3201b9a91a62180f110210201",
-          "size": 5023
+          "sha256": "7e3931694ec0ffa298c14ee109e118fcf9db1c6316fe7c40c2bad3eaad15f8c6",
+          "size": 4966
         },
         {
           "path": "p/paper-site/reading/papers/PPR-solution-780.html",
@@ -4108,8 +4108,8 @@
         },
         {
           "path": "p/paper-site/reading/progress.html",
-          "sha256": "3f273abc1bdc663da4430dbd1640b0da0a73364dceb4fa2ca00757d844e2ebdd",
-          "size": 4592
+          "sha256": "b676aef147af9abc8133c6a2f2906d3aa4387c53c15833aa6f52365a7f5a293c",
+          "size": 4593
         }
       ]
     },

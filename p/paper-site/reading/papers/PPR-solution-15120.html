@@ -10,25 +10,26 @@
 <nav class="site"><a href="../index.html">読む</a><a href="../progress.html">進捗</a></nav>
 <main>
 <h1>AgentCanary: A Security Evaluation Framework for Autonomous AI Agents in Real Executable Environments</h1>
-<div class="muted">must-read ・ 関連度 0.92 ・ — ・ 追跡 — ・ 再現性 — ・ 処理状況 Fulltext Reviewed</div>
+<div class="muted">must-read ・ 関連度 0.92 ・ — ・ 追跡 — ・ 再現性 High ・ 処理状況 Fulltext Reviewed</div>
 <div class="muted">著者: Peiyang Li; Songping Wang; Yi Huang; Yanhua Shi; Chenhao Zhang; (+7)</div>
 <div><span class="score">優先度 57</span> <span class="muted">既読: <b id="state-label">未読</b></span></div>
 <div class="chips"><span class="chip">関連度 0.92 +37</span><span class="chip">処理状況 Fulltext Reviewed +10</span><span class="chip">新しい +10</span></div>
 <div class="chips"><button class="state-button chip" data-value="unread">未読に戻す</button><button class="state-button chip" data-value="summary">サマリ済</button><button class="state-button chip" data-value="full">通読済</button><button class="state-button chip" data-value="shelved">棚上げ</button></div>
 <p><a href="http://arxiv.org/abs/2606.10484v1">原文を開く</a></p>
 <h2>要点</h2>
-<div class="scroll-x"><table><tr><th>Problem / Task</th><td>—</td></tr><tr><th>Main Contribution</th><td>—</td></tr><tr><th>Novelty</th><td>—</td></tr></table></div>
+<div class="scroll-x"><table><tr><th>Problem / Task</th><td>自律型AIエージェントの実環境におけるセキュリティ評価の課題（リスクカバレッジの断片化、低忠実度な実行環境、単一・粗粒度な評価指標）を解決し、体系的ベンチマーク基盤を構築すること</td></tr><tr><th>Main Contribution</th><td>エントリとインパクトを直交させるリスク分類体系、動的プロビジョニングによる高忠実度実行環境、エージェントの完全な軌跡に基づく3次元評価指標、および12モデル・複数攻撃手法による大規模実証評価の提供</td></tr><tr><th>Novelty</th><td>既存ベンチマークが抱える静的シミュレーション依存や評価軸の混同を解消し、リアルツールとの相互作用・永続状態・マルチステップ軌跡を直接観測・多次元スコアリングする設計へ転換した点</td></tr></table></div>
 <h2>要約</h2>
 <div class='card'><p>自律型AIエージェントのセキュリティ評価を目的とした「AgentCanary」フレームワークを提案。エントリ経路と影響結果を直交するリスク分類体系と、動的な状態保持・リアルツール連携による高忠実度実行環境を実現し、エージェントの完全な軌跡に基づいて「結果安全性」「セキュリティ認識」「タスク有用性」の3次元で評価する。主要モデルに対する攻撃耐性ベンチマークを実施した結果、長期実行やスキル侵害下での脆弱性が顕在化し、エージェントセキュリティ評価の新基準を提供した。</p></div>
 <h2>キーポイント</h2>
 <div class='card'><p>エントリ経路と影響結果を直交する「Entry × Impact」リスク分類体系と、長期実行・状態保持に対応したリアルツール連携環境の提供</p><p>単発応答やモック評価に依存せず、エージェントの完全な実行軌跡（Trajectory）を用いた3次元（安全性・認識力・有用性）評価手法の提案</p><p>主要フロントモデルに対する多様な攻撃手法でのベンチマーク実施により、長期ホライゾン・状態侵害下での脆弱性を定量的に可視化</p><p>動的プロビジョニングとリアル環境連携により実デプロイに近いテストが可能だが、環境構築コストや大規模スケーラビリティは未言及</p></div>
 <details id="deep"><summary>手法と報告実験を開く</summary>
 <h2>手法</h2>
-<p class='muted'>台帳用の申告がありません。</p>
+<div class="card"><h3>AgentCanary <span class="muted">Security Evaluation Framework / Benchmark</span></h3><p>「Risk Entry × Risk Impact」直交行列に基づくリスク構造化、Linux Dockerベースの動的プロビジョニング高忠実度サンドボックス環境、エージェント完全軌跡（ユーザークエリ・ツール呼び出し/戻り値・システムイベント）を入力とする3次元スコアリング評価器</p><div class="pair"><div><b>効く条件</b><br>リアルツール連携、永続状態管理、マルチステップタスク実行が要求される実環境に近い評価が必要な場合</div><div><b>効かない条件</b><br>静的なQ&amp;Aや単一応答のみで安全判定可能な単純なプロンプトレベルの課題には過剰かつ不適切</div></div><p class="muted">重要ハイパラ: —</p></div>
 <h2>報告実験</h2>
 <p class='muted'>台帳用の申告がありません。</p>
 </details>
-
+<h2>つながり</h2>
+<p>同じ手法ファミリ: <a href="../index.html?family=Security Evaluation Framework / Benchmark&state=">Security Evaluation Framework / Benchmark</a></p>
 <p><a href='../index.html'>一覧に戻る</a></p>
 </main>
 <script>
