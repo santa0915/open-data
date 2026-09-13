@@ -1,0 +1,113 @@
+
+:root {
+  color-scheme: light dark;
+  --bg: #fbfbfa; --fg: #1b1b1a; --muted: #6b6b66; --line: #e2e2dd;
+  --card: #ffffff; --accent: #2f6f4f; --warn: #a4522a;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161714; --fg: #eceae4; --muted: #9d9c94; --line: #2e302b;
+    --card: #1e201c; --accent: #7fbf9b; --warn: #d99565;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg); line-height: 1.7;
+  font-family: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
+}
+main { max-width: 60rem; margin: 0 auto; padding: 1rem 1rem 4rem; }
+/* 一覧だけは表の列を並べるので広く取る（読む面である論文ページは 60rem のまま）。 */
+body.listing main { max-width: 82rem; }
+a { color: var(--accent); }
+h1 { font-size: 1.3rem; margin: 1rem 0 0.25rem; }
+h2 { font-size: 1.05rem; margin: 2rem 0 0.5rem; }
+h3 { font-size: 0.95rem; margin: 1.2rem 0 0.4rem; }
+nav.site { border-bottom: 1px solid var(--line); padding: 0.6rem 1rem; }
+nav.site a { margin-right: 1rem; text-decoration: none; }
+.muted { color: var(--muted); }
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  padding: 0.8rem 0.9rem; margin: 0.6rem 0;
+}
+.card h3 { margin-top: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.3rem; margin: 0.3rem 0; }
+.chip {
+  border: 1px solid var(--line); border-radius: 999px; padding: 0.1rem 0.6rem;
+  font-size: 0.78rem; color: var(--muted);
+}
+.chip.on { color: var(--fg); border-color: var(--accent); }
+.score { font-weight: 700; color: var(--accent); }
+.state-read { color: var(--accent); }
+.state-shelved { color: var(--muted); text-decoration: line-through; }
+/* 絞り込みは既定で開く。開きっぱなしでも邪魔にならないよう、
+   1 段の高さを詰めて横に並べる（縦に 10 段積むと本文が押し出される）。 */
+.filters-panel { margin: 0.6rem 0 1rem; padding: 0.45rem 0.7rem 0.6rem; }
+.filters-panel > summary { font-weight: 700; padding: 0.15rem 0; min-height: 0; }
+.filters {
+  display: grid; gap: 0.3rem 0.6rem; margin: 0.45rem 0 0;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+}
+.filter-field { display: grid; gap: 0.05rem; align-content: start; }
+.filters label { font-size: 0.74rem; line-height: 1.3; color: var(--muted); }
+.filters select, .filters input {
+  width: 100%; padding: 0.2rem 0.4rem; min-height: 32px; font-size: 0.85rem;
+  background: var(--card); color: var(--fg); border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.filter-actions {
+  grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 0.5rem;
+  margin-top: 0.3rem;
+}
+.filter-actions button { min-height: 34px; font-size: 0.82rem; }
+/* 指で触る端末だけ、詰めた入力欄をタップできる高さへ戻す。 */
+@media (pointer: coarse) {
+  .filters select, .filters input, .filter-actions button { min-height: 40px; }
+}
+button {
+  min-height: 44px; padding: 0.3rem 0.9rem; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--card); color: var(--fg);
+}
+table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
+th, td { border: 1px solid var(--line); padding: 0.35rem 0.5rem; text-align: left; }
+th { color: var(--muted); font-weight: 600; }
+.scroll-x { overflow-x: auto; }
+/* 論文の表（次に読む・一覧）。列幅を固定し、左ほど判断に効く順に並べる。 */
+table.papers { table-layout: fixed; font-size: 0.82rem; }
+table.papers th, table.papers td {
+  border: 0; border-bottom: 1px solid var(--line);
+  padding: 0.3rem 0.5rem 0.3rem 0; vertical-align: top; line-height: 1.5;
+}
+table.papers th { font-size: 0.72rem; white-space: nowrap; }
+table.papers .sub { font-size: 0.72rem; }
+/* 順位は 1 語として扱う（「今日の1本」が 1 文字ずつ縦に割れるのを防ぐ）。 */
+.col-rank { width: 4.2rem; word-break: keep-all; }
+.col-score { width: 3.4rem; }
+.col-area { width: 5.6rem; }
+.col-venue { width: 7rem; }
+.col-affiliation { width: 9rem; }
+.col-keywords { width: 15%; font-size: 0.78rem; }
+.col-summary { width: 19%; }
+/* 概要は 1 行で切る（折り返すと 1 件が 3 行に伸びて一覧として読めない）。 */
+.clip { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+/* 加点の内訳は畳んで持つ（点だけ見せ、押せば理由が出る）。 */
+.why { margin: 0; }
+.why > summary { min-height: 0; list-style: none; }
+.why > summary::-webkit-details-marker { display: none; }
+.why .chips { margin: 0.2rem 0 0; }
+.why .chip { font-size: 0.7rem; }
+/* 狭い画面では右側の補助列から落とし、固定幅も解いてタイトルへ幅を回す
+   （固定幅のままだとタイトルが数文字まで潰れて読めない）。 */
+@media (max-width: 62rem) {
+  .col-summary, .col-keywords { display: none; }
+}
+@media (max-width: 52rem) {
+  .col-area, .col-affiliation { display: none; }
+  table.papers { table-layout: auto; }
+  .col-rank, .col-score, .col-venue { width: auto; }
+}
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+@media (max-width: 40rem) { .pair { grid-template-columns: 1fr; } }
+.attention { color: var(--warn); font-weight: 700; }
+details { margin: 0.6rem 0; }
+summary { cursor: pointer; min-height: 44px; }
+footer { border-top: 1px solid var(--line); margin-top: 3rem; padding-top: 0.8rem; }
