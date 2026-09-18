@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-09-13T06:39:49Z",
+  "generated_at": "2026-09-18T14:19:00Z",
   "views": [
     {
       "id": "investment/site",
@@ -14,9 +14,10 @@
       ],
       "kind": "page",
       "license": "",
+      "listed": true,
       "path": "p/investment/site/index.html",
-      "updated_at": "2026-09-13T06:39:49Z",
-      "digest": "fe8fa46c92f89146315983ecac4f75775170e0b44d6d52b94e815254511166a3",
+      "updated_at": "2026-09-18T14:19:00Z",
+      "digest": "a68edc0965fa1900101bd5d3f6b19973c7efbe6a46c0a715ac77ed60ca7fb2b5",
       "build_ref": null,
       "source_versions": [],
       "files": [
@@ -32,13 +33,13 @@
         },
         {
           "path": "p/investment/site/data/index.html",
-          "sha256": "e9e5f839443f506921a4c3359555c00a94ae09718e45d5331181860bd6023b1a",
+          "sha256": "c623d6327d1dfc9d27795c30964067fc0828cae4e3324b71cec48683c73b7847",
           "size": 1616
         },
         {
           "path": "p/investment/site/data/runs.csv",
-          "sha256": "344cfea1f0e588b71e5e65bceeccf55b45b0f1de8ca77752c4426a36b3042995",
-          "size": 84
+          "sha256": "6c7805aec1fb3618ad9070bee2cf89a36aecc4465c051276d77b202294c03944",
+          "size": 197
         },
         {
           "path": "p/investment/site/data/screening-streak.csv",
@@ -47,13 +48,13 @@
         },
         {
           "path": "p/investment/site/index.html",
-          "sha256": "bb6664fa56a6111ece2a775f39e508fd84fba5848d0b84d860b3641ef41c5f56",
-          "size": 3739
+          "sha256": "29418a3b83159008ab01d605f2c894d3839246ebd286161e39afd9a6f6093e2e",
+          "size": 3736
         },
         {
           "path": "p/investment/site/overview/index.html",
-          "sha256": "9fd489e405d8d294e58a12926347485141f8cef87b965c01a8d5d11f3f6953ef",
-          "size": 6903
+          "sha256": "efac2de310d61aeb8ab325f8820477e0610f64ff6755e363f4a1294943c87def",
+          "size": 25168
         },
         {
           "path": "p/investment/site/screening/index.html",
@@ -62,8 +63,8 @@
         },
         {
           "path": "p/investment/site/sector/index.html",
-          "sha256": "e37bb8779696ced96256c260c7dc37a71322c257024ff5e478d4aedced793866",
-          "size": 1101
+          "sha256": "da6e8f7cad13bbbcce203cb0c072ff07305560c544017e1a3d48365c43c52e43",
+          "size": 9652
         },
         {
           "path": "p/investment/site/strategy/index.html",
@@ -90,6 +91,7 @@
       ],
       "kind": "page",
       "license": "",
+      "listed": false,
       "path": "p/yomoji/app/index.html",
       "updated_at": "2026-09-13T04:11:54Z",
       "digest": "812b86ff7dd499c94cda007655b02f1155d188f30e3dc4a934c08ac24760289d",
@@ -161,6 +163,7 @@
       ],
       "kind": "page",
       "license": "",
+      "listed": false,
       "path": "p/uso-boshi/app/index.html",
       "updated_at": "2026-09-13T04:11:54Z",
       "digest": "126f9fd1423f53e9ad68db7f4b3f450f1f8e8302cf6505ca1fb459b536f3f866",
@@ -232,6 +235,7 @@
       ],
       "kind": "page",
       "license": "",
+      "listed": false,
       "path": "p/twin-leap/app/index.html",
       "updated_at": "2026-09-13T04:11:54Z",
       "digest": "1a750ca7bb79cb1498676b2755fdb476aeb022033896a8dc6a6ad0d3ebeac8f6",
@@ -293,6 +297,7 @@
       ],
       "kind": "page",
       "license": "",
+      "listed": false,
       "path": "p/nuri-logi/app/index.html",
       "updated_at": "2026-09-13T04:11:54Z",
       "digest": "547548ff9ec6e5ea52a3ab82a877d424615f06ddebf29d18d9a0d230bf44353e",
@@ -364,6 +369,7 @@
       ],
       "kind": "page",
       "license": "",
+      "listed": false,
       "path": "p/nine-grid/app/index.html",
       "updated_at": "2026-09-13T04:11:54Z",
       "digest": "c1b8a10e5b847e96c88280ed25c28993fcf8223c1281b89b0760a5a859102381",
@@ -426,6 +432,7 @@
       ],
       "kind": "dataset",
       "license": "CC0",
+      "listed": true,
       "path": "p/ichimon/themes/index.html",
       "updated_at": "2026-09-13T04:11:54Z",
       "digest": "4e829a67a0ba90c4ff63f8c8fd7708ba67bcfaf87d915eca66d66a4881b43fc8",
@@ -462,6 +469,7 @@
       ],
       "kind": "page",
       "license": "",
+      "listed": false,
       "path": "p/hako-oshi/app/index.html",
       "updated_at": "2026-09-13T04:11:54Z",
       "digest": "503496bca84d9ec9b1de232525dedd7b74fe3e6d6dc86917a8f07a8015ab674b",
@@ -528,6 +536,7 @@
       ],
       "kind": "page",
       "license": "",
+      "listed": false,
       "path": "p/four-winds/app/index.html",
       "updated_at": "2026-09-13T04:11:54Z",
       "digest": "947ad6079546242d9f7281a326c97f376122a3282fe7412561d80078bea26a2c",
@@ -599,6 +608,7 @@
       ],
       "kind": "page",
       "license": "",
+      "listed": false,
       "path": "p/cosmo-merge/app/index.html",
       "updated_at": "2026-09-13T04:11:54Z",
       "digest": "6bea46b4b778eca2cfa82061392961fe9fa1589cef254f8e0a0f75828e52e398",
@@ -663,6 +673,7 @@
       ],
       "kind": "page",
       "license": "",
+      "listed": true,
       "path": "p/commons/works/index.html",
       "updated_at": "2026-09-13T04:11:54Z",
       "digest": "982d256e4f5214c2a5ef0a34f622dd5870197838c87bf7837111bcb862e8b6a2",
@@ -688,6 +699,7 @@
       ],
       "kind": "page",
       "license": "",
+      "listed": true,
       "path": "p/commons/games/index.html",
       "updated_at": "2026-09-13T04:11:54Z",
       "digest": "37b040879bc6181142312d89427e97a2ad1213cba424c139dee47656c3c2c21b",
@@ -714,6 +726,7 @@
       ],
       "kind": "page",
       "license": "",
+      "listed": true,
       "path": "p/paper-site/reading/index.html",
       "updated_at": "2026-09-13T01:34:28Z",
       "digest": "8b67857f70686b62ae7573efbbc875d2438d8653f89cb3c46046b6bd8104f943",
@@ -4830,6 +4843,7 @@
       ],
       "kind": "page",
       "license": "",
+      "listed": false,
       "path": "p/ichimon/app/index.html",
       "updated_at": "2026-08-30T12:55:19Z",
       "digest": "610c5c0d2f5c0c89f345981bb2cf6197a744d0c799dc4e7881b0cbbb65557ee7",
