@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-09-19T04:40:05Z",
+  "generated_at": "2026-09-19T05:49:49Z",
   "views": [
     {
       "id": "investment/site",
@@ -16,8 +16,8 @@
       "license": "",
       "listed": true,
       "path": "p/investment/site/index.html",
-      "updated_at": "2026-09-19T04:40:05Z",
-      "digest": "95fe09a70e713741d927ff9fd262cb76d1420262a5487f76ab621f318f001c4b",
+      "updated_at": "2026-09-19T05:49:49Z",
+      "digest": "206d8b316c2829c507f7a382776a4eaf06419c16282a33004c5989e01498644a",
       "build_ref": null,
       "source_versions": [],
       "files": [
@@ -33,13 +33,13 @@
         },
         {
           "path": "p/investment/site/data/index.html",
-          "sha256": "831376dfad896c2ca6d5a519b6cc86bf4e3beeb3c70fac4ae7f8541081f317bb",
+          "sha256": "44bd1ea6de00625fab04caa40fbbb78e009e9a9f7de0a0fcc0f4a8775ce100f7",
           "size": 1616
         },
         {
           "path": "p/investment/site/data/runs.csv",
-          "sha256": "400622f8995b9708ee38c1de5c6098cb8678f81810bffa513428085293d613e9",
-          "size": 517
+          "sha256": "bc26e1756859a1b151956878338b6c1ffd07167978ff3a7bfcf51d21c9b6d6df",
+          "size": 1050
         },
         {
           "path": "p/investment/site/data/screening-streak.csv",
@@ -48,13 +48,13 @@
         },
         {
           "path": "p/investment/site/index.html",
-          "sha256": "90532a96c5e2a1eaa4d021ab7b071e2f52402c332e3018b25bbbe39fb7fca6e1",
-          "size": 3736
+          "sha256": "8a1da3c3204aec273b4a0c818c513ae8cb53b9542848a55a46a4b38c76f213af",
+          "size": 3737
         },
         {
           "path": "p/investment/site/overview/index.html",
-          "sha256": "c76a242603f7542298c1d10eb6492e37f7770ee77a77c5aee57192551e569e97",
-          "size": 25555
+          "sha256": "d90f6f6ed6659730076d4a68784ac0a3c9b1342759d7bec7c5cab5879d1d9f9d",
+          "size": 27900
         },
         {
           "path": "p/investment/site/screening/index.html",
@@ -63,7 +63,7 @@
         },
         {
           "path": "p/investment/site/sector/index.html",
-          "sha256": "545dc047a7f6d9a76ff058d3fb435dbf013a1ec2c10f7d24660b5a9180885303",
+          "sha256": "d961dc7ac4ceb8a65f8311fa3d98f762468cee2b145a086dff683ef60511ff87",
           "size": 12367
         },
         {

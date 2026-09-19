@@ -3,3 +3,8 @@ run_uid,analysis,skill,granularity,executed_at,data_date,origin_kind,region,pres
 20260919T132141-sector-phase,sector,sector-analysis,monthly,2026-09-19T13:21:41,2026-09-19,skill,,
 20260919T132141-sector-rotation_japan,sector,sector-analysis,weekly,2026-09-19T13:21:41,2026-09-19,skill,japan,
 20260919T132150-sector-rotation_us,sector,sector-analysis,weekly,2026-09-19T13:21:50,2026-09-19,skill,us,
+20260919T144246-sector-phase,sector,sector-analysis,monthly,2026-09-19T14:42:46,2026-09-19,skill,,
+20260919T144246-sector-rotation_japan,sector,sector-analysis,weekly,2026-09-19T14:42:46,2026-09-19,skill,japan,
+20260919T144255-sector-rotation_us,sector,sector-analysis,weekly,2026-09-19T14:42:55,2026-09-19,skill,us,
+20260919T144509-sector-phase,sector,sector-analysis,monthly,2026-09-19T14:45:09,2026-09-19,skill,,
+20260919T144509-sector-rotation_japan,sector,sector-analysis,weekly,2026-09-19T14:45:09,2026-09-19,skill,japan,
