@@ -1,2 +1,5 @@
 run_uid,analysis,skill,granularity,executed_at,data_date,origin_kind,region,preset
 20260918T231628-sector-rotation_japan,sector,sector-analysis,weekly,2026-09-18T23:16:28,2026-09-18,skill,japan,
+20260919T132141-sector-phase,sector,sector-analysis,monthly,2026-09-19T13:21:41,2026-09-19,skill,,
+20260919T132141-sector-rotation_japan,sector,sector-analysis,weekly,2026-09-19T13:21:41,2026-09-19,skill,japan,
+20260919T132150-sector-rotation_us,sector,sector-analysis,weekly,2026-09-19T13:21:50,2026-09-19,skill,us,
