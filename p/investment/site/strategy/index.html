@@ -16,8 +16,60 @@
     入口・出口・撤退を 1 本の数直線で。リスクリワードを長さの比として読む。</p>
 </header>
 
-<div class="empty">トレードプランの記録がまだありません。
-  <br><span class="muted">invest.py trading plan 7203.T を実行すると、ここに価格帯が出ます。</span></div>
+<section>
+<header>
+  <h2>トレードプラン</h2>
+  <p class="sub">エントリー前に確定した入口・出口・撤退。銘柄ごとに最新の 1 件を出している。</p>
+</header>
+
+<div class="kpis"><div class="kpi"><div class="label">プラン</div><div class="value">5</div><div class="note">銘柄ごとの最新版</div></div><div class="kpi"><div class="label">実行判定</div><div class="value">2</div><div class="note">verdict が trade のもの</div></div><div class="kpi"><div class="label">RR 中央値</div><div class="value">—</div><div class="note">リスク 1 に対するリワード</div></div><div class="kpi"><div class="label">直近の作成</div><div class="value">2026-09-20</div><div class="note">最新プランの日付</div></div></div>
+
+<div class="card" style="margin-top:12px">
+  <h3>価格帯</h3>
+  <p class="muted" style="margin-top:0">
+    左端が撤退、右端が目標、青い帯がエントリー帯。銘柄ごとに撤退〜目標で正規化して幅を揃えてあるので、
+    <strong>帯が左に寄っているほどリスクリワードが良い</strong>（下落余地が小さく上昇余地が大きい）。</p>
+  <div class="legend">
+    <span><span class="swatch" style="background:var(--serious)"></span>撤退</span>
+    <span><span class="swatch" style="background:var(--accent);opacity:.75"></span>エントリー帯</span>
+    <span><span class="swatch" style="background:var(--good)"></span>目標</span>
+  </div>
+  <div class="plans"><div class="plan-row">
+  <div class="plan-head">
+    <span class="plan-symbol">1860.T</span>
+    <span class="muted"><span class="mark mark-good">●</span>実行・RR —
+    ・2026-09-20</span>
+  </div>
+  <div class="plan-prices muted">
+    撤退 1,485 ／ エントリー 1,487〜1,526
+    ／ 目標 1,551
+  </div>
+  <div class="plan-bullet"><svg viewBox="0 0 520 34" role="img" aria-label="1860.T の価格帯" xmlns="http://www.w3.org/2000/svg">
+<line x1="4" y1="17" x2="516" y2="17" stroke="var(--gridline)" stroke-width="2" stroke-linecap="round"/>
+<rect x="24.2" y="10" width="300.9" height="14" rx="3" fill="var(--accent)" fill-opacity="0.75"><title>エントリー帯 1,487〜1,526</title></rect>
+<line x1="4.0" y1="7" x2="4.0" y2="27" stroke="var(--serious)" stroke-width="3" stroke-linecap="round"><title>撤退 1,485</title></line>
+<line x1="516.0" y1="7" x2="516.0" y2="27" stroke="var(--good)" stroke-width="3" stroke-linecap="round"><title>目標 1,551</title></line>
+</svg></div>
+</div><div class="plan-row">
+  <div class="plan-head">
+    <span class="plan-symbol">7282.T</span>
+    <span class="muted"><span class="mark mark-good">●</span>実行・RR —
+    ・2026-09-20</span>
+  </div>
+  <div class="plan-prices muted">
+    撤退 5,191 ／ エントリー 5,171〜5,249
+    ／ 目標 5,247
+  </div>
+  <div class="plan-bullet"><svg viewBox="0 0 520 34" role="img" aria-label="7282.T の価格帯" xmlns="http://www.w3.org/2000/svg">
+<line x1="4" y1="17" x2="516" y2="17" stroke="var(--gridline)" stroke-width="2" stroke-linecap="round"/>
+<rect x="-186.9" y="10" width="723.1" height="14" rx="3" fill="var(--accent)" fill-opacity="0.75"><title>エントリー帯 5,171〜5,249</title></rect>
+<line x1="4.0" y1="7" x2="4.0" y2="27" stroke="var(--serious)" stroke-width="3" stroke-linecap="round"><title>撤退 5,191</title></line>
+<line x1="516.0" y1="7" x2="516.0" y2="27" stroke="var(--good)" stroke-width="3" stroke-linecap="round"><title>目標 5,247</title></line>
+</svg></div>
+</div></div>
+  
+</div>
+</section>
 
 <footer class="page">
   <p>価格と比率のみ。株数・金額・口座残高は公開していない。
