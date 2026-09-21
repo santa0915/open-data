@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-09-20T09:21:05Z",
+  "generated_at": "2026-09-21T16:07:04Z",
   "views": [
     {
       "id": "investment/site",
@@ -16,8 +16,8 @@
       "license": "",
       "listed": true,
       "path": "p/investment/site/index.html",
-      "updated_at": "2026-09-20T09:21:05Z",
-      "digest": "57a6f344d38628b96cbfcf31d6fa01c5ca6aefb5c0ea326ac748e269b327e724",
+      "updated_at": "2026-09-21T16:07:04Z",
+      "digest": "ccf9b2769c7b477ea185c4bdea517eb1d10d9bdbb8c8f4685df41c12c60b70a7",
       "build_ref": null,
       "source_versions": [],
       "files": [
@@ -33,38 +33,38 @@
         },
         {
           "path": "p/investment/site/data/index.html",
-          "sha256": "08e4056446895b2c23d64cc133675d2078be32d099e9b5ef440c8f48835ba513",
-          "size": 1617
+          "sha256": "a57da977172be4d99a14b8cbe19279b2b02096633408d9ca52a0348d722ecaff",
+          "size": 1620
         },
         {
           "path": "p/investment/site/data/runs.csv",
-          "sha256": "4b97f9edd8a50a7e7d43c631d46f4f8b903faf2f6f9159a4a8245505916c5850",
-          "size": 6309
+          "sha256": "f28b231b3e787b6ac05c719b5ae144539943e382254c0815890766b6ac6e9243",
+          "size": 9739
         },
         {
           "path": "p/investment/site/data/screening-streak.csv",
-          "sha256": "8d0b658ef9c3ef889a36ddbc86e98399e2e88bd87855c42bb089858f3d0b10af",
-          "size": 173
+          "sha256": "50ab7cdef2c19e49cd7e7758aba24ff7ad58193c3b45cb97f716f9d04f7fd49c",
+          "size": 40763
         },
         {
           "path": "p/investment/site/index.html",
-          "sha256": "bffaaa94a5fa7171aba5ab2203605266ba38f67628f312c6367994722a6b1902",
-          "size": 3731
+          "sha256": "5bfe292e4710f29accf821c18cae20351f3d7a354f8f2af971707364aeacf62f",
+          "size": 3732
         },
         {
           "path": "p/investment/site/overview/index.html",
-          "sha256": "a324ec8e24a75535831facb85350726b993d8ffb58473d8c41298737a0aa14ff",
-          "size": 10711
+          "sha256": "eb0c879c275511fccf04ed624e9c114ca898a96dfa4bf60cb01c39d187404544",
+          "size": 45667
         },
         {
           "path": "p/investment/site/screening/index.html",
-          "sha256": "d2c2fe6e7956d822668bd0fa4ab220b75b2cb29f9284b696d9f52381247f2103",
-          "size": 12402
+          "sha256": "c76c9a806eeecd23b37edfc25749dc004b2f3d931d6a3dabccc171d21bcf83ce",
+          "size": 377264
         },
         {
           "path": "p/investment/site/sector/index.html",
-          "sha256": "a3fbb309dfb5df6365320d434b293b2d48ebb9b3193111e1072a8507f3313e84",
-          "size": 12453
+          "sha256": "3199c0e4ef8ccb5d3cbc159d638d9a916e3edbcc7372226d33f5fe2409b90340",
+          "size": 14675
         },
         {
           "path": "p/investment/site/strategy/index.html",
