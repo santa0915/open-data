@@ -1,7 +1,90 @@
 {
   "schema": 1,
-  "generated_at": "2026-11-07T06:17:55Z",
+  "generated_at": "2026-11-07T12:56:25Z",
   "views": [
+    {
+      "id": "ai-trends/weekly",
+      "project": "ai-trends",
+      "view": "weekly",
+      "title": "AI 動向",
+      "summary": "arXiv の AI 論文とニュースの週次・月次の動き（ユースケース・モーダル・アーキテクチャ）",
+      "tags": [
+        "AI",
+        "論文",
+        "ニュース",
+        "動向"
+      ],
+      "kind": "page",
+      "license": "",
+      "listed": true,
+      "path": "p/ai-trends/weekly/index.html",
+      "updated_at": "2026-11-07T12:56:25Z",
+      "digest": "9f214cad8106611a5d0376f16ae4c421a642650f1a345b4804c3384b4a7a7e63",
+      "build_ref": null,
+      "source_versions": [],
+      "files": [
+        {
+          "path": "p/ai-trends/weekly/assets/site.30c2902670.css",
+          "sha256": "30c2902670b1000543a4dcdf2562d38ad234f5ca9fd154a7f305e0e165039dd2",
+          "size": 5831
+        },
+        {
+          "path": "p/ai-trends/weekly/index.html",
+          "sha256": "4405448a26203ca260c3ee27ece0aca73881cb8a781b967488d42b19a14994a0",
+          "size": 13605
+        },
+        {
+          "path": "p/ai-trends/weekly/periods/2026-09.html",
+          "sha256": "3a9d7a3d783b671714728622c48a3b90db890917d2bfdfc7deaef38605b9a470",
+          "size": 47947
+        },
+        {
+          "path": "p/ai-trends/weekly/periods/2026-10.html",
+          "sha256": "d36a70dbe7e88e87c47c16e61a707f28987f7cdbcf85004f5d65aee27d0029fa",
+          "size": 49341
+        },
+        {
+          "path": "p/ai-trends/weekly/periods/2026-W37.html",
+          "sha256": "f9d830d7b136f891964c9e70baf3d570fdfbe131f305086bd983098365419424",
+          "size": 28117
+        },
+        {
+          "path": "p/ai-trends/weekly/periods/2026-W38.html",
+          "sha256": "453edd8d61c0e134ca767fe2cdaad70c46cb8e44ca3aa5248b2fd0bf781d79cc",
+          "size": 27825
+        },
+        {
+          "path": "p/ai-trends/weekly/periods/2026-W39.html",
+          "sha256": "b8a496ec7e8badea9c4357b75e7cfbaa33619ade9f27eae62bc27e9bc8a6ebc8",
+          "size": 26935
+        },
+        {
+          "path": "p/ai-trends/weekly/periods/2026-W40.html",
+          "sha256": "3bb4d2a7f942cfc71b6f9ed63f29022e18f5c4ce6c2dbfe1bc6145de405401c6",
+          "size": 27963
+        },
+        {
+          "path": "p/ai-trends/weekly/periods/2026-W41.html",
+          "sha256": "bab1f3aaacf72a8c49a35a890119816995e4c1b02eacfe4c69dd7d7d15137885",
+          "size": 26483
+        },
+        {
+          "path": "p/ai-trends/weekly/periods/2026-W42.html",
+          "sha256": "b64c097479036167871bd52240f9069aa523d7c31636143ed31150ddf3cb3a44",
+          "size": 30219
+        },
+        {
+          "path": "p/ai-trends/weekly/periods/2026-W43.html",
+          "sha256": "8dbc893fee6a455f98965f91570f7f13c095501b78831df2296a8554d9ebea95",
+          "size": 29797
+        },
+        {
+          "path": "p/ai-trends/weekly/periods/2026-W44.html",
+          "sha256": "f35ba0601d30a412ca473132e541f9a11f4f1c4e2775602579289736763113cd",
+          "size": 33027
+        }
+      ]
+    },
     {
       "id": "investment/site",
       "project": "investment",
@@ -75,44 +158,6 @@
           "path": "p/investment/site/thesis/index.html",
           "sha256": "863de4344009cb5931f4d6299b880c75e5cfee9aa63f2ce22d7909ca60c8cde7",
           "size": 1111
-        }
-      ]
-    },
-    {
-      "id": "ai-trends/weekly",
-      "project": "ai-trends",
-      "view": "weekly",
-      "title": "AI 動向",
-      "summary": "arXiv の AI 論文とニュースの週次・月次の動き（ユースケース・モーダル・アーキテクチャ）",
-      "tags": [
-        "AI",
-        "論文",
-        "ニュース",
-        "動向"
-      ],
-      "kind": "page",
-      "license": "",
-      "listed": true,
-      "path": "p/ai-trends/weekly/index.html",
-      "updated_at": "2026-11-07T06:17:55Z",
-      "digest": "ea5886645a603d2dfc38990bed74054a39b23215be239e0c4effcea52452ff2f",
-      "build_ref": null,
-      "source_versions": [],
-      "files": [
-        {
-          "path": "p/ai-trends/weekly/assets/site.30c2902670.css",
-          "sha256": "30c2902670b1000543a4dcdf2562d38ad234f5ca9fd154a7f305e0e165039dd2",
-          "size": 5831
-        },
-        {
-          "path": "p/ai-trends/weekly/index.html",
-          "sha256": "15c99c98dd5e694c2406556ff3e792506c9e1f27c419b12f2f2b4d6d5b3f5c8f",
-          "size": 3124
-        },
-        {
-          "path": "p/ai-trends/weekly/periods/2026-W44.html",
-          "sha256": "ee66729579167bc5ccc054d4a047b566ca789618b2452bce7eec63dc9daee405",
-          "size": 33897
         }
       ]
     },
