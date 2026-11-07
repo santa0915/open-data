@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-09-21T16:07:04Z",
+  "generated_at": "2026-11-07T06:17:55Z",
   "views": [
     {
       "id": "investment/site",
@@ -16,30 +16,30 @@
       "license": "",
       "listed": true,
       "path": "p/investment/site/index.html",
-      "updated_at": "2026-09-21T16:07:04Z",
-      "digest": "ccf9b2769c7b477ea185c4bdea517eb1d10d9bdbb8c8f4685df41c12c60b70a7",
+      "updated_at": "2026-11-07T06:17:55Z",
+      "digest": "ba03341ce0573bb93a672152a3c125afd1da86c27d8e1df2b45d6d416bae322a",
       "build_ref": null,
       "source_versions": [],
       "files": [
         {
-          "path": "p/investment/site/assets/site.f6e79a31.css",
-          "sha256": "9e94d48b2da59b297c7489976f9a02cd30663aef1f1fa145974b1f19f53f65f5",
-          "size": 9461
+          "path": "p/investment/site/assets/site.efd6f814.css",
+          "sha256": "a3a3c8727a97d4605349d946daa0c19a5ec189f93d1cc9ba85de208d7f2d3fd5",
+          "size": 12898
         },
         {
           "path": "p/investment/site/crash/index.html",
-          "sha256": "a332c336d6ec89005ab459174c4771a9ecb008ae92e564ab520f5b42fe886a45",
+          "sha256": "9e957bf414747ed7acf32c6026e459514f08662918efaa0c0cf3a4bcbd3dc2c6",
           "size": 967
         },
         {
           "path": "p/investment/site/data/index.html",
-          "sha256": "a57da977172be4d99a14b8cbe19279b2b02096633408d9ca52a0348d722ecaff",
-          "size": 1620
+          "sha256": "5aa95ce06cb117bb9e658f517e5902aee4c1d46e4998efa94b39213c9c298386",
+          "size": 1621
         },
         {
           "path": "p/investment/site/data/runs.csv",
-          "sha256": "f28b231b3e787b6ac05c719b5ae144539943e382254c0815890766b6ac6e9243",
-          "size": 9739
+          "sha256": "93cc8a358d6bc7e359bd5151684aad79708b82f8650248ebbdccbd0cf16a1784",
+          "size": 11230
         },
         {
           "path": "p/investment/site/data/screening-streak.csv",
@@ -48,33 +48,71 @@
         },
         {
           "path": "p/investment/site/index.html",
-          "sha256": "5bfe292e4710f29accf821c18cae20351f3d7a354f8f2af971707364aeacf62f",
-          "size": 3732
+          "sha256": "88179befa51befe85a2e67ddceb2808a306668afb5511114f97d2407c4555561",
+          "size": 3733
         },
         {
           "path": "p/investment/site/overview/index.html",
-          "sha256": "eb0c879c275511fccf04ed624e9c114ca898a96dfa4bf60cb01c39d187404544",
-          "size": 45667
+          "sha256": "57f9e328d7ad56049035b9a9633b6ad0680f422baf43255749bcd7933b1c3731",
+          "size": 45720
         },
         {
           "path": "p/investment/site/screening/index.html",
-          "sha256": "c76c9a806eeecd23b37edfc25749dc004b2f3d931d6a3dabccc171d21bcf83ce",
-          "size": 377264
+          "sha256": "62f1d41c8a770f090518319576501ffd804e443ea64ed3c4d20fb4caae545096",
+          "size": 216950
         },
         {
           "path": "p/investment/site/sector/index.html",
-          "sha256": "3199c0e4ef8ccb5d3cbc159d638d9a916e3edbcc7372226d33f5fe2409b90340",
-          "size": 14675
+          "sha256": "338baff8b711742192e2932592e961c8796ce0d21c0a93ba0459d6e132c7e575",
+          "size": 14698
         },
         {
           "path": "p/investment/site/strategy/index.html",
-          "sha256": "da6737f7e626120da0c2b05f8c9a3bd42a0a427344caeb73b3733869f8c70551",
-          "size": 4369
+          "sha256": "787c200567cc7df65c30e13ec7b4826df4b2c493f541ac9c629e2c83beb9e3f3",
+          "size": 4485
         },
         {
           "path": "p/investment/site/thesis/index.html",
-          "sha256": "5ff45a4239bac5b5bd0d491c445f9265a37a3499b6280cc9312a2749c7c2cf7d",
+          "sha256": "863de4344009cb5931f4d6299b880c75e5cfee9aa63f2ce22d7909ca60c8cde7",
           "size": 1111
+        }
+      ]
+    },
+    {
+      "id": "ai-trends/weekly",
+      "project": "ai-trends",
+      "view": "weekly",
+      "title": "AI 動向",
+      "summary": "arXiv の AI 論文とニュースの週次・月次の動き（ユースケース・モーダル・アーキテクチャ）",
+      "tags": [
+        "AI",
+        "論文",
+        "ニュース",
+        "動向"
+      ],
+      "kind": "page",
+      "license": "",
+      "listed": true,
+      "path": "p/ai-trends/weekly/index.html",
+      "updated_at": "2026-11-07T06:17:55Z",
+      "digest": "ea5886645a603d2dfc38990bed74054a39b23215be239e0c4effcea52452ff2f",
+      "build_ref": null,
+      "source_versions": [],
+      "files": [
+        {
+          "path": "p/ai-trends/weekly/assets/site.30c2902670.css",
+          "sha256": "30c2902670b1000543a4dcdf2562d38ad234f5ca9fd154a7f305e0e165039dd2",
+          "size": 5831
+        },
+        {
+          "path": "p/ai-trends/weekly/index.html",
+          "sha256": "15c99c98dd5e694c2406556ff3e792506c9e1f27c419b12f2f2b4d6d5b3f5c8f",
+          "size": 3124
+        },
+        {
+          "path": "p/ai-trends/weekly/periods/2026-W44.html",
+          "sha256": "ee66729579167bc5ccc054d4a047b566ca789618b2452bce7eec63dc9daee405",
+          "size": 33897
         }
       ]
     },

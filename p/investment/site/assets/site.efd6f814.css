@@ -180,7 +180,9 @@ section > header { margin-bottom: 12px; }
 .funnel .bar-track { height: 18px; }
 
 /* ── 実施カレンダー（SVG）──────────────────────── */
-.cal svg { width: 100%; height: auto; display: block; }
+/* 図は実寸（width/height 属性）を持つ。ここで 100% を指定すると再び引き伸ばされ、
+   図中の font-size が本文より大きく描かれるので、上限だけを与えて拡大させない。 */
+.cal svg { max-width: 100%; height: auto; display: block; }
 .cal .daily { display: block; }
 .cal .weekly { display: none; }
 @media (max-width: 720px) {
@@ -282,7 +284,7 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
   font-size: 13px;
 }
 .plan-symbol { font-weight: 650; }
-.plan-bullet svg { width: 100%; height: auto; display: block; }
+.plan-bullet svg { max-width: 100%; height: auto; display: block; }
 .plan-prices { font-variant-numeric: tabular-nums; }
 
 /* ── バッジ（新顔・消失）────────────────────────── */
@@ -297,6 +299,105 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
   vertical-align: 1px;
 }
 .badge.gone { background: var(--baseline); color: var(--text-primary); }
+
+/* ── screen の索引 ───────────────────────────── */
+nav.toc { margin-bottom: 28px; }
+nav.toc h2 { font-size: 12px; color: var(--text-secondary); letter-spacing: .04em; }
+nav.toc ul {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 6px 12px;
+}
+nav.toc a {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  font-size: 13px;
+  text-decoration: none;
+  gap: 6px;
+}
+nav.toc a:hover { text-decoration: underline; }
+
+/* ── 絞り込み条件（V4c）────────────────────────── */
+.lead { margin: 0 0 10px; font-size: 14px; color: var(--text-primary); }
+dl.meta {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 4px 12px;
+  margin: 0 0 14px;
+  font-size: 13px;
+}
+dl.meta dt { color: var(--text-secondary); }
+dl.meta dd { margin: 0; color: var(--text-primary); }
+@media (max-width: 480px) {
+  dl.meta { grid-template-columns: 1fr; gap: 0 0; }
+  dl.meta dt { margin-top: 6px; }
+}
+
+/* 条件表だけは意図の列を折り返す（他の表は nowrap のまま） */
+table.conditions th[scope="row"] {
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+table.conditions td.cond-value {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+table.conditions td.cond-intent {
+  white-space: normal;
+  color: var(--text-secondary);
+  min-width: 18em;
+}
+
+/* 実測値の列見出しに添える閾値 */
+th .thr {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 次の一手 / 流れ ──────────────────────────── */
+ol.actions, ol.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+li.action { border-top: 1px solid var(--gridline); padding-top: 14px; }
+li.action:first-child { border-top: none; padding-top: 0; }
+.action-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
+.action-title { font-size: 14px; font-weight: 650; }
+.action-reason { margin: 4px 0 0; font-size: 13px; color: var(--text-secondary); }
+.action-symbols {
+  margin: 6px 0 0;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.badge.phase { background: var(--wash); color: var(--text-secondary); }
+
+li.step { display: grid; grid-template-columns: 84px 1fr; gap: 12px; align-items: start; }
+.step-phase { font-size: 12px; color: var(--text-secondary); padding-top: 2px; }
+.step-body { font-size: 13px; }
+@media (max-width: 480px) {
+  li.step { grid-template-columns: 1fr; gap: 2px; }
+}
+
+/* コマンドは横に溢れさせず、その行だけスクロールさせる */
+pre.cmd {
+  margin: 6px 0 0;
+  padding: 8px 10px;
+  background: var(--wash);
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 12px;
+  line-height: 1.5;
+}
+pre.cmd code { white-space: pre; }
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .92em;
+}
 
 .empty {
   color: var(--text-muted);
