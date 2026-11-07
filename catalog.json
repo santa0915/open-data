@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-11-07T12:56:25Z",
+  "generated_at": "2026-11-07T13:32:58Z",
   "views": [
     {
       "id": "ai-trends/weekly",
@@ -18,8 +18,8 @@
       "license": "",
       "listed": true,
       "path": "p/ai-trends/weekly/index.html",
-      "updated_at": "2026-11-07T12:56:25Z",
-      "digest": "9f214cad8106611a5d0376f16ae4c421a642650f1a345b4804c3384b4a7a7e63",
+      "updated_at": "2026-11-07T13:32:58Z",
+      "digest": "5b5bd9af728d603d2a010ab0a948398cf14aa3a22854248155ea3d277f12c6b9",
       "build_ref": null,
       "source_versions": [],
       "files": [
@@ -30,7 +30,7 @@
         },
         {
           "path": "p/ai-trends/weekly/index.html",
-          "sha256": "4405448a26203ca260c3ee27ece0aca73881cb8a781b967488d42b19a14994a0",
+          "sha256": "c903d91a4ba61944930ee3217b44899bd45296564d0cb9711bb2cf8da4c97dc3",
           "size": 13605
         },
         {
@@ -50,8 +50,8 @@
         },
         {
           "path": "p/ai-trends/weekly/periods/2026-W38.html",
-          "sha256": "453edd8d61c0e134ca767fe2cdaad70c46cb8e44ca3aa5248b2fd0bf781d79cc",
-          "size": 27825
+          "sha256": "5a48c2efd26f3505d729da5fe6007f4c9f2516249adc7a539b34a53c28e94558",
+          "size": 27770
         },
         {
           "path": "p/ai-trends/weekly/periods/2026-W39.html",
@@ -75,8 +75,8 @@
         },
         {
           "path": "p/ai-trends/weekly/periods/2026-W43.html",
-          "sha256": "8dbc893fee6a455f98965f91570f7f13c095501b78831df2296a8554d9ebea95",
-          "size": 29797
+          "sha256": "06bfb40c56bf0c0ea2cf3b2802013bd85b233eafd4bc86deafb19a2daa03770c",
+          "size": 29832
         },
         {
           "path": "p/ai-trends/weekly/periods/2026-W44.html",
