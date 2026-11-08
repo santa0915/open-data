@@ -1,0 +1,1904 @@
+{
+ "as_of": "2026-11-07",
+ "directions": [
+  {
+   "aim": "consensus・lead-lag・投稿はソースが取れていて初めて成り立つ。実害 4 件が「取れているか分からない」まま",
+   "id": "D-01",
+   "next_step": "ネットワークにつながる環境で `/health-check` と整備状況の実測列を見て 0 件のソースを特定する。Reddit・Product Hunt のキーを入れる",
+   "open_items": [
+    "B-04",
+    "B-01",
+    "B-02"
+   ],
+   "rank": 1,
+   "related": "B-04 / B-01 / B-02",
+   "state": "判断待ち",
+   "title": "取得の実測と欠損の解消"
+  },
+  {
+   "aim": "既存ソースでは取れない事業者側の痛みと支払額。求人台帳は V0〜V3 が実装済みで V4（実取得）だけが残る。決定 0015 の見直し期限が 2026-11-30",
+   "id": "D-02",
+   "next_step": "`initDisp` の応答確認（B-14）→ 運用時刻の決定（B-15）→ 夜間巡回の開始。e-Stat は規約確認とアプリ ID・統計表 ID",
+   "open_items": [
+    "B-14",
+    "B-15",
+    "B-18",
+    "B-19",
+    "B-32"
+   ],
+   "rank": 2,
+   "related": "B-14 / B-15 / B-18 / B-19 / B-32 / 決定 0015 / 決定 0038",
+   "state": "判断待ち",
+   "title": "スモールビジネスの痛みの実運用化（求人台帳・発注予算・公的統計）"
+  },
+  {
+   "aim": "変換前の値を残せば、変換を直したときに再収集せず作り直せる（決定 0004）。substack / medium は移行済み",
+   "id": "D-03",
+   "next_step": "producthunt → appstore_jp（ランキング）→ reddit（本文）→ arxiv（抄録の全文）の順に 1 本ずつ",
+   "open_items": [
+    "B-12"
+   ],
+   "rank": 3,
+   "related": "B-12 / 決定 0045",
+   "state": "着手可",
+   "title": "生データ保存の全ソース展開"
+  },
+  {
+   "aim": "規約違反を機械で止める。いまは記録を持つ 4 系統（ハローワーク・e-Stat・Hugging Face・newsroom）だけで、スクレイピングするソースの多くが素通り",
+   "id": "D-04",
+   "next_step": "既存コレクターへの必須化の方針（B-17）を決め、スクレイピング系から記録を作る",
+   "open_items": [
+    "B-17",
+    "B-40"
+   ],
+   "rank": 4,
+   "related": "B-17 / B-40",
+   "state": "判断待ち",
+   "title": "取得可否ゲートの全ソース適用"
+  },
+  {
+   "aim": "読む時間が律速。取りこぼし率と人のラベルを記録できるようになったので、次は好みを学ばせる",
+   "id": "D-05",
+   "next_step": "監査の判定（`audit-record`）と既読ログを数十件ためる → ロジスティック回帰（B-30）→ 適合率と確認時間（B-38）→ 外部の評判（B-31）",
+   "open_items": [
+    "B-30",
+    "B-38",
+    "B-31"
+   ],
+   "rank": 5,
+   "related": "B-30 / B-38 / B-31",
+   "state": "待ち",
+   "title": "振り分けを人の判断で育てる"
+  },
+  {
+   "aim": "open-data の AI 動向の質を上げる。一次情報は DeepMind・Hugging Face の 2 社だけで、同じ出来事が別件のまま並ぶ",
+   "id": "D-06",
+   "next_step": "報道機関フィードの規約確認（B-40）→ 件数がたまったら出来事ごとに束ねる（B-39）→ 欠けが続けばニュース検索 API（B-41）",
+   "open_items": [
+    "B-40",
+    "B-39",
+    "B-41"
+   ],
+   "rank": 6,
+   "related": "B-40 / B-39 / B-41",
+   "state": "判断待ち",
+   "title": "AI 動向の一次情報と束ね"
+  },
+  {
+   "aim": "読んだ論文を手法ごとの比較・矛盾する知見・採用判断に積み上げる",
+   "id": "D-07",
+   "next_step": "手法の名寄せ（B-23）→ 方式比較の層（B-35）→ 月次の Knowledge Delta（B-36）。根拠の位置（B-34）と月次サマリとの接続（B-44）",
+   "open_items": [
+    "B-23",
+    "B-35",
+    "B-36",
+    "B-34",
+    "B-44",
+    "B-33",
+    "B-42"
+   ],
+   "rank": 7,
+   "related": "B-23 / B-35 / B-36 / B-34 / B-44 / B-33 / B-42",
+   "state": "待ち",
+   "title": "論文知識基盤の深化"
+  },
+  {
+   "aim": "戦略上の Phase 1 の完了条件（1 週間連続の自動投稿）が未達で、Go/Kill 判定の前提になる。発信を最優先にするならここを上げる",
+   "id": "D-08",
+   "next_step": "X API キー → 投稿クライアント（B-03）、キャラ設定（B-06）、配信頻度（決定 0013）、Go/Kill の月境界（B-08）",
+   "open_items": [
+    "B-03",
+    "B-06",
+    "B-08",
+    "B-05"
+   ],
+   "rank": 8,
+   "related": "B-03 / B-06 / B-08 / B-05 / 決定 0011 / 決定 0012 / 決定 0013",
+   "state": "判断待ち",
+   "title": "発信（X 自動投稿）で Phase 1 を完了させる"
+  },
+  {
+   "aim": "収集条件を採用実績で入れ替える仕組み。日次パイプラインに組み込み済みで、観察の段",
+   "id": "D-09",
+   "next_step": "2〜3 週で自動昇格・自動降格を各 1 件観測 → 他のシグナルタイプへ広げる → `managed_keywords` を統合（決定 0011 が先）",
+   "open_items": [
+    "B-05"
+   ],
+   "rank": 9,
+   "related": "B-05 / 決定 0011",
+   "state": "待ち",
+   "title": "収集条件の自動進化の横展開"
+  },
+  {
+   "aim": "読む・確かめる面を外から開けるようにする。論文サイトは公開コマンドが無い",
+   "id": "D-10",
+   "next_step": "論文サイトの公開先と決定 0029 の採否 → `paper-site` から `sm-publish` を呼ぶ（B-29）。論文ページの全文（B-28）",
+   "open_items": [
+    "B-29",
+    "B-28"
+   ],
+   "rank": 10,
+   "related": "B-29 / B-28 / 決定 0029",
+   "state": "判断待ち",
+   "title": "公開面の整備"
+  },
+  {
+   "aim": "変更のしやすさを保つ。行数上限の違反 14 件、決定 0018 の見直し期限が 2026-12-31",
+   "id": "D-11",
+   "next_step": "超過の小さいモジュールから 1 本 1 コミットで分ける。設計違反の予算をリファクタリングのたびに締める",
+   "open_items": [],
+   "rank": 11,
+   "related": "決定 0018",
+   "state": "着手可",
+   "title": "保守性"
+  },
+  {
+   "aim": "日本ソース起点の英語発信と収益化。Phase 3 の Go 判定が出るまで着手しない",
+   "id": "D-12",
+   "next_step": "Go/Kill 判定（ROADMAP §1）の後に計画を起こす",
+   "open_items": [],
+   "rank": 12,
+   "related": "ROADMAP §1",
+   "state": "判断待ち",
+   "title": "英語展開・収益化（Phase 4）"
+  }
+ ],
+ "measured": true,
+ "open_items": [
+  {
+   "id": "B-01",
+   "impact": "実害",
+   "summary": "Reddit の収集が一度も実測されていない。F1 / F3 / F5 の主要ソースなので、入っていなければ consensus が成立しない",
+   "target": "`collectors/international/reddit_collector.py` / `config.yaml`"
+  },
+  {
+   "id": "B-02",
+   "impact": "実害",
+   "summary": "Product Hunt の GraphQL token が有効か未確認。F2 / F5 の PRODUCT シグナルが欠落しうる",
+   "target": "`collectors/international/producthunt_collector.py`"
+  },
+  {
+   "id": "B-03",
+   "impact": "実害",
+   "summary": "X への実投稿ができない（`publishing/x_client.py` が未実装）",
+   "target": "`publishing/`（新規）"
+  },
+  {
+   "id": "B-04",
+   "impact": "実害",
+   "summary": "`yahoo_realtime` / `fivech` / `crowdworks` の収集件数が 0 のままか未検証。スクレイピング 3 本ともサイト構造依存",
+   "target": "`collectors/japan/{yahoo_realtime,fivech,crowdworks}_collector.py`"
+  },
+  {
+   "id": "B-32",
+   "impact": "実害",
+   "summary": "e-Stat の統計表を取り込めない。API 利用規約が未確認（`tos_verdict: review_required`）で、アプリケーション ID と取得する統計表 ID も未設定。実サーバとの疎通も未確認",
+   "target": "`core/compliance/sites/estat.yaml` / `config.yaml` の `estat`"
+  },
+  {
+   "id": "B-05",
+   "impact": "コスト",
+   "summary": "`managed_keywords` に F1〜F8 / R1〜R7 の初期シードが未投入",
+   "target": "`config.example.yaml` / 投入スクリプト"
+  },
+  {
+   "id": "B-06",
+   "impact": "コスト",
+   "summary": "X JP アカウントのキャラ設定（Bot 名・自己紹介・口調・アイコン・user_handle）が未確定",
+   "target": "`spec/21_PUBLISHING.md` §5.1"
+  },
+  {
+   "id": "B-08",
+   "impact": "コスト",
+   "summary": "Go/Kill 判定の月境界定義が食い違う（`14` §4.1「M3 開始月」/ 戦略書 §5「M3 末」）",
+   "target": "`spec/40_OPERATIONS.md` / `22_STRATEGY.md`"
+  },
+  {
+   "id": "B-09",
+   "impact": "将来",
+   "summary": "投稿開始までに必要な signals 蓄積期間が未決（baseline 計算用）",
+   "target": "—"
+  },
+  {
+   "id": "B-10",
+   "impact": "将来",
+   "summary": "Z-score baseline のウィンドウ・テーマ別の日次最低件数・`consensus_min_sources = 3` を満たすキーワード数が未実測",
+   "target": "`analysis/`"
+  },
+  {
+   "id": "B-11",
+   "impact": "将来",
+   "summary": "`digest_runs.theme_id` の `CD-` / `LL-` / `CWD-` プレフィクス命名規約が未確定",
+   "target": "`cli/digest/extract.py`"
+  },
+  {
+   "id": "B-12",
+   "impact": "コスト",
+   "summary": "producthunt / appstore_jp（ランキング）が専用ペイロードテーブルに未移行で、本文が保持できていない（substack / medium は移行済み）",
+   "target": "`core/storage/storage_payloads.py` / `core/etl.py`"
+  },
+  {
+   "id": "B-14",
+   "impact": "コスト",
+   "summary": "正直な UA でハローワークの `initDisp` が 200 を返すか未確認。403 なら取得不能で、V2 のパーサが無駄になる",
+   "target": "`collectors/japan/hellowork/client.py`"
+  },
+  {
+   "id": "B-15",
+   "impact": "コスト",
+   "summary": "夜間帯限定（`allowed_hours: [22-05]`）と `/daily-pipeline` の実行時刻が衝突する。hellowork だけ別 cron にする案が有力だが未決",
+   "target": "`spec/41_OPS_PLAYBOOK.md` / cron 設定"
+  },
+  {
+   "id": "B-17",
+   "impact": "コスト",
+   "summary": "取得可否ゲートを既存コレクターにも必須化するか未決。一律必須にすると `jmty.yaml` が `review_required` のため jmty が停止する",
+   "target": "`core/compliance/guard.py` / `collectors/`"
+  },
+  {
+   "id": "B-18",
+   "impact": "将来",
+   "summary": "ハローワークの求人番号が使い回されるか未確認。使い回しがあると継続日数が過大評価される",
+   "target": "`analysis/vacancy_chronicity.py`"
+  },
+  {
+   "id": "B-19",
+   "impact": "将来",
+   "summary": "1 巡回あたりの求人件数と `min_interval_seconds: 10` での所要時間が未見積もり。夜間 8 時間に収まらなければ収集スコープを絞る設計変更が要る",
+   "target": "`collectors/japan/hellowork_collector.py`"
+  },
+  {
+   "id": "B-26",
+   "impact": "将来",
+   "summary": "会議レジストリが英語の国際会議 21 件のみ。J-STAGE の日本語論文は掲載誌名が取れても解決できない",
+   "target": "`core/paper_kb/venue_registry.py`"
+  },
+  {
+   "id": "B-23",
+   "impact": "将来",
+   "summary": "手法の名寄せが手法名の表記ゆれに弱い（`MTH-{slug}`）。`LoRA` と `Low-Rank Adaptation` は別行になる",
+   "target": "`core/paper_kb/extraction.py`"
+  },
+  {
+   "id": "B-28",
+   "impact": "将来",
+   "summary": "論文ページに本文詳細レビュー（`*_detail.md`）の全文を載せていない。台帳から作れる範囲だけを出しており、読み込むには手元のファイルへ戻る必要がある",
+   "target": "`publish/paper_site/paper_page.py`"
+  },
+  {
+   "id": "B-29",
+   "impact": "コスト",
+   "summary": "`paper-site` から `sm-publish` を呼ぶ公開コマンドが無い。生成物のディレクトリを人が渡している",
+   "target": "`cli/cmd_paper_site.py`"
+  },
+  {
+   "id": "B-30",
+   "impact": "将来",
+   "summary": "振り分けが既読ログ（人の判断）から好みを学ばない。手本は must-read のものだけで、棚上げしたものを遠ざける力が無い",
+   "target": "`core/content_screen/`"
+  },
+  {
+   "id": "B-31",
+   "impact": "将来",
+   "summary": "振り分けの点に外部の評判（被引用・Hugging Face Daily Papers・コード公開の有無）を加えていない",
+   "target": "`core/content_screen/scoring.py`"
+  },
+  {
+   "id": "B-33",
+   "impact": "将来",
+   "summary": "論文の書誌・引用を OpenAlex / Semantic Scholar で補完していない。関連論文の推薦と、月次・四半期の引用数による再評価ができない",
+   "target": "`collectors/international/`（新規）/ `core/paper_kb/`"
+  },
+  {
+   "id": "B-34",
+   "impact": "将来",
+   "summary": "本文レビューが主張（貢献）ごとの根拠の位置（章・表・ページ）を残さない。報告実験は比較対象・データセット・指標・`evidence_location` つきで台帳に入っている（15 §3.2）",
+   "target": "`prompts/_base/paper_kb_block.ja.j2` / `core/paper_kb/extraction.py`"
+  },
+  {
+   "id": "B-35",
+   "impact": "将来",
+   "summary": "知識が論文と手法（`MTH-`）の 2 層までで、手法ごとの方式比較・矛盾する知見・採用判断と検証結果の層が無い",
+   "target": "`core/paper_kb/`"
+  },
+  {
+   "id": "B-36",
+   "impact": "将来",
+   "summary": "月次の「知識がどう更新されたか（Knowledge Delta）・次に検証すること」を自動で作らない（週次の読むべき論文は `paper-site weekly` で作れるようになった）",
+   "target": "`workflow/` / `publish/paper_site/`"
+  },
+  {
+   "id": "B-38",
+   "impact": "将来",
+   "summary": "推薦上位 5 件の適合率と週次の確認時間を継続して測る仕組みが無い（取りこぼし率は `audit --sheet` → `audit-record` → `eval` で測れるようになった）",
+   "target": "`core/content_screen/evaluation.py`"
+  },
+  {
+   "id": "B-39",
+   "impact": "将来",
+   "summary": "Newsroom の発表を「同じ出来事」（Story）にまとめていない。同じ発表を報じた記事が別件のまま並び、独立した情報源の数（`tier:` タグ）も数えられない",
+   "target": "`collectors/international/newsroom_collector.py` / `core/content_screen/`"
+  },
+  {
+   "id": "B-40",
+   "impact": "コスト",
+   "summary": "`newsroom` に独立した報道機関（`tier: press`）のフィードが無く、既定は当事者の 3 本だけ。2026-11-07 時点で DeepMind・Hugging Face は allowed、OpenAI は prohibited で、一次情報は 2 社だけ",
+   "target": "`core/compliance/sites/` / `config.yaml` の `newsroom.feeds`"
+  },
+  {
+   "id": "B-41",
+   "impact": "将来",
+   "summary": "ニュース検索 API（GNews / GDELT / NewsAPI）を使っていない",
+   "target": "`collectors/international/`（新規）"
+  },
+  {
+   "id": "B-42",
+   "impact": "将来",
+   "summary": "論文の根拠・反証・撤回を外部サービス（Scite / Consensus / Elicit）で確かめていない",
+   "target": "`core/review/` / `core/paper_kb/`"
+  },
+  {
+   "id": "B-43",
+   "impact": "将来",
+   "summary": "読んだ論文・発表を Zotero / Notion / Slack へ書き出していない",
+   "target": "`publish/`（新規）"
+  },
+  {
+   "id": "B-44",
+   "impact": "将来",
+   "summary": "arXiv 月次サマリ（`out/arxiv_monthly/<月>/summary.md`）が論文サイト・既読ログとつながっていない。注目論文を読んだかどうかが残らない",
+   "target": "`publish/paper_site/` / `analysis/paper_month/`"
+  },
+  {
+   "id": "B-45",
+   "impact": "将来",
+   "summary": "語の集計は、汎用語・日本語の切れ端・書式の語を落とし、表記ゆれを辞書（`term_filter.ALIASES`）でまとめているが、辞書に無い言い換えはまとまらない。日本語の自動抽出（`keywords`）は切り出しが粗く、ひらがなを含む語を落とすので取りこぼしもある",
+   "target": "`analysis/paper_month/term_filter.py` / `core/nlp.py`"
+  }
+ ],
+ "proposed_decisions": [
+  {
+   "id": "0011",
+   "title": "`managed_keywords` のテーマ識別子をカラムで持つか文字列で持つか"
+  },
+  {
+   "id": "0012",
+   "title": "`note_featured` を consensus 集計に含めるか、`note` との二重カウントをどう避けるか"
+  },
+  {
+   "id": "0013",
+   "title": "配信ジョブ（consensus_daily / lead_lag_weekly / consensus_weekly_deep）の既定頻度"
+  },
+  {
+   "id": "0014",
+   "title": "ruff の lint ルールセットを明示的に固定するか"
+  },
+  {
+   "id": "0016",
+   "title": "`digest_runs` / `digest_items` の `theme_id` カラムを `format_id` にリネームするか"
+  },
+  {
+   "id": "0029",
+   "title": "論文サイトは個人の読書導線として作り、既読は 2 層で持つ"
+  },
+  {
+   "id": "0037",
+   "title": "振り分けを論文専用から「種類で切り替える 1 つの段」にし、技術記事にも広げる"
+  }
+ ],
+ "sources": [
+  {
+   "judged": 8,
+   "market": "japan",
+   "open_items": [],
+   "overall": "ok",
+   "ready": 8,
+   "signal_types": [
+    "article"
+   ],
+   "source": "note",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P1",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "1,799 件・直近 30 日 1,799 件（最新 2026-10-17）",
+     "state": "ok"
+    },
+    "output": {
+     "note": "コンセンサス・Lead-Lag（配信の材料）・記事の振り分け・読解",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_daily_jp（0 21 * * *）・s1_ingest（0 */4 * * *）・trend_to_post（0 * * * *）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "生データを note_article_payloads に保存",
+     "state": "ok"
+    },
+    "store": {
+     "note": "article_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_note_payload_collector_contract.py ほか 1 ファイル",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl（parse_note_payload）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "JP-1: note.com 人気記事トレンドコレクター"
+  },
+  {
+   "judged": 8,
+   "market": "japan",
+   "open_items": [
+    "B-12"
+   ],
+   "overall": "blocked",
+   "ready": 5,
+   "signal_types": [
+    "complaint",
+    "ranking"
+   ],
+   "source": "appstore_jp",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P1",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "0 件（一度も入っていない）",
+     "state": "blocked"
+    },
+    "output": {
+     "note": "コンセンサス・Lead-Lag（配信の材料）・製品別の不満（analyze product-complaints）",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_daily_jp（0 21 * * *）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "raw_fetches（変換後の値。変換前の生データは残らない・B-12）",
+     "state": "partial"
+    },
+    "store": {
+     "note": "complaint_signals / ranking_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "コレクターを読むテストが無い",
+     "state": "missing"
+    },
+    "transform": {
+     "note": "etl（RawFetchQueue）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "JP-7: App Store Japan ランキング + レビューコレクター"
+  },
+  {
+   "judged": 8,
+   "market": "japan",
+   "open_items": [],
+   "overall": "blocked",
+   "ready": 3,
+   "signal_types": [
+    "trend"
+   ],
+   "source": "google_trends_jp",
+   "stages": {
+    "collect": {
+     "note": "一括収集から外している（一時停止）",
+     "state": "blocked"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "0 件（一度も入っていない）",
+     "state": "blocked"
+    },
+    "output": {
+     "note": "コンセンサス・Lead-Lag（配信の材料）",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "scheduled のワークフローに入っていない",
+     "state": "missing"
+    },
+    "staging": {
+     "note": "raw_fetches（変換後の値。変換前の生データは残らない・B-12）",
+     "state": "partial"
+    },
+    "store": {
+     "note": "trend_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "コレクターを読むテストが無い",
+     "state": "missing"
+    },
+    "transform": {
+     "note": "etl（RawFetchQueue）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "JP-4: Google Trends Japan コレクター"
+  },
+  {
+   "judged": 8,
+   "market": "japan",
+   "open_items": [
+    "B-04"
+   ],
+   "overall": "partial",
+   "ready": 7,
+   "signal_types": [
+    "job_posting"
+   ],
+   "source": "crowdworks",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P2",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "166 件・直近 30 日 166 件（最新 2026-10-17）",
+     "state": "ok"
+    },
+    "output": {
+     "note": "コンセンサス・Lead-Lag（配信の材料）・スモールビジネスの痛み（/collect-smb-pain）",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_daily_jp（0 21 * * *）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "raw_fetches（変換後の値。変換前の生データは残らない・B-12）",
+     "state": "partial"
+    },
+    "store": {
+     "note": "job_posting_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_crowdworks_budget.py ほか 1 ファイル",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl（RawFetchQueue）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "JP-5: クラウドワークス 求人コレクター"
+  },
+  {
+   "judged": 8,
+   "market": "japan",
+   "open_items": [
+    "B-04"
+   ],
+   "overall": "blocked",
+   "ready": 5,
+   "signal_types": [
+    "trend"
+   ],
+   "source": "yahoo_realtime",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P2",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "0 件（一度も入っていない）",
+     "state": "blocked"
+    },
+    "output": {
+     "note": "コンセンサス・Lead-Lag（配信の材料）",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_realtime（*/30 * * * *）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "raw_fetches（変換後の値。変換前の生データは残らない・B-12）",
+     "state": "partial"
+    },
+    "store": {
+     "note": "trend_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "コレクターを読むテストが無い",
+     "state": "missing"
+    },
+    "transform": {
+     "note": "etl（RawFetchQueue）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "JP-2: Yahoo! Japan リアルタイム検索 トレンドコレクター"
+  },
+  {
+   "judged": 8,
+   "market": "japan",
+   "open_items": [
+    "B-04"
+   ],
+   "overall": "blocked",
+   "ready": 5,
+   "signal_types": [
+    "question"
+   ],
+   "source": "fivech",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P3",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "0 件（一度も入っていない）",
+     "state": "blocked"
+    },
+    "output": {
+     "note": "コンセンサス・Lead-Lag（配信の材料）",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_2h（0 */2 * * *）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "raw_fetches（変換後の値。変換前の生データは残らない・B-12）",
+     "state": "partial"
+    },
+    "store": {
+     "note": "question_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "コレクターを読むテストが無い",
+     "state": "missing"
+    },
+    "transform": {
+     "note": "etl（RawFetchQueue）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "JP-6: 5ch スレッドコレクター"
+  },
+  {
+   "judged": 8,
+   "market": "japan",
+   "open_items": [],
+   "overall": "blocked",
+   "ready": 5,
+   "signal_types": [
+    "complaint"
+   ],
+   "source": "amazon_jp",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P3",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "0 件（一度も入っていない）",
+     "state": "blocked"
+    },
+    "output": {
+     "note": "製品別の不満（analyze product-complaints）",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_weekly（0 2 * * 0）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "raw_fetches（変換後の値。変換前の生データは残らない・B-12）",
+     "state": "partial"
+    },
+    "store": {
+     "note": "complaint_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "コレクターを読むテストが無い",
+     "state": "missing"
+    },
+    "transform": {
+     "note": "etl（RawFetchQueue）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "JP-3: Amazon.co.jp レビューコレクター"
+  },
+  {
+   "judged": 8,
+   "market": "japan",
+   "open_items": [],
+   "overall": "partial",
+   "ready": 6,
+   "signal_types": [
+    "solution"
+   ],
+   "source": "jstage",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P1",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "101 件・直近 30 日 0 件（最新 2026-06-20）",
+     "state": "partial"
+    },
+    "output": {
+     "note": "論文の振り分け・レビュー・論文サイト",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_daily_int（0 8 * * *）・s1_ingest（0 */4 * * *）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "raw_fetches（変換後の値。変換前の生データは残らない・B-12）",
+     "state": "partial"
+    },
+    "store": {
+     "note": "solution_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_jstage_collector.py",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl（RawFetchQueue）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "JP-8: J-STAGE 学術論文コレクター"
+  },
+  {
+   "judged": 8,
+   "market": "japan",
+   "open_items": [
+    "B-17"
+   ],
+   "overall": "blocked",
+   "ready": 5,
+   "signal_types": [
+    "job_posting"
+   ],
+   "source": "jmty",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P2",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "0 件（一度も入っていない）",
+     "state": "blocked"
+    },
+    "output": {
+     "note": "コンセンサス・Lead-Lag（配信の材料）",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "scheduled のワークフローに入っていない",
+     "state": "missing"
+    },
+    "staging": {
+     "note": "raw_fetches（変換後の値。変換前の生データは残らない・B-12）",
+     "state": "partial"
+    },
+    "store": {
+     "note": "job_posting_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_jmty_collector.py",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl（RawFetchQueue）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "JP-9: ジモティー サービス依頼コレクター"
+  },
+  {
+   "judged": 9,
+   "market": "japan",
+   "open_items": [
+    "B-14",
+    "B-15",
+    "B-19"
+   ],
+   "overall": "partial",
+   "ready": 7,
+   "signal_types": [],
+   "source": "hellowork",
+   "stages": {
+    "collect": {
+     "note": "個別実行のみ（取得可否ゲート経由）",
+     "state": "partial"
+    },
+    "compliance": {
+     "note": "hellowork: 可（次の確認 2027-03-30）",
+     "state": "ok"
+    },
+    "measured": {
+     "note": "119 件・直近 30 日 119 件（最新 2026-10-17）",
+     "state": "ok"
+    },
+    "output": {
+     "note": "スモールビジネスの痛み（/collect-smb-pain）・求人台帳（vacancy rank）",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "/collect-smb-pain で取る（夜間帯の cron は未決・B-15）",
+     "state": "partial"
+    },
+    "staging": {
+     "note": "巡回の生データを raw_fetches に保存",
+     "state": "ok"
+    },
+    "store": {
+     "note": "vacancy_signals / vacancy_tracking",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_hellowork_collector.py",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl → 求人台帳（vacancy_signals / vacancy_tracking）",
+     "state": "ok"
+    }
+   },
+   "title": "JP-12: ハローワーク インターネットサービス 求人コレクター"
+  },
+  {
+   "judged": 9,
+   "market": "japan",
+   "open_items": [
+    "B-32"
+   ],
+   "overall": "blocked",
+   "ready": 5,
+   "signal_types": [],
+   "source": "estat",
+   "stages": {
+    "collect": {
+     "note": "個別実行のみ（取得可否ゲート経由）・e-Stat アプリ ID が未設定",
+     "state": "blocked"
+    },
+    "compliance": {
+     "note": "estat: 未確認",
+     "state": "blocked"
+    },
+    "measured": {
+     "note": "0 件（一度も入っていない）",
+     "state": "blocked"
+    },
+    "output": {
+     "note": "公的統計（public-stats）",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "collect --source estat で取る（統計表の更新は月次〜年次）",
+     "state": "partial"
+    },
+    "staging": {
+     "note": "応答 JSON を raw_fetches に保存",
+     "state": "ok"
+    },
+    "store": {
+     "note": "statistic_observations（文脈データ・signals_index に載せない）",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_estat_collector.py",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl → statistic_observations",
+     "state": "ok"
+    }
+   },
+   "title": "JP-13: e-Stat（政府統計の総合窓口）統計表コレクター"
+  },
+  {
+   "judged": 8,
+   "market": "japan",
+   "open_items": [],
+   "overall": "ok",
+   "ready": 8,
+   "signal_types": [
+    "article",
+    "wish"
+   ],
+   "source": "zenn",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P1",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "5,698 件・直近 30 日 5,698 件（最新 2026-11-07）",
+     "state": "ok"
+    },
+    "output": {
+     "note": "コンセンサス・Lead-Lag（配信の材料）・AI 動向（open-data）・記事の振り分け・読解・収集条件の自動進化",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_daily_jp（0 21 * * *）・s1_ingest（0 */4 * * *）・trend_to_post（0 * * * *）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "生データを zenn_article_payloads に保存",
+     "state": "ok"
+    },
+    "store": {
+     "note": "article_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_zenn_collector.py",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl（parse_zenn_payload）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "JP-10: Zenn.dev 人気記事コレクター"
+  },
+  {
+   "judged": 8,
+   "market": "japan",
+   "open_items": [],
+   "overall": "ok",
+   "ready": 8,
+   "signal_types": [
+    "article"
+   ],
+   "source": "qiita",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P1・Qiita token なし（任意）",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "460 件・直近 30 日 460 件（最新 2026-11-07）",
+     "state": "ok"
+    },
+    "output": {
+     "note": "コンセンサス・Lead-Lag（配信の材料）・AI 動向（open-data）・記事の振り分け・読解・収集条件の自動進化",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_daily_jp（0 21 * * *）・s1_ingest（0 */4 * * *）・trend_to_post（0 * * * *）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "生データを qiita_article_payloads に保存",
+     "state": "ok"
+    },
+    "store": {
+     "note": "article_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_qiita_collector.py",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl（parse_qiita_payload）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "JP-11: Qiita 人気記事コレクター"
+  },
+  {
+   "judged": 8,
+   "market": "international",
+   "open_items": [],
+   "overall": "ok",
+   "ready": 8,
+   "signal_types": [
+    "article",
+    "question",
+    "trend",
+    "wish"
+   ],
+   "source": "hackernews",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P1",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "140 件・直近 30 日 140 件（最新 2026-11-07）",
+     "state": "ok"
+    },
+    "output": {
+     "note": "コンセンサス・Lead-Lag（配信の材料）・AI 動向（open-data）・記事の振り分け・読解",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_6h（0 */6 * * *）・s1_ingest（0 */4 * * *）・trend_to_post（0 * * * *）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "生データを hackernews_story_payloads に保存",
+     "state": "ok"
+    },
+    "store": {
+     "note": "article_signals / question_signals / trend_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_hackernews_show_hn.py",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl（parse_hackernews_payload）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "INT-2: Hacker News Ask HN / Show HN コレクター"
+  },
+  {
+   "judged": 8,
+   "market": "international",
+   "open_items": [
+    "B-01"
+   ],
+   "overall": "blocked",
+   "ready": 6,
+   "signal_types": [
+    "complaint",
+    "question",
+    "wish"
+   ],
+   "source": "reddit",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P2・Reddit API 設定済み",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "0 件（一度も入っていない）",
+     "state": "blocked"
+    },
+    "output": {
+     "note": "コンセンサス・Lead-Lag（配信の材料）",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_4h（0 */4 * * *）・s1_ingest（0 */4 * * *）・trend_to_post（0 * * * *）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "raw_fetches（変換後の値。変換前の生データは残らない・B-12）",
+     "state": "partial"
+    },
+    "store": {
+     "note": "complaint_signals / question_signals / wish_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_reddit_japan_community.py",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl（RawFetchQueue）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "INT-1: Reddit コレクター"
+  },
+  {
+   "judged": 8,
+   "market": "international",
+   "open_items": [],
+   "overall": "blocked",
+   "ready": 5,
+   "signal_types": [
+    "complaint"
+   ],
+   "source": "google_play",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P1",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "0 件（一度も入っていない）",
+     "state": "blocked"
+    },
+    "output": {
+     "note": "製品別の不満（analyze product-complaints）",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_weekly（0 2 * * 0）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "raw_fetches（変換後の値。変換前の生データは残らない・B-12）",
+     "state": "partial"
+    },
+    "store": {
+     "note": "complaint_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "コレクターを読むテストが無い",
+     "state": "missing"
+    },
+    "transform": {
+     "note": "etl（RawFetchQueue）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "INT-7: Google Play Store レビューコレクター"
+  },
+  {
+   "judged": 8,
+   "market": "international",
+   "open_items": [],
+   "overall": "blocked",
+   "ready": 6,
+   "signal_types": [
+    "question"
+   ],
+   "source": "stackoverflow",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P2・Stack Exchange key 設定済み",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "0 件（一度も入っていない）",
+     "state": "blocked"
+    },
+    "output": {
+     "note": "コンセンサス・Lead-Lag（配信の材料）・未解決の問い（analyze unmet-demand）",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_daily_int（0 8 * * *）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "raw_fetches（変換後の値。変換前の生データは残らない・B-12）",
+     "state": "partial"
+    },
+    "store": {
+     "note": "question_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_unmet_demand.py",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl（RawFetchQueue）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "INT-4: Stack Overflow / Stack Exchange API コレクター"
+  },
+  {
+   "judged": 8,
+   "market": "international",
+   "open_items": [
+    "B-02",
+    "B-12"
+   ],
+   "overall": "blocked",
+   "ready": 5,
+   "signal_types": [
+    "product"
+   ],
+   "source": "producthunt",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P2・Product Hunt token 設定済み",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "0 件（一度も入っていない）",
+     "state": "blocked"
+    },
+    "output": {
+     "note": "コンセンサス・Lead-Lag（配信の材料）",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_daily_int（0 8 * * *）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "raw_fetches（変換後の値。変換前の生データは残らない・B-12）",
+     "state": "partial"
+    },
+    "store": {
+     "note": "product_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "コレクターを読むテストが無い",
+     "state": "missing"
+    },
+    "transform": {
+     "note": "etl（RawFetchQueue）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "INT-3: Product Hunt コレクター"
+  },
+  {
+   "judged": 8,
+   "market": "international",
+   "open_items": [],
+   "overall": "blocked",
+   "ready": 5,
+   "signal_types": [
+    "complaint"
+   ],
+   "source": "amazon_com",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P3",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "0 件（一度も入っていない）",
+     "state": "blocked"
+    },
+    "output": {
+     "note": "製品別の不満（analyze product-complaints）",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_weekly（0 2 * * 0）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "raw_fetches（変換後の値。変換前の生データは残らない・B-12）",
+     "state": "partial"
+    },
+    "store": {
+     "note": "complaint_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "コレクターを読むテストが無い",
+     "state": "missing"
+    },
+    "transform": {
+     "note": "etl（RawFetchQueue）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "INT-5: Amazon.com レビューコレクター"
+  },
+  {
+   "judged": 8,
+   "market": "international",
+   "open_items": [
+    "B-44"
+   ],
+   "overall": "partial",
+   "ready": 7,
+   "signal_types": [
+    "solution"
+   ],
+   "source": "arxiv",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P1",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "33,848 件・直近 30 日 33,307 件（最新 2026-11-07）",
+     "state": "ok"
+    },
+    "output": {
+     "note": "コンセンサス・Lead-Lag（配信の材料）・AI 動向（open-data）・arXiv 月次サマリ・論文の振り分け・レビュー・論文サイト",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_daily_int（0 8 * * *）・s1_ingest（0 */4 * * *）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "raw_fetches（変換後の値。変換前の生データは残らない・B-12）",
+     "state": "partial"
+    },
+    "store": {
+     "note": "solution_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_arxiv_collector.py ほか 2 ファイル",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl（RawFetchQueue）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "INT-8: arXiv プレプリントコレクター"
+  },
+  {
+   "judged": 8,
+   "market": "international",
+   "open_items": [],
+   "overall": "blocked",
+   "ready": 6,
+   "signal_types": [
+    "solution"
+   ],
+   "source": "uspto_patents",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P2",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "0 件（一度も入っていない）",
+     "state": "blocked"
+    },
+    "output": {
+     "note": "論文の振り分け・レビュー・論文サイト",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_weekly（0 2 * * 0）・s1_ingest（0 */4 * * *）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "raw_fetches（変換後の値。変換前の生データは残らない・B-12）",
+     "state": "partial"
+    },
+    "store": {
+     "note": "solution_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_uspto_patents_collector.py",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl（RawFetchQueue）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "INT-9: USPTO PatentsView 特許コレクター"
+  },
+  {
+   "judged": 8,
+   "market": "international",
+   "open_items": [],
+   "overall": "ok",
+   "ready": 8,
+   "signal_types": [
+    "article",
+    "question",
+    "solution"
+   ],
+   "source": "devto",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P1",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "632 件・直近 30 日 632 件（最新 2026-11-07）",
+     "state": "ok"
+    },
+    "output": {
+     "note": "コンセンサス・Lead-Lag（配信の材料）・AI 動向（open-data）・論文の振り分け・レビュー・論文サイト・記事の振り分け・読解・収集条件の自動進化",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_daily_int（0 8 * * *）・s1_ingest（0 */4 * * *）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "生データを devto_article_payloads に保存",
+     "state": "ok"
+    },
+    "store": {
+     "note": "article_signals / question_signals / solution_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_devto_f1_tags.py",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl（parse_devto_payload）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "INT-10: DEV.to 記事コレクター"
+  },
+  {
+   "judged": 8,
+   "market": "international",
+   "open_items": [
+    "B-12"
+   ],
+   "overall": "ok",
+   "ready": 8,
+   "signal_types": [
+    "article",
+    "question"
+   ],
+   "source": "substack",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P1",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "22 件・直近 30 日 22 件（最新 2026-11-07）",
+     "state": "ok"
+    },
+    "output": {
+     "note": "AI 動向（open-data）・記事の振り分け・読解",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_daily_int（0 8 * * *）・s1_ingest（0 */4 * * *）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "生データを substack_article_payloads に保存",
+     "state": "ok"
+    },
+    "store": {
+     "note": "article_signals / question_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_substack_collector.py",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl（parse_substack_payload）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "INT-11: Substack ニュースレター コレクター"
+  },
+  {
+   "judged": 8,
+   "market": "international",
+   "open_items": [
+    "B-12"
+   ],
+   "overall": "ok",
+   "ready": 8,
+   "signal_types": [
+    "article",
+    "question",
+    "solution"
+   ],
+   "source": "medium",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P1",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "69 件・直近 30 日 69 件（最新 2026-11-07）",
+     "state": "ok"
+    },
+    "output": {
+     "note": "AI 動向（open-data）・論文の振り分け・レビュー・論文サイト・記事の振り分け・読解",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_daily_int（0 8 * * *）・s1_ingest（0 */4 * * *）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "生データを medium_article_payloads に保存",
+     "state": "ok"
+    },
+    "store": {
+     "note": "article_signals / question_signals / solution_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_medium_collector.py",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl（parse_medium_payload）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "INT-12: Medium 記事コレクター"
+  },
+  {
+   "judged": 9,
+   "market": "international",
+   "open_items": [
+    "B-39",
+    "B-40"
+   ],
+   "overall": "partial",
+   "ready": 7,
+   "signal_types": [
+    "article"
+   ],
+   "source": "newsroom",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P1",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "openai: 規約・法令で不可 / deepmind: 可（次の確認 2027-05-06） / huggingface: 可（次の確認 2027-05-06）",
+     "state": "partial"
+    },
+    "measured": {
+     "note": "40 件・直近 30 日 40 件（最新 2026-11-07）",
+     "state": "ok"
+    },
+    "output": {
+     "note": "AI 動向（open-data）・記事の振り分け・読解",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ingest_daily_int（0 8 * * *）・s1_ingest（0 */4 * * *）",
+     "state": "ok"
+    },
+    "staging": {
+     "note": "raw_fetches（変換後の値。変換前の生データは残らない・B-12）",
+     "state": "partial"
+    },
+    "store": {
+     "note": "article_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_newsroom_collector.py",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl（RawFetchQueue）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "INT-14: AI Newsroom コレクター"
+  },
+  {
+   "judged": 9,
+   "market": "international",
+   "open_items": [],
+   "overall": "partial",
+   "ready": 7,
+   "signal_types": [
+    "solution"
+   ],
+   "source": "hf_papers",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P1",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "huggingface_hub: 可（次の確認 2027-05-06）",
+     "state": "ok"
+    },
+    "measured": {
+     "note": "2,197 件・直近 30 日 2,197 件（最新 2026-11-07）",
+     "state": "ok"
+    },
+    "output": {
+     "note": "AI 動向（open-data）・論文の振り分け・レビュー・論文サイト",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ai-trends collect（/ai-trends）で取る",
+     "state": "partial"
+    },
+    "staging": {
+     "note": "raw_fetches（変換後の値。変換前の生データは残らない・B-12）",
+     "state": "partial"
+    },
+    "store": {
+     "note": "solution_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_huggingface_hub_collector.py",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl（RawFetchQueue）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "Hugging Face Hub — Daily Papers と注目モデルを、公式ライブラリ（huggingface_hub）で集める"
+  },
+  {
+   "judged": 9,
+   "market": "international",
+   "open_items": [],
+   "overall": "partial",
+   "ready": 7,
+   "signal_types": [
+    "product"
+   ],
+   "source": "hf_models",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P1",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "huggingface_hub: 可（次の確認 2027-05-06）",
+     "state": "ok"
+    },
+    "measured": {
+     "note": "100 件・直近 30 日 100 件（最新 2026-11-07）",
+     "state": "ok"
+    },
+    "output": {
+     "note": "AI 動向（open-data）",
+     "state": "ok"
+    },
+    "schedule": {
+     "note": "ai-trends collect（/ai-trends）で取る",
+     "state": "partial"
+    },
+    "staging": {
+     "note": "raw_fetches（変換後の値。変換前の生データは残らない・B-12）",
+     "state": "partial"
+    },
+    "store": {
+     "note": "product_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_huggingface_hub_collector.py",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl（RawFetchQueue）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "Hugging Face Hub — Daily Papers と注目モデルを、公式ライブラリ（huggingface_hub）で集める"
+  },
+  {
+   "judged": 8,
+   "market": "international",
+   "open_items": [],
+   "overall": "blocked",
+   "ready": 4,
+   "signal_types": [
+    "trend"
+   ],
+   "source": "google_trends_global",
+   "stages": {
+    "collect": {
+     "note": "一括収集 P2（非公式 API）",
+     "state": "ok"
+    },
+    "compliance": {
+     "note": "ゲート対象外（opt-in。全ソース適用は未決・B-17）",
+     "state": "na"
+    },
+    "measured": {
+     "note": "0 件（一度も入っていない）",
+     "state": "blocked"
+    },
+    "output": {
+     "note": "読む分析・公開物が無い",
+     "state": "missing"
+    },
+    "schedule": {
+     "note": "scheduled のワークフローに入っていない",
+     "state": "missing"
+    },
+    "staging": {
+     "note": "raw_fetches（変換後の値。変換前の生データは残らない・B-12）",
+     "state": "partial"
+    },
+    "store": {
+     "note": "trend_signals + signals_index",
+     "state": "ok"
+    },
+    "tests": {
+     "note": "test_google_trends_global_collector.py",
+     "state": "ok"
+    },
+    "transform": {
+     "note": "etl（RawFetchQueue）→ signals",
+     "state": "ok"
+    }
+   },
+   "title": "INT-13: Google Trends グローバルコレクター"
+  }
+ ],
+ "stages": [
+  {
+   "key": "collect",
+   "label": "取得"
+  },
+  {
+   "key": "compliance",
+   "label": "取得可否"
+  },
+  {
+   "key": "schedule",
+   "label": "定期実行"
+  },
+  {
+   "key": "staging",
+   "label": "一時保存"
+  },
+  {
+   "key": "transform",
+   "label": "加工"
+  },
+  {
+   "key": "store",
+   "label": "保存"
+  },
+  {
+   "key": "output",
+   "label": "出力"
+  },
+  {
+   "key": "tests",
+   "label": "テスト"
+  },
+  {
+   "key": "measured",
+   "label": "実測"
+  }
+ ],
+ "state_labels": {
+  "blocked": "停止",
+  "missing": "未整備",
+  "na": "対象外",
+  "ok": "整備済み",
+  "partial": "一部",
+  "unknown": "未計測"
+ },
+ "summary": {
+  "overall": {
+   "blocked": 14,
+   "ok": 7,
+   "partial": 7
+  },
+  "sources": 28
+ },
+ "version": 1
+}

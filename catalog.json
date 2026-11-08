@@ -1,7 +1,49 @@
 {
   "schema": 1,
-  "generated_at": "2026-11-07T13:32:58Z",
+  "generated_at": "2026-11-08T00:34:24Z",
   "views": [
+    {
+      "id": "data-platform/status",
+      "project": "data-platform",
+      "view": "status",
+      "title": "データ基盤の整備状況",
+      "summary": "収集ソースごとの取得・加工・保存・出力の整備状況と、拡張の方向性",
+      "tags": [
+        "データ基盤",
+        "棚卸し",
+        "ロードマップ"
+      ],
+      "kind": "page",
+      "license": "",
+      "listed": true,
+      "path": "p/data-platform/status/index.html",
+      "updated_at": "2026-11-08T00:34:24Z",
+      "digest": "bd59abad0b391c0af1547df364c8711cafd2956821078d0b6993ecf7633a84e4",
+      "build_ref": null,
+      "source_versions": [],
+      "files": [
+        {
+          "path": "p/data-platform/status/assets/site.01b32ac866.css",
+          "sha256": "01b32ac866ec14ed74356a86ffa33e173d2e1ac9b5378320c5b897944fc489b9",
+          "size": 6461
+        },
+        {
+          "path": "p/data-platform/status/data/platform_status.315604b73f.json",
+          "sha256": "315604b73fac60dff4ee5d74f804ec2ef94f0a90d92e675a01dc7e1618ccf76d",
+          "size": 53723
+        },
+        {
+          "path": "p/data-platform/status/directions.html",
+          "sha256": "8a5961fd44ef35e15d36cde203938a31880d1ae3ed490d422e9adfd89fe2cd2b",
+          "size": 18248
+        },
+        {
+          "path": "p/data-platform/status/index.html",
+          "sha256": "3627749a096377dbc3f038ae81d3f3e0ea8505208fa6da11f99f56fc974288be",
+          "size": 91624
+        }
+      ]
+    },
     {
       "id": "ai-trends/weekly",
       "project": "ai-trends",
